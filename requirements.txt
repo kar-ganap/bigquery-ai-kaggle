@@ -1,0 +1,5 @@
+google-cloud-bigquery
+pandas
+pyarrow
+requests
+python-dateutil

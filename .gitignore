@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+
+# OS
+.DS_Store
+
+# Env & Auth
+.env
+.env.*
+*.json
+
+# Editors
+.vscode/
+.idea/

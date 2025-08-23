@@ -1,0 +1,8 @@
+US Ads JSON (ScrapeCreators) ──► BigQuery: ads_raw (partitioned)
+                                   │
+                                   ├─► AI.GENERATE_TABLE ──► ads_labels (funnel, angles)
+                                   │
+                                   ├─► (optional) ML.GENERATE_EMBEDDING ──► ads_emb ──┬─► VECTOR_SEARCH
+                                   │                                                   └─► Vector Index
+                                   │
+                                   └─► Rollups ──► brand_week_funnel_mix (weekly funnel %), ads_activity
