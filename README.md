@@ -21,20 +21,19 @@ A **SQL-first** pipeline that ingests public Meta Ad Library data (via ScrapeCre
 git clone .
 cd us-ads-strategy-radar
 
-python -m venv venv
-source venv/bin/activate            # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+# Install uv if not already installed
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # 2) Auth to BigQuery
 gcloud auth application-default login
 
-# 3) Set env
-export SC_API_KEY="YOUR_SCRAPECREATORS_KEY"  # don't commit this!
-export BQ_PROJECT="yourproj"                 # change to your GCP project id
-export BQ_DATASET="ads_demo"                 # dataset will be created if missing
+# 3) Set env (create .env file or export)
+echo "SC_API_KEY=YOUR_SCRAPECREATORS_KEY" >> .env  # don't commit this!
+echo "BQ_PROJECT=yourproj" >> .env                 # change to your GCP project id
+echo "BQ_DATASET=ads_demo" >> .env                 # dataset will be created if missing
 
 # 4) Ingest one or more Meta Page IDs
-python scripts/ingest_fb_ads.py --page_id 242713675589446   # Youth Crews (example)
+uv run python scripts/ingest_fb_ads.py --page_id 242713675589446   # Youth Crews (example)
 # repeat with other competitor page IDs to append more rows
 
 # 5) Run SQL (creates labels + rollups)
