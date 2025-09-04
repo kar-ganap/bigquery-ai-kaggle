@@ -1,0 +1,99 @@
+[project]
+name = "us-ads-strategy-radar"
+version = "0.1.0"
+description = "BigQuery AI Competitive Intelligence System for Meta Ad Library Analysis"
+authors = [
+    {name = "Kartik Ganapathi"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+
+dependencies = [
+    # Core BigQuery and data processing
+    "google-cloud-bigquery>=3.36.0",
+    "pandas>=2.3.0",
+    "pyarrow>=21.0.0",
+    "requests>=2.32.0",
+    "python-dateutil>=2.9.0",
+    # BigQuery DataFrame support
+    "db-dtypes>=1.4.0",
+    "pandas-gbq>=0.29.0",
+    # Meta Ad Library API and competitor discovery
+    "google-api-python-client>=2.176.0",
+    "beautifulsoup4>=4.13.0",
+    "nltk>=3.9.0",
+    # Enhanced analytics and ML
+    "scikit-learn>=1.7.0",
+    "matplotlib>=3.10.0",
+    "seaborn>=0.13.0",
+    # Environment and configuration
+    "python-dotenv>=1.1.0",
+    "google-cloud-aiplatform>=1.71.1",
+    "vertexai>=1.71.1",
+]
+
+[project.optional-dependencies]
+# Hybrid mode AI dependencies (for fallback when BigQuery AI unavailable)
+hybrid = [
+    "google-cloud-aiplatform>=1.71.0",
+    "vertexai>=1.71.0",
+]
+
+# Development and testing
+dev = [
+    "pytest>=8.4.0",
+    "black>=25.1.0",
+    "flake8>=7.3.0",
+    "jupyter>=1.1.0",
+]
+
+# All optional dependencies  
+all = [
+    "google-cloud-aiplatform>=1.71.0",
+    "vertexai>=1.71.0",
+    "pytest>=8.4.0",
+    "black>=25.1.0",
+    "flake8>=7.3.0", 
+    "jupyter>=1.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["scripts"]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.4.0",
+    "black>=25.1.0", 
+    "flake8>=7.3.0",
+    "jupyter>=1.1.0",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-v --tb=short"
+
+# Note: Using script-based approach instead of package scripts
