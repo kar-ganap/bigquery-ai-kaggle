@@ -5,6 +5,10 @@ pyarrow
 requests
 python-dateutil
 
+# BigQuery DataFrame support
+db-dtypes                   # Required for BigQuery DataFrame operations
+pandas-gbq                  # Enhanced BigQuery pandas integration
+
 # New dependencies for competitor discovery
 google-api-python-client     # Google Custom Search API
 beautifulsoup4              # HTML parsing for search results
@@ -15,6 +19,10 @@ scikit-learn               # Clustering and ML utilities
 matplotlib                 # Plotting for analysis
 seaborn                   # Statistical visualizations
 jupyter                   # Notebook environment
+
+# Hybrid mode AI dependencies (optional - for fallback only)
+google-cloud-aiplatform   # Vertex AI integration for hybrid curation
+vertexai                  # Vertex AI Python SDK
 
 # Development and testing
 pytest                    # Testing framework
