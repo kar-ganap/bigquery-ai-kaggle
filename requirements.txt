@@ -1,5 +1,23 @@
+# Core existing dependencies
 google-cloud-bigquery
 pandas
 pyarrow
 requests
 python-dateutil
+
+# New dependencies for competitor discovery
+google-api-python-client     # Google Custom Search API
+beautifulsoup4              # HTML parsing for search results
+nltk                        # Text processing for company name extraction
+
+# New dependencies for enhanced analytics
+scikit-learn               # Clustering and ML utilities
+matplotlib                 # Plotting for analysis
+seaborn                   # Statistical visualizations
+jupyter                   # Notebook environment
+
+# Development and testing
+pytest                    # Testing framework
+black                     # Code formatting
+flake8                   # Code linting
+python-dotenv            # .env file loading (alternative to direnv)
