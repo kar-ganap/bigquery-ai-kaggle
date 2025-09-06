@@ -118,23 +118,98 @@ FROM VECTOR_SEARCH(
 
 ---
 
-## Subgoal 6: AI-Enhanced Creative Analysis
+## Subgoal 6: AI-Enhanced Creative Analysis & Strategic Intelligence
 **Branch**: `feature/crawl-06-ai-analysis`  
-**Goal**: Upgrade existing labeling with better prompts and new features  
-**Deliverable**: Enhanced `sql/02_label_ads.sql` + trend analysis
+**Goal**: Comprehensive strategic competitive intelligence system answering key growth marketing questions  
+**Deliverable**: Enhanced creative analysis + strategic intelligence views + forecasting models
+
+### Strategic Questions to Answer:
+1. **Ad Focus Analysis**: "In the past n weeks, what have my Facebook ads focused on?"
+2. **Competitor Strategy**: "In the same period, what has been my competitors' focus?"
+3. **Strategy Evolution**: "How have our strategies evolved over time over the last 3 months?"
+4. **Trend Forecasting**: "Can we forecast these trends into the near future with confidence bands?"
+
+### Core Strategic Features:
+- [ ] **Enhanced Ad Classification** - Strategic labels beyond basic funnel
+- [ ] **Time-Series Strategy Tracking** - Evolution analysis with trend detection
+- [ ] **Competitive Response Detection** - Identify when competitors copy strategies
+- [ ] **Creative Fatigue Detection** - Using content embeddings to detect diminishing returns
+- [ ] **CTA Aggressiveness & Promotional Calendar** - Track promotional intensity and timing
+- [ ] **Platform Strategy Analysis** - Cross-platform messaging consistency
+- [ ] **Brand Voice Consistency** - Detect messaging drift and positioning changes
+- [ ] **AI.FORECAST Models** - Strategic trend prediction with confidence intervals
 
 ### Checkpoints:
-- [ ] Improved `AI.GENERATE` prompts for funnel classification
-- [ ] Additional analysis: persona detection, urgency scoring
-- [ ] `AI.FORECAST` integration for trend prediction
-- [ ] **Test**: All ads get proper funnel/angle labels
-- [ ] **Test**: Forecast shows reasonable trend projections
-- [ ] **Business validation**: Label accuracy > 80% on manual sample
+
+#### Enhanced Creative Classification:
+- [ ] Improved `AI.GENERATE_TABLE` prompts for multi-dimensional classification
+- [ ] Strategic labels: funnel stage, persona, topics, urgency score, promotional intensity
+- [ ] Message angle extraction with confidence scoring
+- [ ] **Test**: All ads get comprehensive strategic labels with >85% accuracy
+- [ ] **Business validation**: Manual review confirms strategic relevance
+
+#### Time-Series Strategy Intelligence:
+- [ ] Funnel mix evolution tracking (Upper/Mid/Lower distribution over time)
+- [ ] Message angle trend detection (shifting from features to benefits, etc.)
+- [ ] Promotional intensity cycles and seasonal patterns
+- [ ] **Test**: Can identify clear strategy shifts in 3-month historical data
+- [ ] **Test**: Trend detection works across multiple competitor brands
+
+#### Competitive Response System:
+- [ ] Content similarity spike detection (>0.85 similarity appearing within 2 weeks)
+- [ ] Cross-brand copying identification with timing analysis
+- [ ] Strategic response recommendations based on competitor moves
+- [ ] **Test**: Correctly identifies known copying cases in sample data
+- [ ] **Test**: Response system flags <5% false positives
+
+#### Creative Fatigue Detection:
+- [ ] Content embedding clustering to identify overused themes
+- [ ] Performance correlation with creative repetition
+- [ ] Automated recommendations for creative refreshes
+- [ ] **Test**: Identifies ads using similar messaging with declining performance
+- [ ] **Test**: Recommendations align with creative best practices
+
+#### Promotional & CTA Intelligence:
+- [ ] CTA aggressiveness scoring (urgency, discount intensity, action pressure)
+- [ ] Promotional calendar extraction (sale periods, seasonal campaigns)
+- [ ] Cross-competitor promotional timing analysis
+- [ ] **Test**: Accurately identifies promotional periods vs. brand messaging
+- [ ] **Test**: CTA scoring correlates with business intuition
+
+#### Platform & Brand Voice Analysis:
+- [ ] Cross-platform messaging consistency scoring
+- [ ] Brand voice drift detection over time periods
+- [ ] Positioning change identification and quantification
+- [ ] **Test**: Detects intentional brand voice changes in sample data
+- [ ] **Test**: Platform consistency scores align with manual assessment
+
+#### AI.FORECAST Integration:
+- [ ] Strategic trend forecasting models with confidence bands
+- [ ] Seasonal adjustment and cycle detection
+- [ ] Competitive response prediction based on historical patterns
+- [ ] **Test**: Forecast accuracy >70% for 4-week ahead predictions
+- [ ] **Test**: Confidence bands capture actual outcomes 80% of the time
 
 ### Enhanced Schema:
 ```sql
-OUTPUT_SCHEMA => 'funnel STRING, angles ARRAY<STRING>, persona STRING, urgency_score FLOAT64'
+-- Core classification
+OUTPUT_SCHEMA => 'funnel STRING, angles ARRAY<STRING>, persona STRING, topics ARRAY<STRING>, 
+                  urgency_score FLOAT64, promotional_intensity FLOAT64, brand_voice_score FLOAT64'
+
+-- Strategic intelligence views
+CREATE VIEW v_strategy_evolution AS ...     -- Time-series strategy tracking
+CREATE VIEW v_competitive_responses AS ... -- Copy detection and timing
+CREATE VIEW v_creative_fatigue AS ...      -- Content repetition analysis
+CREATE VIEW v_promotional_calendar AS ...  -- CTA and promotional patterns
+CREATE VIEW v_brand_voice_consistency AS ...-- Voice drift detection
 ```
+
+### Success Criteria:
+- [ ] **Strategic Question Coverage**: All 4 core questions answerable with <30 second query response
+- [ ] **Competitive Intelligence**: Can identify strategy shifts, copying, and opportunities within 1 week of occurrence
+- [ ] **Forecasting Accuracy**: >70% accuracy on 4-week strategic trend predictions
+- [ ] **Creative Insights**: Fatigue detection prevents 80% of declining creative performance
+- [ ] **Business Impact**: Growth marketers can make strategic decisions from dashboard insights
 
 ---
 
