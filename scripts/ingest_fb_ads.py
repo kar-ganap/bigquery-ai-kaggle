@@ -39,6 +39,8 @@ def normalize_result(r):
         "publisher_platforms": pub_str,
         "first_seen": to_date(r.get("start_date_string") or r.get("start_date")),
         "last_seen":  to_date(r.get("end_date_string") or r.get("end_date")),
+        "start_date_string": r.get("start_date_string"),
+        "end_date_string": r.get("end_date_string"),
         "landing_url": snapshot.get("link_url"),
         "cta_type": snapshot.get("cta_type"),
     }
@@ -145,6 +147,8 @@ def ensure_table(client: bigquery.Client):
         bigquery.SchemaField("media_type", "STRING"),
         bigquery.SchemaField("first_seen", "DATE"),
         bigquery.SchemaField("last_seen", "DATE"),
+        bigquery.SchemaField("start_date_string", "STRING"),
+        bigquery.SchemaField("end_date_string", "STRING"),
         bigquery.SchemaField("snapshot_url", "STRING"),
         bigquery.SchemaField("landing_url", "STRING"),
         bigquery.SchemaField("card_index", "INT64"),
