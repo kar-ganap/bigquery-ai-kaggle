@@ -42,7 +42,7 @@ class BigQueryAICurator:
             create_model_sql = f"""
             CREATE OR REPLACE MODEL `{model_id}`
             REMOTE WITH CONNECTION `{self.project_id}.us.gemini-connection`
-            OPTIONS (ENDPOINT = 'gemini-1.5-flash');
+            OPTIONS (ENDPOINT = 'gemini-2.5-flash');
             """
             
             try:
