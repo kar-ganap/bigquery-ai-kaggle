@@ -1,7 +1,7 @@
 -- CTA Aggressiveness & Promotional Intensity Scoring
 -- Analyzes urgency signals, discount intensity, and action pressure in creative text
 
-CREATE OR REPLACE TABLE `your-project.ads_demo.cta_aggressiveness_analysis` AS
+CREATE OR REPLACE TABLE `bigquery-ai-kaggle-469620.ads_demo.cta_aggressiveness_analysis` AS
 WITH cta_features AS (
   SELECT 
     ad_id,
@@ -48,7 +48,7 @@ WITH cta_features AS (
     -- Extract discount percentages for intensity measurement
     REGEXP_EXTRACT(UPPER(COALESCE(creative_text, '') || ' ' || COALESCE(title, '')), r'(\d+)%') AS discount_percentage_str
 
-  FROM `your-project.ads_demo.ads_with_dates`
+  FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`
   WHERE creative_text IS NOT NULL OR title IS NOT NULL
 ),
 
@@ -120,10 +120,10 @@ SELECT
   active_days,
   
   -- Feature flags
-  CAST(has_urgency_signals AS BOOL) AS has_urgency_signals,
-  CAST(has_promotional_signals AS BOOL) AS has_promotional_signals,
-  CAST(has_action_pressure AS BOOL) AS has_action_pressure,
-  CAST(has_scarcity_signals AS BOOL) AS has_scarcity_signals,
+  has_urgency_signals > 0 AS has_urgency_signals,
+  has_promotional_signals > 0 AS has_promotional_signals,
+  has_action_pressure > 0 AS has_action_pressure,
+  has_scarcity_signals > 0 AS has_scarcity_signals,
   
   -- Extracted values
   discount_percentage,
@@ -173,7 +173,7 @@ FROM enhanced_scoring
 ORDER BY final_aggressiveness_score DESC, brand, start_timestamp DESC;
 
 -- Create summary view for competitive analysis
-CREATE OR REPLACE VIEW `your-project.ads_demo.v_cta_competitive_summary` AS
+CREATE OR REPLACE VIEW `bigquery-ai-kaggle-469620.ads_demo.v_cta_competitive_summary` AS
 SELECT 
   brand,
   week_start,
@@ -209,7 +209,7 @@ SELECT
     PARTITION BY brand ORDER BY week_start
   ) AS aggressiveness_change_wow
 
-FROM `your-project.ads_demo.cta_aggressiveness_analysis`
+FROM `bigquery-ai-kaggle-469620.ads_demo.cta_aggressiveness_analysis`
 GROUP BY brand, week_start
 ORDER BY brand, week_start DESC;
 
@@ -223,4 +223,4 @@ SELECT
   COUNTIF(has_urgency_signals) AS ads_with_urgency,
   COUNTIF(discount_percentage > 0) AS ads_with_discounts,
   MAX(discount_percentage) AS max_discount_found
-FROM `your-project.ads_demo.cta_aggressiveness_analysis`;
+FROM `bigquery-ai-kaggle-469620.ads_demo.cta_aggressiveness_analysis`;
