@@ -18,8 +18,23 @@ from googleapiclient.discovery import build
 from bs4 import BeautifulSoup
 import pandas as pd
 
-from utils.bigquery_client import get_bigquery_client, load_dataframe_to_bq
-from utils.search_utils import extract_company_names, score_search_result, dedupe_companies
+try:
+    # Add scripts directory to path for utils imports
+    import sys
+    from pathlib import Path
+    scripts_dir = Path(__file__).parent
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    
+    from utils.bigquery_client import get_bigquery_client, load_dataframe_to_bq
+    from utils.search_utils import extract_company_names, score_search_result, dedupe_companies
+except ImportError as e:
+    print(f"Warning: Could not import utils modules: {e}")
+    get_bigquery_client = None
+    load_dataframe_to_bq = None
+    extract_company_names = None
+    score_search_result = None
+    dedupe_companies = None
 
 # Environment configuration
 GOOGLE_CSE_API_KEY = os.environ.get("GOOGLE_CSE_API_KEY")
@@ -179,11 +194,11 @@ class CompetitorDiscovery:
             query = result.get('query_context', '')
             
             # Calculate relevance score
-            raw_score = score_search_result(title, snippet, url, query)
+            raw_score = score_search_result(title, snippet, url, query) if score_search_result else 0.5
             
             # Extract company names from title and snippet
-            title_companies = extract_company_names(title)
-            snippet_companies = extract_company_names(snippet)
+            title_companies = extract_company_names(title) if extract_company_names else [title.split()[0] if title else "Unknown"]
+            snippet_companies = extract_company_names(snippet) if extract_company_names else []
             
             # Create candidates for each found company
             for company in title_companies:
@@ -266,7 +281,18 @@ class CompetitorDiscovery:
             } for c in all_candidates
         ]
         
-        unique_candidates = dedupe_companies(dedupe_data, 'company_name')
+        # Dedupe companies if function is available, otherwise use simple deduplication
+        if dedupe_companies:
+            unique_candidates = dedupe_companies(dedupe_data, 'company_name')
+        else:
+            # Simple deduplication by company_name
+            seen_names = set()
+            unique_candidates = []
+            for data in dedupe_data:
+                name_lower = data['company_name'].lower()
+                if name_lower not in seen_names:
+                    unique_candidates.append(data)
+                    seen_names.add(name_lower)
         
         # Convert back to CompetitorCandidate objects
         final_candidates = [
