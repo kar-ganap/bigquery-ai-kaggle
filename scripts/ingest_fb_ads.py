@@ -2,6 +2,14 @@ import os, requests, pandas as pd
 from datetime import datetime
 from dateutil import parser as dtp
 from google.cloud import bigquery
+from typing import List, Dict
+
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv not available, use system environment variables
 
 SC_API_KEY   = os.environ["SC_API_KEY"]
 BQ_PROJECT   = os.environ.get("BQ_PROJECT", "yourproj")
@@ -174,6 +182,101 @@ def load_dataframe(df: pd.DataFrame):
     )
     job.result()
     print(f"Loaded {len(df)} rows into {TABLE_ID}")
+
+
+class MetaAdsFetcher:
+    """Wrapper class for Meta ads fetching functionality"""
+    
+    def __init__(self, api_key: str = None):
+        self.api_key = api_key or SC_API_KEY
+        
+    def fetch_competitor_ads(self, competitor_names: List[str], country: str = "US", 
+                           status: str = "ACTIVE") -> Dict[str, int]:
+        """Fetch ads for multiple competitors"""
+        results = {}
+        
+        for company_name in competitor_names:
+            try:
+                ads = fetch_company_ads(
+                    company_name=company_name, 
+                    country=country, 
+                    status=status
+                )
+                
+                # Normalize the results
+                rows = []
+                for r in ads:
+                    rows.extend(normalize_result(r))
+                    
+                df = pd.DataFrame(rows)
+                if not df.empty:
+                    load_dataframe(df)
+                    results[company_name] = len(df)
+                    print(f"✅ {company_name}: {len(df)} ads collected")
+                else:
+                    results[company_name] = 0
+                    print(f"⚠️  {company_name}: No ads found")
+                    
+            except Exception as e:
+                print(f"❌ {company_name}: Error fetching ads - {e}")
+                results[company_name] = 0
+                
+        return results
+    
+    def fetch_company_ads_with_metadata(self, company_name: str, page_id: str = None, 
+                                      max_ads: int = 50, max_pages: int = 5, 
+                                      delay_between_requests: float = 0.5, 
+                                      country: str = "US", status: str = "ACTIVE") -> tuple:
+        """
+        Fetch ads for a single company with additional metadata and control parameters.
+        Returns (ads_list, fetch_result_dict) to match expected interface from pipeline.
+        """
+        import time
+        
+        try:
+            # Fetch raw ads data
+            ads = fetch_company_ads(
+                page_id=page_id,
+                company_name=company_name,
+                country=country,
+                status=status
+            )
+            
+            # Apply max_ads limit if specified
+            if max_ads and len(ads) > max_ads:
+                ads = ads[:max_ads]
+            
+            # Normalize the results
+            normalized_ads = []
+            for r in ads:
+                normalized_ads.extend(normalize_result(r))
+            
+            # Add delay simulation (though not needed for single request)
+            time.sleep(delay_between_requests)
+            
+            # Create fetch result metadata
+            fetch_result = {
+                'company_name': company_name,
+                'page_id': page_id,
+                'ads_found': len(normalized_ads),
+                'pages_processed': 1,  # API handles pagination internally
+                'status': 'success'
+            }
+            
+            return normalized_ads, fetch_result
+            
+        except Exception as e:
+            print(f"❌ Error fetching ads for {company_name}: {str(e)}")
+            fetch_result = {
+                'company_name': company_name,
+                'page_id': page_id,
+                'ads_found': 0,
+                'pages_processed': 0,
+                'status': 'error',
+                'error': str(e)
+            }
+            return [], fetch_result
+
 
 if __name__ == "__main__":
     import argparse
