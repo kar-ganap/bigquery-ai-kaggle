@@ -1142,6 +1142,735 @@ class CompetitiveIntelligencePipeline:
         
         return output
     
+    # ========================================================================
+    # Phase 8: Cascade Prediction Intelligence Methods
+    # ========================================================================
+    
+    def _detect_cascade_patterns(self) -> pd.DataFrame:
+        """Detect historical competitive cascades (Task 1.1)"""
+        if self.dry_run or not run_query:
+            return pd.DataFrame({
+                'initiator': ['Brand_A', 'Brand_B'],
+                'responder': ['Brand_B', 'Brand_C'],
+                'initiation_date': ['2024-01-15', '2024-02-10'],
+                'response_date': ['2024-01-22', '2024-02-17'],
+                'response_lag': [7, 7],
+                'initial_move_size': [-0.3, 0.4],
+                'response_size': [-0.2, 0.3],
+                'cascade_correlation': [0.8, 0.7]
+            })
+        
+        cascade_sql = f"""
+        -- Detect historical competitive cascades
+        WITH strategic_moves AS (
+          SELECT 
+            brand,
+            DATE(start_timestamp) as move_date,
+            promotional_intensity,
+            urgency_score,
+            primary_angle,
+            -- Detect significant changes
+            promotional_intensity - LAG(promotional_intensity, 7) OVER (
+              PARTITION BY brand ORDER BY DATE(start_timestamp)
+            ) as promo_delta,
+            urgency_score - LAG(urgency_score, 7) OVER (
+              PARTITION BY brand ORDER BY DATE(start_timestamp)  
+            ) as urgency_delta
+          FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock`
+          WHERE brand IN ('{self.brand}', {', '.join([f"'{b}'" for b in self.competitor_brands])})
+            AND start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 180 DAY)
+        ),
+        cascades AS (
+          SELECT 
+            a.brand as initiator,
+            b.brand as responder,
+            a.move_date as initiation_date,
+            b.move_date as response_date,
+            DATE_DIFF(b.move_date, a.move_date, DAY) as response_lag,
+            a.promo_delta as initial_move_size,
+            b.promo_delta as response_size,
+            -- Calculate correlation
+            CORR(a.promotional_intensity, b.promotional_intensity) OVER (
+              PARTITION BY a.brand, b.brand 
+              ORDER BY a.move_date 
+              ROWS BETWEEN CURRENT ROW AND 30 FOLLOWING
+            ) as cascade_correlation
+          FROM strategic_moves a
+          JOIN strategic_moves b
+            ON b.move_date BETWEEN a.move_date AND DATE_ADD(a.move_date, INTERVAL 30 DAY)
+            AND a.brand != b.brand
+            AND ABS(a.promo_delta) > 0.1  -- Significant initial move
+            AND ABS(b.promo_delta) > 0.05 -- Meaningful response
+        )
+        SELECT * FROM cascades
+        WHERE cascade_correlation > 0.6
+        ORDER BY initiation_date DESC
+        LIMIT 20
+        """
+        
+        try:
+            result = run_query(cascade_sql)
+            return result if not result.empty else pd.DataFrame()
+        except Exception as e:
+            self.logger.warning(f"Cascade pattern detection failed: {e}")
+            return pd.DataFrame()
+
+    def _build_influence_network(self) -> Dict:
+        """Build brand influence network from historical cascades (Task 1.2)"""
+        cascades_df = self._detect_cascade_patterns()
+        
+        if cascades_df.empty:
+            return {
+                'nodes': [self.brand] + self.competitor_brands[:3],
+                'edges': [
+                    {'source_brand': self.brand, 'target_brand': self.competitor_brands[0], 
+                     'influence_strength': 0.7, 'avg_response_time': 7, 'influence_type': 'MODERATE_DIRECT'}
+                ] if self.competitor_brands else [],
+                'influence_matrix': {}
+            }
+        
+        # Build network from cascade data
+        influence_metrics = cascades_df.groupby(['initiator', 'responder']).agg({
+            'response_lag': 'mean',
+            'cascade_correlation': 'mean',
+            'response_size': lambda x: (x / cascades_df['initial_move_size']).mean() if len(x) > 0 else 0,
+            'initiator': 'count'  # cascade_count
+        }).rename(columns={'initiator': 'cascade_count'}).reset_index()
+        
+        influence_metrics['influence_strength'] = influence_metrics['cascade_correlation']
+        influence_metrics['avg_response_time'] = influence_metrics['response_lag']
+        
+        # Classify influence types
+        def classify_influence(row):
+            if row['influence_strength'] > 0.8 and row['avg_response_time'] < 7:
+                return 'STRONG_DIRECT'
+            elif row['influence_strength'] > 0.6 and row['avg_response_time'] < 14:
+                return 'MODERATE_DIRECT'
+            elif row['influence_strength'] > 0.4:
+                return 'WEAK_INDIRECT'
+            else:
+                return 'MINIMAL'
+        
+        influence_metrics['influence_type'] = influence_metrics.apply(classify_influence, axis=1)
+        
+        # Filter minimum pattern frequency
+        influence_metrics = influence_metrics[influence_metrics['cascade_count'] >= 2]
+        
+        network = {
+            'nodes': list(set(influence_metrics['initiator'].unique()) | 
+                         set(influence_metrics['responder'].unique())),
+            'edges': influence_metrics.to_dict('records'),
+            'influence_matrix': self._create_influence_matrix(influence_metrics)
+        }
+        
+        return network
+
+    def _create_influence_matrix(self, influence_df: pd.DataFrame) -> Dict:
+        """Create influence matrix from metrics"""
+        matrix = {}
+        for _, row in influence_df.iterrows():
+            source = row['initiator']
+            target = row['responder']
+            if source not in matrix:
+                matrix[source] = {}
+            matrix[source][target] = {
+                'strength': row['influence_strength'],
+                'response_time': row['avg_response_time'],
+                'type': row['influence_type']
+            }
+        return matrix
+
+    def _predict_cascade_sequence(self, initial_move: Dict) -> List[Dict]:
+        """Predict 3 moves ahead in competitive cascade (Task 1.3)"""
+        if self.dry_run:
+            return [
+                {'brand': 'Brand_B', 'move_number': 1, 'predicted_date': 7, 
+                 'predicted_intensity': 0.6, 'confidence': 0.8},
+                {'brand': 'Brand_C', 'move_number': 2, 'predicted_date': 14, 
+                 'predicted_intensity': 0.5, 'confidence': 0.7},
+                {'brand': 'Brand_D', 'move_number': 3, 'predicted_date': 21, 
+                 'predicted_intensity': 0.4, 'confidence': 0.6}
+            ]
+        
+        influence_network = self._build_influence_network()
+        predictions = []
+        current_state = initial_move
+        
+        for move_num in range(1, 4):  # 3 moves ahead
+            # Step 1: Identify likely responders based on influence network
+            likely_responders = self._get_likely_responders(
+                current_state['brand'], influence_network
+            )
+            
+            if not likely_responders:
+                break
+            
+            # Step 2: Predict response timing and magnitude
+            response_predictions = []
+            for responder in likely_responders:
+                # Use historical averages for prediction
+                response_time = influence_network['influence_matrix'].get(
+                    current_state['brand'], {}
+                ).get(responder, {}).get('response_time', 7)
+                
+                influence_strength = influence_network['influence_matrix'].get(
+                    current_state['brand'], {}
+                ).get(responder, {}).get('strength', 0.5)
+                
+                # Predict intensity based on initial move and influence
+                predicted_intensity = current_state.get('promotional_intensity', 0.5) * influence_strength * 0.8
+                
+                confidence = self._calculate_prediction_confidence(responder, current_state, influence_strength)
+                
+                response_predictions.append({
+                    'brand': responder,
+                    'move_number': move_num,
+                    'predicted_date': response_time,
+                    'predicted_intensity': predicted_intensity,
+                    'confidence': confidence
+                })
+            
+            if response_predictions:
+                # Select most likely response as next state
+                next_move = max(response_predictions, key=lambda x: x['confidence'])
+                predictions.append(next_move)
+                current_state = next_move
+        
+        return predictions
+
+    def _get_likely_responders(self, brand: str, network: Dict) -> List[str]:
+        """Get brands likely to respond to a move by the given brand"""
+        influence_matrix = network.get('influence_matrix', {})
+        if brand not in influence_matrix:
+            # Return competitor brands as fallback
+            return [b for b in self.competitor_brands if b != brand][:3]
+        
+        # Sort by influence strength
+        responders = []
+        for target, metrics in influence_matrix[brand].items():
+            if metrics.get('strength', 0) > 0.4:  # Minimum threshold
+                responders.append((target, metrics['strength']))
+        
+        responders.sort(key=lambda x: x[1], reverse=True)
+        return [r[0] for r in responders[:3]]
+
+    def _calculate_prediction_confidence(self, responder: str, current_state: Dict, influence_strength: float) -> float:
+        """Calculate confidence score for cascade prediction"""
+        base_confidence = influence_strength
+        
+        # Adjust based on historical patterns
+        if influence_strength > 0.7:
+            base_confidence += 0.1
+        elif influence_strength < 0.5:
+            base_confidence -= 0.1
+        
+        # Cap between 0.1 and 0.9
+        return max(0.1, min(0.9, base_confidence))
+
+    def _generate_cascade_interventions(self, predictions: List[Dict]) -> Dict:
+        """Generate strategic interventions based on cascade predictions (Task 1.4)"""
+        interventions = {
+            'cascade_timeline': [],
+            'preemptive_actions': [],
+            'defensive_strategies': [],
+            'opportunity_windows': []
+        }
+        
+        for i, prediction in enumerate(predictions):
+            # Timeline visualization
+            interventions['cascade_timeline'].append({
+                'move': i + 1,
+                'brand': prediction['brand'],
+                'when': f"T+{prediction['predicted_date']} days",
+                'what': self._describe_predicted_move(prediction),
+                'confidence': f"{prediction['confidence']*100:.0f}%"
+            })
+            
+            # Preemptive actions
+            if prediction['confidence'] > 0.7:
+                interventions['preemptive_actions'].append({
+                    'timing': f"Before T+{prediction['predicted_date']} days",
+                    'action': self._generate_preemptive_action(prediction),
+                    'rationale': f"Block {prediction['brand']}'s predicted {prediction['predicted_intensity']:.1f} intensity move",
+                    'priority': 'HIGH' if i == 0 else 'MEDIUM'
+                })
+            
+            # Opportunity windows
+            if i < len(predictions) - 1:
+                gap_days = predictions[i+1]['predicted_date'] - prediction['predicted_date']
+                if gap_days > 7:
+                    interventions['opportunity_windows'].append({
+                        'window': f"Days {prediction['predicted_date']}-{predictions[i+1]['predicted_date']}",
+                        'opportunity': "Launch counter-campaign while competitors recalibrate",
+                        'duration': f"{gap_days} days"
+                    })
+        
+        return interventions
+
+    def _describe_predicted_move(self, prediction: Dict) -> str:
+        """Describe what the predicted move looks like"""
+        intensity = prediction['predicted_intensity']
+        if intensity > 0.7:
+            return "Aggressive promotional campaign launch"
+        elif intensity > 0.5:
+            return "Moderate competitive response"
+        elif intensity > 0.3:
+            return "Defensive positioning adjustment"
+        else:
+            return "Minor tactical shift"
+
+    def _generate_preemptive_action(self, prediction: Dict) -> str:
+        """Generate specific preemptive action for predicted move"""
+        intensity = prediction['predicted_intensity']
+        if intensity > 0.6:
+            return f"Launch preemptive campaign to dominate {prediction['brand']}'s target audience"
+        elif intensity > 0.4:
+            return f"Increase ad spend to block {prediction['brand']}'s visibility window"
+        else:
+            return f"Monitor {prediction['brand']} closely for early intervention signals"
+
+    # ========================================================================
+    # Phase 8: White Space Detection Methods  
+    # ========================================================================
+
+    def _detect_white_spaces(self) -> pd.DataFrame:
+        """Detect white space opportunities in 3D competitive coverage (Task 2.1)"""
+        if self.dry_run or not run_query:
+            return pd.DataFrame({
+                'primary_angle': ['EMOTIONAL', 'FUNCTIONAL', 'ASPIRATIONAL'],
+                'funnel': ['Upper', 'Mid', 'Lower'], 
+                'persona': ['Eco-conscious', 'Price-conscious', 'Quality-focused'],
+                'total_market_presence': [5, 12, 8],
+                'competitor_count': [0, 1, 2],
+                'brands_in_space': [[], ['Brand_A'], ['Brand_B', 'Brand_C']],
+                'space_type': ['VIRGIN_TERRITORY', 'MONOPOLY', 'DUOPOLY'],
+                'opportunity_score': [0.9, 0.7, 0.4]
+            })
+        
+        white_space_sql = f"""
+        -- Build 3D competitive coverage matrix
+        WITH coverage_matrix AS (
+          SELECT 
+            primary_angle,
+            funnel,
+            persona,
+            brand,
+            COUNT(*) as presence_count,
+            AVG(promotional_intensity) as avg_intensity
+          FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock`
+          WHERE brand IN ('{self.brand}', {', '.join([f"'{b}'" for b in self.competitor_brands])})
+            AND primary_angle IS NOT NULL
+            AND funnel IS NOT NULL
+            AND persona IS NOT NULL
+          GROUP BY primary_angle, funnel, persona, brand
+        ),
+        market_coverage AS (
+          SELECT 
+            primary_angle,
+            funnel,
+            persona,
+            SUM(presence_count) as total_market_presence,
+            COUNT(DISTINCT brand) as competitor_count,
+            ARRAY_AGG(DISTINCT brand) as brands_in_space,
+            AVG(avg_intensity) as market_avg_intensity,
+            -- Calculate concentration (simplified Herfindahl index)
+            SUM(POWER(presence_count / SUM(presence_count) OVER (
+              PARTITION BY primary_angle, funnel, persona
+            ), 2)) as market_concentration
+          FROM coverage_matrix
+          GROUP BY primary_angle, funnel, persona
+        ),
+        white_spaces AS (
+          SELECT 
+            primary_angle,
+            funnel,
+            persona,
+            total_market_presence,
+            competitor_count,
+            brands_in_space,
+            CASE 
+              WHEN competitor_count = 0 THEN 'VIRGIN_TERRITORY'
+              WHEN competitor_count = 1 THEN 'MONOPOLY'
+              WHEN competitor_count = 2 THEN 'DUOPOLY'
+              WHEN market_concentration > 0.5 THEN 'CONCENTRATED'
+              WHEN total_market_presence < 10 THEN 'UNDERSERVED'
+              ELSE 'COMPETITIVE'
+            END as space_type,
+            -- Score opportunity
+            (1 - COALESCE(market_concentration, 0.5)) * (1 - (competitor_count / 10.0)) as opportunity_score
+          FROM market_coverage
+        )
+        SELECT * FROM white_spaces
+        WHERE space_type IN ('VIRGIN_TERRITORY', 'MONOPOLY', 'UNDERSERVED')
+        ORDER BY opportunity_score DESC
+        LIMIT 15
+        """
+        
+        try:
+            result = run_query(white_space_sql)
+            return result if not result.empty else pd.DataFrame()
+        except Exception as e:
+            self.logger.warning(f"White space detection failed: {e}")
+            return pd.DataFrame()
+
+    def _estimate_market_potential(self, white_space: Dict) -> Dict:
+        """Estimate market potential for identified white space (Task 2.2)"""
+        if self.dry_run or not run_query:
+            return {
+                'estimated_performance': 0.7,
+                'estimated_volume': 150,
+                'market_size_multiplier': 0.8,
+                'total_potential_score': 84.0,
+                'strategic_fit': 0.8,
+                'implementation_difficulty': 0.3,
+                'competitive_moat': 0.6
+            }
+        
+        performance_sql = f"""
+        WITH space_performance AS (
+          SELECT 
+            primary_angle,
+            funnel,
+            persona,
+            AVG(promotional_intensity) as avg_performance,
+            COUNT(DISTINCT ad_archive_id) as ad_volume,
+            -- Use engagement proxy from related spaces
+            AVG(CASE 
+              WHEN primary_angle = '{white_space.get('primary_angle', '')}' THEN 1.2
+              WHEN funnel = '{white_space.get('funnel', '')}' THEN 1.0
+              WHEN persona = '{white_space.get('persona', '')}' THEN 0.8
+              ELSE 0.5
+            END) as relevance_weight
+          FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock`
+          GROUP BY primary_angle, funnel, persona
+        ),
+        potential_score AS (
+          SELECT 
+            '{white_space.get('primary_angle', '')}' as target_angle,
+            '{white_space.get('funnel', '')}' as target_funnel,
+            '{white_space.get('persona', '')}' as target_persona,
+            AVG(avg_performance * relevance_weight) as estimated_performance,
+            SUM(ad_volume * relevance_weight) as estimated_volume,
+            -- Market size estimation
+            CASE 
+              WHEN '{white_space.get('funnel', '')}' = 'Upper' THEN 1.0
+              WHEN '{white_space.get('funnel', '')}' = 'Mid' THEN 0.6
+              WHEN '{white_space.get('funnel', '')}' = 'Lower' THEN 0.3
+              ELSE 0.5
+            END * 
+            CASE
+              WHEN '{white_space.get('persona', '')}' IN ('Price-conscious', 'Quality-focused') THEN 1.0
+              ELSE 0.7
+            END as market_size_multiplier
+          FROM space_performance
+          WHERE relevance_weight > 0.5
+        )
+        SELECT 
+          COALESCE(estimated_performance, 0.5) as estimated_performance,
+          COALESCE(estimated_volume, 50) as estimated_volume,
+          COALESCE(market_size_multiplier, 0.5) as market_size_multiplier,
+          COALESCE(estimated_performance, 0.5) * COALESCE(estimated_volume, 50) * COALESCE(market_size_multiplier, 0.5) as total_potential_score
+        FROM potential_score
+        """
+        
+        try:
+            result = run_query(performance_sql)
+            if not result.empty:
+                potential = result.iloc[0].to_dict()
+            else:
+                potential = {'estimated_performance': 0.5, 'estimated_volume': 50, 'market_size_multiplier': 0.5, 'total_potential_score': 12.5}
+        except Exception as e:
+            self.logger.warning(f"Market potential estimation failed: {e}")
+            potential = {'estimated_performance': 0.5, 'estimated_volume': 50, 'market_size_multiplier': 0.5, 'total_potential_score': 12.5}
+        
+        # Add strategic fit assessments
+        potential['strategic_fit'] = self._assess_strategic_fit(white_space)
+        potential['implementation_difficulty'] = self._assess_implementation_difficulty(white_space)
+        potential['competitive_moat'] = self._estimate_competitive_moat(white_space)
+        
+        return potential
+
+    def _assess_strategic_fit(self, white_space: Dict) -> float:
+        """Assess how well a white space fits the brand's strategy"""
+        fit_score = 0.7  # Base score
+        
+        # Adjust based on angle alignment
+        if white_space.get('primary_angle') in ['EMOTIONAL', 'ASPIRATIONAL']:
+            fit_score += 0.1  # Premium brands often use these angles
+        elif white_space.get('primary_angle') == 'FUNCTIONAL':
+            fit_score += 0.05
+        
+        # Adjust based on funnel stage
+        if white_space.get('funnel') == 'Upper':
+            fit_score += 0.1  # Brand building is always strategic
+        elif white_space.get('funnel') == 'Lower':
+            fit_score += 0.05  # Conversion focus
+        
+        return min(0.9, max(0.1, fit_score))
+
+    def _assess_implementation_difficulty(self, white_space: Dict) -> float:
+        """Assess implementation difficulty (0 = easy, 1 = very hard)"""
+        difficulty = 0.4  # Base difficulty
+        
+        # Adjust based on space type
+        space_type = white_space.get('space_type', '')
+        if space_type == 'VIRGIN_TERRITORY':
+            difficulty += 0.2  # Higher risk in untested space
+        elif space_type == 'MONOPOLY':
+            difficulty += 0.3  # Need to compete with established player
+        elif space_type == 'UNDERSERVED':
+            difficulty += 0.1  # Some competition but manageable
+        
+        # Adjust based on persona complexity
+        if white_space.get('persona') in ['Eco-conscious', 'Tech-savvy']:
+            difficulty += 0.1  # More specialized targeting required
+        
+        return min(0.9, max(0.1, difficulty))
+
+    def _estimate_competitive_moat(self, white_space: Dict) -> float:
+        """Estimate defensibility of the white space position"""
+        moat_score = 0.5  # Base defensibility
+        
+        # Virgin territories have highest defensibility potential
+        if white_space.get('space_type') == 'VIRGIN_TERRITORY':
+            moat_score += 0.3
+        elif white_space.get('space_type') == 'UNDERSERVED':
+            moat_score += 0.2
+        elif white_space.get('space_type') == 'MONOPOLY':
+            moat_score += 0.1  # Can challenge existing player
+        
+        # Complex angles/personas are more defensible
+        if white_space.get('primary_angle') in ['EMOTIONAL', 'ASPIRATIONAL']:
+            moat_score += 0.1
+        if white_space.get('persona') in ['Eco-conscious', 'Tech-savvy']:
+            moat_score += 0.1
+        
+        return min(0.9, max(0.1, moat_score))
+
+    def _prioritize_white_spaces(self, white_spaces: List[Dict]) -> List[Dict]:
+        """Prioritize white space opportunities by value and feasibility (Task 2.3)"""
+        prioritized = []
+        
+        for space in white_spaces:
+            # Estimate market potential for each space
+            potential = self._estimate_market_potential(space)
+            
+            # Calculate composite scores
+            market_potential = potential['estimated_performance'] * potential['estimated_volume'] / 100.0
+            strategic_fit = potential['strategic_fit']
+            ease_of_entry = 1 - potential['implementation_difficulty']
+            defensibility = potential['competitive_moat']
+            
+            # Priority matrix (2x2: Impact vs Feasibility)
+            impact_score = (market_potential * 0.6 + defensibility * 0.4)
+            feasibility_score = (strategic_fit * 0.5 + ease_of_entry * 0.5)
+            
+            # Classify opportunity
+            if impact_score > 0.7 and feasibility_score > 0.7:
+                priority = 'QUICK_WIN'
+            elif impact_score > 0.7 and feasibility_score <= 0.7:
+                priority = 'STRATEGIC_BET'
+            elif impact_score <= 0.7 and feasibility_score > 0.7:
+                priority = 'FILL_IN'
+            else:
+                priority = 'QUESTIONABLE'
+            
+            prioritized.append({
+                'angle': space.get('primary_angle', ''),
+                'funnel': space.get('funnel', ''),
+                'persona': space.get('persona', ''),
+                'space_type': space.get('space_type', ''),
+                'market_potential': round(market_potential, 2),
+                'strategic_fit': round(strategic_fit, 2),
+                'ease_of_entry': round(ease_of_entry, 2),
+                'defensibility': round(defensibility, 2),
+                'priority': priority,
+                'overall_score': round(impact_score * feasibility_score, 2)
+            })
+        
+        return sorted(prioritized, key=lambda x: x['overall_score'], reverse=True)
+
+    def _generate_white_space_interventions(self, prioritized_spaces: List[Dict]) -> Dict:
+        """Generate specific interventions for white space opportunities (Task 2.4)"""
+        interventions = {
+            'quick_wins': [],
+            'strategic_bets': [],
+            'entry_strategies': [],
+            'campaign_templates': []
+        }
+        
+        for space in prioritized_spaces[:10]:  # Top 10 opportunities
+            if space['priority'] == 'QUICK_WIN':
+                interventions['quick_wins'].append({
+                    'opportunity': f"{space['angle']} × {space['funnel']} × {space['persona']}",
+                    'market_gap': space['space_type'],
+                    'action': self._generate_entry_strategy(space),
+                    'timeline': '0-30 days',
+                    'expected_roi': f"{space['market_potential']*100:.0f}%",
+                    'resources_required': 'Low-Medium'
+                })
+            
+            elif space['priority'] == 'STRATEGIC_BET':
+                interventions['strategic_bets'].append({
+                    'opportunity': f"{space['angle']} × {space['funnel']} × {space['persona']}",
+                    'market_potential': space['market_potential'],
+                    'investment_required': self._estimate_investment(space),
+                    'time_to_market': '30-90 days',
+                    'competitive_advantage': space['defensibility'],
+                    'risk_factors': self._identify_risks(space)
+                })
+            
+            # Generate campaign template
+            interventions['campaign_templates'].append(
+                self._generate_campaign_template(space)
+            )
+        
+        return interventions
+
+    def _generate_entry_strategy(self, space: Dict) -> str:
+        """Generate entry strategy for white space"""
+        if space.get('space_type') == 'VIRGIN_TERRITORY':
+            return f"Pioneer {space['angle']} messaging for {space['persona']} in {space['funnel']} funnel"
+        elif space.get('space_type') == 'MONOPOLY':
+            return f"Challenge existing player with differentiated {space['angle']} approach"
+        elif space.get('space_type') == 'UNDERSERVED':
+            return f"Scale up presence in underserved {space['angle']} × {space['persona']} space"
+        else:
+            return f"Enter {space['angle']} × {space['funnel']} × {space['persona']} space"
+
+    def _estimate_investment(self, space: Dict) -> str:
+        """Estimate investment required for white space entry"""
+        if space.get('space_type') == 'VIRGIN_TERRITORY':
+            return 'High (education + positioning)'
+        elif space.get('space_type') == 'MONOPOLY':
+            return 'Medium-High (competitive displacement)'
+        else:
+            return 'Medium (standard market entry)'
+
+    def _identify_risks(self, space: Dict) -> List[str]:
+        """Identify key risks for white space entry"""
+        risks = []
+        if space.get('space_type') == 'VIRGIN_TERRITORY':
+            risks.extend(['Market education required', 'Unproven demand'])
+        if space.get('ease_of_entry', 0) < 0.5:
+            risks.append('High implementation complexity')
+        if space.get('defensibility', 0) < 0.5:
+            risks.append('Low competitive moat')
+        return risks or ['Standard competitive risks']
+
+    def _generate_campaign_template(self, space: Dict) -> Dict:
+        """Generate campaign template for white space entry"""
+        return {
+            'campaign_name': f"{space['angle']}_{space['funnel']}_{space['persona']}_Entry",
+            'targeting': {
+                'persona': space['persona'],
+                'funnel_stage': space['funnel']
+            },
+            'messaging': {
+                'primary_angle': space['angle'],
+                'key_messages': self._generate_key_messages(space),
+                'cta_suggestions': self._generate_cta_suggestions(space)
+            },
+            'creative_brief': {
+                'tone': self._determine_tone(space['angle'], space['persona']),
+                'visual_style': self._determine_visual_style(space['persona']),
+                'copy_length': self._determine_copy_length(space['funnel'])
+            },
+            'kpis': {
+                'primary': self._determine_primary_kpi(space['funnel']),
+                'secondary': self._determine_secondary_kpis(space)
+            }
+        }
+
+    def _generate_key_messages(self, space: Dict) -> List[str]:
+        """Generate key messages for campaign template"""
+        messages = []
+        if space['angle'] == 'EMOTIONAL':
+            messages.append("Connect emotionally with core values")
+        elif space['angle'] == 'FUNCTIONAL':
+            messages.append("Highlight practical benefits and features")
+        elif space['angle'] == 'ASPIRATIONAL':
+            messages.append("Inspire toward ideal lifestyle")
+        elif space['angle'] == 'PROMOTIONAL':
+            messages.append("Emphasize value and savings")
+        
+        if space['persona'] == 'Eco-conscious':
+            messages.append("Emphasize sustainability and environmental impact")
+        elif space['persona'] == 'Price-conscious':
+            messages.append("Focus on value proposition and affordability")
+        elif space['persona'] == 'Quality-focused':
+            messages.append("Highlight craftsmanship and premium materials")
+        
+        return messages
+
+    def _generate_cta_suggestions(self, space: Dict) -> List[str]:
+        """Generate CTA suggestions based on funnel stage"""
+        if space['funnel'] == 'Upper':
+            return ["Learn More", "Discover", "Explore"]
+        elif space['funnel'] == 'Mid':
+            return ["Try Now", "Compare", "See How"]
+        elif space['funnel'] == 'Lower':
+            return ["Buy Now", "Shop", "Get Started"]
+        else:
+            return ["Learn More", "Shop Now"]
+
+    def _determine_tone(self, angle: str, persona: str) -> str:
+        """Determine appropriate tone for creative"""
+        if angle == 'EMOTIONAL':
+            return 'Warm and personal'
+        elif angle == 'ASPIRATIONAL':
+            return 'Inspiring and premium'
+        elif angle == 'FUNCTIONAL':
+            return 'Clear and informative'
+        elif persona == 'Eco-conscious':
+            return 'Authentic and values-driven'
+        else:
+            return 'Friendly and approachable'
+
+    def _determine_visual_style(self, persona: str) -> str:
+        """Determine visual style based on persona"""
+        if persona == 'Eco-conscious':
+            return 'Natural, organic imagery'
+        elif persona == 'Quality-focused':
+            return 'Premium, sophisticated aesthetic'
+        elif persona == 'Price-conscious':
+            return 'Clean, value-focused design'
+        elif persona == 'Tech-savvy':
+            return 'Modern, digital-first approach'
+        else:
+            return 'Clean and modern'
+
+    def _determine_copy_length(self, funnel: str) -> str:
+        """Determine appropriate copy length"""
+        if funnel == 'Upper':
+            return 'Medium (brand story)'
+        elif funnel == 'Mid':
+            return 'Medium-Long (feature details)'
+        elif funnel == 'Lower':
+            return 'Short (direct CTA)'
+        else:
+            return 'Medium'
+
+    def _determine_primary_kpi(self, funnel: str) -> str:
+        """Determine primary KPI based on funnel stage"""
+        if funnel == 'Upper':
+            return 'Brand awareness lift'
+        elif funnel == 'Mid':
+            return 'Consideration rate'
+        elif funnel == 'Lower':
+            return 'Conversion rate'
+        else:
+            return 'Engagement rate'
+
+    def _determine_secondary_kpis(self, space: Dict) -> List[str]:
+        """Determine secondary KPIs"""
+        kpis = ['CPM', 'CTR']
+        if space['funnel'] == 'Lower':
+            kpis.extend(['CPA', 'ROAS'])
+        elif space['funnel'] == 'Upper':
+            kpis.extend(['Reach', 'Frequency'])
+        return kpis
+
     def _generate_level_1_executive(self, analysis: AnalysisResults) -> Dict:
         """Generate Level 1: Executive Summary"""
         alerts = []
@@ -1639,6 +2368,84 @@ class CompetitiveIntelligencePipeline:
                     'velocity_gap': -15,
                     'refresh_efficiency_score': 0.71
                 }
+            }
+        
+        # PHASE 8 ENHANCEMENT: Cascade Prediction Intelligence
+        print("     🔮 Adding cascade prediction intelligence...")
+        try:
+            # Build influence network and generate predictions
+            influence_network = self._build_influence_network()
+            
+            # Simulate current market state for predictions
+            current_market_state = {
+                'brand': self.brand,
+                'promotional_intensity': analysis.current_state.get('promotional_intensity', 0.5),
+                'timestamp': datetime.now().isoformat()
+            }
+            
+            predictions = self._predict_cascade_sequence(current_market_state)
+            cascade_interventions = self._generate_cascade_interventions(predictions)
+            
+            level_2['cascade_predictions'] = {
+                'next_moves': predictions,
+                'influence_network': {
+                    'nodes': influence_network['nodes'],
+                    'edges': influence_network['edges'][:5],  # Top 5 relationships
+                    'total_relationships': len(influence_network['edges'])
+                },
+                'cascade_probability': predictions[0]['confidence'] if predictions else 0.0,
+                'timeline_preview': cascade_interventions['cascade_timeline'][:3]  # Next 3 moves
+            }
+            
+            print(f"     ✅ Added cascade predictions for {len(predictions)} moves ahead")
+            
+        except Exception as e:
+            self.logger.warning(f"Cascade prediction integration failed: {e}")
+            level_2['cascade_predictions'] = {
+                'next_moves': [],
+                'influence_network': {'nodes': [], 'edges': [], 'total_relationships': 0},
+                'cascade_probability': 0.0,
+                'timeline_preview': []
+            }
+        
+        # PHASE 8 ENHANCEMENT: White Space Detection 
+        print("     🎯 Adding white space opportunity detection...")
+        try:
+            # Detect white space opportunities
+            white_spaces_df = self._detect_white_spaces()
+            
+            if not white_spaces_df.empty:
+                # Convert to dict for processing
+                white_spaces = white_spaces_df.to_dict('records')
+                prioritized_spaces = self._prioritize_white_spaces(white_spaces)
+                white_space_interventions = self._generate_white_space_interventions(prioritized_spaces)
+                
+                level_2['white_space_opportunities'] = {
+                    'identified_gaps': prioritized_spaces[:5],  # Top 5 opportunities
+                    'quick_wins': white_space_interventions.get('quick_wins', []),
+                    'market_coverage_summary': {
+                        'virgin_territories': len([s for s in white_spaces if s.get('space_type') == 'VIRGIN_TERRITORY']),
+                        'monopolies': len([s for s in white_spaces if s.get('space_type') == 'MONOPOLY']),
+                        'underserved': len([s for s in white_spaces if s.get('space_type') == 'UNDERSERVED']),
+                        'total_opportunities': len(white_spaces)
+                    }
+                }
+                
+                print(f"     ✅ Added {len(prioritized_spaces)} white space opportunities")
+            else:
+                level_2['white_space_opportunities'] = {
+                    'identified_gaps': [],
+                    'quick_wins': [],
+                    'market_coverage_summary': {'virgin_territories': 0, 'monopolies': 0, 'underserved': 0, 'total_opportunities': 0}
+                }
+                print("     ⚠️  No white space opportunities detected")
+                
+        except Exception as e:
+            self.logger.warning(f"White space detection integration failed: {e}")
+            level_2['white_space_opportunities'] = {
+                'identified_gaps': [],
+                'quick_wins': [],
+                'market_coverage_summary': {'virgin_territories': 0, 'monopolies': 0, 'underserved': 0, 'total_opportunities': 0}
             }
                 
         return level_2
@@ -2280,6 +3087,72 @@ class CompetitiveIntelligencePipeline:
                         print(f"     ⚠️  AI intervention generation failed, using fallback: {e}")
                         # Fallback to rule-based interventions if AI fails
                         interventions['phase_7_ai_interventions'] = self._generate_fallback_interventions()
+                    
+                    # PHASE 8 ENHANCEMENT: Cascade Prediction Interventions
+                    print("     🔮 Generating cascade prediction interventions...")
+                    try:
+                        # Build current market state
+                        current_market_state = {
+                            'brand': self.brand,
+                            'promotional_intensity': analysis.current_state.get('promotional_intensity', 0.5),
+                            'timestamp': datetime.now().isoformat()
+                        }
+                        
+                        # Generate cascade predictions and interventions
+                        predictions = self._predict_cascade_sequence(current_market_state)
+                        cascade_interventions = self._generate_cascade_interventions(predictions)
+                        
+                        interventions['cascade_predictions'] = {
+                            'preemptive_actions': cascade_interventions.get('preemptive_actions', []),
+                            'defensive_strategies': cascade_interventions.get('defensive_strategies', []),
+                            'opportunity_windows': cascade_interventions.get('opportunity_windows', []),
+                            'timeline': cascade_interventions.get('cascade_timeline', [])
+                        }
+                        
+                        print(f"     ✅ Generated {len(predictions)} cascade prediction interventions")
+                        
+                    except Exception as e:
+                        self.logger.warning(f"Cascade prediction interventions failed: {e}")
+                        interventions['cascade_predictions'] = {
+                            'preemptive_actions': [],
+                            'defensive_strategies': [],
+                            'opportunity_windows': [],
+                            'timeline': []
+                        }
+                    
+                    # PHASE 8 ENHANCEMENT: White Space Action Plans
+                    print("     🎯 Generating white space intervention plans...")
+                    try:
+                        # Detect and prioritize white spaces
+                        white_spaces_df = self._detect_white_spaces()
+                        
+                        if not white_spaces_df.empty:
+                            white_spaces = white_spaces_df.to_dict('records')
+                            prioritized_spaces = self._prioritize_white_spaces(white_spaces)
+                            white_space_interventions = self._generate_white_space_interventions(prioritized_spaces)
+                            
+                            interventions['white_spaces'] = {
+                                'quick_wins': white_space_interventions.get('quick_wins', [])[:3],  # Top 3 quick wins
+                                'strategic_bets': white_space_interventions.get('strategic_bets', [])[:2],  # Top 2 strategic bets
+                                'campaign_templates': white_space_interventions.get('campaign_templates', [])[:5]  # Top 5 templates
+                            }
+                            
+                            print(f"     ✅ Generated {len(prioritized_spaces)} white space intervention plans")
+                        else:
+                            interventions['white_spaces'] = {
+                                'quick_wins': [],
+                                'strategic_bets': [],
+                                'campaign_templates': []
+                            }
+                            print("     ⚠️  No white space interventions available")
+                        
+                    except Exception as e:
+                        self.logger.warning(f"White space interventions failed: {e}")
+                        interventions['white_spaces'] = {
+                            'quick_wins': [],
+                            'strategic_bets': [],
+                            'campaign_templates': []
+                        }
                         
                 else:
                     # Fallback when BigQuery not available
