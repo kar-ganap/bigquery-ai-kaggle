@@ -1,0 +1,271 @@
+"""
+Stage 7: Intelligence Output Generation
+
+Clean, focused implementation of 4-level progressive disclosure output.
+"""
+import os
+import time
+import json
+from typing import List
+
+from ..core.base import PipelineStage, PipelineContext
+from ..models.candidates import AnalysisResults, IntelligenceOutput
+
+# Environment configuration
+BQ_PROJECT = os.environ.get("BQ_PROJECT", "bigquery-ai-kaggle-469620")
+BQ_DATASET = os.environ.get("BQ_DATASET", "ads_demo")
+
+
+class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
+    """
+    Stage 7: Intelligence Output Generation.
+    
+    Responsibilities:
+    - Generate Level 1: Executive Summary
+    - Generate Level 2: Strategic Dashboard  
+    - Generate Level 3: Actionable Interventions
+    - Generate Level 4: SQL Dashboards
+    - Display and save output files
+    """
+    
+    def __init__(self, context: PipelineContext, dry_run: bool = False, verbose: bool = False):
+        super().__init__("Intelligence Output", 7, context.run_id)
+        self.context = context
+        self.dry_run = dry_run
+        self.verbose = verbose
+    
+    def execute(self, analysis: AnalysisResults) -> IntelligenceOutput:
+        """Execute intelligence output generation"""
+        
+        print("   📊 Generating 4-level intelligence framework...")
+        
+        output = IntelligenceOutput()
+        
+        # Generate all 4 levels of progressive disclosure
+        print("   🎯 Level 1: Executive Summary")
+        output.level_1 = self._generate_level_1_executive(analysis)
+        
+        print("   📈 Level 2: Strategic Dashboard")
+        output.level_2 = self._generate_level_2_strategic(analysis)
+        
+        print("   🎮 Level 3: Actionable Interventions")
+        output.level_3 = self._generate_level_3_interventions(analysis)
+        
+        print("   📋 Level 4: SQL Dashboards")
+        output.level_4 = self._generate_level_4_dashboards(analysis)
+        
+        # Display output
+        self._display_output(output)
+        
+        # Save output files
+        if not self.dry_run:
+            self._save_output_files(output)
+        
+        return output
+    
+    def _generate_level_1_executive(self, analysis: AnalysisResults) -> dict:
+        """Generate Level 1: Executive Summary"""
+        
+        # Extract key insights from analysis
+        market_position = analysis.current_state.get('market_position', 'unknown')
+        copying_detected = analysis.influence.get('copying_detected', False)
+        trend_direction = analysis.evolution.get('trend_direction', 'stable')
+        forecast_summary = analysis.forecasts.get('executive_summary', 'Stable market conditions expected')
+        
+        return {
+            'brand': self.context.brand,
+            'market_position': market_position,
+            'competitive_threat_level': 'HIGH' if copying_detected else 'MEDIUM',
+            'trend_momentum': trend_direction.upper(),
+            'forecast_summary': forecast_summary,
+            'key_insights': [
+                f"{self.context.brand} is in a {market_position} market position",
+                f"Competitive copying {'detected' if copying_detected else 'not detected'}",
+                f"Market trend is {trend_direction}",
+                f"Forecast: {forecast_summary[:60]}..."
+            ]
+        }
+    
+    def _generate_level_2_strategic(self, analysis: AnalysisResults) -> dict:
+        """Generate Level 2: Strategic Dashboard"""
+        
+        return {
+            'current_state_metrics': {
+                'promotional_intensity': analysis.current_state.get('promotional_intensity', 0),
+                'urgency_score': analysis.current_state.get('urgency_score', 0),
+                'brand_voice_score': analysis.current_state.get('brand_voice_score', 0),
+                'market_position': analysis.current_state.get('market_position', 'unknown'),
+                'promotional_volatility': analysis.current_state.get('promotional_volatility', 0)
+            },
+            'competitive_influence': {
+                'copying_detected': analysis.influence.get('copying_detected', False),
+                'top_copier': analysis.influence.get('top_copier', 'None'),
+                'similarity_score': analysis.influence.get('similarity_score', 0),
+                'lag_days': analysis.influence.get('lag_days', 0)
+            },
+            'temporal_intelligence': {
+                'momentum_status': analysis.evolution.get('momentum_status', 'STABLE'),
+                'velocity_change_7d': analysis.evolution.get('velocity_change_7d', 0),
+                'velocity_change_30d': analysis.evolution.get('velocity_change_30d', 0),
+                'trend_direction': analysis.evolution.get('trend_direction', 'stable')
+            },
+            'forecasting': {
+                'business_impact_score': analysis.forecasts.get('business_impact_score', 2),
+                'confidence': analysis.forecasts.get('confidence', 'MEDIUM'),
+                'next_30_days': analysis.forecasts.get('next_30_days', 'stable_market')
+            }
+        }
+    
+    def _generate_level_3_interventions(self, analysis: AnalysisResults) -> dict:
+        """Generate Level 3: Actionable Interventions"""
+        
+        interventions = []
+        
+        # Generate interventions based on analysis
+        market_position = analysis.current_state.get('market_position', 'unknown')
+        if market_position == 'defensive':
+            interventions.append({
+                'priority': 'HIGH',
+                'action': 'Increase promotional intensity',
+                'rationale': 'Currently in defensive position - need to be more aggressive',
+                'timeline': '2-4 weeks'
+            })
+        
+        if analysis.influence.get('copying_detected', False):
+            top_copier = analysis.influence.get('top_copier', 'Unknown')
+            interventions.append({
+                'priority': 'MEDIUM',
+                'action': f'Monitor and differentiate from {top_copier}',
+                'rationale': 'Competitive copying detected - need differentiation strategy',
+                'timeline': '1-2 weeks'
+            })
+        
+        momentum = analysis.evolution.get('momentum_status', 'STABLE')
+        if momentum == 'ACCELERATING':
+            interventions.append({
+                'priority': 'LOW',
+                'action': 'Maintain current strategy',
+                'rationale': 'Positive momentum detected - continue current approach',
+                'timeline': 'Ongoing'
+            })
+        
+        return {
+            'immediate_actions': [i for i in interventions if i['priority'] == 'HIGH'],
+            'short_term_actions': [i for i in interventions if i['priority'] == 'MEDIUM'],
+            'monitoring_actions': [i for i in interventions if i['priority'] == 'LOW'],
+            'strategic_recommendations': [
+                'Implement competitive monitoring dashboard',
+                'Set up automated alerts for market position changes',
+                'Establish weekly competitive intelligence reviews'
+            ]
+        }
+    
+    def _generate_level_4_dashboards(self, analysis: AnalysisResults) -> dict:
+        """Generate Level 4: SQL Dashboards"""
+        
+        return {
+            'bigquery_project': BQ_PROJECT,
+            'bigquery_dataset': BQ_DATASET,
+            'key_tables': {
+                'ads_raw': f'{BQ_PROJECT}.{BQ_DATASET}.ads_raw_{self.context.run_id}',
+                'ads_embeddings': f'{BQ_PROJECT}.{BQ_DATASET}.ads_embeddings',
+                'strategic_labels': f'{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock'
+            },
+            'dashboard_queries': {
+                'competitive_overview': f'''
+                    SELECT 
+                        brand,
+                        COUNT(*) as ad_count,
+                        AVG(promotional_intensity) as avg_promo_intensity,
+                        AVG(urgency_score) as avg_urgency
+                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock`
+                    WHERE brand IN ('{self.context.brand}', {', '.join([f"'{b}'" for b in getattr(self.context, 'competitor_brands', [])])})
+                    GROUP BY brand
+                    ORDER BY avg_promo_intensity DESC
+                ''',
+                'trend_analysis': f'''
+                    SELECT 
+                        DATE(start_timestamp) as date,
+                        brand,
+                        AVG(promotional_intensity) as daily_promo_intensity
+                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock`
+                    WHERE brand = '{self.context.brand}'
+                        AND start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
+                    GROUP BY date, brand
+                    ORDER BY date DESC
+                '''
+            },
+            'visualization_suggestions': [
+                'Time series chart for promotional intensity trends',
+                'Competitive positioning scatter plot',
+                'Market share analysis pie chart',
+                'Copying detection heatmap'
+            ]
+        }
+    
+    def _display_output(self, output: IntelligenceOutput):
+        """Display formatted output to console"""
+        
+        print("\n" + "=" * 80)
+        print("🎯 COMPETITIVE INTELLIGENCE OUTPUT")
+        print("=" * 80)
+        
+        # Level 1: Executive Summary
+        print("\n📋 LEVEL 1: EXECUTIVE SUMMARY")
+        print("-" * 40)
+        level1 = output.level_1
+        print(f"Brand: {level1.get('brand', 'Unknown')}")
+        print(f"Market Position: {level1.get('market_position', 'Unknown')}")
+        print(f"Threat Level: {level1.get('competitive_threat_level', 'Unknown')}")
+        print(f"Trend: {level1.get('trend_momentum', 'Unknown')}")
+        print(f"Forecast: {level1.get('forecast_summary', 'No forecast available')}")
+        
+        # Level 2: Key Metrics
+        print("\n📊 LEVEL 2: KEY METRICS")
+        print("-" * 40)
+        level2 = output.level_2
+        current_state = level2.get('current_state_metrics', {})
+        print(f"Promotional Intensity: {current_state.get('promotional_intensity', 0):.2f}")
+        print(f"Market Position: {current_state.get('market_position', 'Unknown')}")
+        
+        influence = level2.get('competitive_influence', {})
+        if influence.get('copying_detected'):
+            print(f"⚠️  Copying detected from: {influence.get('top_copier', 'Unknown')}")
+        
+        # Level 3: Actions (abbreviated)
+        print("\n🎮 LEVEL 3: TOP ACTIONS")
+        print("-" * 40)
+        level3 = output.level_3
+        immediate = level3.get('immediate_actions', [])
+        if immediate:
+            for action in immediate[:2]:  # Show top 2
+                print(f"• {action.get('action', 'No action')} ({action.get('priority', 'Unknown')} priority)")
+        else:
+            print("• No immediate actions required")
+        
+        print("\n" + "=" * 80)
+    
+    def _save_output_files(self, output: IntelligenceOutput):
+        """Save output to files"""
+        
+        try:
+            # Ensure output directory exists
+            output_dir = "data/output"
+            os.makedirs(output_dir, exist_ok=True)
+            
+            # Save JSON output
+            output_file = f"{output_dir}/intelligence_{self.context.run_id}.json"
+            with open(output_file, 'w') as f:
+                json.dump({
+                    'brand': self.context.brand,
+                    'run_id': self.context.run_id,
+                    'level_1': output.level_1,
+                    'level_2': output.level_2,
+                    'level_3': output.level_3,
+                    'level_4': output.level_4
+                }, f, indent=2)
+            
+            print(f"   💾 Output saved to: {output_file}")
+            
+        except Exception as e:
+            print(f"   ⚠️  Could not save output files: {e}")

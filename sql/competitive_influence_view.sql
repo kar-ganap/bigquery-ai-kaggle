@@ -6,14 +6,14 @@ CREATE OR REPLACE VIEW `bigquery-ai-kaggle-469620.ads_demo.v_competitive_influen
 WITH competitor_prior_ads AS (
   -- Find all competitor ads that came before each current ad
   SELECT 
-    current_ad.ad_id AS current_ad_id,
+    current_ad.ad_archive_id AS current_ad_archive_id,
     current_ad.brand AS current_brand,
     current_ad.start_timestamp AS current_start,
     current_ad.primary_angle AS current_angle,
     current_ad.funnel AS current_funnel,
     current_ad.promotional_intensity AS current_promo,
     
-    prior_ad.ad_id AS prior_ad_id,
+    prior_ad.ad_archive_id AS prior_ad_archive_id,
     prior_ad.brand AS prior_brand,
     prior_ad.start_timestamp AS prior_start,
     prior_ad.primary_angle AS prior_angle,
@@ -35,9 +35,9 @@ WITH competitor_prior_ads AS (
 
 influence_scoring AS (
   SELECT 
-    current_ad_id,
+    current_ad_archive_id,
     current_brand,
-    prior_ad_id,
+    prior_ad_archive_id,
     prior_brand,
     days_before,
     duration_weight,
@@ -78,9 +78,9 @@ influence_scoring AS (
 )
 
 SELECT 
-  current_ad_id,
+  current_ad_archive_id,
   current_brand,
-  prior_ad_id,
+  prior_ad_archive_id,
   prior_brand,
   influence_score,
   influence_confidence,
@@ -97,4 +97,4 @@ SELECT
   
 FROM influence_scoring
 WHERE influence_score > 0.05  -- Filter out negligible influences
-ORDER BY current_ad_id, influence_score DESC;
+ORDER BY current_ad_archive_id, influence_score DESC;

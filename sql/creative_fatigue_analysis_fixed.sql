@@ -34,7 +34,7 @@ WITH recent_ads_originality AS (
     
   FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates` a
   LEFT JOIN `bigquery-ai-kaggle-469620.ads_demo.v_competitive_influence` ci
-    ON a.ad_archive_id = ci.current_ad_id
+    ON a.ad_archive_id = ci.current_ad_archive_id
   WHERE a.start_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 60 DAY)  -- Last 60 days
     AND a.start_date IS NOT NULL
   GROUP BY 
