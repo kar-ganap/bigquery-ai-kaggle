@@ -281,7 +281,7 @@ class MetaAdsFetcher:
     def fetch_company_ads_with_metadata(self, company_name: str, page_id: str = None, 
                                       max_ads: int = 50, max_pages: int = 5, 
                                       delay_between_requests: float = 0.5, 
-                                      country: str = "US", status: str = "ALL") -> tuple:
+                                      country: str = "US", status: str = "ACTIVE") -> tuple:
         """
         Compatibility method for pipeline - matches old interface.
         Returns (ads_list, fetch_result_dict) to match expected interface from pipeline.

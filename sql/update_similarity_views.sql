@@ -7,14 +7,14 @@ WITH ad_pairs AS (
     base.ad_archive_id as base_ad_id,
     base.brand as base_brand,
     base.creative_text as base_creative_text,
-    base.page_category as base_category,
-    base.cta_text as base_cta,
+    '' as base_category,  -- page_category not available in embeddings table
+    '' as base_cta,       -- cta_text not available in embeddings table
     
     comp.ad_archive_id as similar_ad_id,
     comp.brand as similar_brand,
     comp.creative_text as similar_creative_text,
-    comp.page_category as similar_category,
-    comp.cta_text as similar_cta,
+    '' as similar_category,  -- page_category not available in embeddings table
+    '' as similar_cta,       -- cta_text not available in embeddings table
     
     -- Calculate semantic similarity  
     (1 - ML.DISTANCE(base.content_embedding, comp.content_embedding, 'COSINE')) as similarity_score,
@@ -37,12 +37,12 @@ WITH ad_pairs AS (
     -- Enhanced quality indicators
     base.has_title as base_has_title,
     base.has_body as base_has_body,
-    base.has_cta as base_has_cta,
-    base.has_category as base_has_category,
+    CASE WHEN base.cta_text IS NOT NULL AND LENGTH(base.cta_text) > 0 THEN TRUE ELSE FALSE END as base_has_cta,
+    CASE WHEN base.page_category IS NOT NULL AND LENGTH(base.page_category) > 0 THEN TRUE ELSE FALSE END as base_has_category,
     comp.has_title as similar_has_title,
     comp.has_body as similar_has_body,
-    comp.has_cta as similar_has_cta,
-    comp.has_category as similar_has_category,
+    CASE WHEN comp.cta_text IS NOT NULL AND LENGTH(comp.cta_text) > 0 THEN TRUE ELSE FALSE END as similar_has_cta,
+    CASE WHEN comp.page_category IS NOT NULL AND LENGTH(comp.page_category) > 0 THEN TRUE ELSE FALSE END as similar_has_category,
     
     -- Text quality scores
     base.text_richness_score as base_quality,

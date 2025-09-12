@@ -37,10 +37,15 @@ data/exports/*
 ehthumbs.db
 Thumbs.db
 
-# Env & Auth
+# Env & Auth  
 .env
 .env.*
-*.json
+
+# Development utilities (shouldn't be tracked)
+tools/
+scripts/data/
+data/output/*
+!data/output/clean_checkpoints/
 
 # Editors
 .vscode/
