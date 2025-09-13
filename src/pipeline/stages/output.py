@@ -39,6 +39,15 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
         
         print("   📊 Generating 4-level intelligence framework...")
         
+        # DEBUG: Log what we received from Analysis stage
+        print(f"   🔍 DEBUG OUTPUT STAGE: Received analysis object")
+        print(f"   🔍 DEBUG: analysis.current_state = {analysis.current_state}")
+        print(f"   🔍 DEBUG: current_state type = {type(analysis.current_state)}")
+        
+        if hasattr(analysis, 'current_state') and analysis.current_state:
+            for key, value in analysis.current_state.items():
+                print(f"   🔍 DEBUG: current_state['{key}'] = {value} (type: {type(value)})")
+        
         output = IntelligenceOutput()
         
         # Generate all 4 levels of progressive disclosure
@@ -89,24 +98,33 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
     def _generate_level_2_strategic(self, analysis: AnalysisResults) -> dict:
         """Generate Level 2: Strategic Dashboard"""
         
-        return {
+        # DEBUG: Log what values we're extracting for Level 2
+        pi_val = analysis.current_state.get('promotional_intensity', 0.0)
+        us_val = analysis.current_state.get('urgency_score', 0.0)
+        bv_val = analysis.current_state.get('brand_voice_score', 0.0)
+        
+        print(f"   🔍 DEBUG LEVEL_2: promotional_intensity = {pi_val} (type: {type(pi_val)})")
+        print(f"   🔍 DEBUG LEVEL_2: urgency_score = {us_val} (type: {type(us_val)})")
+        print(f"   🔍 DEBUG LEVEL_2: brand_voice_score = {bv_val} (type: {type(bv_val)})")
+        
+        level_2_data = {
             'current_state_metrics': {
-                'promotional_intensity': analysis.current_state.get('promotional_intensity', 0),
-                'urgency_score': analysis.current_state.get('urgency_score', 0),
-                'brand_voice_score': analysis.current_state.get('brand_voice_score', 0),
+                'promotional_intensity': pi_val,
+                'urgency_score': us_val,
+                'brand_voice_score': bv_val,
                 'market_position': analysis.current_state.get('market_position', 'unknown'),
-                'promotional_volatility': analysis.current_state.get('promotional_volatility', 0)
+                'promotional_volatility': analysis.current_state.get('promotional_volatility', 0.0)
             },
             'competitive_influence': {
                 'copying_detected': analysis.influence.get('copying_detected', False),
                 'top_copier': analysis.influence.get('top_copier', 'None'),
-                'similarity_score': analysis.influence.get('similarity_score', 0),
+                'similarity_score': analysis.influence.get('similarity_score', 0.0),
                 'lag_days': analysis.influence.get('lag_days', 0)
             },
             'temporal_intelligence': {
                 'momentum_status': analysis.evolution.get('momentum_status', 'STABLE'),
-                'velocity_change_7d': analysis.evolution.get('velocity_change_7d', 0),
-                'velocity_change_30d': analysis.evolution.get('velocity_change_30d', 0),
+                'velocity_change_7d': analysis.evolution.get('velocity_change_7d', 0.0),
+                'velocity_change_30d': analysis.evolution.get('velocity_change_30d', 0.0),
                 'trend_direction': analysis.evolution.get('trend_direction', 'stable')
             },
             'forecasting': {
@@ -115,6 +133,9 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                 'next_30_days': analysis.forecasts.get('next_30_days', 'stable_market')
             }
         }
+        
+        print(f"   🔍 DEBUG LEVEL_2: Final level_2_data current_state_metrics = {level_2_data['current_state_metrics']}")
+        return level_2_data
     
     def _generate_level_3_interventions(self, analysis: AnalysisResults) -> dict:
         """Generate Level 3: Actionable Interventions"""
@@ -169,7 +190,7 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
             'key_tables': {
                 'ads_raw': f'{BQ_PROJECT}.{BQ_DATASET}.ads_raw_{self.context.run_id}',
                 'ads_embeddings': f'{BQ_PROJECT}.{BQ_DATASET}.ads_embeddings',
-                'strategic_labels': f'{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock'
+                'strategic_labels': f'{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates'
             },
             'dashboard_queries': {
                 'competitive_overview': f'''
@@ -178,7 +199,7 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                         COUNT(*) as ad_count,
                         AVG(promotional_intensity) as avg_promo_intensity,
                         AVG(urgency_score) as avg_urgency
-                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock`
+                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates`
                     WHERE brand IN ('{self.context.brand}', {', '.join([f"'{b}'" for b in getattr(self.context, 'competitor_brands', [])])})
                     GROUP BY brand
                     ORDER BY avg_promo_intensity DESC
@@ -188,7 +209,7 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                         DATE(start_timestamp) as date,
                         brand,
                         AVG(promotional_intensity) as daily_promo_intensity
-                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock`
+                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates`
                     WHERE brand = '{self.context.brand}'
                         AND start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
                     GROUP BY date, brand
@@ -255,15 +276,22 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
             
             # Save JSON output
             output_file = f"{output_dir}/intelligence_{self.context.run_id}.json"
+            
+            # DEBUG: Log what we're about to save to JSON
+            json_data = {
+                'brand': self.context.brand,
+                'run_id': self.context.run_id,
+                'level_1': output.level_1,
+                'level_2': output.level_2,
+                'level_3': output.level_3,
+                'level_4': output.level_4
+            }
+            
+            print(f"   🔍 DEBUG JSON SAVE: About to write to {output_file}")
+            print(f"   🔍 DEBUG JSON SAVE: level_2 current_state_metrics = {json_data['level_2']['current_state_metrics']}")
+            
             with open(output_file, 'w') as f:
-                json.dump({
-                    'brand': self.context.brand,
-                    'run_id': self.context.run_id,
-                    'level_1': output.level_1,
-                    'level_2': output.level_2,
-                    'level_3': output.level_3,
-                    'level_4': output.level_4
-                }, f, indent=2)
+                json.dump(json_data, f, indent=2)
             
             print(f"   💾 Output saved to: {output_file}")
             

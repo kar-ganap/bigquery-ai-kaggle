@@ -262,23 +262,25 @@ class CurationStage(PipelineStage[List[CompetitorCandidate], List[ValidatedCompe
               'Pre-filter score: ', CAST(ROUND(prefilter_score, 2) as STRING), '. ',
               
               'Instructions: Be conservative - only mark as competitor if confident they actually compete.',
-              '1. is_competitor: TRUE if this is a real company that competes with the target brand, FALSE otherwise',
-              '2. tier: Categorize as "Direct-Rival", "Market-Leader", "Disruptor", "Niche-Player", or "Adjacent"',
-              '3. market_overlap_pct: Estimate 0-100% how much their target markets overlap',
-              '4. customer_substitution_ease: "Easy", "Medium", or "Hard"',
-              '5. confidence: 0.0-1.0 confidence in your assessment',
-              '6. reasoning: Brief explanation (max 200 chars)',
-              '7. evidence_sources: What information you used (max 150 chars)'
+              '1. company_name: Return the exact company name "', company_name, '"',
+              '2. is_competitor: TRUE if this is a real company that competes with the target brand, FALSE otherwise',
+              '3. tier: Categorize as "Direct-Rival", "Market-Leader", "Disruptor", "Niche-Player", or "Adjacent"',
+              '4. market_overlap_pct: Estimate 0-100% how much their target markets overlap',
+              '5. customer_substitution_ease: "Easy", "Medium", or "Hard"',
+              '6. confidence: 0.0-1.0 confidence in your assessment',
+              '7. reasoning: Brief explanation (max 200 chars)',
+              '8. evidence_sources: What information you used (max 150 chars)'
             ) as analysis_prompt
           FROM `{batch_table_id}`
         ),
         ai_analysis AS (
-          SELECT * FROM ML.GENERATE_TABLE(
+          SELECT * FROM AI.GENERATE_TABLE(
             MODEL `{BQ_PROJECT}.{BQ_DATASET}.gemini_model`,
-            (SELECT *, analysis_prompt as prompt FROM source_data),
+            (SELECT analysis_prompt as prompt FROM source_data),
             STRUCT(
-              'is_competitor BOOL, tier STRING, market_overlap_pct INT64, customer_substitution_ease STRING, confidence FLOAT64, reasoning STRING, evidence_sources STRING'
-              AS output_schema
+              'company_name STRING, is_competitor BOOL, tier STRING, market_overlap_pct INT64, customer_substitution_ease STRING, confidence FLOAT64, reasoning STRING, evidence_sources STRING'
+              AS output_schema,
+              'SHARED' AS request_type
             )
           )
         )

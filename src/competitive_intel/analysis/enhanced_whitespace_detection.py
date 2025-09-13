@@ -60,38 +60,32 @@ class Enhanced3DWhiteSpaceDetector:
             DATE(r.start_timestamp) as campaign_date,
             r.media_type,
             -- Extract messaging angle from real content
-            ML.GENERATE_TEXT(
-              MODEL `bigquery-ai-kaggle-469620.ads_demo.gemini_model`,
-              STRUCT(
-                CONCAT(
-                  'Analyze this eyewear/glasses ad and classify the primary messaging angle. ',
-                  'Text: "', SUBSTR(r.creative_text, 1, 500), '". ',
-                  'Return ONLY one of: EMOTIONAL, FUNCTIONAL, ASPIRATIONAL, SOCIAL_PROOF, PROBLEM_SOLUTION'
-                ) AS prompt
-              )
-            ).candidates[0].content.parts[0].text as messaging_angle_raw,
+            AI.GENERATE(
+              CONCAT(
+                'Analyze this eyewear/glasses ad and classify the primary messaging angle. ',
+                'Text: "', SUBSTR(r.creative_text, 1, 500), '". ',
+                'Return ONLY one of: EMOTIONAL, FUNCTIONAL, ASPIRATIONAL, SOCIAL_PROOF, PROBLEM_SOLUTION'
+              ),
+              connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai'
+            ) as messaging_angle_raw,
             -- Extract funnel stage
-            ML.GENERATE_TEXT(
-              MODEL `bigquery-ai-kaggle-469620.ads_demo.gemini_model`,
-              STRUCT(
-                CONCAT(
-                  'Classify this ad by marketing funnel stage. ',
-                  'Text: "', SUBSTR(r.creative_text, 1, 500), '". ',
-                  'Return ONLY one of: AWARENESS, CONSIDERATION, DECISION, RETENTION'
-                ) AS prompt
-              )
-            ).candidates[0].content.parts[0].text as funnel_stage_raw,
+            AI.GENERATE(
+              CONCAT(
+                'Classify this ad by marketing funnel stage. ',
+                'Text: "', SUBSTR(r.creative_text, 1, 500), '". ',
+                'Return ONLY one of: AWARENESS, CONSIDERATION, DECISION, RETENTION'
+              ),
+              connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai'
+            ) as funnel_stage_raw,
             -- Extract target persona (simplified)
-            ML.GENERATE_TEXT(
-              MODEL `bigquery-ai-kaggle-469620.ads_demo.gemini_model`,
-              STRUCT(
-                CONCAT(
-                  'Who is the primary target audience for this eyewear ad? ',
-                  'Text: "', SUBSTR(r.creative_text, 1, 500), '". ',
-                  'Return ONLY 2-3 words describing the main demographic/psychographic (e.g., "Young Professionals", "Price-Conscious Families", "Style-Conscious Millennials")'
-                ) AS prompt
-              )
-            ).candidates[0].content.parts[0].text as target_persona_raw,
+            AI.GENERATE(
+              CONCAT(
+                'Who is the primary target audience for this eyewear ad? ',
+                'Text: "', SUBSTR(r.creative_text, 1, 500), '". ',
+                'Return ONLY 2-3 words describing the main demographic/psychographic (e.g., "Young Professionals", "Price-Conscious Families", "Style-Conscious Millennials")'
+              ),
+              connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai'
+            ) as target_persona_raw,
             -- Message quality from CTA analysis
             COALESCE(c.final_aggressiveness_score, 3.0) as message_strength
           FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates` r
