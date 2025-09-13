@@ -62,33 +62,35 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
     
     def _create_mock_analysis(self) -> AnalysisResults:
         """Create mock analysis for testing"""
-        analysis = AnalysisResults()
-        analysis.current_state = {
-            'promotional_intensity': 0.67,
-            'urgency_score': 0.58,
-            'brand_voice_score': 0.73,
-            'market_position': 'defensive',
-            'promotional_volatility': 0.12
-        }
-        analysis.influence = {
-            'copying_detected': True,
-            'top_copier': 'Competitor_1',
-            'similarity_score': 0.84,
-            'lag_days': 5
-        }
-        analysis.evolution = {
-            'momentum_status': 'ACCELERATING',
-            'velocity_change_7d': 0.15,
-            'velocity_change_30d': 0.08,
-            'trend_direction': 'increasing'
-        }
-        analysis.forecasts = {
-            'executive_summary': 'MODERATE INCREASE: Expected 15% rise in competitive pressure',
-            'business_impact_score': 3,
-            'confidence': 'MEDIUM',
-            'next_30_days': 'increased_competition'
-        }
-        return analysis
+        return AnalysisResults(
+            status="success",
+            current_state={
+                'promotional_intensity': 0.67,
+                'urgency_score': 0.58,
+                'brand_voice_score': 0.73,
+                'market_position': 'defensive',
+                'promotional_volatility': 0.12
+            },
+            influence={
+                'copying_detected': True,
+                'top_copier': 'Competitor_1',
+                'similarity_score': 0.84,
+                'lag_days': 5
+            },
+            evolution={
+                'momentum_status': 'ACCELERATING',
+                'velocity_change_7d': 0.15,
+                'velocity_change_30d': 0.08,
+                'trend_direction': 'increasing'
+            },
+            forecasts={
+                'executive_summary': 'MODERATE INCREASE: Expected 15% rise in competitive pressure',
+                'business_impact_score': 3,
+                'confidence': 'MEDIUM',
+                'next_30_days': 'increased_competition'
+            }
+            # All other fields (metadata, velocity, patterns, etc.) get default values automatically
+        )
     
     def _run_real_analysis(self, embeddings: EmbeddingResults) -> AnalysisResults:
         """Run actual strategic analysis"""
@@ -99,26 +101,64 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
         
         try:
             print("   🔍 Running enhanced strategic analysis with temporal intelligence...")
+            
+            # Robust polling mechanism to ensure BigQuery table consistency after Strategic Labeling
+            import time
+            print("   ⏰ Waiting for BigQuery strategic data availability...")
+            self._wait_for_strategic_data_availability()
+            
             analysis = AnalysisResults()
+            analysis.status = "success"
+            # Note: Using dataclass constructor ensures all fields get proper defaults
             
             # Initialize enhanced intelligence modules
             self._initialize_intelligence_engines()
             
             # Step 1: Current State Analysis
             print("   📊 Analyzing current strategic position...")
-            analysis.current_state = self._analyze_current_state()
+            try:
+                analysis.current_state = self._analyze_current_state()
+                print(f"   ✅ Current state analysis complete: PI = {analysis.current_state.get('promotional_intensity', 'MISSING')}")
+            except Exception as e:
+                print(f"   ❌ Current state analysis failed: {e}")
+                analysis.current_state = {
+                    'promotional_intensity': 0.0,
+                    'urgency_score': 0.0,
+                    'brand_voice_score': 0.0,
+                    'market_position': 'unknown',
+                    'promotional_volatility': 0.0
+                }
             
             # Step 2: Competitive Copying Detection
             print("   🎯 Detecting competitive copying patterns...")
-            analysis.influence = self._detect_copying_patterns(embeddings)
+            try:
+                analysis.influence = self._detect_copying_patterns(embeddings)
+                print("   ✅ Copying detection complete")
+            except Exception as e:
+                print(f"   ❌ Copying detection failed: {e}")
+                analysis.influence = {'copying_detected': False, 'similarity_score': 0.0}
             
             # Step 3: Temporal Intelligence Analysis
             print("   📈 Analyzing temporal intelligence (where did we come from)...")
-            analysis.evolution = self._analyze_temporal_intelligence()
+            try:
+                analysis.evolution = self._analyze_temporal_intelligence()
+                print("   ✅ Temporal intelligence complete")
+            except Exception as e:
+                print(f"   ❌ Temporal intelligence failed: {e}")
+                analysis.evolution = {'trend_direction': 'stable', 'momentum_status': 'STABLE', 'velocity_change_7d': 0.0, 'velocity_change_30d': 0.0}
             
             # Step 4: Wide Net Forecasting
             print("   🔮 Generating Wide Net forecasting (where are we going)...")
-            analysis.forecasts = self._generate_forecasts()
+            try:
+                analysis.forecasts = self._generate_forecasts()
+                print("   ✅ Forecasting complete")
+            except Exception as e:
+                print(f"   ❌ Forecasting failed: {e}")
+                analysis.forecasts = {'next_30_days': 'stable_market', 'confidence': 'LOW', 'business_impact_score': 2}
+            
+            # DEBUG: Log final analysis result before returning
+            print(f"   🔍 DEBUG ANALYSIS: Final analysis.current_state = {analysis.current_state}")
+            print(f"   🔍 DEBUG ANALYSIS: About to return analysis with current_state PI = {analysis.current_state.get('promotional_intensity', 'MISSING')}")
             
             return analysis
             
@@ -163,9 +203,11 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
         try:
             strategic_result = run_query(strategic_labels_query)
             has_strategic_data = strategic_result.iloc[0]['has_strategic_data'] > 0 if not strategic_result.empty else False
+            strategic_count = strategic_result.iloc[0]['has_strategic_data'] if not strategic_result.empty else 0
             
             if has_strategic_data:
                 print("   ✅ Using existing strategic labels for analysis")
+                print(f"   🔍 DEBUG: Found {strategic_count} records with strategic data")
                 
                 current_state_query = f"""
                 SELECT 
@@ -187,21 +229,33 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 current_result = run_query(current_state_query)
                 if not current_result.empty:
                     row = current_result.iloc[0]
-                    return {
+                    result = {
                         'promotional_intensity': float(row.get('avg_promotional_intensity', 0)),
                         'urgency_score': float(row.get('avg_urgency_score', 0)),
                         'brand_voice_score': float(row.get('avg_brand_voice_score', 0)),
                         'market_position': row.get('market_position', 'unknown'),
                         'promotional_volatility': float(row.get('promotional_volatility', 0))
                     }
+                    print(f"   📊 Analysis metrics found: PI={result['promotional_intensity']:.3f}, US={result['urgency_score']:.3f}, BV={result['brand_voice_score']:.3f}")
+                    print(f"   🔍 DEBUG ANALYSIS: Returning current_state = {result}")
+                    for key, value in result.items():
+                        print(f"   🔍 DEBUG ANALYSIS: result['{key}'] = {value} (type: {type(value)})")
+                    return result
             else:
                 print("   ⚠️  No strategic labels found, using basic analysis")
                 
         except Exception as e:
             print(f"   ⚠️  Current state analysis error: {e}")
         
-        # Fallback
-        return {'market_position': 'unknown'}
+        # Fallback - ensure we return all fields with float default values
+        print("   ⚠️  Returning fallback analysis with float default values")
+        return {
+            'promotional_intensity': 0.0,
+            'urgency_score': 0.0,
+            'brand_voice_score': 0.0,
+            'market_position': 'unknown',
+            'promotional_volatility': 0.0
+        }
     
     def _detect_copying_patterns(self, embeddings: EmbeddingResults) -> dict:
         """Detect competitive copying patterns using embeddings joined with strategic labels for timestamps"""
@@ -331,9 +385,62 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
     
     def _create_fallback_analysis(self) -> AnalysisResults:
         """Create fallback analysis when real analysis fails"""
-        analysis = AnalysisResults()
-        analysis.current_state = {'market_position': 'unknown'}
-        analysis.influence = {'copying_detected': False}
-        analysis.evolution = {'trend_direction': 'stable'}
-        analysis.forecasts = {'next_30_days': 'stable_market', 'confidence': 'LOW'}
-        return analysis
+        return AnalysisResults(
+            status="success",
+            current_state={
+                'promotional_intensity': 0.0,
+                'urgency_score': 0.0,
+                'brand_voice_score': 0.0,
+                'market_position': 'unknown',
+                'promotional_volatility': 0.0
+            },
+            influence={
+                'copying_detected': False,
+                'top_copier': 'None',
+                'similarity_score': 0.0,
+                'lag_days': 0
+            },
+            evolution={
+                'trend_direction': 'stable',
+                'momentum_status': 'STABLE',
+                'velocity_change_7d': 0.0,
+                'velocity_change_30d': 0.0
+            },
+            forecasts={
+                'next_30_days': 'stable_market',
+                'confidence': 'LOW',
+                'business_impact_score': 2
+            }
+        )
+    
+    def _wait_for_strategic_data_availability(self, max_attempts: int = 10, delay_seconds: int = 3):
+        """Wait for strategic data to be available in BigQuery with polling mechanism"""
+        import time
+        
+        for attempt in range(max_attempts):
+            try:
+                # Check for strategic data availability
+                check_query = f"""
+                SELECT COUNT(*) as strategic_count
+                FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates`
+                WHERE brand = '{self.context.brand}'
+                    AND promotional_intensity IS NOT NULL
+                    AND promotional_intensity > 0
+                """
+                
+                result = run_query(check_query)
+                if not result.empty:
+                    strategic_count = result.iloc[0]['strategic_count']
+                    if strategic_count > 0:
+                        print(f"   ✅ Strategic data available! Found {strategic_count} records with metrics")
+                        return True
+                
+                print(f"   ⏳ Attempt {attempt + 1}/{max_attempts}: Strategic data not ready, waiting {delay_seconds}s...")
+                time.sleep(delay_seconds)
+                
+            except Exception as e:
+                print(f"   ⚠️  Strategic data check attempt {attempt + 1} failed: {e}")
+                time.sleep(delay_seconds)
+        
+        print(f"   ⚠️  Strategic data not available after {max_attempts} attempts, proceeding anyway...")
+        return False

@@ -36,7 +36,7 @@ class BigQueryAICurator:
             self.client.get_model(model_id)
             print(f"✅ Gemini model exists: {model_id}")
             return model_id
-        except:
+        except Exception as e:
             # Create remote model connection to Gemini
             print(f"🔧 Creating Gemini model connection: {model_id}")
             create_model_sql = f"""

@@ -29,6 +29,7 @@ from .stages.strategic_labeling import StrategicLabelingStage
 from .stages.embeddings import EmbeddingsStage
 from .stages.analysis import AnalysisStage
 from .stages.output import OutputStage
+from .stages.multidimensional_intelligence import MultiDimensionalIntelligenceStage
 
 # Environment configuration
 BQ_PROJECT = os.environ.get("BQ_PROJECT", "bigquery-ai-kaggle-469620")
@@ -64,7 +65,7 @@ class CompetitiveIntelligencePipeline:
         self._setup_logging()
         
         # Initialize progress tracker  
-        self.progress = ProgressTracker(total_stages=8)
+        self.progress = ProgressTracker(total_stages=9)
         
         # Stage timings
         self.stage_timings = {}
@@ -146,10 +147,17 @@ class CompetitiveIntelligencePipeline:
             analysis_results = analysis_stage.run(embeddings_results, self.progress)
             print(f"✅ Stage 7 complete - Strategic analysis complete")
             
-            # Stage 8: Intelligence Output
+            # Stage 8: Multi-Dimensional Intelligence
+            multidim_intel_stage = MultiDimensionalIntelligenceStage("Multi-Dimensional Intelligence", 8, self.run_id)
+            # Pass competitor brands to the stage for proper analysis
+            multidim_intel_stage.competitor_brands = self.context.competitor_brands + [self.context.brand]
+            multidim_intel_results = multidim_intel_stage.run(analysis_results, self.progress)
+            print(f"✅ Stage 8 complete - Multi-dimensional intelligence analysis complete")
+            
+            # Stage 9: Intelligence Output
             output_stage = OutputStage(self.context, self.dry_run, self.verbose)
             intelligence_output = output_stage.run(analysis_results, self.progress)
-            print(f"✅ Stage 8 complete - Intelligence output generated")
+            print(f"✅ Stage 9 complete - Intelligence output generated")
             
             # Success!
             duration = time.time() - start_time
