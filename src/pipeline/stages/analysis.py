@@ -11,18 +11,18 @@ from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import EmbeddingResults, AnalysisResults
 
 try:
-    from scripts.utils.bigquery_client import get_bigquery_client, run_query
+    from src.utils.bigquery_client import get_bigquery_client, run_query
 except ImportError:
     get_bigquery_client = None
     run_query = None
 
 try:
-    from scripts.analysis.temporal_intelligence_engine import TemporalIntelligenceEngine
+    from src.competitive_intel.intelligence.temporal_intelligence_module import TemporalIntelligenceEngine
 except ImportError:
     TemporalIntelligenceEngine = None
 
 try:
-    from scripts.analysis.enhanced_3d_whitespace_detector import Enhanced3DWhiteSpaceDetector
+    from src.competitive_intel.analysis.enhanced_whitespace_detection import Enhanced3DWhiteSpaceDetector
 except ImportError:
     Enhanced3DWhiteSpaceDetector = None
 
@@ -114,7 +114,15 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
             # Initialize enhanced intelligence modules
             self._initialize_intelligence_engines()
             
-            # Step 1: Current State Analysis
+            # Step 1: CTA Intelligence Analysis (Required for temporal intelligence)
+            print("   🎯 Executing CTA Intelligence Analysis...")
+            try:
+                self._execute_cta_intelligence_analysis()
+                print("   ✅ CTA Intelligence analysis complete")
+            except Exception as e:
+                print(f"   ❌ CTA Intelligence analysis failed: {e}")
+
+            # Step 2: Current State Analysis
             print("   📊 Analyzing current strategic position...")
             try:
                 analysis.current_state = self._analyze_current_state()
@@ -129,7 +137,7 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                     'promotional_volatility': 0.0
                 }
             
-            # Step 2: Competitive Copying Detection
+            # Step 3: Competitive Copying Detection
             print("   🎯 Detecting competitive copying patterns...")
             try:
                 analysis.influence = self._detect_copying_patterns(embeddings)
@@ -137,8 +145,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
             except Exception as e:
                 print(f"   ❌ Copying detection failed: {e}")
                 analysis.influence = {'copying_detected': False, 'similarity_score': 0.0}
-            
-            # Step 3: Temporal Intelligence Analysis
+
+            # Step 4: Temporal Intelligence Analysis (now enhanced with CTA data)
             print("   📈 Analyzing temporal intelligence (where did we come from)...")
             try:
                 analysis.evolution = self._analyze_temporal_intelligence()
@@ -146,8 +154,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
             except Exception as e:
                 print(f"   ❌ Temporal intelligence failed: {e}")
                 analysis.evolution = {'trend_direction': 'stable', 'momentum_status': 'STABLE', 'velocity_change_7d': 0.0, 'velocity_change_30d': 0.0}
-            
-            # Step 4: Wide Net Forecasting
+
+            # Step 5: Wide Net Forecasting
             print("   🔮 Generating Wide Net forecasting (where are we going)...")
             try:
                 analysis.forecasts = self._generate_forecasts()
@@ -361,14 +369,23 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                         'executive_summary': top_forecast.get('executive_summary', 'STABLE: No significant changes predicted'),
                         'business_impact_score': int(top_forecast.get('business_impact_score', 2)),
                         'confidence': 'HIGH' if top_forecast.get('business_impact_score', 2) >= 4 else 'MEDIUM',
-                        'top_predictions': self._extract_top_predictions(forecast_result)
+                        'top_predictions': self._extract_top_predictions(forecast_result),
+                        'next_7_days': self._generate_short_term_forecast(forecast_result, 7),
+                        'next_14_days': self._generate_intermediate_forecast(forecast_result, 14),
+                        'next_30_days': self._generate_long_term_forecast(forecast_result, 30)
                     }
                     
             except Exception as e:
                 print(f"   ⚠️  Forecasting fallback: {e}")
         
-        # Fallback to basic forecasting
-        return {'next_30_days': 'stable_market', 'confidence': 'LOW', 'data_available': False}
+        # Fallback to basic forecasting with progressive timeline
+        return {
+            'next_7_days': 'stable_market', 
+            'next_14_days': 'stable_market', 
+            'next_30_days': 'stable_market', 
+            'confidence': 'LOW', 
+            'data_available': False
+        }
     
     def _extract_top_predictions(self, forecast_result) -> list:
         """Extract top predictions from forecast results"""
@@ -382,6 +399,74 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 'promotional_change': float(row.get('promotional_change_magnitude', 0))
             })
         return predictions
+    
+    def _generate_short_term_forecast(self, forecast_result, days: int) -> str:
+        """Generate 7-day short-term forecast focusing on immediate tactical changes"""
+        if forecast_result.empty:
+            return "stable_tactical_environment"
+        
+        # Analyze immediate tactical patterns (urgency, promotional intensity changes)
+        top_row = forecast_result.iloc[0]
+        promotional_change = top_row.get('promotional_change_magnitude', 0)
+        urgency_change = top_row.get('urgency_change_magnitude', 0)
+        
+        if abs(promotional_change) > 0.3 or abs(urgency_change) > 0.3:
+            if promotional_change > 0.3:
+                return "immediate_promotional_escalation_expected"
+            elif promotional_change < -0.3:
+                return "promotional_deescalation_likely"
+            elif urgency_change > 0.3:
+                return "urgency_messaging_increase_predicted"
+            else:
+                return "tactical_messaging_shift_anticipated"
+        
+        return "stable_short_term_outlook"
+    
+    def _generate_intermediate_forecast(self, forecast_result, days: int) -> str:
+        """Generate 14-day intermediate forecast focusing on strategic positioning"""
+        if forecast_result.empty:
+            return "stable_competitive_positioning"
+        
+        # Analyze competitive positioning and strategic messaging shifts
+        top_row = forecast_result.iloc[0]
+        video_change = top_row.get('video_change_magnitude', 0)
+        business_impact = top_row.get('business_impact_score', 2)
+        
+        if business_impact >= 4:
+            return "significant_market_disruption_building"
+        elif business_impact >= 3:
+            if abs(video_change) > 0.2:
+                return "creative_strategy_evolution_underway"
+            else:
+                return "competitive_pressure_mounting"
+        elif abs(video_change) > 0.25:
+            return "content_strategy_pivot_emerging"
+        
+        return "steady_competitive_equilibrium"
+    
+    def _generate_long_term_forecast(self, forecast_result, days: int) -> str:
+        """Generate 30-day strategic forecast focusing on market positioning"""
+        if forecast_result.empty:
+            return "stable_market_outlook"
+        
+        # Analyze long-term strategic market positioning
+        top_row = forecast_result.iloc[0]
+        business_impact = top_row.get('business_impact_score', 2)
+        executive_summary = top_row.get('executive_summary', '').upper()
+        
+        if business_impact >= 5:
+            return "major_market_transformation_expected"
+        elif business_impact >= 4:
+            if 'AGGRESSIVE' in executive_summary or 'EXPANSION' in executive_summary:
+                return "market_expansion_phase_predicted"
+            else:
+                return "competitive_intensity_increase_likely"
+        elif business_impact >= 3:
+            return "moderate_market_evolution_anticipated"
+        elif 'DEFENSIVE' in executive_summary or 'MAINTAIN' in executive_summary:
+            return "defensive_positioning_solidification"
+        
+        return "stable_market_continuation"
     
     def _create_fallback_analysis(self) -> AnalysisResults:
         """Create fallback analysis when real analysis fails"""
@@ -444,3 +529,79 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
         
         print(f"   ⚠️  Strategic data not available after {max_attempts} attempts, proceeding anyway...")
         return False
+
+    def _execute_cta_intelligence_analysis(self):
+        """Execute CTA Intelligence analysis to create cta_aggressiveness_analysis table for temporal intelligence"""
+
+        # Get brands from context
+        brands = [self.context.brand] + self.competitor_brands
+        brands_filter = "', '".join(brands)
+
+        # Enhanced CTA Intelligence SQL - creates the table that temporal intelligence expects
+        cta_analysis_sql = f"""
+        CREATE OR REPLACE TABLE `{BQ_PROJECT}.{BQ_DATASET}.cta_aggressiveness_analysis` AS
+
+        WITH cta_analysis AS (
+          SELECT
+            brand,
+            ad_archive_id,
+            cta_text,
+            LENGTH(COALESCE(cta_text, '')) as cta_length,
+
+            -- CTA Presence Analysis
+            CASE
+              WHEN cta_text IS NOT NULL AND LENGTH(cta_text) > 0 THEN 'HAS_CTA'
+              ELSE 'NO_CTA'
+            END as cta_presence,
+
+            -- Enhanced CTA Aggressiveness Classification
+            CASE
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BUY NOW|ORDER NOW|SHOP NOW|LIMITED TIME|ACT FAST|HURRY)\\b') THEN 'HIGH_URGENCY'
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(LEARN MORE|GET STARTED|DISCOVER|EXPLORE)\\b') THEN 'MEDIUM_ENGAGEMENT'
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BROWSE|VIEW|SEE MORE|FIND OUT)\\b') THEN 'LOW_PRESSURE'
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BOOK|SCHEDULE|CONSULT|TRY|EXPERIENCE)\\b') THEN 'CONSULTATIVE'
+              WHEN cta_text IS NOT NULL AND LENGTH(cta_text) > 0 THEN 'OTHER'
+              ELSE 'NO_CTA'
+            END as cta_aggressiveness
+
+          FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_raw_{self.context.run_id}`
+          WHERE brand IN ('{brands_filter}')
+        )
+
+        SELECT
+          brand,
+          COUNT(*) as total_ads,
+          COUNT(CASE WHEN cta_presence = 'HAS_CTA' THEN 1 END) as ads_with_cta,
+          ROUND(COUNT(CASE WHEN cta_presence = 'HAS_CTA' THEN 1 END) * 100.0 / COUNT(*), 1) as cta_adoption_rate,
+          ROUND(AVG(CASE WHEN cta_length > 0 THEN cta_length END), 1) as avg_cta_length,
+          COUNT(CASE WHEN cta_aggressiveness = 'HIGH_URGENCY' THEN 1 END) as high_urgency_ctas,
+          COUNT(CASE WHEN cta_aggressiveness = 'MEDIUM_ENGAGEMENT' THEN 1 END) as medium_engagement_ctas,
+          COUNT(CASE WHEN cta_aggressiveness = 'LOW_PRESSURE' THEN 1 END) as low_pressure_ctas,
+          COUNT(CASE WHEN cta_aggressiveness = 'CONSULTATIVE' THEN 1 END) as consultative_ctas,
+
+          -- Dominant Strategy
+          CASE
+            WHEN COUNT(CASE WHEN cta_aggressiveness = 'HIGH_URGENCY' THEN 1 END) >= GREATEST(
+              COUNT(CASE WHEN cta_aggressiveness = 'MEDIUM_ENGAGEMENT' THEN 1 END),
+              COUNT(CASE WHEN cta_aggressiveness = 'LOW_PRESSURE' THEN 1 END),
+              COUNT(CASE WHEN cta_aggressiveness = 'CONSULTATIVE' THEN 1 END)
+            ) THEN 'HIGH_URGENCY'
+            WHEN COUNT(CASE WHEN cta_aggressiveness = 'MEDIUM_ENGAGEMENT' THEN 1 END) >= GREATEST(
+              COUNT(CASE WHEN cta_aggressiveness = 'LOW_PRESSURE' THEN 1 END),
+              COUNT(CASE WHEN cta_aggressiveness = 'CONSULTATIVE' THEN 1 END)
+            ) THEN 'MEDIUM_ENGAGEMENT'
+            WHEN COUNT(CASE WHEN cta_aggressiveness = 'LOW_PRESSURE' THEN 1 END) >= COUNT(CASE WHEN cta_aggressiveness = 'CONSULTATIVE' THEN 1 END)
+            THEN 'LOW_PRESSURE'
+            ELSE 'CONSULTATIVE'
+          END as dominant_cta_strategy,
+
+          CURRENT_TIMESTAMP() as analysis_timestamp
+
+        FROM cta_analysis
+        GROUP BY brand
+        ORDER BY cta_adoption_rate DESC;
+        """
+
+        # Execute the CTA Intelligence analysis
+        run_query(cta_analysis_sql)
+        print(f"   ✅ Created cta_aggressiveness_analysis table for temporal intelligence")

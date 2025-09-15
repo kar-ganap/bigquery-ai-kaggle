@@ -45,6 +45,7 @@ class AnalysisResults:
     momentum: Dict = field(default_factory=dict)
     white_spaces: Dict = field(default_factory=dict)
     cascades: Dict = field(default_factory=dict)
+    channel_intelligence: Dict = field(default_factory=dict)  # Channel performance & optimization
     metadata: Dict = field(default_factory=dict)
 
 

@@ -10,10 +10,10 @@ from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import ValidatedCompetitor
 
 try:
-    from scripts.utils.ads_fetcher import MetaAdsFetcher
+    from src.utils.ads_fetcher import MetaAdsFetcher
 except ImportError:
     try:
-        from scripts.ingest_fb_ads import MetaAdsFetcher
+        from scripts.utils.ads_fetcher import MetaAdsFetcher  # Legacy fallback
     except ImportError:
         MetaAdsFetcher = None
 

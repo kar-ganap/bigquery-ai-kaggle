@@ -14,17 +14,20 @@ from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import ValidatedCompetitor, IngestionResults
 
 try:
-    from scripts.utils.ads_fetcher import MetaAdsFetcher
+    from src.utils.ads_fetcher import MetaAdsFetcher
 except ImportError:
     try:
-        from scripts.ingest_fb_ads import MetaAdsFetcher
+        from scripts.utils.ads_fetcher import MetaAdsFetcher  # Legacy fallback
     except ImportError:
         MetaAdsFetcher = None
 
 try:
-    from scripts.utils.bigquery_client import load_dataframe_to_bq
+    from src.utils.bigquery_client import load_dataframe_to_bq
 except ImportError:
-    load_dataframe_to_bq = None
+    try:
+        from scripts.utils.bigquery_client import load_dataframe_to_bq  # Legacy fallback
+    except ImportError:
+        load_dataframe_to_bq = None
 
 # Environment configuration
 BQ_PROJECT = os.environ.get("BQ_PROJECT", "bigquery-ai-kaggle-469620")
@@ -158,8 +161,8 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
                 # Fetch ads for this competitor
                 ads, fetch_result = fetcher.fetch_company_ads_with_metadata(
                     company_name=comp.company_name,
-                    max_ads=30,
-                    max_pages=3,
+                    max_ads=500,
+                    max_pages=10,
                     delay_between_requests=0.5
                 )
                 
@@ -214,8 +217,8 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
         try:
             target_ads, _ = fetcher.fetch_company_ads_with_metadata(
                 company_name=self.context.brand,
-                max_ads=30,
-                max_pages=3,
+                max_ads=500,
+                max_pages=10,
                 delay_between_requests=0.5
             )
             
@@ -252,10 +255,15 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
         # Extract page name from different sources
         page_name = ad.get('page_name') or snapshot.get('page_name') or brand_name
         
-        # Extract creative content
-        creative_text = (ad.get('creative_text') or 
-                        snapshot.get('body', {}).get('text') if isinstance(snapshot.get('body'), dict) else 
-                        snapshot.get('body') or '')
+        # Extract creative content - trust the fetcher's creative_text if available
+        creative_text = ad.get('creative_text', '')
+
+        # Fallback to extracting from snapshot if fetcher didn't provide creative_text
+        if not creative_text:
+            if isinstance(snapshot.get('body'), dict):
+                creative_text = snapshot.get('body', {}).get('text', '')
+            else:
+                creative_text = snapshot.get('body', '') or ''
         
         title = ad.get('title') or snapshot.get('title') or ''
         
