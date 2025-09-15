@@ -19,15 +19,9 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 try:
-    # Add scripts directory to path for utils imports
-    import sys
-    from pathlib import Path
-    scripts_dir = Path(__file__).parent
-    if str(scripts_dir) not in sys.path:
-        sys.path.insert(0, str(scripts_dir))
-    
-    from utils.bigquery_client import get_bigquery_client, load_dataframe_to_bq
-    from utils.search_utils import extract_company_names, score_search_result, dedupe_companies
+    # Import from src.utils for modern pipeline
+    from src.utils.bigquery_client import get_bigquery_client, load_dataframe_to_bq
+    from src.utils.search_utils import extract_company_names, score_search_result, dedupe_companies
 except ImportError as e:
     print(f"Warning: Could not import utils modules: {e}")
     get_bigquery_client = None

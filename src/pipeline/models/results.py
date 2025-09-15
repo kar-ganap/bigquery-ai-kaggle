@@ -32,6 +32,8 @@ class EmbeddingResults:
 @dataclass
 class AnalysisResults:
     """Comprehensive strategic analysis results"""
+    status: str = "success"
+    message: str = ""
     current_state: Dict = field(default_factory=dict)
     influence: Dict = field(default_factory=dict)
     evolution: Dict = field(default_factory=dict)
@@ -43,6 +45,8 @@ class AnalysisResults:
     momentum: Dict = field(default_factory=dict)
     white_spaces: Dict = field(default_factory=dict)
     cascades: Dict = field(default_factory=dict)
+    channel_intelligence: Dict = field(default_factory=dict)  # Channel performance & optimization
+    metadata: Dict = field(default_factory=dict)
 
 
 @dataclass
