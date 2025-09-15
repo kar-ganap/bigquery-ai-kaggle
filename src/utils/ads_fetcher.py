@@ -50,7 +50,7 @@ class MetaAdsFetcher:
                                    company_name: str = None, 
                                    page_id: str = None,
                                    country: str = "US",
-                                   status: str = "ACTIVE", 
+                                   status: str = "ALL", 
                                    max_ads: int = 100,
                                    max_pages: int = 10,
                                    delay_between_requests: float = 0.5) -> Generator[Dict, None, AdsFetchResult]:
@@ -242,7 +242,8 @@ class MetaAdsFetcher:
     def fetch_company_ads_list(self, 
                               company_name: str = None,
                               page_id: str = None,
-                              max_ads: int = 100,
+                              max_ads: int = 500,
+                              max_pages: int = 10,
                               **kwargs) -> Tuple[List[Dict], AdsFetchResult]:
         """
         Fetch ads as a list (convenience method)
@@ -257,7 +258,8 @@ class MetaAdsFetcher:
         # Use the generator to collect ads
         for ad in self.fetch_company_ads_paginated(company_name=company_name, 
                                                   page_id=page_id, 
-                                                  max_ads=max_ads, 
+                                                  max_ads=max_ads,
+                                                  max_pages=max_pages,
                                                   **kwargs):
             if isinstance(ad, AdsFetchResult):
                 result = ad
@@ -281,7 +283,7 @@ class MetaAdsFetcher:
     def fetch_company_ads_with_metadata(self, company_name: str, page_id: str = None, 
                                       max_ads: int = 50, max_pages: int = 5, 
                                       delay_between_requests: float = 0.5, 
-                                      country: str = "US", status: str = "ACTIVE") -> tuple:
+                                      country: str = "US", status: str = "ALL") -> tuple:
         """
         Compatibility method for pipeline - matches old interface.
         Returns (ads_list, fetch_result_dict) to match expected interface from pipeline.
@@ -310,13 +312,26 @@ class MetaAdsFetcher:
             cards = snapshot.get("cards", []) or []
             
             # Extract creative text from various possible locations
-            creative_text = ""
             body_text = (snapshot.get("body", {}) or {}).get("text", "")
             title = snapshot.get("title") or ""
             link_description = snapshot.get("link_description") or ""
-            
-            # Combine text elements
-            text_parts = [title, body_text, link_description]
+            cta_text = snapshot.get("cta_text") or ""
+
+            # Handle string 'None' values from API
+            if cta_text == 'None':
+                cta_text = ""
+            if title == 'None':
+                title = ""
+
+            # Extract titles from cards array if available
+            card_titles = []
+            if cards:
+                for card in cards:
+                    if isinstance(card, dict) and card.get("title"):
+                        card_titles.append(card["title"])
+
+            # Combine all text for creative_text field
+            text_parts = [title, body_text, link_description] + card_titles
             creative_text = " ".join([part for part in text_parts if part]).strip()
             
             # Extract media info
@@ -335,6 +350,8 @@ class MetaAdsFetcher:
                 'ad_archive_id': ad.get("ad_archive_id"),
                 'page_name': ad.get("page_name") or company_name,
                 'creative_text': creative_text,
+                'title': title,  # Add separate title field
+                'cta_text': cta_text,  # Add separate CTA text field
                 'publisher_platforms': ",".join(ad.get("publisher_platform", [])) if isinstance(ad.get("publisher_platform"), list) else str(ad.get("publisher_platform", "")),
                 'media_type': media_type,
                 'snapshot_url': ad.get("url"),
@@ -342,7 +359,10 @@ class MetaAdsFetcher:
                 'first_seen': ad.get("start_date_string"),
                 'last_seen': ad.get("end_date_string"),
                 'start_date_string': ad.get("start_date_string"),
-                'end_date_string': ad.get("end_date_string")
+                'end_date_string': ad.get("end_date_string"),
+                # Additional fields for better analysis
+                'body_text': body_text,
+                'card_titles': ", ".join(card_titles) if card_titles else ""
             }
             
             normalized_ads.append(normalized_ad)
@@ -466,7 +486,7 @@ class MetaAdsFetcher:
         return min(max(score, 0), 1)
     
     def get_competitor_ad_tiers(self, competitor_names: List[str], country: str = "US", 
-                               status: str = "ACTIVE", probe_limit: int = 20, 
+                               status: str = "ALL", probe_limit: int = 20, 
                                target_count: int = 10) -> Dict[str, Dict]:
         """
         Smart probe to classify competitors by Meta ad activity tiers:

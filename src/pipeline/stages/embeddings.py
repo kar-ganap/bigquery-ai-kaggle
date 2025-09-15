@@ -11,7 +11,7 @@ from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import IngestionResults, EmbeddingResults
 
 try:
-    from scripts.utils.bigquery_client import get_bigquery_client, run_query
+    from src.utils.bigquery_client import get_bigquery_client, run_query
 except ImportError:
     get_bigquery_client = None
     run_query = None

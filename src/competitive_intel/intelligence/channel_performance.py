@@ -78,8 +78,8 @@ class ChannelPerformanceEngine:
               THEN DATE_DIFF(CURRENT_TIMESTAMP(), SAFE.PARSE_TIMESTAMP('%Y-%m-%dT%H:%M:%E*S%Ez', start_date_string), DAY)
               ELSE 0
             END as campaign_duration_days,
-            COALESCE(CAST(impressions_upper AS INT64), CAST(impressions_lower AS INT64), 1000) as estimated_impressions,
-            COALESCE(CAST(spend_upper AS FLOAT64), CAST(spend_lower AS FLOAT64), 100.0) as estimated_spend,
+            -- NOTE: Impression/spend data unavailable from ScrapeCreators API (all NULL values)
+            -- Removed artificial fallback metrics based on hardcoded values
             
             -- Time-based features  
             CASE
@@ -139,7 +139,7 @@ class ChannelPerformanceEngine:
                 'Platform: ', platform_category, '. ',
                 'Campaign Duration: ', CAST(campaign_duration_days AS STRING), ' days. ',
                 'Start Month: ', CAST(start_month AS STRING), '. ',
-                'Estimated Impressions: ', CAST(estimated_impressions AS STRING), '. ',
+                -- Removed artificial impression reference (data unavailable). 
                 'What is the primary channel strategy? ',
                 'Return ONLY one of: BROAD_REACH, TARGETED_PRECISION, COST_EFFICIENT, PREMIUM_PLACEMENT'
               ),
@@ -164,7 +164,7 @@ class ChannelPerformanceEngine:
                 'Based on this ad placement and content, assess audience targeting approach. ',
                 'Platform: ', platform_category, '. ',
                 'Content preview: "', SUBSTR(COALESCE(creative_text, ''), 1, 200), '". ',
-                'Impressions: ', CAST(estimated_impressions AS STRING), '. ',
+                -- Removed artificial impression reference (data unavailable). 
                 'What targeting strategy is likely? ',
                 'Return ONLY one of: BROAD_MASS_MARKET, DEMOGRAPHIC_TARGETED, INTEREST_BASED, BEHAVIORAL_PRECISE, LOOKALIKE_EXPANSION'
               ),
@@ -175,8 +175,8 @@ class ChannelPerformanceEngine:
             AI.GENERATE_DOUBLE(
               CONCAT(
                 'Rate the campaign intensity/aggressiveness of this ad. ',
-                'Impressions: ', CAST(estimated_impressions AS STRING), '. ',
-                'Spend: ', CAST(estimated_spend AS STRING), '. ',
+                -- Removed artificial impression reference (data unavailable). 
+                -- Removed artificial spend reference (data unavailable). 
                 'Duration: ', CAST(campaign_duration_days AS STRING), ' days. ',
                 'Platform: ', platform_category, '. ',
                 'Consider spend velocity and impression targets. ',

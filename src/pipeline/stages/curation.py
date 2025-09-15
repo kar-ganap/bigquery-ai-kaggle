@@ -13,8 +13,8 @@ from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import CompetitorCandidate, ValidatedCompetitor
 
 try:
-    from scripts.utils.bigquery_client import get_bigquery_client, run_query, load_dataframe_to_bq
-    from scripts.competitor_name_validator import CompetitorNameValidator
+    from src.utils.bigquery_client import get_bigquery_client, run_query, load_dataframe_to_bq
+    from src.competitive_intel.curation.competitor_name_validator import CompetitorNameValidator
 except ImportError:
     get_bigquery_client = None
     run_query = None

@@ -28,7 +28,7 @@ from .stages.ingestion import IngestionStage
 from .stages.strategic_labeling import StrategicLabelingStage
 from .stages.embeddings import EmbeddingsStage
 from .stages.analysis import AnalysisStage
-from .stages.output import OutputStage
+from .stages.enhanced_output import EnhancedOutputStage
 from .stages.multidimensional_intelligence import MultiDimensionalIntelligenceStage
 
 # Environment configuration
@@ -155,8 +155,8 @@ class CompetitiveIntelligencePipeline:
             print(f"✅ Stage 8 complete - Multi-dimensional intelligence analysis complete")
             
             # Stage 9: Intelligence Output
-            output_stage = OutputStage(self.context, self.dry_run, self.verbose)
-            intelligence_output = output_stage.run(analysis_results, self.progress)
+            output_stage = EnhancedOutputStage(self.context, self.dry_run, self.verbose)
+            intelligence_output = output_stage.run(multidim_intel_results, self.progress)
             print(f"✅ Stage 9 complete - Intelligence output generated")
             
             # Success!

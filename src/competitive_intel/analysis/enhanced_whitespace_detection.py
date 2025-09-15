@@ -86,19 +86,21 @@ class Enhanced3DWhiteSpaceDetector:
               ),
               connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai'
             ) as target_persona_raw,
-            -- Message quality from CTA analysis
-            COALESCE(c.final_aggressiveness_score, 3.0) as message_strength
+            -- Message quality from CTA analysis (brand-level)
+            COALESCE(c.cta_adoption_rate * 5.0, 3.0) as message_strength
           FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates` r
           LEFT JOIN `{BQ_PROJECT}.{BQ_DATASET}.cta_aggressiveness_analysis` c
-            ON r.ad_archive_id = c.ad_archive_id
+            ON r.brand = c.brand
           WHERE r.creative_text IS NOT NULL
             AND LENGTH(r.creative_text) > 20
             AND r.brand IN ('{self.brand}', {', '.join(f"'{c}'" for c in self.competitors)})
+          -- PERFORMANCE OPTIMIZATION: Limit to 15 ads for 2-minute analysis
+          QUALIFY ROW_NUMBER() OVER (PARTITION BY r.brand ORDER BY r.start_timestamp DESC) <= 3
         ),
         cleaned_positions AS (
           SELECT 
             brand,
-            ad_id,
+            ad_archive_id,
             creative_text,
             publisher_platforms,
             campaign_date,
@@ -106,29 +108,29 @@ class Enhanced3DWhiteSpaceDetector:
             message_strength,
             -- Clean and standardize ML outputs
             CASE 
-              WHEN UPPER(messaging_angle_raw) LIKE '%EMOTIONAL%' THEN 'EMOTIONAL'
-              WHEN UPPER(messaging_angle_raw) LIKE '%FUNCTIONAL%' THEN 'FUNCTIONAL'
-              WHEN UPPER(messaging_angle_raw) LIKE '%ASPIRATIONAL%' THEN 'ASPIRATIONAL'
-              WHEN UPPER(messaging_angle_raw) LIKE '%SOCIAL%' THEN 'SOCIAL_PROOF'
-              WHEN UPPER(messaging_angle_raw) LIKE '%PROBLEM%' THEN 'PROBLEM_SOLUTION'
+              WHEN UPPER(messaging_angle_raw.result) LIKE '%EMOTIONAL%' THEN 'EMOTIONAL'
+              WHEN UPPER(messaging_angle_raw.result) LIKE '%FUNCTIONAL%' THEN 'FUNCTIONAL'
+              WHEN UPPER(messaging_angle_raw.result) LIKE '%ASPIRATIONAL%' THEN 'ASPIRATIONAL'
+              WHEN UPPER(messaging_angle_raw.result) LIKE '%SOCIAL%' THEN 'SOCIAL_PROOF'
+              WHEN UPPER(messaging_angle_raw.result) LIKE '%PROBLEM%' THEN 'PROBLEM_SOLUTION'
               ELSE 'FUNCTIONAL'  -- Default fallback
             END as messaging_angle,
             CASE 
-              WHEN UPPER(funnel_stage_raw) LIKE '%AWARENESS%' THEN 'AWARENESS'
-              WHEN UPPER(funnel_stage_raw) LIKE '%CONSIDERATION%' THEN 'CONSIDERATION'
-              WHEN UPPER(funnel_stage_raw) LIKE '%DECISION%' THEN 'DECISION'
-              WHEN UPPER(funnel_stage_raw) LIKE '%RETENTION%' THEN 'RETENTION'
+              WHEN UPPER(funnel_stage_raw.result) LIKE '%AWARENESS%' THEN 'AWARENESS'
+              WHEN UPPER(funnel_stage_raw.result) LIKE '%CONSIDERATION%' THEN 'CONSIDERATION'
+              WHEN UPPER(funnel_stage_raw.result) LIKE '%DECISION%' THEN 'DECISION'
+              WHEN UPPER(funnel_stage_raw.result) LIKE '%RETENTION%' THEN 'RETENTION'
               ELSE 'CONSIDERATION'  -- Default fallback
             END as funnel_stage,
             -- Clean persona output
             REGEXP_REPLACE(
-              TRIM(UPPER(target_persona_raw)), 
+              TRIM(UPPER(target_persona_raw.result)),
               r'[^A-Z\\s]', ''
             ) as target_persona
           FROM real_strategic_positions
-          WHERE messaging_angle_raw IS NOT NULL 
-            AND funnel_stage_raw IS NOT NULL
-            AND target_persona_raw IS NOT NULL
+          WHERE messaging_angle_raw.result IS NOT NULL
+            AND funnel_stage_raw.result IS NOT NULL
+            AND target_persona_raw.result IS NOT NULL
         ),
         market_3d_grid AS (
           SELECT 
@@ -136,10 +138,10 @@ class Enhanced3DWhiteSpaceDetector:
             funnel_stage, 
             target_persona,
             COUNT(DISTINCT brand) as competitor_count,
-            COUNT(DISTINCT ad_id) as total_ads,
+            COUNT(DISTINCT ad_archive_id) as total_ads,
             AVG(message_strength) as avg_message_quality,
             -- Competitive intensity modeling
-            (COUNT(DISTINCT brand) * COUNT(DISTINCT ad_id) * AVG(message_strength)) / 1000.0 as intensity_score,
+            (COUNT(DISTINCT brand) * COUNT(DISTINCT ad_archive_id) * AVG(message_strength)) / 1000.0 as intensity_score,
             -- Temporal opportunity analysis
             COUNT(CASE 
               WHEN campaign_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY) 
@@ -153,7 +155,7 @@ class Enhanced3DWhiteSpaceDetector:
             MAX(CASE WHEN brand != '{self.brand}' THEN message_strength ELSE 0 END) as max_competitor_quality
           FROM cleaned_positions
           GROUP BY messaging_angle, funnel_stage, target_persona
-          HAVING COUNT(DISTINCT ad_id) >= 2  -- Filter noise
+          HAVING COUNT(DISTINCT ad_archive_id) >= 2  -- Filter noise
         ),
         white_space_scoring AS (
           SELECT *,
@@ -360,6 +362,38 @@ class Enhanced3DWhiteSpaceDetector:
             'DECISION': 'Conversion rate',
             'RETENTION': 'Customer lifetime value'
         }.get(funnel, 'Engagement rate')
+    
+    def generate_strategic_opportunities(self, whitespace_results: List[Dict]) -> List[Dict]:
+        """Convert whitespace analysis results into strategic opportunities"""
+        opportunities = []
+        
+        for result in whitespace_results:
+            # Convert the SQL result into a WhiteSpaceOpportunity-like structure
+            opportunity = {
+                'messaging_angle': result.get('messaging_angle', 'FUNCTIONAL'),
+                'funnel_stage': result.get('funnel_stage', 'CONSIDERATION'),
+                'target_persona': result.get('target_persona', 'General Market'),
+                'space_type': result.get('space_type', 'UNDERSERVED'),
+                'competitive_intensity': float(result.get('competitive_intensity', 0.5)),
+                'market_potential': float(result.get('market_potential', 0.6)),
+                'entry_difficulty': float(result.get('entry_difficulty', 0.4)),
+                'overall_score': float(result.get('overall_score', 0.5)),
+                'competitor_count': int(result.get('competitor_count', 2)),
+                'total_ads': int(result.get('total_ads', 10)),
+                'avg_message_quality': float(result.get('avg_message_quality', 5.0)),
+                'recent_activity': int(result.get('recent_activity', 5)),
+                'channel_coverage': int(result.get('channel_coverage', 2)),
+                'opportunity_window': result.get('opportunity_window', 'MEDIUM - Market opportunity'),
+                'recommended_investment': result.get('recommended_investment', 'MEDIUM ($30K-75K) - Market expansion'),
+                'success_indicators': [
+                    indicator.strip() for indicator in 
+                    result.get('success_indicators', 'CTR >2.5%, CPA <$15, Brand lift +8%').split(',')
+                ],
+                'campaign_template': self.generate_campaign_template(result)
+            }
+            opportunities.append(opportunity)
+        
+        return opportunities
 
 if __name__ == "__main__":
     # Example usage
