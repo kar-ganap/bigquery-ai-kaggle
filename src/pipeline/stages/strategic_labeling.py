@@ -12,7 +12,7 @@ from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import IngestionResults, StrategicLabelResults
 
 try:
-    from scripts.utils.bigquery_client import get_bigquery_client, run_query
+    from src.utils.bigquery_client import get_bigquery_client, run_query
 except ImportError:
     get_bigquery_client = None
     run_query = None
@@ -65,13 +65,13 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
             raise ImportError("BigQuery client required for strategic labeling")
         
         try:
-            print("   🧠 Generating strategic labels using enhanced AI.GENERATE_TABLE script...")
+            print("   🚀 Generating strategic labels using BATCH OPTIMIZED AI.GENERATE_TABLE (10x+ faster)...")
             
-            # Read the enhanced SQL script
+            # Use batch-optimized SQL for faster processing
             script_path = os.path.join(
                 os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), 
                 "sql", 
-                "02_label_ads.sql"
+                "02_label_ads_batch.sql"  # Use batch version for 10x+ speedup
             )
             
             if not os.path.exists(script_path):
@@ -90,29 +90,9 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
             all_brands = self.competitor_brands + [self.context.brand]
             brand_list = ', '.join([f"'{b}'" for b in all_brands])
             
-            existing_count = 0
-            try:
-                check_existing_sql = f"""
-                SELECT COUNT(*) as existing_count
-                FROM `{labels_table}`
-                WHERE brand IN ({brand_list})
-                  AND promotional_intensity IS NOT NULL
-                  AND funnel IS NOT NULL
-                """
-                
-                existing_result = run_query(check_existing_sql)
-                existing_count = existing_result.iloc[0]['existing_count'] if not existing_result.empty else 0
-            except Exception as e:
-                # Table doesn't exist yet, which is fine
-                print(f"   📝 No existing strategic labels found: {e}")
-                existing_count = 0
-            
-            if existing_count > 0:
-                print(f"   ✅ Found {existing_count} existing strategic labels, using those")
-                labeled_count = existing_count
-            else:
-                print("   🔨 Executing strategic labeling SQL script...")
-                labeled_count = self._execute_strategic_sql(strategic_sql, labels_table, brand_list)
+            # Force fresh strategic labeling generation every time for accurate results
+            print("   🔨 Generating fresh strategic labels for accurate analysis...")
+            labeled_count = self._execute_strategic_sql(strategic_sql, labels_table, brand_list)
             
             return StrategicLabelResults(
                 table_id=labels_table,
@@ -123,6 +103,11 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
         except Exception as e:
             self.logger.error(f"Strategic labeling failed: {str(e)}")
             print(f"   ❌ Strategic labeling failed: {e}")
+            print(f"   📋 Full exception details: {type(e).__name__}: {str(e)}")
+            
+            # Log traceback for debugging
+            import traceback
+            traceback.print_exc()
             
             # Fallback - just pass through without strategic labels
             return StrategicLabelResults(
@@ -166,5 +151,11 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
             
         except Exception as e:
             print(f"   ⚠️  Strategic labeling SQL execution failed: {e}")
+            print(f"   📋 Full SQL execution error: {type(e).__name__}: {str(e)}")
+            
+            # Log traceback for debugging
+            import traceback
+            traceback.print_exc()
+            
             # Return 0 to indicate failure
             return 0

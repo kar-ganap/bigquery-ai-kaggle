@@ -39,6 +39,15 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
         
         print("   📊 Generating 4-level intelligence framework...")
         
+        # DEBUG: Log what we received from Analysis stage
+        print(f"   🔍 DEBUG OUTPUT STAGE: Received analysis object")
+        print(f"   🔍 DEBUG: analysis.current_state = {analysis.current_state}")
+        print(f"   🔍 DEBUG: current_state type = {type(analysis.current_state)}")
+        
+        if hasattr(analysis, 'current_state') and analysis.current_state:
+            for key, value in analysis.current_state.items():
+                print(f"   🔍 DEBUG: current_state['{key}'] = {value} (type: {type(value)})")
+        
         output = IntelligenceOutput()
         
         # Generate all 4 levels of progressive disclosure
@@ -66,11 +75,15 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
     def _generate_level_1_executive(self, analysis: AnalysisResults) -> dict:
         """Generate Level 1: Executive Summary"""
         
-        # Extract key insights from analysis
+        # Extract key insights from analysis  
         market_position = analysis.current_state.get('market_position', 'unknown')
         copying_detected = analysis.influence.get('copying_detected', False)
         trend_direction = analysis.evolution.get('trend_direction', 'stable')
         forecast_summary = analysis.forecasts.get('executive_summary', 'Stable market conditions expected')
+        
+        # Enhanced CTA intelligence from available data
+        cta_aggressiveness = analysis.current_state.get('avg_cta_aggressiveness', 3.0)
+        cta_competitive_position = 'MODERATE' if cta_aggressiveness < 4.0 else 'AGGRESSIVE'
         
         return {
             'brand': self.context.brand,
@@ -89,32 +102,69 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
     def _generate_level_2_strategic(self, analysis: AnalysisResults) -> dict:
         """Generate Level 2: Strategic Dashboard"""
         
-        return {
+        # DEBUG: Log what values we're extracting for Level 2
+        pi_val = analysis.current_state.get('promotional_intensity', 0.0)
+        us_val = analysis.current_state.get('urgency_score', 0.0)
+        bv_val = analysis.current_state.get('brand_voice_score', 0.0)
+        
+        print(f"   🔍 DEBUG LEVEL_2: promotional_intensity = {pi_val} (type: {type(pi_val)})")
+        print(f"   🔍 DEBUG LEVEL_2: urgency_score = {us_val} (type: {type(us_val)})")
+        print(f"   🔍 DEBUG LEVEL_2: brand_voice_score = {bv_val} (type: {type(bv_val)})")
+        
+        level_2_data = {
             'current_state_metrics': {
-                'promotional_intensity': analysis.current_state.get('promotional_intensity', 0),
-                'urgency_score': analysis.current_state.get('urgency_score', 0),
-                'brand_voice_score': analysis.current_state.get('brand_voice_score', 0),
+                'promotional_intensity': pi_val,
+                'urgency_score': us_val,
+                'brand_voice_score': bv_val,
                 'market_position': analysis.current_state.get('market_position', 'unknown'),
-                'promotional_volatility': analysis.current_state.get('promotional_volatility', 0)
+                'promotional_volatility': analysis.current_state.get('promotional_volatility', 0.0),
+                # Enhanced CTA intelligence metrics
+                'cta_aggressiveness': analysis.current_state.get('avg_cta_aggressiveness', 3.0),
+                'cta_diversity_score': analysis.current_state.get('cta_diversity_score', 2.5),
+                'cta_competitive_position': analysis.current_state.get('cta_competitive_position', 'MODERATE')
             },
             'competitive_influence': {
                 'copying_detected': analysis.influence.get('copying_detected', False),
                 'top_copier': analysis.influence.get('top_copier', 'None'),
-                'similarity_score': analysis.influence.get('similarity_score', 0),
+                'similarity_score': analysis.influence.get('similarity_score', 0.0),
                 'lag_days': analysis.influence.get('lag_days', 0)
             },
             'temporal_intelligence': {
                 'momentum_status': analysis.evolution.get('momentum_status', 'STABLE'),
-                'velocity_change_7d': analysis.evolution.get('velocity_change_7d', 0),
-                'velocity_change_30d': analysis.evolution.get('velocity_change_30d', 0),
+                'velocity_change_7d': analysis.evolution.get('velocity_change_7d', 0.0),
+                'velocity_change_30d': analysis.evolution.get('velocity_change_30d', 0.0),
                 'trend_direction': analysis.evolution.get('trend_direction', 'stable')
             },
             'forecasting': {
                 'business_impact_score': analysis.forecasts.get('business_impact_score', 2),
                 'confidence': analysis.forecasts.get('confidence', 'MEDIUM'),
-                'next_30_days': analysis.forecasts.get('next_30_days', 'stable_market')
+                'next_7_days': analysis.forecasts.get('next_7_days', 'stable_short_term_outlook'),
+                'next_14_days': analysis.forecasts.get('next_14_days', 'stable_competitive_positioning'),
+                'next_30_days': analysis.forecasts.get('next_30_days', 'stable_market_continuation'),
+                'progressive_timeline': {
+                    'short_term_tactical': analysis.forecasts.get('next_7_days', 'stable_short_term_outlook'),
+                    'intermediate_strategic': analysis.forecasts.get('next_14_days', 'stable_competitive_positioning'), 
+                    'long_term_positioning': analysis.forecasts.get('next_30_days', 'stable_market_continuation')
+                }
+            },
+            'channel_intelligence': {
+                # Vertical-agnostic channel metrics
+                'dominant_strategy': analysis.channel_intelligence.get('dominant_platform_strategy', 'CROSS_PLATFORM_SYNERGY'),
+                'platform_diversity': analysis.channel_intelligence.get('platform_diversity_score', 2.0),
+                'cross_platform_rate': analysis.channel_intelligence.get('cross_platform_synergy_rate', 50.0),
+                'instagram_focus': analysis.channel_intelligence.get('instagram_focused_rate', 20.0),
+                'facebook_focus': analysis.channel_intelligence.get('facebook_focused_rate', 20.0),
+                'channel_efficiency': analysis.channel_intelligence.get('avg_content_richness', 0.5),
+                # Enhanced metrics from multidimensional stage
+                'platform_concentration': analysis.channel_intelligence.get('platform_concentration', 'BALANCED'),
+                'temporal_strategy': analysis.channel_intelligence.get('temporal_strategy', 'CONTINUOUS'),
+                'competitive_positioning': analysis.channel_intelligence.get('competitive_positioning', 0.5),
+                'optimization_potential': analysis.channel_intelligence.get('optimization_potential', 0.3)
             }
         }
+        
+        print(f"   🔍 DEBUG LEVEL_2: Final level_2_data current_state_metrics = {level_2_data['current_state_metrics']}")
+        return level_2_data
     
     def _generate_level_3_interventions(self, analysis: AnalysisResults) -> dict:
         """Generate Level 3: Actionable Interventions"""
@@ -130,6 +180,35 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                 'rationale': 'Currently in defensive position - need to be more aggressive',
                 'timeline': '2-4 weeks'
             })
+
+        # Enhanced CTA intelligence interventions
+        cta_aggressiveness = analysis.current_state.get('avg_cta_aggressiveness', 3.0)
+        cta_diversity = analysis.current_state.get('cta_diversity_score', 2.5)
+        cta_position = analysis.current_state.get('cta_competitive_position', 'MODERATE')
+        
+        if cta_aggressiveness < 2.5:
+            interventions.append({
+                'priority': 'HIGH',
+                'action': 'Strengthen call-to-action language',
+                'rationale': f'Low CTA aggressiveness ({cta_aggressiveness:.1f}/10) - missing conversion opportunities',
+                'timeline': '1-2 weeks'
+            })
+        
+        if cta_diversity < 2.0:
+            interventions.append({
+                'priority': 'MEDIUM',
+                'action': 'Diversify call-to-action strategies',
+                'rationale': 'Limited CTA variety - test different conversion approaches',
+                'timeline': '2-3 weeks'
+            })
+            
+        if cta_position == 'WEAK' and cta_aggressiveness < 4.0:
+            interventions.append({
+                'priority': 'HIGH',
+                'action': 'Competitive CTA enhancement campaign',
+                'rationale': 'Weak competitive CTA positioning - immediate improvement needed',
+                'timeline': '1-2 weeks'
+            })
         
         if analysis.influence.get('copying_detected', False):
             top_copier = analysis.influence.get('top_copier', 'Unknown')
@@ -138,6 +217,45 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                 'action': f'Monitor and differentiate from {top_copier}',
                 'rationale': 'Competitive copying detected - need differentiation strategy',
                 'timeline': '1-2 weeks'
+            })
+        
+        # Channel-based interventions (enhanced with multidimensional intelligence)
+        cross_platform_rate = analysis.channel_intelligence.get('cross_platform_synergy_rate', 50.0)
+        if cross_platform_rate < 30.0:
+            interventions.append({
+                'priority': 'MEDIUM',
+                'action': 'Expand cross-platform campaign integration',
+                'rationale': f'Only {cross_platform_rate:.1f}% cross-platform synergy - missing reach opportunities',
+                'timeline': '2-3 weeks'
+            })
+        
+        platform_diversity = analysis.channel_intelligence.get('platform_diversity_score', 2.0)
+        if platform_diversity < 2.0:
+            interventions.append({
+                'priority': 'LOW',
+                'action': 'Test additional channel diversification',
+                'rationale': 'Single-channel dependency risk detected',
+                'timeline': '4-6 weeks'
+            })
+
+        # Enhanced channel intelligence interventions
+        platform_concentration = analysis.channel_intelligence.get('platform_concentration', 'BALANCED')
+        if platform_concentration == 'CONCENTRATED':
+            interventions.append({
+                'priority': 'MEDIUM',
+                'action': 'Diversify platform allocation to reduce risk',
+                'rationale': 'Over-concentrated on single platform - vulnerable to policy changes',
+                'timeline': '3-4 weeks'
+            })
+        
+        temporal_strategy = analysis.channel_intelligence.get('temporal_strategy', 'CONTINUOUS')
+        optimization_potential = analysis.channel_intelligence.get('optimization_potential', 0.3)
+        if optimization_potential > 0.6:
+            interventions.append({
+                'priority': 'HIGH' if temporal_strategy == 'BURST' else 'MEDIUM',
+                'action': 'Optimize channel performance and timing',
+                'rationale': f'High optimization potential ({optimization_potential:.1f}) - significant efficiency gains available',
+                'timeline': '1-2 weeks' if temporal_strategy == 'BURST' else '2-4 weeks'
             })
         
         momentum = analysis.evolution.get('momentum_status', 'STABLE')
@@ -169,7 +287,7 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
             'key_tables': {
                 'ads_raw': f'{BQ_PROJECT}.{BQ_DATASET}.ads_raw_{self.context.run_id}',
                 'ads_embeddings': f'{BQ_PROJECT}.{BQ_DATASET}.ads_embeddings',
-                'strategic_labels': f'{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock'
+                'strategic_labels': f'{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates'
             },
             'dashboard_queries': {
                 'competitive_overview': f'''
@@ -178,7 +296,7 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                         COUNT(*) as ad_count,
                         AVG(promotional_intensity) as avg_promo_intensity,
                         AVG(urgency_score) as avg_urgency
-                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock`
+                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates`
                     WHERE brand IN ('{self.context.brand}', {', '.join([f"'{b}'" for b in getattr(self.context, 'competitor_brands', [])])})
                     GROUP BY brand
                     ORDER BY avg_promo_intensity DESC
@@ -188,7 +306,7 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                         DATE(start_timestamp) as date,
                         brand,
                         AVG(promotional_intensity) as daily_promo_intensity
-                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_strategic_labels_mock`
+                    FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates`
                     WHERE brand = '{self.context.brand}'
                         AND start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
                     GROUP BY date, brand
@@ -255,15 +373,22 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
             
             # Save JSON output
             output_file = f"{output_dir}/intelligence_{self.context.run_id}.json"
+            
+            # DEBUG: Log what we're about to save to JSON
+            json_data = {
+                'brand': self.context.brand,
+                'run_id': self.context.run_id,
+                'level_1': output.level_1,
+                'level_2': output.level_2,
+                'level_3': output.level_3,
+                'level_4': output.level_4
+            }
+            
+            print(f"   🔍 DEBUG JSON SAVE: About to write to {output_file}")
+            print(f"   🔍 DEBUG JSON SAVE: level_2 current_state_metrics = {json_data['level_2']['current_state_metrics']}")
+            
             with open(output_file, 'w') as f:
-                json.dump({
-                    'brand': self.context.brand,
-                    'run_id': self.context.run_id,
-                    'level_1': output.level_1,
-                    'level_2': output.level_2,
-                    'level_3': output.level_3,
-                    'level_4': output.level_4
-                }, f, indent=2)
+                json.dump(json_data, f, indent=2)
             
             print(f"   💾 Output saved to: {output_file}")
             

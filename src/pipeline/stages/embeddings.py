@@ -11,7 +11,7 @@ from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import IngestionResults, EmbeddingResults
 
 try:
-    from scripts.utils.bigquery_client import get_bigquery_client, run_query
+    from src.utils.bigquery_client import get_bigquery_client, run_query
 except ImportError:
     get_bigquery_client = None
     run_query = None
@@ -90,12 +90,9 @@ class EmbeddingsStage(PipelineStage[IngestionResults, EmbeddingResults]):
                 print(f"   📝 No existing embeddings table found: {e}")
                 existing_count = 0
             
-            if existing_count > 0:
-                print(f"   ✅ Found {existing_count} existing embeddings, using those")
-                embedding_count = existing_count
-            else:
-                print("   🔨 Generating new embeddings using existing pipeline pattern...")
-                embedding_count = self._generate_new_embeddings(ads, embedding_table, brand_list)
+            # Force fresh embeddings generation every time for accurate results
+            print("   🔨 Generating fresh embeddings for accurate analysis...")
+            embedding_count = self._generate_new_embeddings(ads, embedding_table, brand_list)
             
             return EmbeddingResults(
                 table_id=embedding_table,

@@ -88,7 +88,8 @@ comprehensive_labels AS (
               ) AS prompt
           ),
           STRUCT(
-            "funnel STRING, angles ARRAY<STRING>, promotional_intensity FLOAT64, urgency_score FLOAT64, brand_voice_score FLOAT64" AS output_schema
+            "funnel STRING, angles ARRAY<STRING>, promotional_intensity FLOAT64, urgency_score FLOAT64, brand_voice_score FLOAT64" AS output_schema,
+            "SHARED" AS request_type
           )
         )
         LIMIT 1

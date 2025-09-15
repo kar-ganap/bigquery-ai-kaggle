@@ -310,13 +310,26 @@ class MetaAdsFetcher:
             cards = snapshot.get("cards", []) or []
             
             # Extract creative text from various possible locations
-            creative_text = ""
             body_text = (snapshot.get("body", {}) or {}).get("text", "")
             title = snapshot.get("title") or ""
             link_description = snapshot.get("link_description") or ""
-            
-            # Combine text elements
-            text_parts = [title, body_text, link_description]
+            cta_text = snapshot.get("cta_text") or ""
+
+            # Handle string 'None' values from API
+            if cta_text == 'None':
+                cta_text = ""
+            if title == 'None':
+                title = ""
+
+            # Extract titles from cards array if available
+            card_titles = []
+            if cards:
+                for card in cards:
+                    if isinstance(card, dict) and card.get("title"):
+                        card_titles.append(card["title"])
+
+            # Combine all text for creative_text field
+            text_parts = [title, body_text, link_description] + card_titles
             creative_text = " ".join([part for part in text_parts if part]).strip()
             
             # Extract media info
@@ -335,6 +348,8 @@ class MetaAdsFetcher:
                 'ad_archive_id': ad.get("ad_archive_id"),
                 'page_name': ad.get("page_name") or company_name,
                 'creative_text': creative_text,
+                'title': title,  # Add separate title field
+                'cta_text': cta_text,  # Add separate CTA text field
                 'publisher_platforms': ",".join(ad.get("publisher_platform", [])) if isinstance(ad.get("publisher_platform"), list) else str(ad.get("publisher_platform", "")),
                 'media_type': media_type,
                 'snapshot_url': ad.get("url"),
@@ -342,7 +357,10 @@ class MetaAdsFetcher:
                 'first_seen': ad.get("start_date_string"),
                 'last_seen': ad.get("end_date_string"),
                 'start_date_string': ad.get("start_date_string"),
-                'end_date_string': ad.get("end_date_string")
+                'end_date_string': ad.get("end_date_string"),
+                # Additional fields for better analysis
+                'body_text': body_text,
+                'card_titles': ", ".join(card_titles) if card_titles else ""
             }
             
             normalized_ads.append(normalized_ad)

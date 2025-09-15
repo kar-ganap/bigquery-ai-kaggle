@@ -8,7 +8,7 @@ from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import CompetitorCandidate
 
 try:
-    from scripts.discover_competitors_v2 import CompetitorDiscovery
+    from src.competitive_intel.discovery.discover_competitors_v2 import CompetitorDiscovery
 except ImportError:
     CompetitorDiscovery = None
 
