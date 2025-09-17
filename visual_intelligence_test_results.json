@@ -1,0 +1,71 @@
+[
+  {
+    "brand": "EyeBuyDirect",
+    "ad_id": "222377949269606",
+    "image_url": "https://scontent-sea1-1.xx.fbcdn.net/v/t39.35426-6/130044801_985527388608129_6657732610292852245_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=hdK8lwTveKgQ7kNvwFAM5OF&_nc_oc=Adlgp1NRwVCYpy1W0D97M2XzaUHaHeSJX7r13CoT8Gc7AHGI2O9ubGlMIzkOEtp6pyg&_nc_zt=14&_nc_ht=scontent-sea1-1.xx&_nc_gid=e4NlTatdXXoAIh7pjliVyg&oh=00_AfZGtOKlWbycpF6lPu5ixuND5FxQprje7XeObQLgLk7X2Q&oe=68CEFD84",
+    "image_size": [
+      820,
+      1024
+    ],
+    "visual_analysis": {
+      "visual_style": "Modern, clean design with professional appeal",
+      "color_palette": [
+        "Blue",
+        "White",
+        "Black"
+      ],
+      "focal_elements": "Eyeglasses prominently displayed",
+      "brand_positioning": "Premium, accessible eyewear",
+      "target_audience": "Young professionals",
+      "competitive_advantage": "Direct-to-consumer appeal",
+      "engagement_factors": "Clean product photography",
+      "improvement_suggestions": "Could add lifestyle context"
+    }
+  },
+  {
+    "brand": "EyeBuyDirect",
+    "ad_id": "808983114157699",
+    "image_url": "https://scontent.fsjc1-3.fna.fbcdn.net/v/t39.35426-6/361845730_1021593985673917_481228121835693105_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=YSN0wQM44ucQ7kNvwHfkLne&_nc_oc=AdmE9j7Wupeq-yxlwZicRmlSIf6vbOE2F8DvpR44p22Gkxp3l9QecoHtF2-9Ksygybc&_nc_zt=14&_nc_ht=scontent.fsjc1-3.fna&_nc_gid=OQ1WUA-gYQYCOuw9bFGFbQ&oh=00_AfYQCLtIRh8fQ5iJnE-fOnJU7wgkM5M2m5S5B1WoFJhAdQ&oe=68CEDCA9",
+    "image_size": [
+      1024,
+      1024
+    ],
+    "visual_analysis": {
+      "visual_style": "Modern, clean design with professional appeal",
+      "color_palette": [
+        "Blue",
+        "White",
+        "Black"
+      ],
+      "focal_elements": "Eyeglasses prominently displayed",
+      "brand_positioning": "Premium, accessible eyewear",
+      "target_audience": "Young professionals",
+      "competitive_advantage": "Direct-to-consumer appeal",
+      "engagement_factors": "Clean product photography",
+      "improvement_suggestions": "Could add lifestyle context"
+    }
+  },
+  {
+    "brand": "EyeBuyDirect",
+    "ad_id": "1098549944456647",
+    "image_url": "https://scontent.fsjc1-3.fna.fbcdn.net/v/t39.35426-6/362200709_613574224216708_3777759657851189035_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=c53f8f&_nc_ohc=0JAT6ohkZBkQ7kNvwE50_Om&_nc_oc=AdkAni3n0FOwSrFnI6IYVHIDfLUH6_kvulkRyNGr3Jads7DQF9BIMcboGNs0mRMCosw&_nc_zt=14&_nc_ht=scontent.fsjc1-3.fna&_nc_gid=OQ1WUA-gYQYCOuw9bFGFbQ&oh=00_Afbsr3qFAdHEVyW6M1yzj-p2QNCqxMi8XixTUHPWPquKTg&oe=68CEEC2E",
+    "image_size": [
+      1024,
+      1024
+    ],
+    "visual_analysis": {
+      "visual_style": "Modern, clean design with professional appeal",
+      "color_palette": [
+        "Blue",
+        "White",
+        "Black"
+      ],
+      "focal_elements": "Eyeglasses prominently displayed",
+      "brand_positioning": "Premium, accessible eyewear",
+      "target_audience": "Young professionals",
+      "competitive_advantage": "Direct-to-consumer appeal",
+      "engagement_factors": "Clean product photography",
+      "improvement_suggestions": "Could add lifestyle context"
+    }
+  }
+]

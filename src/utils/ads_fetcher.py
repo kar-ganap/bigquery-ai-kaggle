@@ -315,6 +315,7 @@ class MetaAdsFetcher:
             body_text = (snapshot.get("body", {}) or {}).get("text", "")
             title = snapshot.get("title") or ""
             link_description = snapshot.get("link_description") or ""
+            cta_text = snapshot.get("cta_text") or ""  # Extract main CTA text
             cta_text = snapshot.get("cta_text") or ""
 
             # Handle string 'None' values from API
@@ -323,26 +324,106 @@ class MetaAdsFetcher:
             if title == 'None':
                 title = ""
 
-            # Extract titles from cards array if available
+            # Extract titles and bodies from cards with precise deduplication
             card_titles = []
+            card_bodies = []
+            card_ctas = []  # Add CTA collection
+            seen_card_titles = set()  # Dedupe card titles against each other
+            seen_card_bodies = set()  # Dedupe card bodies against each other
+            seen_card_ctas = set()  # Track CTAs too
+
             if cards:
                 for card in cards:
-                    if isinstance(card, dict) and card.get("title"):
-                        card_titles.append(card["title"])
+                    if isinstance(card, dict):
+                        # Extract and deduplicate card titles (card-to-card)
+                        card_title = card.get("title", "")
+                        if card_title and card_title not in seen_card_titles:
+                            card_titles.append(card_title)
+                            seen_card_titles.add(card_title)
 
-            # Combine all text for creative_text field
-            text_parts = [title, body_text, link_description] + card_titles
+                        # Extract and deduplicate card bodies (card-to-card)
+                        card_body = card.get("body", "")
+                        if card_body and card_body not in seen_card_bodies:
+                            card_bodies.append(card_body)
+                            seen_card_bodies.add(card_body)
+
+                        # Extract and deduplicate card CTAs
+                        card_cta = card.get("cta_text", "")
+                        if card_cta and card_cta not in seen_card_ctas:
+                            card_ctas.append(card_cta)
+                            seen_card_ctas.add(card_cta)
+
+            # Smart deduplication: only dedupe where it makes logical sense
+            main_text_parts = []
+            duplicate_flags = {
+                'title_in_cards': False,
+                'body_in_cards': False,
+                'link_desc_in_cards': False,
+                'cta_in_cards': False
+            }
+
+            # Add title if not already in card titles (logical duplication)
+            if title and title not in seen_card_titles:
+                main_text_parts.append(title)
+            elif title and title in seen_card_titles:
+                duplicate_flags['title_in_cards'] = True
+
+            # Add body_text - no deduplication vs card content (different contexts)
+            if body_text:
+                main_text_parts.append(body_text)
+
+            # Add link_description - no deduplication vs card content (different contexts)
+            if link_description:
+                main_text_parts.append(link_description)
+
+            # Add CTA if not already in card CTAs
+            if cta_text and cta_text not in seen_card_ctas:
+                main_text_parts.append(cta_text)
+            elif cta_text and cta_text in seen_card_ctas:
+                duplicate_flags['cta_in_cards'] = True
+
+            # Combine all text parts (including CTAs)
+            text_parts = main_text_parts + card_titles + card_bodies + card_ctas
             creative_text = " ".join([part for part in text_parts if part]).strip()
+
+            # Calculate comprehensive dedup stats
+            total_possible_parts = len([x for x in [title, body_text, link_description] if x]) + len(card_titles) + len(card_bodies)
+            total_unique_parts = len([x for x in main_text_parts + card_titles + card_bodies if x])
+            has_any_duplicates = any(duplicate_flags.values()) or len(seen_card_titles) < len([card.get('title', '') for card in cards if isinstance(card, dict) and card.get('title')]) or len(seen_card_bodies) < len([card.get('body', '') for card in cards if isinstance(card, dict) and card.get('body')])
             
-            # Extract media info
+            # Extract media info and image URLs for multimodal integration
+            # Per budget constraint: Only look at cards[0]
             media_type = "unknown"
-            if cards:
-                if any("video" in str(card).lower() for card in cards):
+            image_urls = []
+            video_urls = []  # Keep empty - Meta API doesn't provide actual video URLs
+            primary_image_url = None  # For visual intelligence
+
+            if cards and len(cards) > 0:
+                first_card = cards[0] if isinstance(cards[0], dict) else {}
+
+                # Check for image URLs in first card only
+                original_url = first_card.get("original_image_url")
+                resized_url = first_card.get("resized_image_url")
+                video_preview_url = first_card.get("video_preview_image_url")
+
+                # Determine media type based on which URLs are null
+                if original_url is None and resized_url is None and video_preview_url:
+                    # No image URLs but has video preview = VIDEO
                     media_type = "video"
-                elif any("image" in str(card).lower() for card in cards):
-                    media_type = "image"
+                    image_urls.append(video_preview_url)  # Use video preview for visual analysis
+                    primary_image_url = video_preview_url
+                elif original_url or resized_url:
+                    # Has image URL = IMAGE or CAROUSEL (doesn't matter per your note)
+                    media_type = "image" if len(cards) == 1 else "carousel"
+                    # Prefer original over resized
+                    if original_url:
+                        image_urls.append(original_url)
+                        primary_image_url = original_url
+                    elif resized_url:
+                        image_urls.append(resized_url)
+                        primary_image_url = resized_url
                 else:
-                    media_type = "carousel" if len(cards) > 1 else "image"
+                    media_type = "unknown"
             
             # Normalize to expected format
             normalized_ad = {
@@ -351,7 +432,8 @@ class MetaAdsFetcher:
                 'page_name': ad.get("page_name") or company_name,
                 'creative_text': creative_text,
                 'title': title,  # Add separate title field
-                'cta_text': cta_text,  # Add separate CTA text field
+                'cta_text': cta_text,  # Add separate CTA text field (main + cards)
+                'primary_image_url': primary_image_url,  # For visual intelligence
                 'publisher_platforms': ",".join(ad.get("publisher_platform", [])) if isinstance(ad.get("publisher_platform"), list) else str(ad.get("publisher_platform", "")),
                 'media_type': media_type,
                 'snapshot_url': ad.get("url"),
@@ -362,7 +444,13 @@ class MetaAdsFetcher:
                 'end_date_string': ad.get("end_date_string"),
                 # Additional fields for better analysis
                 'body_text': body_text,
-                'card_titles': ", ".join(card_titles) if card_titles else ""
+                'card_titles': ", ".join(card_titles) if card_titles else "",
+                'card_bodies': ", ".join(card_bodies) if card_bodies else "",
+                'image_urls': image_urls,  # Array of image URLs for multimodal analysis
+                'video_urls': video_urls,  # Array of video URLs
+                'total_unique_text_parts': total_unique_parts,  # Deduplication stats
+                'has_duplicate_content': has_any_duplicates,
+                'dedup_details': duplicate_flags  # Specific duplicate information
             }
             
             normalized_ads.append(normalized_ad)

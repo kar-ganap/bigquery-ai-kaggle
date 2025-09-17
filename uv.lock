@@ -743,6 +743,22 @@ wheels = [
 ]
 
 [[package]]
+name = "google-cloud-billing"
+version = "1.16.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "google-api-core", extra = ["grpc"] },
+    { name = "google-auth" },
+    { name = "grpc-google-iam-v1" },
+    { name = "proto-plus" },
+    { name = "protobuf" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/43/1d/3f540933471afd0a9fe9e7b7f6df04f608a45f19eac52a49662175ee32ba/google_cloud_billing-1.16.3.tar.gz", hash = "sha256:016a500a078efc2014820462ace53d7fdc31328de94b060f2383e74f1c976014", size = 128316 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cc/83/a05dbf663aa0bfd9f13c116c287d94d6df5d4ab3258c9371cdba2f051f2c/google_cloud_billing-1.16.3-py3-none-any.whl", hash = "sha256:0087e8286ad3557becdc6e1aa6b3374fe029374c815bc7424852338f4976faec", size = 115772 },
+]
+
+[[package]]
 name = "google-cloud-core"
 version = "2.4.3"
 source = { registry = "https://pypi.org/simple" }
@@ -3104,6 +3120,7 @@ dependencies = [
     { name = "google-cloud-aiplatform" },
     { name = "google-cloud-bigquery" },
     { name = "google-cloud-bigquery-storage" },
+    { name = "google-cloud-billing" },
     { name = "matplotlib" },
     { name = "nltk" },
     { name = "pandas" },
@@ -3159,6 +3176,7 @@ requires-dist = [
     { name = "google-cloud-aiplatform", marker = "extra == 'hybrid'", specifier = ">=1.71.0" },
     { name = "google-cloud-bigquery", specifier = ">=3.36.0" },
     { name = "google-cloud-bigquery-storage", specifier = ">=2.33.1" },
+    { name = "google-cloud-billing", specifier = ">=1.16.3" },
     { name = "jupyter", marker = "extra == 'all'", specifier = ">=1.1.0" },
     { name = "jupyter", marker = "extra == 'dev'", specifier = ">=1.1.0" },
     { name = "matplotlib", specifier = ">=3.10.0" },

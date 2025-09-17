@@ -3,7 +3,7 @@
 CREATE OR REPLACE TABLE `yourproj.ads_demo.ads_with_dates` AS
 
 WITH base_ads AS (
-  SELECT 
+  SELECT
     ad_archive_id,
     brand,
     creative_text,
@@ -11,7 +11,23 @@ WITH base_ads AS (
     media_type,
     start_date_string,
     end_date_string,
-    publisher_platforms
+    publisher_platforms,
+    -- Include multimodal fields (properly restored from JSON strings)
+    CASE
+      WHEN image_urls_json IS NOT NULL AND image_urls_json != '[]'
+      THEN JSON_EXTRACT_STRING_ARRAY(image_urls_json)
+      WHEN image_url IS NOT NULL
+      THEN [image_url]
+      ELSE []
+    END AS image_urls,
+    CASE
+      WHEN video_urls_json IS NOT NULL AND video_urls_json != '[]'
+      THEN JSON_EXTRACT_STRING_ARRAY(video_urls_json)
+      WHEN video_url IS NOT NULL
+      THEN [video_url]
+      ELSE []
+    END AS video_urls,
+    COALESCE(card_bodies, title, '') AS card_bodies
   FROM `yourproj.ads_demo.ads_raw`
   WHERE (creative_text IS NOT NULL OR title IS NOT NULL)
 ),
@@ -91,6 +107,10 @@ SELECT
   de.last_seen,
   de.active_days,
   de.publisher_platforms,
+  -- Multimodal fields for visual intelligence
+  de.image_urls,
+  de.video_urls,
+  de.card_bodies,
   -- AI-generated intelligence fields
   ai.funnel,
   ai.angles,
