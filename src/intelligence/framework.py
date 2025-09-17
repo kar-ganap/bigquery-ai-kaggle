@@ -351,8 +351,20 @@ class ProgressiveDisclosureFramework:
         # Check for complementary signals
         creative_signals = [s for s in signals if 'Creative' in s.source_module]
         channel_signals = [s for s in signals if 'Channel' in s.source_module]
+        visual_signals = [s for s in signals if 'Visual' in s.source_module]
+
         if creative_signals and channel_signals:
             patterns.append("Creative and Channel intelligence provide complementary insights")
+
+        if visual_signals and creative_signals:
+            patterns.append("Visual and Creative intelligence show multimodal consistency patterns")
+
+        if len([creative_signals, channel_signals, visual_signals]) >= 2:
+            active_modules = []
+            if creative_signals: active_modules.append("Creative")
+            if channel_signals: active_modules.append("Channel")
+            if visual_signals: active_modules.append("Visual")
+            patterns.append(f"Multi-dimensional intelligence active: {', '.join(active_modules)} modules provide comprehensive competitive analysis")
         
         return patterns
     
@@ -394,6 +406,19 @@ class ProgressiveDisclosureFramework:
                 metrics.extend(["Platform diversity score", "Risk concentration metric"])
             else:
                 metrics.extend(["Channel efficiency score", "Platform optimization rate"])
+        elif "Visual" in signal.source_module:
+            if "visual-text alignment" in signal.insight.lower():
+                metrics.extend(["Visual-text alignment score", "Multimodal consistency rate"])
+            elif "brand consistency" in signal.insight.lower():
+                metrics.extend(["Brand visual consistency score", "Brand recognition rate"])
+            elif "positioning" in signal.insight.lower():
+                metrics.extend(["Competitive positioning score", "Market differentiation rate"])
+            elif "differentiation" in signal.insight.lower():
+                metrics.extend(["Visual differentiation score", "Competitive advantage index"])
+            elif "fatigue" in signal.insight.lower():
+                metrics.extend(["Creative freshness score", "Visual pattern diversity"])
+            else:
+                metrics.extend(["Visual intelligence score", "Multimodal effectiveness"])
         else:
             metrics.extend(["Performance improvement %", "Strategic goal achievement"])
         
@@ -442,7 +467,7 @@ class ProgressiveDisclosureFramework:
             """
         elif "Channel" in module:
             return f"""
-            -- Channel Intelligence Dashboard  
+            -- Channel Intelligence Dashboard
             WITH channel_metrics AS (
               SELECT
                 brand,
@@ -451,12 +476,12 @@ class ProgressiveDisclosureFramework:
                 COUNT(DISTINCT ad_archive_id) as unique_campaigns,
                 AVG(CASE WHEN publisher_platforms LIKE '%,%' THEN 1.0 ELSE 0.0 END) as cross_platform_rate,
                 -- P2 Enhancement metrics
-                AVG(CASE 
-                  WHEN REGEXP_CONTAINS(publisher_platforms, 'Facebook') AND 
-                       REGEXP_CONTAINS(publisher_platforms, 'Instagram') AND 
+                AVG(CASE
+                  WHEN REGEXP_CONTAINS(publisher_platforms, 'Facebook') AND
+                       REGEXP_CONTAINS(publisher_platforms, 'Instagram') AND
                        REGEXP_CONTAINS(publisher_platforms, 'Messenger') THEN 3
-                  WHEN REGEXP_CONTAINS(publisher_platforms, 'Facebook') AND 
-                       REGEXP_CONTAINS(publisher_platforms, 'Instagram') THEN 2  
+                  WHEN REGEXP_CONTAINS(publisher_platforms, 'Facebook') AND
+                       REGEXP_CONTAINS(publisher_platforms, 'Instagram') THEN 2
                   WHEN publisher_platforms LIKE '%,%' THEN 1
                   ELSE 0
                 END) as platform_diversification_score
@@ -472,6 +497,53 @@ class ProgressiveDisclosureFramework:
               ROUND(platform_diversification_score, 1) as diversification_score
             FROM channel_metrics
             ORDER BY ad_count DESC
+            """
+        elif "Visual" in module:
+            return f"""
+            -- Visual Intelligence Dashboard
+            WITH visual_metrics AS (
+              SELECT
+                brand,
+                COUNT(*) as total_visual_ads,
+                AVG(visual_text_alignment_score) as avg_visual_alignment,
+                AVG(brand_consistency_score) as avg_brand_consistency,
+                AVG(luxury_positioning_score) as avg_luxury_position,
+                AVG(boldness_score) as avg_boldness,
+                AVG(visual_differentiation_level) as avg_differentiation,
+                AVG(creative_pattern_risk) as avg_pattern_risk,
+                STRING_AGG(DISTINCT target_demographic, ', ') as target_demographics,
+                -- Positioning quadrant classification
+                CASE
+                  WHEN AVG(luxury_positioning_score) > 0.7 AND AVG(boldness_score) > 0.7 THEN 'Luxury-Bold'
+                  WHEN AVG(luxury_positioning_score) > 0.7 AND AVG(boldness_score) < 0.4 THEN 'Luxury-Subtle'
+                  WHEN AVG(luxury_positioning_score) < 0.4 AND AVG(boldness_score) > 0.7 THEN 'Accessible-Bold'
+                  ELSE 'Mid-Balanced'
+                END as positioning_quadrant,
+                -- Visual health score
+                (AVG(visual_text_alignment_score) * 0.3 +
+                 AVG(brand_consistency_score) * 0.3 +
+                 AVG(visual_differentiation_level) * 0.2 +
+                 (1 - AVG(creative_pattern_risk)) * 0.2) as visual_health_score
+              FROM (
+                SELECT * FROM {base_table.replace('.ads_with_dates', '.visual_intelligence_*')}
+                WHERE luxury_positioning_score IS NOT NULL
+              )
+              GROUP BY brand
+            )
+            SELECT
+              brand,
+              total_visual_ads,
+              ROUND(avg_visual_alignment, 3) as visual_alignment_score,
+              ROUND(avg_brand_consistency, 3) as brand_consistency_score,
+              ROUND(avg_luxury_position, 3) as luxury_positioning,
+              ROUND(avg_boldness, 3) as boldness_score,
+              ROUND(avg_differentiation, 3) as differentiation_level,
+              ROUND(avg_pattern_risk, 3) as fatigue_risk,
+              target_demographics,
+              positioning_quadrant,
+              ROUND(visual_health_score, 3) as overall_visual_health
+            FROM visual_metrics
+            ORDER BY total_visual_ads DESC
             """
         else:
             return f"""
@@ -702,4 +774,141 @@ def create_channel_intelligence_signals(framework: ProgressiveDisclosureFramewor
             actionability=0.7,
             source_module="Channel Intelligence",
             metadata={'metric': 'concentration_risk', 'risk_type': 'policy_changes', 'mitigation': 'diversification'}
+        )
+
+
+def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework, visual_data: Dict) -> None:
+    """Create Visual Intelligence signals from enhanced multimodal analysis"""
+
+    # Visual-Text Alignment Signal
+    avg_alignment = visual_data.get('avg_visual_text_alignment', 0)
+    if avg_alignment < 0.6:
+        framework.add_signal(
+            insight="Visual-text misalignment detected - ensure images and copy work together cohesively",
+            value=avg_alignment,
+            confidence=0.8,
+            business_impact=0.8,
+            actionability=0.9,
+            source_module="Visual Intelligence",
+            metadata={'metric': 'visual_text_alignment', 'threshold': 0.6, 'optimization': 'multimodal_consistency'}
+        )
+    elif avg_alignment > 0.85:
+        framework.add_signal(
+            insight="Excellent visual-text alignment achieved - maintain this multimodal consistency",
+            value=avg_alignment,
+            confidence=0.9,
+            business_impact=0.6,
+            actionability=0.5,
+            source_module="Visual Intelligence",
+            metadata={'metric': 'visual_text_alignment', 'status': 'strength'}
+        )
+
+    # Brand Consistency Signal
+    avg_brand_consistency = visual_data.get('avg_brand_consistency', 0)
+    if avg_brand_consistency < 0.7:
+        framework.add_signal(
+            insight="Visual brand inconsistency identified - standardize brand visual elements across campaigns",
+            value=avg_brand_consistency,
+            confidence=0.8,
+            business_impact=0.9,  # Brand consistency is critical
+            actionability=0.8,
+            source_module="Visual Intelligence",
+            metadata={'metric': 'brand_consistency', 'impact': 'brand_recognition', 'threshold': 0.7}
+        )
+
+    # Competitive Positioning Matrix Signal
+    luxury_position = visual_data.get('avg_luxury_positioning', 0.5)
+    boldness_score = visual_data.get('avg_boldness', 0.5)
+
+    # Determine positioning quadrant
+    if luxury_position > 0.7 and boldness_score > 0.7:
+        positioning_quadrant = "Luxury-Bold"
+        positioning_insight = "Strong luxury-bold positioning - premium market leadership opportunity"
+        confidence = 0.8
+        business_impact = 0.8
+    elif luxury_position > 0.7 and boldness_score < 0.4:
+        positioning_quadrant = "Luxury-Subtle"
+        positioning_insight = "Luxury-subtle positioning - consider bolder visuals to increase market presence"
+        confidence = 0.7
+        business_impact = 0.6
+    elif luxury_position < 0.4 and boldness_score > 0.7:
+        positioning_quadrant = "Accessible-Bold"
+        positioning_insight = "Accessible-bold positioning - strong mass market appeal with distinctive visuals"
+        confidence = 0.8
+        business_impact = 0.7
+    else:
+        positioning_quadrant = "Mid-Balanced"
+        positioning_insight = "Balanced positioning - opportunity to differentiate through stronger visual identity"
+        confidence = 0.6
+        business_impact = 0.7
+
+    framework.add_signal(
+        insight=positioning_insight,
+        value={'quadrant': positioning_quadrant, 'luxury': luxury_position, 'boldness': boldness_score},
+        confidence=confidence,
+        business_impact=business_impact,
+        actionability=0.7,
+        source_module="Visual Intelligence",
+        metadata={'metric': 'competitive_positioning', 'quadrant': positioning_quadrant, 'matrix': '2D_luxury_boldness'}
+    )
+
+    # Creative Fatigue Detection Signal
+    avg_pattern_risk = visual_data.get('avg_creative_pattern_risk', 0)
+    if avg_pattern_risk > 0.7:
+        framework.add_signal(
+            insight="High creative pattern fatigue risk - refresh visual approach to avoid stale creatives",
+            value=avg_pattern_risk,
+            confidence=0.7,
+            business_impact=0.7,
+            actionability=0.8,
+            source_module="Visual Intelligence",
+            metadata={'metric': 'creative_fatigue', 'risk_level': 'high', 'action': 'visual_refresh'}
+        )
+
+    # Visual Differentiation Signal
+    avg_differentiation = visual_data.get('avg_visual_differentiation', 0)
+    if avg_differentiation < 0.5:
+        framework.add_signal(
+            insight="Low visual differentiation detected - increase unique visual elements to stand out from competitors",
+            value=avg_differentiation,
+            confidence=0.7,
+            business_impact=0.8,
+            actionability=0.8,
+            source_module="Visual Intelligence",
+            metadata={'metric': 'visual_differentiation', 'competitive_risk': 'commoditization', 'threshold': 0.5}
+        )
+    elif avg_differentiation > 0.8:
+        framework.add_signal(
+            insight="Strong visual differentiation achieved - maintain unique visual identity as competitive advantage",
+            value=avg_differentiation,
+            confidence=0.8,
+            business_impact=0.6,
+            actionability=0.5,
+            source_module="Visual Intelligence",
+            metadata={'metric': 'visual_differentiation', 'status': 'competitive_advantage'}
+        )
+
+    # Target Demographic Alignment Signal
+    dominant_demographic = visual_data.get('dominant_target_demographic', '')
+    demographic_confidence = visual_data.get('demographic_targeting_confidence', 0)
+
+    if demographic_confidence > 0.8:
+        framework.add_signal(
+            insight=f"Clear visual targeting for {dominant_demographic} demographic - optimize campaigns for this audience",
+            value={'demographic': dominant_demographic, 'confidence': demographic_confidence},
+            confidence=0.8,
+            business_impact=0.7,
+            actionability=0.8,
+            source_module="Visual Intelligence",
+            metadata={'metric': 'demographic_targeting', 'primary_audience': dominant_demographic, 'strategy': 'audience_optimization'}
+        )
+    elif demographic_confidence < 0.5:
+        framework.add_signal(
+            insight="Unclear visual demographic targeting - define target audience and align visual language accordingly",
+            value={'demographic': dominant_demographic or 'undefined', 'confidence': demographic_confidence},
+            confidence=0.7,
+            business_impact=0.8,
+            actionability=0.9,
+            source_module="Visual Intelligence",
+            metadata={'metric': 'demographic_targeting', 'issue': 'unclear_targeting', 'action_needed': 'audience_definition'}
         )

@@ -32,6 +32,7 @@ dependencies = [
     "google-cloud-aiplatform>=1.71.1",
     "vertexai>=1.71.1",
     "google-cloud-bigquery-storage>=2.33.1",
+    "google-cloud-billing>=1.16.3",
 ]
 
 [project.optional-dependencies]

@@ -28,6 +28,7 @@ from .stages.ingestion import IngestionStage
 from .stages.strategic_labeling import StrategicLabelingStage
 from .stages.embeddings import EmbeddingsStage
 from .stages.analysis import AnalysisStage
+from .stages.visual_intelligence import VisualIntelligenceStage
 from .stages.enhanced_output import EnhancedOutputStage
 from .stages.multidimensional_intelligence import MultiDimensionalIntelligenceStage
 
@@ -64,8 +65,8 @@ class CompetitiveIntelligencePipeline:
         # Setup logging
         self._setup_logging()
         
-        # Initialize progress tracker  
-        self.progress = ProgressTracker(total_stages=9)
+        # Initialize progress tracker
+        self.progress = ProgressTracker(total_stages=10)  # Updated for Stage 6.5 Visual Intelligence
         
         # Stage timings
         self.stage_timings = {}
@@ -141,7 +142,12 @@ class CompetitiveIntelligencePipeline:
             embeddings_stage = EmbeddingsStage(self.context, self.dry_run, self.verbose)
             embeddings_results = embeddings_stage.run(ingestion_results, self.progress)
             print(f"✅ Stage 6 complete - Generated {embeddings_results.embedding_count} embeddings")
-            
+
+            # Stage 6.5: Visual Intelligence (Phase 3)
+            visual_intel_stage = VisualIntelligenceStage(self.context, self.dry_run)
+            visual_intel_results = visual_intel_stage.run(embeddings_results, self.progress)
+            print(f"✅ Stage 6.5 complete - Visual intelligence: {visual_intel_results.sampled_ads} ads analyzed, ${visual_intel_results.cost_estimate:.2f}")
+
             # Stage 7: Strategic Analysis
             analysis_stage = AnalysisStage(self.context, self.dry_run, self.verbose)
             analysis_results = analysis_stage.run(embeddings_results, self.progress)

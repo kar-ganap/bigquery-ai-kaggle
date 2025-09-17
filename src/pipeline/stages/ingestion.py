@@ -50,6 +50,12 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
         self.context = context
         self.dry_run = dry_run
         self.verbose = verbose
+
+        # Load configuration from environment
+        self.max_ads = int(os.getenv('MAX_ADS_PER_COMPANY', '500'))
+        self.max_pages = int(os.getenv('MAX_PAGES_PER_COMPANY', '10'))
+        self.delay_between_requests = float(os.getenv('DELAY_BETWEEN_REQUESTS', '0.5'))
+        self.image_budget = int(os.getenv('MULTIMODAL_IMAGE_BUDGET', '60'))
     
     def execute(self, competitors: List[ValidatedCompetitor]) -> IngestionResults:
         """Execute Meta ads ingestion"""
@@ -130,7 +136,29 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
             # Load ads to BigQuery for embedding generation
             if len(all_ads) > 0 and load_dataframe_to_bq:
                 try:
-                    ads_df = pd.DataFrame(all_ads)
+                    # Prepare ads data for BigQuery by handling array fields correctly
+                    prepared_ads = []
+                    for ad in all_ads:
+                        prepared_ad = ad.copy()
+
+                        # Convert array fields to JSON strings for BigQuery compatibility
+                        if 'image_urls' in prepared_ad and isinstance(prepared_ad['image_urls'], list):
+                            # Store as JSON string array for now, will convert properly in strategic labeling
+                            prepared_ad['image_urls_json'] = str(prepared_ad['image_urls'])
+                            # Keep first image for backward compatibility
+                            prepared_ad['image_url'] = prepared_ad['image_urls'][0] if prepared_ad['image_urls'] else None
+                            del prepared_ad['image_urls']
+
+                        if 'video_urls' in prepared_ad and isinstance(prepared_ad['video_urls'], list):
+                            # Store as JSON string array for now, will convert properly in strategic labeling
+                            prepared_ad['video_urls_json'] = str(prepared_ad['video_urls'])
+                            # Keep first video for backward compatibility
+                            prepared_ad['video_url'] = prepared_ad['video_urls'][0] if prepared_ad['video_urls'] else None
+                            del prepared_ad['video_urls']
+
+                        prepared_ads.append(prepared_ad)
+
+                    ads_df = pd.DataFrame(prepared_ads)
                     ads_table_id = f"{BQ_PROJECT}.{BQ_DATASET}.ads_raw_{self.context.run_id}"
                     print(f"   💾 Loading {len(ads_df)} ads to BigQuery table {ads_table_id}...")
                     load_dataframe_to_bq(ads_df, ads_table_id, write_disposition="WRITE_TRUNCATE")
@@ -161,9 +189,9 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
                 # Fetch ads for this competitor
                 ads, fetch_result = fetcher.fetch_company_ads_with_metadata(
                     company_name=comp.company_name,
-                    max_ads=500,
-                    max_pages=10,
-                    delay_between_requests=0.5
+                    max_ads=self.max_ads,
+                    max_pages=self.max_pages,
+                    delay_between_requests=self.delay_between_requests
                 )
                 
                 elapsed = time.time() - start_time
@@ -217,9 +245,9 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
         try:
             target_ads, _ = fetcher.fetch_company_ads_with_metadata(
                 company_name=self.context.brand,
-                max_ads=500,
-                max_pages=10,
-                delay_between_requests=0.5
+                max_ads=self.max_ads,
+                max_pages=self.max_pages,
+                delay_between_requests=self.delay_between_requests
             )
             
             if target_ads:
@@ -300,6 +328,11 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
             'image_url': ad.get('image_url'),
             'video_url': ad.get('video_url'),
             'card_index': ad.get('card_index'),
-            
+
+            # MULTIMODAL FIELDS: Preserve from enhanced ads_fetcher
+            'image_urls': ad.get('image_urls', []),
+            'video_urls': ad.get('video_urls', []),
+            'card_bodies': ad.get('card_bodies', ''),
+
             'created_date': datetime.now().isoformat()
         }
