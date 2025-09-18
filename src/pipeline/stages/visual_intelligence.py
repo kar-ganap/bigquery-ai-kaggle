@@ -1,5 +1,5 @@
 """
-Stage 5.5: Visual Intelligence - Multimodal Analysis with Adaptive Sampling
+Stage 7: Visual Intelligence - Multimodal Analysis with Adaptive Sampling
 
 NEW STAGE: Analyzes visual creative strategy using BigQuery AI multimodal capabilities.
 Implements adaptive sampling to balance cost control with comprehensive competitive intelligence.
@@ -35,7 +35,7 @@ class VisualIntelligenceResults:
 
 class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceResults]):
     """
-    Stage 5.5: Visual Intelligence Analysis
+    Stage 7: Visual Intelligence Analysis
 
     Implements adaptive sampling strategy from multimodal integration plan:
     - Small brands (≤20 ads): 50% coverage, max 10 images
@@ -93,20 +93,26 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
             analysis_sql = self._generate_visual_analysis_sql()
             print("   🔍 Executing multimodal analysis...")
 
-            # Execute the analysis
+            # Execute the analysis (creates table)
             query_job = client.query(analysis_sql)
-            results = query_job.result()
+            query_job.result()  # Wait for table creation
 
-            # Count results
-            sampled_count = 0
-            insights_count = 0
-            competitive_count = 0
-            for row in results:
-                sampled_count += 1
-                if row.get('visual_text_alignment_score', 0) > 0:
-                    insights_count += 1
-                if row.get('luxury_positioning_score', 0) > 0:
-                    competitive_count += 1
+            # Count results by querying the created table
+            count_sql = f"""
+            SELECT
+                COUNT(*) as sampled_count,
+                COUNT(CASE WHEN visual_text_alignment_score > 0 THEN 1 END) as insights_count,
+                COUNT(CASE WHEN luxury_positioning_score > 0 THEN 1 END) as competitive_count
+            FROM `{BQ_PROJECT}.{BQ_DATASET}.visual_intelligence_{self.context.run_id}`
+            """
+            count_job = client.query(count_sql)
+            count_result = count_job.result()
+
+            for row in count_result:
+                sampled_count = row.sampled_count
+                insights_count = row.insights_count
+                competitive_count = row.competitive_count
+                break
 
             estimated_cost = sampled_count * 0.30  # Rough estimate (doubled due to 2 AI calls per ad)
 

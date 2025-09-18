@@ -395,8 +395,16 @@ class ProgressiveDisclosureFramework:
         if "Creative" in signal.source_module:
             if "text length" in signal.insight.lower():
                 metrics.extend(["Average creative text length", "Content engagement rate"])
+            elif "emotional intensity" in signal.insight.lower():
+                metrics.extend(["AI emotional intensity score", "Emotional engagement rate", "Brand resonance metrics"])
             elif "emotional" in signal.insight.lower():
                 metrics.extend(["Emotional keyword usage rate", "Brand sentiment score"])
+            elif "industry relevance" in signal.insight.lower():
+                metrics.extend(["Industry relevance score", "Eyewear context alignment", "Message effectiveness"])
+            elif "positive/aspirational" in signal.insight.lower():
+                metrics.extend(["Positive sentiment rate", "Aspirational messaging score", "Brand uplift metrics"])
+            elif "lifestyle" in signal.insight.lower() or "premium" in signal.insight.lower():
+                metrics.extend(["Brand positioning score", "Lifestyle appeal metrics", "Premium perception index"])
             else:
                 metrics.extend(["Creative performance score", "Brand message consistency"])
         elif "Channel" in signal.source_module:
@@ -694,18 +702,110 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
             metadata={'metric': 'brand_mentions', 'current': brand_mentions, 'target': 1.0}
         )
     
-    # Emotional Keywords Signal
-    emotional_score = creative_data.get('avg_emotional_keywords', 0)
-    if emotional_score < 1.0:
+    # AI-Enhanced Emotional Intelligence Signals
+    ai_emotional_intensity = creative_data.get('avg_ai_emotional_intensity', 0)
+    ai_industry_relevance = creative_data.get('avg_ai_industry_relevance', 0)
+
+    # AI Emotional Intensity Signal (0-10 scale)
+    if ai_emotional_intensity > 0:  # AI analysis available
+        if ai_emotional_intensity < 3.0:
+            framework.add_signal(
+                insight="Low emotional intensity detected through AI analysis - strengthen emotional appeal for eyewear marketing",
+                value=ai_emotional_intensity,
+                confidence=0.8,
+                business_impact=0.7,
+                actionability=0.8,
+                source_module="Creative Intelligence",
+                metadata={'metric': 'ai_emotional_intensity', 'scale': '0-10', 'analysis_type': 'ai_generated'}
+            )
+        elif ai_emotional_intensity > 8.0:
+            framework.add_signal(
+                insight="Very high emotional intensity detected - consider balanced approach for broader audience appeal",
+                value=ai_emotional_intensity,
+                confidence=0.7,
+                business_impact=0.6,
+                actionability=0.7,
+                source_module="Creative Intelligence",
+                metadata={'metric': 'ai_emotional_intensity', 'scale': '0-10', 'analysis_type': 'ai_generated'}
+            )
+    else:
+        # Fallback to regex-based analysis if AI not available
+        emotional_score = creative_data.get('avg_emotional_keywords', 0)
+        if emotional_score < 1.0:
+            framework.add_signal(
+                insight="Limited emotional language detected - incorporate more engaging emotional keywords",
+                value=emotional_score,
+                confidence=0.6,
+                business_impact=0.6,
+                actionability=0.7,
+                source_module="Creative Intelligence",
+                metadata={'metric': 'emotional_keywords', 'examples': ['amazing', 'perfect', 'love'], 'analysis_type': 'regex_based'}
+            )
+
+    # AI Industry Relevance Signal (0-1 scale)
+    if ai_industry_relevance > 0 and ai_industry_relevance < 0.4:
         framework.add_signal(
-            insight="Limited emotional language detected - incorporate more engaging emotional keywords",
-            value=emotional_score,
-            confidence=0.6,
-            business_impact=0.6,
-            actionability=0.7,
+            insight="Low eyewear industry relevance in emotional messaging - tailor content for eyewear context",
+            value=ai_industry_relevance,
+            confidence=0.8,
+            business_impact=0.8,
+            actionability=0.9,
             source_module="Creative Intelligence",
-            metadata={'metric': 'emotional_keywords', 'examples': ['amazing', 'perfect', 'love']}
+            metadata={'metric': 'ai_industry_relevance', 'scale': '0-1', 'industry': 'eyewear'}
         )
+
+    # AI Sentiment Category Analysis
+    ai_positive_rate = creative_data.get('ai_positive_sentiment_rate', 0)
+    ai_aspirational_rate = creative_data.get('ai_aspirational_sentiment_rate', 0)
+
+    if ai_positive_rate > 0 or ai_aspirational_rate > 0:  # AI analysis available
+        total_positive_aspirational = ai_positive_rate + ai_aspirational_rate
+        if total_positive_aspirational < 30:  # Less than 30% positive/aspirational
+            framework.add_signal(
+                insight="Low positive/aspirational sentiment detected - increase uplifting messaging for eyewear brand building",
+                value=total_positive_aspirational,
+                confidence=0.8,
+                business_impact=0.7,
+                actionability=0.8,
+                source_module="Creative Intelligence",
+                metadata={'metric': 'ai_sentiment_balance', 'positive_rate': ai_positive_rate, 'aspirational_rate': ai_aspirational_rate}
+            )
+
+    # AI Persuasion Style Analysis
+    ai_lifestyle_rate = creative_data.get('ai_lifestyle_style_rate', 0)
+    ai_premium_rate = creative_data.get('ai_premium_style_rate', 0)
+
+    if ai_lifestyle_rate > 0 or ai_premium_rate > 0:  # AI analysis available
+        if ai_lifestyle_rate > 70:
+            framework.add_signal(
+                insight="Heavy lifestyle positioning detected - consider balancing with functional benefits for broader appeal",
+                value=ai_lifestyle_rate,
+                confidence=0.7,
+                business_impact=0.6,
+                actionability=0.7,
+                source_module="Creative Intelligence",
+                metadata={'metric': 'ai_lifestyle_dominance', 'percentage': ai_lifestyle_rate}
+            )
+        elif ai_premium_rate > 60:
+            framework.add_signal(
+                insight="Strong premium positioning - ensure value communication resonates with target demographic",
+                value=ai_premium_rate,
+                confidence=0.7,
+                business_impact=0.7,
+                actionability=0.8,
+                source_module="Creative Intelligence",
+                metadata={'metric': 'ai_premium_positioning', 'percentage': ai_premium_rate}
+            )
+        elif ai_lifestyle_rate + ai_premium_rate < 20:
+            framework.add_signal(
+                insight="Limited lifestyle/premium positioning - opportunity to enhance brand appeal through emotional storytelling",
+                value=ai_lifestyle_rate + ai_premium_rate,
+                confidence=0.8,
+                business_impact=0.8,
+                actionability=0.9,
+                source_module="Creative Intelligence",
+                metadata={'metric': 'ai_positioning_gap', 'total_rate': ai_lifestyle_rate + ai_premium_rate}
+            )
     
     # Creative Density Signal
     density_score = creative_data.get('avg_creative_density', 0)
@@ -774,6 +874,84 @@ def create_channel_intelligence_signals(framework: ProgressiveDisclosureFramewor
             actionability=0.7,
             source_module="Channel Intelligence",
             metadata={'metric': 'concentration_risk', 'risk_type': 'policy_changes', 'mitigation': 'diversification'}
+        )
+
+def create_audience_intelligence_signals(framework: ProgressiveDisclosureFramework, audience_data: Dict) -> None:
+    """Create Audience Intelligence signals from platform and psychographic analysis"""
+
+    # Cross-Platform Strategy Signal
+    cross_platform_rate = audience_data.get('avg_cross_platform_rate', 0)
+    if cross_platform_rate < 30.0:
+        framework.add_signal(
+            insight="Low cross-platform presence - expand beyond single channel to reach broader audiences",
+            value=cross_platform_rate,
+            confidence=0.8,
+            business_impact=0.7,
+            actionability=0.8,
+            source_module="Audience Intelligence",
+            metadata={'metric': 'cross_platform_rate', 'unit': 'percentage', 'target': 50.0}
+        )
+
+    # Communication Style Optimization Signal
+    avg_text_length = audience_data.get('avg_text_length', 0)
+    if avg_text_length < 50:
+        framework.add_signal(
+            insight="Very short messaging detected - consider more detailed communication for audience engagement",
+            value=avg_text_length,
+            confidence=0.7,
+            business_impact=0.6,
+            actionability=0.8,
+            source_module="Audience Intelligence",
+            metadata={'metric': 'avg_text_length', 'unit': 'characters', 'optimal_range': '75-150'}
+        )
+    elif avg_text_length > 200:
+        framework.add_signal(
+            insight="Very long messaging detected - consider more concise communication for better engagement",
+            value=avg_text_length,
+            confidence=0.7,
+            business_impact=0.6,
+            actionability=0.8,
+            source_module="Audience Intelligence",
+            metadata={'metric': 'avg_text_length', 'unit': 'characters', 'optimal_range': '75-150'}
+        )
+
+    # Price Consciousness Strategy Signal
+    price_conscious_rate = audience_data.get('avg_price_conscious_rate', 0)
+    if price_conscious_rate > 40.0:
+        framework.add_signal(
+            insight="High price-conscious audience detected - emphasize value propositions and competitive pricing",
+            value=price_conscious_rate,
+            confidence=0.8,
+            business_impact=0.8,
+            actionability=0.9,
+            source_module="Audience Intelligence",
+            metadata={'metric': 'price_conscious_rate', 'unit': 'percentage', 'strategy': 'value_messaging'}
+        )
+
+    # Millennial Focus Strategy Signal
+    millennial_focus_rate = audience_data.get('avg_millennial_focus_rate', 0)
+    if millennial_focus_rate > 60.0:
+        framework.add_signal(
+            insight="Strong millennial focus detected - tailor messaging for digital-native preferences and lifestyle",
+            value=millennial_focus_rate,
+            confidence=0.8,
+            business_impact=0.7,
+            actionability=0.8,
+            source_module="Audience Intelligence",
+            metadata={'metric': 'millennial_focus_rate', 'unit': 'percentage', 'strategy': 'digital_lifestyle_messaging'}
+        )
+
+    # Platform Strategy Diversification Signal
+    platform_strategy = audience_data.get('most_common_platform_strategy', 'UNKNOWN')
+    if platform_strategy == 'INSTAGRAM_ONLY' or platform_strategy == 'FACEBOOK_ONLY':
+        framework.add_signal(
+            insight=f"Single-platform dependency detected ({platform_strategy}) - diversify to reduce channel risk",
+            value=platform_strategy,
+            confidence=0.8,
+            business_impact=0.9,
+            actionability=0.7,
+            source_module="Audience Intelligence",
+            metadata={'metric': 'platform_strategy', 'current': platform_strategy, 'recommendation': 'CROSS_PLATFORM'}
         )
 
 

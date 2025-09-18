@@ -1,0 +1,127 @@
+{
+  "immediate_actions": [],
+  "short_term_tactics": [
+    {
+      "action": "Creative text length optimization needed - content is too brief for engagement",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.9,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Average creative text length",
+        "Content engagement rate"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger",
+      "rationale": "Based on Channel Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.8,
+      "actionability": 0.9,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Cross-platform synergy rate",
+        "Multi-channel reach"
+      ],
+      "source_module": "Channel Intelligence",
+      "value": 0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low brand mention frequency detected - increase brand presence in creative content",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.8,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Creative performance score",
+        "Brand message consistency"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Platform diversification opportunity - expand cross-platform presence to reduce risk",
+      "rationale": "Based on Channel Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Cross-platform synergy rate",
+        "Multi-channel reach"
+      ],
+      "source_module": "Channel Intelligence",
+      "value": 0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Limited emotional language detected - incorporate more engaging emotional keywords",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.6,
+      "business_impact": 0.6,
+      "actionability": 0.7,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Emotional keyword usage rate",
+        "Brand sentiment score"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Platform-specific content optimization needed - tailor messaging for each channel's audience",
+      "rationale": "Based on Channel Intelligence analysis",
+      "confidence": 0.6,
+      "business_impact": 0.6,
+      "actionability": 0.7,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Channel efficiency score",
+        "Platform optimization rate"
+      ],
+      "source_module": "Channel Intelligence",
+      "value": 0,
+      "priority": "HIGH"
+    }
+  ],
+  "monitoring_actions": [
+    {
+      "action": "Content density optimization opportunity - enrich creative messaging",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.5,
+      "business_impact": 0.5,
+      "actionability": 0.6,
+      "timeline": "Medium-term (4-8 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Creative performance score",
+        "Brand message consistency"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0,
+      "priority": "MEDIUM"
+    }
+  ],
+  "intervention_summary": {
+    "total_interventions": 7,
+    "immediate_count": 0,
+    "short_term_count": 6,
+    "monitoring_count": 1,
+    "avg_confidence": 0.6714285714285715,
+    "avg_actionability": 0.7714285714285716
+  }
+}

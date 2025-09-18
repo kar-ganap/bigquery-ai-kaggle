@@ -20,6 +20,7 @@ class MultiDimensionalResults(AnalysisResults):
     audience_intelligence: Dict[str, Any] = field(default_factory=dict)
     creative_intelligence: Dict[str, Any] = field(default_factory=dict)
     channel_intelligence: Dict[str, Any] = field(default_factory=dict)
+    visual_intelligence: Dict[str, Any] = field(default_factory=dict)  # Phase 3: Visual & multimodal intelligence
     whitespace_intelligence: Dict[str, Any] = field(default_factory=dict)  # P0: White space opportunities
     intelligence_summary: Dict[str, Any] = field(default_factory=dict)
     data_completeness: float = 0.0  # Percentage of ads with complete data
@@ -44,6 +45,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
     def __init__(self, stage_name: str, stage_number: int, run_id: str):
         super().__init__(stage_name, stage_number, run_id)
         self.competitor_brands = None  # Will be set by orchestrator
+        self.visual_intelligence_results = None  # Will be set by orchestrator
         
     def execute(self, previous_results: AnalysisResults) -> MultiDimensionalResults:
         """Execute data-driven intelligence analysis focusing on CTA and Audience insights"""
@@ -72,7 +74,11 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
             # P1 Priority #2: Channel Intelligence Analysis
             self.logger.info("📡 Executing Channel Intelligence Analysis...")
             channel_results = self._execute_channel_intelligence(run_id, brands)
-            
+
+            # Phase 3: Visual Intelligence Metrics Extraction
+            self.logger.info("🎨 Extracting Visual Intelligence Metrics...")
+            visual_metrics_results = self._execute_visual_intelligence_metrics(run_id)
+
             # P0 Priority #3: White Space Intelligence Analysis  
             self.logger.info("🎯 Executing White Space Intelligence Analysis...")
             whitespace_results = self._execute_whitespace_intelligence(run_id, brands)
@@ -101,6 +107,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                 audience_intelligence=audience_results,
                 creative_intelligence=creative_results,
                 channel_intelligence=channel_results,
+                visual_intelligence=visual_metrics_results,  # Phase 3: Visual & multimodal intelligence with extracted metrics
                 whitespace_intelligence=whitespace_results,  # P0: White space opportunities
                 intelligence_summary=intelligence_summary,
                 data_completeness=data_completeness,
@@ -363,7 +370,38 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
             """
             
             run_query(audience_analysis_sql)
-            
+
+            # Extract metrics from the created table for return
+            metrics_query = f"""
+            SELECT
+                brand,
+                total_ads,
+                cross_platform_rate,
+                avg_total_text_length,
+                price_conscious_rate,
+                millennial_focus_rate,
+                dominant_platform_strategy,
+                dominant_communication_style,
+                dominant_psychographic_profile,
+                dominant_age_group
+            FROM `bigquery-ai-kaggle-469620.ads_demo.audience_intelligence_{run_id}`
+            ORDER BY total_ads DESC
+            """
+            metrics_df = run_query(metrics_query)
+
+            # Aggregate metrics across all brands
+            agg_metrics = {
+                'total_ads': int(metrics_df['total_ads'].sum()) if not metrics_df.empty else 0,
+                'avg_cross_platform_rate': float(metrics_df['cross_platform_rate'].mean()) if not metrics_df.empty else 0.0,
+                'avg_text_length': float(metrics_df['avg_total_text_length'].mean()) if not metrics_df.empty else 0.0,
+                'avg_price_conscious_rate': float(metrics_df['price_conscious_rate'].mean()) if not metrics_df.empty else 0.0,
+                'avg_millennial_focus_rate': float(metrics_df['millennial_focus_rate'].mean()) if not metrics_df.empty else 0.0,
+                'most_common_platform_strategy': metrics_df['dominant_platform_strategy'].mode().iloc[0] if not metrics_df.empty else 'UNKNOWN',
+                'most_common_communication_style': metrics_df['dominant_communication_style'].mode().iloc[0] if not metrics_df.empty else 'UNKNOWN',
+                'most_common_psychographic': metrics_df['dominant_psychographic_profile'].mode().iloc[0] if not metrics_df.empty else 'UNKNOWN',
+                'most_common_age_group': metrics_df['dominant_age_group'].mode().iloc[0] if not metrics_df.empty else 'UNKNOWN'
+            }
+
             return {
                 'status': 'success',
                 'analysis_type': 'audience_intelligence',
@@ -379,7 +417,8 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                     'Age group targeting analysis (Gen Z, Millennials, Gen X, Boomers)',
                     'Cross-brand competitive psychographic analysis',
                     'Dominant audience strategies by brand'
-                ]
+                ],
+                **agg_metrics
             }
             
         except Exception as e:
@@ -394,9 +433,12 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
         """Execute P1 Creative Intelligence analysis based on messaging and visual themes"""
         try:
             from src.utils.bigquery_client import run_query
-            
+
             brands_filter = "', '".join(brands)
-            
+
+            # Define regex pattern outside f-string to avoid backslash issues
+            json_regex = r'```json\\s*({[\\s\\S]*?})\\s*```'
+
             # Creative Intelligence SQL - analyzing messaging themes and creative patterns
             creative_analysis_sql = f"""
             CREATE OR REPLACE TABLE `bigquery-ai-kaggle-469620.ads_demo.creative_intelligence_{run_id}` AS
@@ -466,49 +508,130 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
               FROM `bigquery-ai-kaggle-469620.ads_demo.ads_raw_{run_id}`
               WHERE brand IN ('{brands_filter}')
                 AND (creative_text IS NOT NULL OR title IS NOT NULL)
+            ),
+
+            -- AI-Enhanced Sentiment Analysis (sampled for cost control)
+            ai_sentiment_sample AS (
+              SELECT
+                *,
+                ROW_NUMBER() OVER (PARTITION BY brand ORDER BY RAND()) as sample_rank,
+                COUNT(*) OVER (PARTITION BY brand) as brand_total_ads
+              FROM creative_analysis
+              WHERE LENGTH(COALESCE(creative_text, '')) > 10  -- Only analyze substantial text
+            ),
+
+            ai_sentiment_analysis AS (
+              SELECT
+                brand,
+                ad_archive_id,
+                creative_text,
+                title,
+                emotional_keyword_count,
+                brand_mention_frequency,
+                -- AI sentiment analysis (only for sampled ads)
+                CASE WHEN sample_rank <= LEAST(CAST(brand_total_ads * 0.3 AS INT64), 20)  -- Sample 30% or max 20 per brand
+                THEN AI.GENERATE(
+                  CONCAT(
+                    'EYEWEAR AD SENTIMENT ANALYSIS: Analyze the emotional tone and sentiment of this eyewear advertisement.\\n\\n',
+                    'BRAND: ', brand, '\\n',
+                    'TEXT: "', SUBSTR(COALESCE(creative_text, '') || ' ' || COALESCE(title, ''), 1, 300), '"\\n\\n',
+                    'Provide JSON analysis for eyewear industry context:\\n',
+                    '1. emotional_intensity (0-10): Overall emotional strength\\n',
+                    '2. sentiment_category (positive/neutral/aspirational/functional)\\n',
+                    '3. eyewear_emotional_words: [detected eyewear-specific emotional language]\\n',
+                    '4. persuasion_style (lifestyle/clinical/fashion/value/premium)\\n',
+                    '5. target_emotion (confidence/style/comfort/clarity/trust)\\n',
+                    '6. emotional_keywords_detected: [list of emotional trigger words found]\\n',
+                    '7. industry_relevance_score (0-1): How well emotion fits eyewear context'
+                  ),
+                  connection_id => 'bigquery-ai-kaggle-469620.us.gemini-connection'
+                )
+                ELSE NULL END as ai_sentiment_analysis
+              FROM ai_sentiment_sample
+            ),
+
+            -- Extract AI sentiment metrics with JSON parsing
+            ai_sentiment_extracted AS (
+              SELECT
+                brand,
+                ai_sentiment_analysis,
+                emotional_keyword_count,
+                -- Extract AI sentiment scores with fallback to regex counts
+                COALESCE(
+                  CASE WHEN ai_sentiment_analysis IS NOT NULL
+                    THEN CAST(JSON_VALUE(REGEXP_EXTRACT(ai_sentiment_analysis.result, '{json_regex}'), '$.emotional_intensity') AS FLOAT64)
+                    ELSE NULL
+                  END,
+                  emotional_keyword_count * 2.0  -- Fallback: scale regex count
+                ) as ai_emotional_intensity,
+                COALESCE(
+                  CASE WHEN ai_sentiment_analysis IS NOT NULL
+                    THEN CAST(JSON_VALUE(REGEXP_EXTRACT(ai_sentiment_analysis.result, '{json_regex}'), '$.industry_relevance_score') AS FLOAT64)
+                    ELSE NULL
+                  END,
+                  CASE WHEN emotional_keyword_count > 0 THEN 0.5 ELSE 0.1 END  -- Fallback relevance
+                ) as ai_industry_relevance,
+                CASE WHEN ai_sentiment_analysis IS NOT NULL
+                  THEN JSON_VALUE(REGEXP_EXTRACT(ai_sentiment_analysis.result, '{json_regex}'), '$.sentiment_category')
+                  ELSE NULL
+                END as ai_sentiment_category,
+                CASE WHEN ai_sentiment_analysis IS NOT NULL
+                  THEN JSON_VALUE(REGEXP_EXTRACT(ai_sentiment_analysis.result, '{json_regex}'), '$.persuasion_style')
+                  ELSE NULL
+                END as ai_persuasion_style
+              FROM ai_sentiment_analysis
+              WHERE ai_sentiment_analysis IS NOT NULL
             )
-            
-            SELECT 
-              brand,
+
+            SELECT
+              ca.brand,
               COUNT(*) as total_ads,
-              
+
               -- Messaging Theme Distribution
-              COUNT(CASE WHEN messaging_theme = 'INNOVATION_FOCUSED' THEN 1 END) as innovation_focused_ads,
-              COUNT(CASE WHEN messaging_theme = 'VALUE_FOCUSED' THEN 1 END) as value_focused_ads,
-              COUNT(CASE WHEN messaging_theme = 'QUALITY_FOCUSED' THEN 1 END) as quality_focused_ads,
-              COUNT(CASE WHEN messaging_theme = 'PERSONALIZATION_FOCUSED' THEN 1 END) as personalization_focused_ads,
-              COUNT(CASE WHEN messaging_theme = 'STYLE_FOCUSED' THEN 1 END) as style_focused_ads,
-              
+              COUNT(CASE WHEN ca.messaging_theme = 'INNOVATION_FOCUSED' THEN 1 END) as innovation_focused_ads,
+              COUNT(CASE WHEN ca.messaging_theme = 'VALUE_FOCUSED' THEN 1 END) as value_focused_ads,
+              COUNT(CASE WHEN ca.messaging_theme = 'QUALITY_FOCUSED' THEN 1 END) as quality_focused_ads,
+              COUNT(CASE WHEN ca.messaging_theme = 'PERSONALIZATION_FOCUSED' THEN 1 END) as personalization_focused_ads,
+              COUNT(CASE WHEN ca.messaging_theme = 'STYLE_FOCUSED' THEN 1 END) as style_focused_ads,
+
               -- Messaging Theme Percentages
-              ROUND(COUNT(CASE WHEN messaging_theme = 'INNOVATION_FOCUSED' THEN 1 END) * 100.0 / COUNT(*), 1) as innovation_focus_rate,
-              ROUND(COUNT(CASE WHEN messaging_theme = 'VALUE_FOCUSED' THEN 1 END) * 100.0 / COUNT(*), 1) as value_focus_rate,
-              ROUND(COUNT(CASE WHEN messaging_theme = 'QUALITY_FOCUSED' THEN 1 END) * 100.0 / COUNT(*), 1) as quality_focus_rate,
-              
+              ROUND(COUNT(CASE WHEN ca.messaging_theme = 'INNOVATION_FOCUSED' THEN 1 END) * 100.0 / COUNT(*), 1) as innovation_focus_rate,
+              ROUND(COUNT(CASE WHEN ca.messaging_theme = 'VALUE_FOCUSED' THEN 1 END) * 100.0 / COUNT(*), 1) as value_focus_rate,
+              ROUND(COUNT(CASE WHEN ca.messaging_theme = 'QUALITY_FOCUSED' THEN 1 END) * 100.0 / COUNT(*), 1) as quality_focus_rate,
+
               -- Emotional Tone Distribution
-              COUNT(CASE WHEN emotional_tone = 'EMOTIONAL_POSITIVE' THEN 1 END) as emotional_positive_ads,
-              COUNT(CASE WHEN emotional_tone = 'RATIONAL_TRUST' THEN 1 END) as rational_trust_ads,
-              COUNT(CASE WHEN emotional_tone = 'CONVENIENCE_FOCUSED' THEN 1 END) as convenience_focused_ads,
-              COUNT(CASE WHEN emotional_tone = 'URGENCY_DRIVEN' THEN 1 END) as urgency_driven_ads,
-              
+              COUNT(CASE WHEN ca.emotional_tone = 'EMOTIONAL_POSITIVE' THEN 1 END) as emotional_positive_ads,
+              COUNT(CASE WHEN ca.emotional_tone = 'RATIONAL_TRUST' THEN 1 END) as rational_trust_ads,
+              COUNT(CASE WHEN ca.emotional_tone = 'CONVENIENCE_FOCUSED' THEN 1 END) as convenience_focused_ads,
+              COUNT(CASE WHEN ca.emotional_tone = 'URGENCY_DRIVEN' THEN 1 END) as urgency_driven_ads,
+
               -- Content Complexity Distribution
-              COUNT(CASE WHEN content_complexity = 'DETAILED_CONTENT' THEN 1 END) as detailed_content_ads,
-              COUNT(CASE WHEN content_complexity = 'CONCISE_CONTENT' THEN 1 END) as concise_content_ads,
-              ROUND(AVG(creative_text_length + title_length), 1) as avg_content_length,
-              
+              COUNT(CASE WHEN ca.content_complexity = 'DETAILED_CONTENT' THEN 1 END) as detailed_content_ads,
+              COUNT(CASE WHEN ca.content_complexity = 'CONCISE_CONTENT' THEN 1 END) as concise_content_ads,
+              ROUND(AVG(ca.creative_text_length + ca.title_length), 1) as avg_content_length,
+
               -- P2 Enhancements: New Creative Intelligence Metrics
-              COUNT(CASE WHEN text_length_category = 'LONG' THEN 1 END) as long_text_ads,
-              COUNT(CASE WHEN text_length_category = 'MEDIUM' THEN 1 END) as medium_text_ads,
-              COUNT(CASE WHEN text_length_category = 'SHORT' THEN 1 END) as short_text_ads,
-              ROUND(COUNT(CASE WHEN text_length_category = 'LONG' THEN 1 END) * 100.0 / COUNT(*), 1) as long_text_rate,
-              
-              ROUND(AVG(brand_mention_frequency), 2) as avg_brand_mentions_per_ad,
-              ROUND(AVG(emotional_keyword_count), 1) as avg_emotional_keywords_per_ad,
-              ROUND(AVG(creative_density_score), 1) as avg_creative_density,
-              
+              COUNT(CASE WHEN ca.text_length_category = 'LONG' THEN 1 END) as long_text_ads,
+              COUNT(CASE WHEN ca.text_length_category = 'MEDIUM' THEN 1 END) as medium_text_ads,
+              COUNT(CASE WHEN ca.text_length_category = 'SHORT' THEN 1 END) as short_text_ads,
+              ROUND(COUNT(CASE WHEN ca.text_length_category = 'LONG' THEN 1 END) * 100.0 / COUNT(*), 1) as long_text_rate,
+
+              ROUND(AVG(ca.brand_mention_frequency), 2) as avg_brand_mentions_per_ad,
+              ROUND(AVG(ca.emotional_keyword_count), 1) as avg_emotional_keywords_per_ad,
+              ROUND(AVG(ca.creative_density_score), 1) as avg_creative_density,
+
+              -- AI-Enhanced Emotional Intelligence Metrics
+              ROUND(AVG(ase.ai_emotional_intensity), 1) as avg_ai_emotional_intensity,
+              ROUND(AVG(ase.ai_industry_relevance), 2) as avg_ai_industry_relevance,
+              COUNT(CASE WHEN ase.ai_sentiment_category = 'positive' THEN 1 END) as ai_positive_sentiment_ads,
+              COUNT(CASE WHEN ase.ai_sentiment_category = 'aspirational' THEN 1 END) as ai_aspirational_sentiment_ads,
+              COUNT(CASE WHEN ase.ai_persuasion_style = 'lifestyle' THEN 1 END) as ai_lifestyle_style_ads,
+              COUNT(CASE WHEN ase.ai_persuasion_style = 'premium' THEN 1 END) as ai_premium_style_ads,
+
               -- L4 Progressive Disclosure: Creative Strategy Insights
-              COUNT(CASE WHEN emotional_keyword_count >= 3 THEN 1 END) as high_emotion_ads,
-              COUNT(CASE WHEN brand_mention_frequency >= 2 THEN 1 END) as brand_heavy_ads,
-              COUNT(CASE WHEN creative_density_score >= 15.0 THEN 1 END) as content_rich_ads,
+              COUNT(CASE WHEN ca.emotional_keyword_count >= 3 THEN 1 END) as high_emotion_ads,
+              COUNT(CASE WHEN ca.brand_mention_frequency >= 2 THEN 1 END) as brand_heavy_ads,
+              COUNT(CASE WHEN ca.creative_density_score >= 15.0 THEN 1 END) as content_rich_ads,
               
               -- Dominant Strategies (most common messaging theme and emotional tone)
               CASE 
@@ -566,20 +689,90 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
               END as dominant_emotional_tone,
               
               CURRENT_TIMESTAMP() as analysis_timestamp
-              
-            FROM creative_analysis
-            GROUP BY brand
+
+            FROM creative_analysis ca
+            LEFT JOIN ai_sentiment_extracted ase ON ca.brand = ase.brand
+            GROUP BY ca.brand
             ORDER BY total_ads DESC;
             """
             
             run_query(creative_analysis_sql)
-            
+
+            # Query the computed metrics from the created table
+            metrics_query = f"""
+            SELECT
+                brand,
+                total_ads,
+                avg_content_length as avg_text_length,
+                avg_brand_mentions_per_ad as avg_brand_mentions,
+                avg_emotional_keywords_per_ad as avg_emotional_keywords,
+                avg_creative_density as avg_creative_density,
+                -- AI-Enhanced Sentiment Metrics
+                avg_ai_emotional_intensity,
+                avg_ai_industry_relevance,
+                ai_positive_sentiment_ads,
+                ai_aspirational_sentiment_ads,
+                ai_lifestyle_style_ads,
+                ai_premium_style_ads,
+                dominant_messaging_theme,
+                dominant_emotional_tone,
+                long_text_rate,
+                high_emotion_ads,
+                brand_heavy_ads,
+                content_rich_ads
+            FROM `bigquery-ai-kaggle-469620.ads_demo.creative_intelligence_{run_id}`
+            ORDER BY total_ads DESC
+            """
+
+            metrics_df = run_query(metrics_query)
+
+            # Aggregate metrics across all brands for signal generation
+            if not metrics_df.empty:
+                agg_metrics = {
+                    'avg_text_length': float(metrics_df['avg_text_length'].mean()),
+                    'avg_brand_mentions': float(metrics_df['avg_brand_mentions'].mean()),
+                    'avg_emotional_keywords': float(metrics_df['avg_emotional_keywords'].mean()),
+                    'avg_creative_density': float(metrics_df['avg_creative_density'].mean()),
+                    # AI-Enhanced Sentiment Metrics
+                    'avg_ai_emotional_intensity': float(metrics_df['avg_ai_emotional_intensity'].fillna(0).mean()),
+                    'avg_ai_industry_relevance': float(metrics_df['avg_ai_industry_relevance'].fillna(0).mean()),
+                    'ai_positive_sentiment_rate': float(metrics_df['ai_positive_sentiment_ads'].sum() / metrics_df['total_ads'].sum() * 100) if metrics_df['total_ads'].sum() > 0 else 0,
+                    'ai_aspirational_sentiment_rate': float(metrics_df['ai_aspirational_sentiment_ads'].sum() / metrics_df['total_ads'].sum() * 100) if metrics_df['total_ads'].sum() > 0 else 0,
+                    'ai_lifestyle_style_rate': float(metrics_df['ai_lifestyle_style_ads'].sum() / metrics_df['total_ads'].sum() * 100) if metrics_df['total_ads'].sum() > 0 else 0,
+                    'ai_premium_style_rate': float(metrics_df['ai_premium_style_ads'].sum() / metrics_df['total_ads'].sum() * 100) if metrics_df['total_ads'].sum() > 0 else 0,
+                    'total_ads': int(metrics_df['total_ads'].sum()),
+                    'brands_analyzed': len(metrics_df),
+                    'dominant_messaging_theme': metrics_df['dominant_messaging_theme'].mode().iloc[0] if len(metrics_df) > 0 else 'GENERAL_MESSAGING',
+                    'dominant_emotional_tone': metrics_df['dominant_emotional_tone'].mode().iloc[0] if len(metrics_df) > 0 else 'NEUTRAL_TONE'
+                }
+            else:
+                # Fallback values if no data
+                agg_metrics = {
+                    'avg_text_length': 0,
+                    'avg_brand_mentions': 0,
+                    'avg_emotional_keywords': 0,
+                    'avg_creative_density': 0,
+                    # AI-Enhanced Sentiment Metrics (fallback)
+                    'avg_ai_emotional_intensity': 0.0,
+                    'avg_ai_industry_relevance': 0.0,
+                    'ai_positive_sentiment_rate': 0.0,
+                    'ai_aspirational_sentiment_rate': 0.0,
+                    'ai_lifestyle_style_rate': 0.0,
+                    'ai_premium_style_rate': 0.0,
+                    'total_ads': 0,
+                    'brands_analyzed': 0,
+                    'dominant_messaging_theme': 'GENERAL_MESSAGING',
+                    'dominant_emotional_tone': 'NEUTRAL_TONE'
+                }
+
             return {
                 'status': 'success',
                 'analysis_type': 'creative_intelligence',
                 'run_id': run_id,
                 'brands_analyzed': brands,
                 'table_created': f'creative_intelligence_{run_id}',
+                # Include the computed metrics for signal generation
+                **agg_metrics,
                 'metrics_analyzed': [
                     'Messaging theme distribution (innovation, value, quality, personalization, style)',
                     'Emotional tone analysis (emotional-positive, rational-trust, convenience, urgency)',
@@ -783,13 +976,54 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
             """
             
             run_query(channel_analysis_sql)
-            
+
+            # Query the computed metrics from the created table
+            metrics_query = f"""
+            SELECT
+                brand,
+                total_channel_ads,
+                avg_platform_diversification,
+                multi_platform_rate as cross_platform_synergy_rate,
+                platform_optimization_rate,
+                dominant_platform_strategy,
+                dominant_channel_focus
+            FROM `bigquery-ai-kaggle-469620.ads_demo.channel_intelligence_{run_id}`
+            ORDER BY total_channel_ads DESC
+            """
+
+            metrics_df = run_query(metrics_query)
+
+            # Aggregate metrics across all brands for signal generation
+            if not metrics_df.empty:
+                agg_metrics = {
+                    'avg_platform_diversification': float(metrics_df['avg_platform_diversification'].mean()),
+                    'cross_platform_synergy_rate': float(metrics_df['cross_platform_synergy_rate'].mean()),
+                    'platform_optimization_rate': float(metrics_df['platform_optimization_rate'].mean() if 'platform_optimization_rate' in metrics_df.columns else 0),
+                    'total_ads': int(metrics_df['total_channel_ads'].sum()),
+                    'brands_analyzed': len(metrics_df),
+                    'dominant_platform_strategy': metrics_df['dominant_platform_strategy'].mode().iloc[0] if len(metrics_df) > 0 else 'CROSS_PLATFORM',
+                    'dominant_channel_focus': metrics_df['dominant_channel_focus'].mode().iloc[0] if len(metrics_df) > 0 else 'COMMUNITY_FOCUSED'
+                }
+            else:
+                # Fallback values if no data
+                agg_metrics = {
+                    'avg_platform_diversification': 0,
+                    'cross_platform_synergy_rate': 0,
+                    'platform_optimization_rate': 0,
+                    'total_ads': 0,
+                    'brands_analyzed': 0,
+                    'dominant_platform_strategy': 'CROSS_PLATFORM',
+                    'dominant_channel_focus': 'COMMUNITY_FOCUSED'
+                }
+
             return {
                 'status': 'success',
                 'analysis_type': 'channel_intelligence',
                 'run_id': run_id,
                 'brands_analyzed': brands,
                 'table_created': f'channel_intelligence_{run_id}',
+                # Include the computed metrics for signal generation
+                **agg_metrics,
                 'metrics_analyzed': [
                     'Platform strategy distribution (cross-platform synergy vs single-platform focus)',
                     'Content richness by platform (visual vs detailed vs minimal content)',
@@ -828,7 +1062,89 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                 'error': str(e),
                 'analysis_type': 'channel_intelligence'
             }
-    
+
+    def _execute_visual_intelligence_metrics(self, run_id: str) -> Dict[str, Any]:
+        """Extract metrics from Visual Intelligence BigQuery table created by Stage 7"""
+        try:
+            from src.utils.bigquery_client import run_query
+
+            # Extract visual intelligence metrics from the table created in Stage 7
+            visual_metrics_sql = f"""
+            SELECT
+                AVG(visual_text_alignment_score) as avg_visual_text_alignment,
+                AVG(brand_consistency_score) as avg_brand_consistency,
+                AVG(creative_fatigue_risk) as avg_creative_fatigue_risk,
+                AVG(luxury_positioning_score) as avg_luxury_positioning,
+                AVG(boldness_score) as avg_boldness,
+                AVG(visual_differentiation_level) as avg_visual_differentiation,
+                AVG(creative_pattern_risk) as avg_creative_pattern_risk,
+                COUNT(*) as total_visual_ads,
+                COUNT(DISTINCT brand) as brands_analyzed
+            FROM `bigquery-ai-kaggle-469620.ads_demo.visual_intelligence_{run_id}`
+            WHERE visual_text_alignment_score IS NOT NULL
+            """
+
+            result = run_query(visual_metrics_sql)
+
+            if not result.empty:
+                row = result.iloc[0]
+                agg_metrics = {
+                    'avg_visual_text_alignment': float(row.avg_visual_text_alignment) if row.avg_visual_text_alignment else 0,
+                    'avg_brand_consistency': float(row.avg_brand_consistency) if row.avg_brand_consistency else 0,
+                    'avg_creative_fatigue_risk': float(row.avg_creative_fatigue_risk) if row.avg_creative_fatigue_risk else 0,
+                    'avg_luxury_positioning': float(row.avg_luxury_positioning) if row.avg_luxury_positioning else 0,
+                    'avg_boldness': float(row.avg_boldness) if row.avg_boldness else 0,
+                    'avg_visual_differentiation': float(row.avg_visual_differentiation) if row.avg_visual_differentiation else 0,
+                    'avg_creative_pattern_risk': float(row.avg_creative_pattern_risk) if row.avg_creative_pattern_risk else 0,
+                    'total_visual_ads': int(row.total_visual_ads) if row.total_visual_ads else 0,
+                    'brands_analyzed': int(row.brands_analyzed) if row.brands_analyzed else 0
+                }
+            else:
+                # Fallback values if no data available
+                agg_metrics = {
+                    'avg_visual_text_alignment': 0,
+                    'avg_brand_consistency': 0,
+                    'avg_creative_fatigue_risk': 0,
+                    'avg_luxury_positioning': 0,
+                    'avg_boldness': 0,
+                    'avg_visual_differentiation': 0,
+                    'avg_creative_pattern_risk': 0,
+                    'total_visual_ads': 0,
+                    'brands_analyzed': 0
+                }
+
+            return {
+                'status': 'success',
+                'analysis_type': 'visual_intelligence_metrics',
+                'run_id': run_id,
+                'table_source': f'visual_intelligence_{run_id}',
+                # Include the computed metrics for signal generation
+                **agg_metrics,
+                'metrics_analyzed': [
+                    'Visual-text alignment scoring',
+                    'Brand consistency across creative elements',
+                    'Creative fatigue risk assessment',
+                    'Luxury vs accessible positioning analysis',
+                    'Bold vs subtle visual approach',
+                    'Visual differentiation from competitors',
+                    'Creative pattern risk evaluation'
+                ],
+                'visual_intelligence_insights': {
+                    'multimodal_analysis': 'AI-powered visual and text alignment scoring',
+                    'brand_positioning': 'Luxury-boldness competitive matrix',
+                    'creative_strategy': 'Visual differentiation and pattern analysis',
+                    'risk_assessment': 'Creative fatigue and pattern repetition detection'
+                }
+            }
+
+        except Exception as e:
+            self.logger.error(f"Visual intelligence metrics extraction failed: {str(e)}")
+            return {
+                'status': 'error',
+                'error': str(e),
+                'analysis_type': 'visual_intelligence_metrics'
+            }
+
     def _generate_intelligence_summary(
         self,
         run_id: str,

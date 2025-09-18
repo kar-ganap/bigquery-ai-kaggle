@@ -7,14 +7,16 @@ Integrates the new ProgressiveDisclosureFramework for enhanced intelligence orga
 import os
 import time
 import json
-from typing import List
+from typing import List, Dict, Any
 
 from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import AnalysisResults, IntelligenceOutput
 from ...intelligence.framework import (
-    ProgressiveDisclosureFramework, 
+    ProgressiveDisclosureFramework,
     create_creative_intelligence_signals,
-    create_channel_intelligence_signals
+    create_channel_intelligence_signals,
+    create_audience_intelligence_signals,
+    create_visual_intelligence_signals
 )
 
 # Environment configuration
@@ -58,11 +60,26 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
             create_creative_intelligence_signals(framework, analysis.creative_intelligence)
             print(f"   🎨 Added Creative Intelligence signals: {len([s for s in framework.signals if 'Creative' in s.source_module])}")
         
-        # Add Channel Intelligence signals (P2 enhancements) 
+        # Add Channel Intelligence signals (P2 enhancements)
         if hasattr(analysis, 'channel_intelligence') and analysis.channel_intelligence:
             create_channel_intelligence_signals(framework, analysis.channel_intelligence)
             print(f"   📺 Added Channel Intelligence signals: {len([s for s in framework.signals if 'Channel' in s.source_module])}")
-        
+
+        # Add Audience Intelligence signals (P0 Priority - fundamental analysis)
+        if hasattr(analysis, 'audience_intelligence') and analysis.audience_intelligence:
+            create_audience_intelligence_signals(framework, analysis.audience_intelligence)
+            print(f"   👥 Added Audience Intelligence signals: {len([s for s in framework.signals if 'Audience' in s.source_module])}")
+
+        # Add Visual Intelligence signals (Phase 3 - multimodal)
+        if hasattr(analysis, 'visual_intelligence') and analysis.visual_intelligence:
+            create_visual_intelligence_signals(framework, analysis.visual_intelligence)
+            print(f"   👁️ Added Visual Intelligence signals: {len([s for s in framework.signals if 'Visual' in s.source_module])}")
+
+        # Add Whitespace Intelligence signals (Phase 8 - market opportunities)
+        if hasattr(analysis, 'whitespace_intelligence') and analysis.whitespace_intelligence:
+            self._add_whitespace_signals(framework, analysis.whitespace_intelligence)
+            print(f"   🎯 Added Whitespace Intelligence signals: {len([s for s in framework.signals if 'Whitespace' in s.source_module])}")
+
         # Generate systematic L1→L4 output
         output = IntelligenceOutput()
         
@@ -85,10 +102,34 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
         
         # Save output files
         if not self.dry_run:
-            self._save_output_files(output)
-        
+            self._save_output_files(output, analysis)
+
         return output
     
+    def _add_whitespace_signals(self, framework: ProgressiveDisclosureFramework, whitespace_data: Dict) -> None:
+        """Add whitespace opportunity signals to the framework"""
+
+        if not whitespace_data or 'opportunities' not in whitespace_data:
+            return
+
+        for opp in whitespace_data.get('opportunities', []):
+            if opp.get('score', 0) > 0.3:  # Only include significant opportunities
+                framework.add_signal(
+                    insight=f"Whitespace opportunity: {opp.get('segment', 'Unknown')} - {opp.get('messaging_angle', 'Unknown')}",
+                    value=opp.get('score', 0),
+                    confidence=opp.get('confidence', 0.7),
+                    business_impact=0.8,
+                    actionability=0.9,
+                    source_module="Whitespace Intelligence",
+                    metadata={
+                        'space_type': opp.get('space_type', 'Virgin Territory'),
+                        'funnel_stage': opp.get('funnel_stage', 'Unknown'),
+                        'campaign_ready': opp.get('campaign_ready', False),
+                        'sample_headline': opp.get('sample_headline', ''),
+                        'sample_cta': opp.get('sample_cta', '')
+                    }
+                )
+
     def _add_core_analysis_signals(self, framework: ProgressiveDisclosureFramework, analysis: AnalysisResults) -> None:
         """Add core analysis signals to the framework"""
         
@@ -240,15 +281,15 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
         print("✅ SYSTEMATIC L1→L4 INTELLIGENCE GENERATION COMPLETE")
         print("=" * 80)
     
-    def _save_output_files(self, output: IntelligenceOutput):
+    def _save_output_files(self, output: IntelligenceOutput, analysis: AnalysisResults = None):
         """Save intelligence output to files"""
-        
+
         # Ensure output directory exists
         os.makedirs("data/output/clean_checkpoints", exist_ok=True)
-        
+
         # Save systematic intelligence output
         output_path = f"data/output/clean_checkpoints/systematic_intelligence_{self.context.run_id}.json"
-        
+
         # Convert output to serializable format
         output_data = {
             'brand': self.context.brand,
@@ -259,18 +300,29 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
             'level_3': output.level_3,
             'level_4': output.level_4
         }
-        
+
+        # Add whitespace intelligence if available
+        if analysis and hasattr(analysis, 'whitespace_intelligence') and analysis.whitespace_intelligence:
+            output_data['whitespace_intelligence'] = analysis.whitespace_intelligence
+
         with open(output_path, 'w') as f:
             json.dump(output_data, f, indent=2, default=str)
-        
+
         print(f"   💾 Saved systematic intelligence output: {output_path}")
-        
+
         # Save L3 interventions as separate actionable file
         interventions_path = f"data/output/clean_checkpoints/interventions_{self.context.run_id}.json"
         with open(interventions_path, 'w') as f:
             json.dump(output.level_3, f, indent=2, default=str)
-        
+
         print(f"   💾 Saved actionable interventions: {interventions_path}")
+
+        # Save whitespace opportunities as separate file for campaign teams
+        if analysis and hasattr(analysis, 'whitespace_intelligence') and analysis.whitespace_intelligence:
+            whitespace_path = f"data/output/clean_checkpoints/whitespace_{self.context.run_id}.json"
+            with open(whitespace_path, 'w') as f:
+                json.dump(analysis.whitespace_intelligence, f, indent=2, default=str)
+            print(f"   💾 Saved whitespace opportunities: {whitespace_path}")
         
         # Save L4 SQL queries as executable files
         if 'dashboard_queries' in output.level_4:

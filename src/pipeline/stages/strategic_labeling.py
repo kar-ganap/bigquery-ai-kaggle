@@ -1,5 +1,5 @@
 """
-Stage 4.5: Strategic Labeling
+Stage 5: Strategic Labeling
 
 Executes the enhanced SQL script to generate strategic labels for temporal intelligence.
 Integrates existing AI.GENERATE_TABLE infrastructure into the modular pipeline.
@@ -24,7 +24,7 @@ BQ_DATASET = os.environ.get("BQ_DATASET", "ads_demo")
 
 class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResults]):
     """
-    Stage 4.5: Strategic Labeling.
+    Stage 5: Strategic Labeling.
     
     Responsibilities:
     - Execute existing SQL script (sql/02_label_ads.sql) with dynamic project/dataset
