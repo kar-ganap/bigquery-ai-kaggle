@@ -1,0 +1,48 @@
+2025-09-17 16:13:22,798 - pipeline_warby_parker_20250917_161322 - INFO - Starting Competitor Discovery
+2025-09-17 16:13:27,102 - pipeline_warby_parker_20250917_161322 - INFO - Completed Competitor Discovery in 4.3s
+2025-09-17 16:13:27,102 - pipeline_warby_parker_20250917_161322 - INFO - Starting AI Competitor Curation
+2025-09-17 16:15:04,297 - pipeline_warby_parker_20250917_161322 - INFO - Completed AI Competitor Curation in 97.2s
+2025-09-17 16:15:04,298 - pipeline_warby_parker_20250917_161322 - INFO - Starting Meta Ad Activity Ranking
+2025-09-17 16:15:24,835 - pipeline_warby_parker_20250917_161322 - INFO - Completed Meta Ad Activity Ranking in 20.5s
+2025-09-17 16:15:24,836 - pipeline_warby_parker_20250917_161322 - INFO - Starting Meta Ads Ingestion
+2025-09-17 16:16:29,037 - pipeline_warby_parker_20250917_161322 - INFO - Completed Meta Ads Ingestion in 64.2s
+2025-09-17 16:16:29,038 - pipeline_warby_parker_20250917_161322 - INFO - Starting Strategic Labeling
+2025-09-17 16:18:36,766 - pipeline_warby_parker_20250917_161322 - INFO - Completed Strategic Labeling in 127.7s
+2025-09-17 16:18:36,773 - pipeline_warby_parker_20250917_161322 - INFO - Starting Embeddings Generation
+2025-09-17 16:18:46,143 - pipeline_warby_parker_20250917_161322 - INFO - Completed Embeddings Generation in 9.4s
+2025-09-17 16:18:46,145 - pipeline_warby_parker_20250917_161322 - INFO - Starting Visual Intelligence
+2025-09-17 16:19:14,205 - pipeline_warby_parker_20250917_161322 - INFO - Completed Visual Intelligence in 28.1s
+2025-09-17 16:19:14,207 - pipeline_warby_parker_20250917_161322 - INFO - Starting Strategic Analysis
+2025-09-17 16:19:38,459 - pipeline_warby_parker_20250917_161322 - INFO - Completed Strategic Analysis in 24.3s
+2025-09-17 16:19:38,460 - pipeline_warby_parker_20250917_161322 - INFO - Starting Multi-Dimensional Intelligence
+2025-09-17 16:19:38,460 - pipeline_warby_parker_20250917_161322 - INFO - 🚀 Starting Comprehensive Intelligence Analysis - CTA, Audience, Creative & Channel
+2025-09-17 16:19:38,460 - pipeline_warby_parker_20250917_161322 - INFO - 🎯 Analyzing 5 brands (from orchestrator)
+2025-09-17 16:19:38,460 - pipeline_warby_parker_20250917_161322 - INFO - 👥 Executing Audience Intelligence Analysis...
+2025-09-17 16:19:43,825 - pipeline_warby_parker_20250917_161322 - INFO - 🎨 Executing Creative Intelligence Analysis...
+2025-09-17 16:19:44,888 - pipeline_warby_parker_20250917_161322 - ERROR - Creative Intelligence analysis failed: 400 No matching signature for function REGEXP_EXTRACT
+  Argument types: STRUCT<brand STRING, ad_archive_id STRING, creative_text STRING, ...>, STRING
+  Signature: REGEXP_EXTRACT(STRING, STRING, [INT64], [INT64])
+    Argument 1: Unable to coerce type STRUCT<brand STRING, ad_archive_id STRING, creative_text STRING, ...> to expected type STRING
+  Signature: REGEXP_EXTRACT(BYTES, BYTES, [INT64], [INT64])
+    Argument 1: Unable to coerce type STRUCT<brand STRING, ad_archive_id STRING, creative_text STRING, ...> to expected type BYTES at [118:35]; reason: invalidQuery, location: query, message: No matching signature for function REGEXP_EXTRACT
+  Argument types: STRUCT<brand STRING, ad_archive_id STRING, creative_text STRING, ...>, STRING
+  Signature: REGEXP_EXTRACT(STRING, STRING, [INT64], [INT64])
+    Argument 1: Unable to coerce type STRUCT<brand STRING, ad_archive_id STRING, creative_text STRING, ...> to expected type STRING
+  Signature: REGEXP_EXTRACT(BYTES, BYTES, [INT64], [INT64])
+    Argument 1: Unable to coerce type STRUCT<brand STRING, ad_archive_id STRING, creative_text STRING, ...> to expected type BYTES at [118:35]
+
+Location: US
+Job ID: 8355bad9-8a7b-4db3-98fb-8c7eb1da8b6d
+
+2025-09-17 16:19:44,888 - pipeline_warby_parker_20250917_161322 - INFO - 📡 Executing Channel Intelligence Analysis...
+2025-09-17 16:19:50,371 - pipeline_warby_parker_20250917_161322 - INFO - 🎨 Extracting Visual Intelligence Metrics...
+2025-09-17 16:19:53,012 - pipeline_warby_parker_20250917_161322 - INFO - 🎯 Executing White Space Intelligence Analysis...
+2025-09-17 16:19:53,031 - pipeline_warby_parker_20250917_161322 - INFO - 🎯 Executing hybrid whitespace analysis (full dataset + campaign intelligence)...
+2025-09-17 16:20:05,931 - pipeline_warby_parker_20250917_161322 - INFO - ✅ Using Hybrid whitespace detector with campaign intelligence
+2025-09-17 16:20:05,931 - pipeline_warby_parker_20250917_161322 - INFO - 📊 Found 6 opportunities (6 campaign-ready)
+2025-09-17 16:20:05,931 - pipeline_warby_parker_20250917_161322 - INFO - ✅ Analysis completed in 12.9s - EXCELLENT
+2025-09-17 16:20:05,931 - pipeline_warby_parker_20250917_161322 - INFO - 📊 Generating Comprehensive Intelligence Summary...
+2025-09-17 16:20:09,369 - pipeline_warby_parker_20250917_161322 - INFO - ✅ Intelligence Analysis completed - 94.0% data completeness
+2025-09-17 16:20:09,370 - pipeline_warby_parker_20250917_161322 - INFO - Completed Multi-Dimensional Intelligence in 30.9s
+2025-09-17 16:20:09,370 - pipeline_warby_parker_20250917_161322 - INFO - Starting Enhanced Intelligence Output
+2025-09-17 16:20:09,381 - pipeline_warby_parker_20250917_161322 - INFO - Completed Enhanced Intelligence Output in 0.0s
