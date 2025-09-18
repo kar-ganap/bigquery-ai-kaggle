@@ -69,7 +69,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 'urgency_score': 0.58,
                 'brand_voice_score': 0.73,
                 'market_position': 'defensive',
-                'promotional_volatility': 0.12
+                'promotional_volatility': 0.12,
+                'avg_cta_aggressiveness': 4.2
             },
             influence={
                 'copying_detected': True,
@@ -134,7 +135,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                     'urgency_score': 0.0,
                     'brand_voice_score': 0.0,
                     'market_position': 'unknown',
-                    'promotional_volatility': 0.0
+                    'promotional_volatility': 0.0,
+                    'avg_cta_aggressiveness': 0.0
                 }
             
             # Step 3: Competitive Copying Detection
@@ -235,6 +237,34 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 """
                 
                 current_result = run_query(current_state_query)
+
+                # Query CTA aggressiveness from the CTA analysis table
+                cta_aggressiveness = 0.0
+                try:
+                    cta_query = f"""
+                    SELECT
+                        -- Calculate numeric CTA aggressiveness score (0-10 scale)
+                        CASE
+                            WHEN cta_adoption_rate = 0 THEN 0.0
+                            ELSE
+                                (high_urgency_ctas * 10.0 +
+                                 medium_engagement_ctas * 6.0 +
+                                 consultative_ctas * 4.0 +
+                                 low_pressure_ctas * 2.0) /
+                                GREATEST(ads_with_cta, 1)
+                        END as avg_cta_aggressiveness
+                    FROM `{BQ_PROJECT}.{BQ_DATASET}.cta_aggressiveness_analysis`
+                    WHERE brand = '{self.context.brand}'
+                    """
+                    cta_result = run_query(cta_query)
+                    if not cta_result.empty:
+                        cta_aggressiveness = float(cta_result.iloc[0].get('avg_cta_aggressiveness', 0.0))
+                        print(f"   🎯 CTA aggressiveness score: {cta_aggressiveness:.2f}/10")
+                    else:
+                        print("   ⚠️  No CTA data found, using default value")
+                except Exception as e:
+                    print(f"   ⚠️  CTA aggressiveness query failed: {e}")
+
                 if not current_result.empty:
                     row = current_result.iloc[0]
                     result = {
@@ -242,9 +272,10 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                         'urgency_score': float(row.get('avg_urgency_score', 0)),
                         'brand_voice_score': float(row.get('avg_brand_voice_score', 0)),
                         'market_position': row.get('market_position', 'unknown'),
-                        'promotional_volatility': float(row.get('promotional_volatility', 0))
+                        'promotional_volatility': float(row.get('promotional_volatility', 0)),
+                        'avg_cta_aggressiveness': cta_aggressiveness
                     }
-                    print(f"   📊 Analysis metrics found: PI={result['promotional_intensity']:.3f}, US={result['urgency_score']:.3f}, BV={result['brand_voice_score']:.3f}")
+                    print(f"   📊 Analysis metrics found: PI={result['promotional_intensity']:.3f}, US={result['urgency_score']:.3f}, BV={result['brand_voice_score']:.3f}, CTA={result['avg_cta_aggressiveness']:.2f}")
                     print(f"   🔍 DEBUG ANALYSIS: Returning current_state = {result}")
                     for key, value in result.items():
                         print(f"   🔍 DEBUG ANALYSIS: result['{key}'] = {value} (type: {type(value)})")
@@ -262,7 +293,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
             'urgency_score': 0.0,
             'brand_voice_score': 0.0,
             'market_position': 'unknown',
-            'promotional_volatility': 0.0
+            'promotional_volatility': 0.0,
+            'avg_cta_aggressiveness': 0.0
         }
     
     def _detect_copying_patterns(self, embeddings: EmbeddingResults) -> dict:
@@ -477,7 +509,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 'urgency_score': 0.0,
                 'brand_voice_score': 0.0,
                 'market_position': 'unknown',
-                'promotional_volatility': 0.0
+                'promotional_volatility': 0.0,
+                'avg_cta_aggressiveness': 0.0
             },
             influence={
                 'copying_detected': False,

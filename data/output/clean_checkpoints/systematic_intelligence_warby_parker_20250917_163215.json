@@ -1,0 +1,672 @@
+{
+  "brand": "Warby Parker",
+  "run_id": "warby_parker_20250917_163215",
+  "timestamp": 1758152577.810039,
+  "level_1": {
+    "executive_insights": [
+      "Competitive copying detected from EyeBuyDirect (similarity: 72.5%)",
+      "Creative text length optimization needed - content is too brief for engagement",
+      "Platform diversification opportunity - expand cross-platform presence to reduce risk",
+      "Low cross-platform presence - expand beyond single channel to reach broader audiences",
+      "Strong millennial focus detected - tailor messaging for digital-native preferences and lifestyle"
+    ],
+    "critical_metrics": {
+      "Competitive Intelligence_0": 0.7246791814160363,
+      "Creative Intelligence_1": 0,
+      "Channel Intelligence_2": 0.9400000000000001,
+      "Audience Intelligence_3": 0.0,
+      "Audience Intelligence_4": 85.26
+    },
+    "threat_level": "HIGH",
+    "confidence_score": 0.82,
+    "signal_count": 5,
+    "filtered_signals": 0
+  },
+  "level_2": {
+    "strategic_intelligence": {
+      "Competitive Intelligence": {
+        "insights": [
+          "Competitive copying detected from EyeBuyDirect (similarity: 72.5%)"
+        ],
+        "key_metrics": {
+          "competitive_intelligence_0": 0.7246791814160363
+        },
+        "confidence_avg": 0.9,
+        "business_impact_avg": 0.8,
+        "signal_count": 1
+      },
+      "CTA Intelligence": {
+        "insights": [
+          "High CTA aggressiveness (9.5/10) - consider moderation for brand trust"
+        ],
+        "key_metrics": {
+          "cta_intelligence_0": 9.47019867549669
+        },
+        "confidence_avg": 0.6,
+        "business_impact_avg": 0.5,
+        "signal_count": 1
+      },
+      "Creative Intelligence": {
+        "insights": [
+          "Creative text length optimization needed - content is too brief for engagement",
+          "Low brand mention frequency detected - increase brand presence in creative content",
+          "Limited emotional language detected - incorporate more engaging emotional keywords"
+        ],
+        "key_metrics": {
+          "creative_intelligence_0": 0,
+          "creative_intelligence_1": 0,
+          "creative_intelligence_2": 0
+        },
+        "confidence_avg": 0.7000000000000001,
+        "business_impact_avg": 0.7000000000000001,
+        "signal_count": 3
+      },
+      "Channel Intelligence": {
+        "insights": [
+          "Platform diversification opportunity - expand cross-platform presence to reduce risk",
+          "Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger",
+          "Platform-specific content optimization needed - tailor messaging for each channel's audience"
+        ],
+        "key_metrics": {
+          "channel_intelligence_0": 0.9400000000000001,
+          "channel_intelligence_1": 0.0,
+          "channel_intelligence_2": 0.0
+        },
+        "confidence_avg": 0.7000000000000001,
+        "business_impact_avg": 0.7000000000000001,
+        "signal_count": 3
+      },
+      "Audience Intelligence": {
+        "insights": [
+          "Low cross-platform presence - expand beyond single channel to reach broader audiences",
+          "Strong millennial focus detected - tailor messaging for digital-native preferences and lifestyle",
+          "Very long messaging detected - consider more concise communication for better engagement"
+        ],
+        "key_metrics": {
+          "audience_intelligence_0": 0.0,
+          "audience_intelligence_1": 85.26,
+          "audience_intelligence_2": 323.02
+        },
+        "confidence_avg": 0.7666666666666666,
+        "business_impact_avg": 0.6666666666666666,
+        "signal_count": 3
+      },
+      "Visual Intelligence": {
+        "insights": [
+          "Low visual differentiation detected - increase unique visual elements to stand out from competitors",
+          "Unclear visual demographic targeting - define target audience and align visual language accordingly",
+          "Balanced positioning - opportunity to differentiate through stronger visual identity"
+        ],
+        "key_metrics": {
+          "visual_intelligence_0": 0.40701754385964906
+        },
+        "confidence_avg": 0.6666666666666666,
+        "business_impact_avg": 0.7666666666666666,
+        "signal_count": 3
+      }
+    },
+    "cross_module_patterns": [
+      "Multi-module intelligence available from 6 sources",
+      "Consistent high-confidence insights across multiple intelligence modules",
+      "Creative and Channel intelligence provide complementary insights",
+      "Visual and Creative intelligence show multimodal consistency patterns",
+      "Multi-dimensional intelligence active: Creative, Channel, Visual modules provide comprehensive competitive analysis"
+    ],
+    "strategic_priorities": [
+      "Competitive Intelligence: Competitive copying detected from EyeBuyDirect (similarity: 72.5%)...",
+      "Creative Intelligence: Low brand mention frequency detected - increase brand presence in creative content...",
+      "Channel Intelligence: Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger..."
+    ],
+    "total_signals": 14,
+    "modules_active": 6
+  },
+  "level_3": {
+    "immediate_actions": [
+      {
+        "action": "Competitive copying detected from EyeBuyDirect (similarity: 72.5%)",
+        "rationale": "Based on Competitive Intelligence analysis",
+        "confidence": 0.9,
+        "business_impact": 0.8,
+        "actionability": 0.8,
+        "timeline": "Immediate (1-2 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "Competitive Intelligence",
+        "value": 0.7246791814160363,
+        "priority": "CRITICAL"
+      }
+    ],
+    "short_term_tactics": [
+      {
+        "action": "Creative text length optimization needed - content is too brief for engagement",
+        "rationale": "Based on Creative Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.7,
+        "actionability": 0.9,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Average creative text length",
+          "Content engagement rate"
+        ],
+        "source_module": "Creative Intelligence",
+        "value": 0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger",
+        "rationale": "Based on Channel Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.8,
+        "actionability": 0.9,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Cross-platform synergy rate",
+          "Multi-channel reach"
+        ],
+        "source_module": "Channel Intelligence",
+        "value": 0.0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Unclear visual demographic targeting - define target audience and align visual language accordingly",
+        "rationale": "Based on Visual Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.8,
+        "actionability": 0.9,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Visual intelligence score",
+          "Multimodal effectiveness"
+        ],
+        "source_module": "Visual Intelligence",
+        "value": "{'demographic': 'undefined', 'confidence': 0}",
+        "priority": "HIGH"
+      },
+      {
+        "action": "Low brand mention frequency detected - increase brand presence in creative content",
+        "rationale": "Based on Creative Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.8,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Creative performance score",
+          "Brand message consistency"
+        ],
+        "source_module": "Creative Intelligence",
+        "value": 0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Platform diversification opportunity - expand cross-platform presence to reduce risk",
+        "rationale": "Based on Channel Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.7,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Cross-platform synergy rate",
+          "Multi-channel reach"
+        ],
+        "source_module": "Channel Intelligence",
+        "value": 0.9400000000000001,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Low cross-platform presence - expand beyond single channel to reach broader audiences",
+        "rationale": "Based on Audience Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.7,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "Audience Intelligence",
+        "value": 0.0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Very long messaging detected - consider more concise communication for better engagement",
+        "rationale": "Based on Audience Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.6,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "Audience Intelligence",
+        "value": 323.02,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Strong millennial focus detected - tailor messaging for digital-native preferences and lifestyle",
+        "rationale": "Based on Audience Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.7,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "Audience Intelligence",
+        "value": 85.26,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Low visual differentiation detected - increase unique visual elements to stand out from competitors",
+        "rationale": "Based on Visual Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.8,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Visual differentiation score",
+          "Competitive advantage index"
+        ],
+        "source_module": "Visual Intelligence",
+        "value": 0.40701754385964906,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Limited emotional language detected - incorporate more engaging emotional keywords",
+        "rationale": "Based on Creative Intelligence analysis",
+        "confidence": 0.6,
+        "business_impact": 0.6,
+        "actionability": 0.7,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Emotional keyword usage rate",
+          "Brand sentiment score"
+        ],
+        "source_module": "Creative Intelligence",
+        "value": 0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Platform-specific content optimization needed - tailor messaging for each channel's audience",
+        "rationale": "Based on Channel Intelligence analysis",
+        "confidence": 0.6,
+        "business_impact": 0.6,
+        "actionability": 0.7,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Channel efficiency score",
+          "Platform optimization rate"
+        ],
+        "source_module": "Channel Intelligence",
+        "value": 0.0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Balanced positioning - opportunity to differentiate through stronger visual identity",
+        "rationale": "Based on Visual Intelligence analysis",
+        "confidence": 0.6,
+        "business_impact": 0.7,
+        "actionability": 0.7,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Competitive positioning score",
+          "Market differentiation rate"
+        ],
+        "source_module": "Visual Intelligence",
+        "value": "{'quadrant': 'Mid-Balanced', 'luxury': 0.2833333333333334, 'boldness': 0.4508771929824561}",
+        "priority": "HIGH"
+      }
+    ],
+    "monitoring_actions": [
+      {
+        "action": "High CTA aggressiveness (9.5/10) - consider moderation for brand trust",
+        "rationale": "Based on CTA Intelligence analysis",
+        "confidence": 0.6,
+        "business_impact": 0.5,
+        "actionability": 0.6,
+        "timeline": "Medium-term (4-8 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "CTA Intelligence",
+        "value": 9.47019867549669,
+        "priority": "MEDIUM"
+      },
+      {
+        "action": "Content density optimization opportunity - enrich creative messaging",
+        "rationale": "Based on Creative Intelligence analysis",
+        "confidence": 0.5,
+        "business_impact": 0.5,
+        "actionability": 0.6,
+        "timeline": "Medium-term (4-8 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Creative performance score",
+          "Brand message consistency"
+        ],
+        "source_module": "Creative Intelligence",
+        "value": 0,
+        "priority": "MEDIUM"
+      }
+    ],
+    "intervention_summary": {
+      "total_interventions": 15,
+      "immediate_count": 1,
+      "short_term_count": 12,
+      "monitoring_count": 2,
+      "avg_confidence": 0.6999999999999998,
+      "avg_actionability": 0.7733333333333334
+    }
+  },
+  "level_4": {
+    "bigquery_project": "bigquery-ai-kaggle-469620",
+    "bigquery_dataset": "ads_demo",
+    "dashboard_queries": {
+      "channel_intelligence_analysis": "\n            -- Channel Intelligence Dashboard\n            WITH channel_metrics AS (\n              SELECT\n                brand,\n                publisher_platforms,\n                COUNT(*) as ad_count,\n                COUNT(DISTINCT ad_archive_id) as unique_campaigns,\n                AVG(CASE WHEN publisher_platforms LIKE '%,%' THEN 1.0 ELSE 0.0 END) as cross_platform_rate,\n                -- P2 Enhancement metrics\n                AVG(CASE\n                  WHEN REGEXP_CONTAINS(publisher_platforms, 'Facebook') AND\n                       REGEXP_CONTAINS(publisher_platforms, 'Instagram') AND\n                       REGEXP_CONTAINS(publisher_platforms, 'Messenger') THEN 3\n                  WHEN REGEXP_CONTAINS(publisher_platforms, 'Facebook') AND\n                       REGEXP_CONTAINS(publisher_platforms, 'Instagram') THEN 2\n                  WHEN publisher_platforms LIKE '%,%' THEN 1\n                  ELSE 0\n                END) as platform_diversification_score\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              GROUP BY brand, publisher_platforms\n            )\n            SELECT\n              brand,\n              publisher_platforms,\n              ad_count,\n              unique_campaigns,\n              ROUND(cross_platform_rate * 100, 1) as cross_platform_pct,\n              ROUND(platform_diversification_score, 1) as diversification_score\n            FROM channel_metrics\n            ORDER BY ad_count DESC\n            ",
+      "competitive_intelligence_analysis": "\n            -- General Intelligence Dashboard\n            WITH general_metrics AS (\n              SELECT\n                brand,\n                COUNT(*) as total_signals,\n                COUNT(DISTINCT DATE(start_timestamp)) as active_days,\n                MIN(start_timestamp) as first_seen,\n                MAX(start_timestamp) as last_seen,\n                AVG(LENGTH(COALESCE(creative_text, ''))) as avg_content_length,\n                COUNT(DISTINCT publisher_platforms) as platform_count\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              total_signals,\n              active_days,\n              first_seen,\n              last_seen,\n              ROUND(avg_content_length, 1) as avg_content_length,\n              platform_count,\n              ROUND(total_signals / GREATEST(active_days, 1), 2) as signals_per_day\n            FROM general_metrics\n            ORDER BY total_signals DESC\n            ",
+      "creative_intelligence_analysis": "\n            -- Creative Intelligence Dashboard\n            WITH creative_metrics AS (\n              SELECT \n                brand,\n                COUNT(*) as total_ads,\n                AVG(LENGTH(COALESCE(creative_text, ''))) as avg_creative_length,\n                COUNT(DISTINCT REGEXP_EXTRACT(creative_text, r'\\b(\\w+)\\b')) as unique_words,\n                SUM(CASE WHEN creative_text LIKE '%!%' THEN 1 ELSE 0 END) as exclamation_ads,\n                AVG(CASE WHEN LENGTH(creative_text) > 100 THEN 1.0 ELSE 0.0 END) as long_form_rate,\n                -- P2 Enhancement metrics\n                AVG(CASE \n                  WHEN LENGTH(COALESCE(creative_text, '')) > 150 THEN 3\n                  WHEN LENGTH(COALESCE(creative_text, '')) > 75 THEN 2\n                  ELSE 1\n                END) as text_length_score,\n                AVG(\n                  (LENGTH(UPPER(COALESCE(creative_text, ''))) - LENGTH(REPLACE(UPPER(COALESCE(creative_text, '')), brand, ''))) / \n                  GREATEST(LENGTH(brand), 1)\n                ) as brand_mention_density\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              WHERE creative_text IS NOT NULL\n              GROUP BY brand\n            )\n            SELECT \n              brand,\n              total_ads,\n              ROUND(avg_creative_length, 1) as avg_creative_length,\n              unique_words,\n              exclamation_ads,\n              ROUND(long_form_rate * 100, 1) as long_form_pct,\n              ROUND(text_length_score, 2) as text_optimization_score,\n              ROUND(brand_mention_density, 3) as brand_mention_density\n            FROM creative_metrics\n            ORDER BY total_ads DESC\n            ",
+      "audience_intelligence_analysis": "\n            -- General Intelligence Dashboard\n            WITH general_metrics AS (\n              SELECT\n                brand,\n                COUNT(*) as total_signals,\n                COUNT(DISTINCT DATE(start_timestamp)) as active_days,\n                MIN(start_timestamp) as first_seen,\n                MAX(start_timestamp) as last_seen,\n                AVG(LENGTH(COALESCE(creative_text, ''))) as avg_content_length,\n                COUNT(DISTINCT publisher_platforms) as platform_count\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              total_signals,\n              active_days,\n              first_seen,\n              last_seen,\n              ROUND(avg_content_length, 1) as avg_content_length,\n              platform_count,\n              ROUND(total_signals / GREATEST(active_days, 1), 2) as signals_per_day\n            FROM general_metrics\n            ORDER BY total_signals DESC\n            ",
+      "visual_intelligence_analysis": "\n            -- Visual Intelligence Dashboard\n            WITH visual_metrics AS (\n              SELECT\n                brand,\n                COUNT(*) as total_visual_ads,\n                AVG(visual_text_alignment_score) as avg_visual_alignment,\n                AVG(brand_consistency_score) as avg_brand_consistency,\n                AVG(luxury_positioning_score) as avg_luxury_position,\n                AVG(boldness_score) as avg_boldness,\n                AVG(visual_differentiation_level) as avg_differentiation,\n                AVG(creative_pattern_risk) as avg_pattern_risk,\n                STRING_AGG(DISTINCT target_demographic, ', ') as target_demographics,\n                -- Positioning quadrant classification\n                CASE\n                  WHEN AVG(luxury_positioning_score) > 0.7 AND AVG(boldness_score) > 0.7 THEN 'Luxury-Bold'\n                  WHEN AVG(luxury_positioning_score) > 0.7 AND AVG(boldness_score) < 0.4 THEN 'Luxury-Subtle'\n                  WHEN AVG(luxury_positioning_score) < 0.4 AND AVG(boldness_score) > 0.7 THEN 'Accessible-Bold'\n                  ELSE 'Mid-Balanced'\n                END as positioning_quadrant,\n                -- Visual health score\n                (AVG(visual_text_alignment_score) * 0.3 +\n                 AVG(brand_consistency_score) * 0.3 +\n                 AVG(visual_differentiation_level) * 0.2 +\n                 (1 - AVG(creative_pattern_risk)) * 0.2) as visual_health_score\n              FROM (\n                SELECT * FROM `bigquery-ai-kaggle-469620.ads_demo.visual_intelligence_*`\n                WHERE luxury_positioning_score IS NOT NULL\n              )\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              total_visual_ads,\n              ROUND(avg_visual_alignment, 3) as visual_alignment_score,\n              ROUND(avg_brand_consistency, 3) as brand_consistency_score,\n              ROUND(avg_luxury_position, 3) as luxury_positioning,\n              ROUND(avg_boldness, 3) as boldness_score,\n              ROUND(avg_differentiation, 3) as differentiation_level,\n              ROUND(avg_pattern_risk, 3) as fatigue_risk,\n              target_demographics,\n              positioning_quadrant,\n              ROUND(visual_health_score, 3) as overall_visual_health\n            FROM visual_metrics\n            ORDER BY total_visual_ads DESC\n            ",
+      "cta_intelligence_analysis": "\n            -- General Intelligence Dashboard\n            WITH general_metrics AS (\n              SELECT\n                brand,\n                COUNT(*) as total_signals,\n                COUNT(DISTINCT DATE(start_timestamp)) as active_days,\n                MIN(start_timestamp) as first_seen,\n                MAX(start_timestamp) as last_seen,\n                AVG(LENGTH(COALESCE(creative_text, ''))) as avg_content_length,\n                COUNT(DISTINCT publisher_platforms) as platform_count\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              total_signals,\n              active_days,\n              first_seen,\n              last_seen,\n              ROUND(avg_content_length, 1) as avg_content_length,\n              platform_count,\n              ROUND(total_signals / GREATEST(active_days, 1), 2) as signals_per_day\n            FROM general_metrics\n            ORDER BY total_signals DESC\n            "
+    },
+    "signal_explorer_query": "\n        -- Intelligence Signal Explorer\n        WITH signal_metadata AS (\n            \n            SELECT \n                'Competitive Intelligence' as module,\n                'Competitive copying detected from EyeBuyDirect (similarity: 72.5%)...' as insight_preview,\n                0.9 as confidence,\n                0.8 as business_impact,\n                'CRITICAL' as strength UNION ALL \n            SELECT \n                'CTA Intelligence' as module,\n                'High CTA aggressiveness (9.5/10) - consider moderation for brand trust...' as insight_preview,\n                0.6 as confidence,\n                0.5 as business_impact,\n                'MEDIUM' as strength UNION ALL \n            SELECT \n                'Creative Intelligence' as module,\n                'Creative text length optimization needed - content is too brief for engagement...' as insight_preview,\n                0.8 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Creative Intelligence' as module,\n                'Low brand mention frequency detected - increase brand presence in creative content...' as insight_preview,\n                0.7 as confidence,\n                0.8 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Creative Intelligence' as module,\n                'Limited emotional language detected - incorporate more engaging emotional keywords...' as insight_preview,\n                0.6 as confidence,\n                0.6 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Creative Intelligence' as module,\n                'Content density optimization opportunity - enrich creative messaging...' as insight_preview,\n                0.5 as confidence,\n                0.5 as business_impact,\n                'MEDIUM' as strength UNION ALL \n            SELECT \n                'Channel Intelligence' as module,\n                'Platform diversification opportunity - expand cross-platform presence to reduce risk...' as insight_preview,\n                0.8 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Channel Intelligence' as module,\n                'Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger...' as insight_preview,\n                0.7 as confidence,\n                0.8 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Channel Intelligence' as module,\n                'Platform-specific content optimization needed - tailor messaging for each channel''s audience...' as insight_preview,\n                0.6 as confidence,\n                0.6 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Audience Intelligence' as module,\n                'Low cross-platform presence - expand beyond single channel to reach broader audiences...' as insight_preview,\n                0.8 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Audience Intelligence' as module,\n                'Very long messaging detected - consider more concise communication for better engagement...' as insight_preview,\n                0.7 as confidence,\n                0.6 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Audience Intelligence' as module,\n                'Strong millennial focus detected - tailor messaging for digital-native preferences and lifestyle...' as insight_preview,\n                0.8 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Visual Intelligence' as module,\n                'Balanced positioning - opportunity to differentiate through stronger visual identity...' as insight_preview,\n                0.6 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Visual Intelligence' as module,\n                'Low visual differentiation detected - increase unique visual elements to stand out from competitors...' as insight_preview,\n                0.7 as confidence,\n                0.8 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Visual Intelligence' as module,\n                'Unclear visual demographic targeting - define target audience and align visual language accordingly...' as insight_preview,\n                0.7 as confidence,\n                0.8 as business_impact,\n                'HIGH' as strength\n        )\n        SELECT \n            module,\n            COUNT(*) as signal_count,\n            ROUND(AVG(confidence), 3) as avg_confidence,\n            ROUND(AVG(business_impact), 3) as avg_business_impact,\n            COUNT(CASE WHEN strength = 'CRITICAL' THEN 1 END) as critical_signals,\n            COUNT(CASE WHEN strength = 'HIGH' THEN 1 END) as high_signals\n        FROM signal_metadata  \n        GROUP BY module\n        ORDER BY signal_count DESC\n        ",
+    "confidence_analysis_query": "\n        -- Confidence Analysis Across Data Sources\n        SELECT\n            brand,\n            COUNT(*) as total_data_points,\n            COUNT(CASE WHEN creative_text IS NOT NULL AND LENGTH(creative_text) > 10 THEN 1 END) as creative_data_points,\n            COUNT(CASE WHEN publisher_platforms IS NOT NULL THEN 1 END) as channel_data_points,\n            ROUND(COUNT(CASE WHEN creative_text IS NOT NULL AND LENGTH(creative_text) > 10 THEN 1 END) * 100.0 / COUNT(*), 2) as creative_coverage_pct,\n            ROUND(COUNT(CASE WHEN publisher_platforms IS NOT NULL THEN 1 END) * 100.0 / COUNT(*), 2) as channel_coverage_pct,\n            -- Data quality indicators\n            AVG(LENGTH(COALESCE(creative_text, ''))) as avg_text_richness,\n            COUNT(DISTINCT publisher_platforms) as platform_diversity,\n            ROUND((COUNT(CASE WHEN creative_text IS NOT NULL AND LENGTH(creative_text) > 10 THEN 1 END) + \n                   COUNT(CASE WHEN publisher_platforms IS NOT NULL THEN 1 END)) / (COUNT(*) * 2.0) * 100, 1) as overall_data_quality_score\n        FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n        GROUP BY brand\n        ORDER BY total_data_points DESC\n        ",
+    "module_performance_metrics": {
+      "Channel Intelligence": {
+        "signal_count": 3,
+        "avg_confidence": 0.7000000000000001,
+        "avg_business_impact": 0.7000000000000001
+      },
+      "Competitive Intelligence": {
+        "signal_count": 1,
+        "avg_confidence": 0.9,
+        "avg_business_impact": 0.8
+      },
+      "Creative Intelligence": {
+        "signal_count": 4,
+        "avg_confidence": 0.65,
+        "avg_business_impact": 0.65
+      },
+      "Audience Intelligence": {
+        "signal_count": 3,
+        "avg_confidence": 0.7666666666666666,
+        "avg_business_impact": 0.6666666666666666
+      },
+      "Visual Intelligence": {
+        "signal_count": 3,
+        "avg_confidence": 0.6666666666666666,
+        "avg_business_impact": 0.7666666666666666
+      },
+      "CTA Intelligence": {
+        "signal_count": 1,
+        "avg_confidence": 0.6,
+        "avg_business_impact": 0.5
+      }
+    },
+    "total_signals": 15,
+    "filtered_noise_count": 0
+  },
+  "whitespace_intelligence": {
+    "status": "success",
+    "opportunities_found": 6,
+    "top_opportunities": [
+      "MONOPOLY opportunity targeting Returning Customers with EMOTIONAL messaging in RETENTION stage",
+      "VIRGIN_TERRITORY opportunity targeting Hearing Impaired with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "VIRGIN_TERRITORY opportunity targeting New Customers with PROBLEM_SOLUTION messaging in CONSIDERATION stage"
+    ],
+    "strategic_opportunities": [
+      {
+        "space_type": "MONOPOLY",
+        "messaging_angle": "EMOTIONAL",
+        "funnel_stage": "RETENTION",
+        "target_persona": "Returning Customers",
+        "overall_score": 0.385,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 1.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "Your perfect pair is still waiting...",
+          "value_propositions": "Increase sales by targeting abandoned cart users and offering a special discount to encourage them to complete their purchase.",
+          "recommended_ctas": "Shop Now",
+          "channel_focus": "Email",
+          "audience_sizing": "Small (50K-100K)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Email",
+        "success_metrics": "Recovered Cart Rate >10%, Repeat Purchase Rate +5%",
+        "timeline": "Launch in 3-4 weeks (campaign optimization)",
+        "strategic_summary": "MONOPOLY opportunity targeting Returning Customers with EMOTIONAL messaging in RETENTION stage",
+        "confidence_level": "LOW"
+      },
+      {
+        "space_type": "VIRGIN_TERRITORY",
+        "messaging_angle": "PROBLEM_SOLUTION",
+        "funnel_stage": "CONSIDERATION",
+        "target_persona": "Hearing Impaired",
+        "overall_score": 0.315,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 2.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "Invisible Hearing is Here: Experience Nuance Audio at LensCrafters",
+          "value_propositions": "Discreetly improve your hearing with stylish audio glasses that blend seamlessly into your everyday life.",
+          "recommended_ctas": "Book Now",
+          "channel_focus": "Facebook",
+          "audience_sizing": "Medium (100K-500K)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+        "success_metrics": "Booked Demo Conversion Rate > 5%, Learn More CTR > 1%, Nuance Audio sales +15%",
+        "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+        "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Hearing Impaired with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+        "confidence_level": "LOW"
+      },
+      {
+        "space_type": "VIRGIN_TERRITORY",
+        "messaging_angle": "PROBLEM_SOLUTION",
+        "funnel_stage": "CONSIDERATION",
+        "target_persona": "New Customers",
+        "overall_score": 0.315,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 2.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "Struggling to find the perfect frames? Take our quick quiz and we'll find frames that fit your face and style.",
+          "value_propositions": "Simplify your eyewear search with our personalized frame finder. Get tailored recommendations and discover your ideal style.",
+          "recommended_ctas": "Take our quiz & find your perfect frames!",
+          "channel_focus": "Cross-platform",
+          "audience_sizing": "Large (500K+)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+        "success_metrics": "Quiz Completion Rate >50%, CPA <$60, Lead Generation +15%",
+        "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+        "strategic_summary": "VIRGIN_TERRITORY opportunity targeting New Customers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+        "confidence_level": "LOW"
+      },
+      {
+        "space_type": "VIRGIN_TERRITORY",
+        "messaging_angle": "PROBLEM_SOLUTION",
+        "funnel_stage": "CONSIDERATION",
+        "target_persona": "First Time Buyers",
+        "overall_score": 0.315,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 2.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "Confused About Eyewear? [Collection Name] Makes it Easy",
+          "value_propositions": "Simplify your eyewear selection process. Our balanced collection offers flattering shapes and versatile colors that work for everyone, making it easy to find the perfect frames.",
+          "recommended_ctas": "Find Your Style",
+          "channel_focus": "Blog, Facebook, Pinterest",
+          "audience_sizing": "Medium (100K-500K)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+        "success_metrics": "CTR >1.2%, Website Engagement (Time on Page) +15%",
+        "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+        "strategic_summary": "VIRGIN_TERRITORY opportunity targeting First Time Buyers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+        "confidence_level": "LOW"
+      },
+      {
+        "space_type": "MONOPOLY",
+        "messaging_angle": "PROBLEM_SOLUTION",
+        "funnel_stage": "CONSIDERATION",
+        "target_persona": "Practical Shoppers",
+        "overall_score": 0.315,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 2.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "Tired of [Specific Vision Problem]? Get Glasses with [Solution Feature] for Less!",
+          "value_propositions": "Address specific vision-related problems and offer GlassesUSA's affordable solutions with features like Transitions lenses.",
+          "recommended_ctas": "Shop Now",
+          "channel_focus": "Facebook",
+          "audience_sizing": "Medium (100K-500K)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+        "success_metrics": "CTR >1.5%, CPA <$40, Conversion Rate +0.5%",
+        "timeline": "Launch in 3-4 weeks (campaign optimization)",
+        "strategic_summary": "MONOPOLY opportunity targeting Practical Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+        "confidence_level": "LOW"
+      },
+      {
+        "space_type": "VIRGIN_TERRITORY",
+        "messaging_angle": "SOCIAL_PROOF",
+        "funnel_stage": "CONSIDERATION",
+        "target_persona": "Trust-Seeking Shoppers",
+        "overall_score": 0.315,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 2.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "Shop With Confidence! 14-Day Free Returns Make Shopping Worry-Free.  Try Risk-Free: 14-Day Free Returns at EyeBuyDirect. Love Them or Return Them: Free Returns on All Orders",
+          "value_propositions": "Remove purchase anxiety with 14-day free returns, enabling confident shopping and encouraging consumers to try new styles.",
+          "recommended_ctas": "Shop Now",
+          "channel_focus": "Cross-platform|Website",
+          "audience_sizing": "Large (500K+)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+        "success_metrics": "Conversion Rate +2%, Return Rate <5%, Positive customer reviews +15%",
+        "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+        "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trust-Seeking Shoppers with SOCIAL_PROOF messaging in CONSIDERATION stage",
+        "confidence_level": "LOW"
+      }
+    ],
+    "analysis_summary": "Parallel analysis found 6 strategic opportunities",
+    "strategic_recommendations": [
+      {
+        "space_type": "MONOPOLY",
+        "messaging_angle": "EMOTIONAL",
+        "funnel_stage": "RETENTION",
+        "target_persona": "Returning Customers",
+        "overall_score": 0.385,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 1.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "Your perfect pair is still waiting...",
+          "value_propositions": "Increase sales by targeting abandoned cart users and offering a special discount to encourage them to complete their purchase.",
+          "recommended_ctas": "Shop Now",
+          "channel_focus": "Email",
+          "audience_sizing": "Small (50K-100K)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Email",
+        "success_metrics": "Recovered Cart Rate >10%, Repeat Purchase Rate +5%",
+        "timeline": "Launch in 3-4 weeks (campaign optimization)",
+        "strategic_summary": "MONOPOLY opportunity targeting Returning Customers with EMOTIONAL messaging in RETENTION stage",
+        "confidence_level": "LOW"
+      },
+      {
+        "space_type": "VIRGIN_TERRITORY",
+        "messaging_angle": "PROBLEM_SOLUTION",
+        "funnel_stage": "CONSIDERATION",
+        "target_persona": "Hearing Impaired",
+        "overall_score": 0.315,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 2.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "Invisible Hearing is Here: Experience Nuance Audio at LensCrafters",
+          "value_propositions": "Discreetly improve your hearing with stylish audio glasses that blend seamlessly into your everyday life.",
+          "recommended_ctas": "Book Now",
+          "channel_focus": "Facebook",
+          "audience_sizing": "Medium (100K-500K)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+        "success_metrics": "Booked Demo Conversion Rate > 5%, Learn More CTR > 1%, Nuance Audio sales +15%",
+        "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+        "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Hearing Impaired with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+        "confidence_level": "LOW"
+      },
+      {
+        "space_type": "VIRGIN_TERRITORY",
+        "messaging_angle": "PROBLEM_SOLUTION",
+        "funnel_stage": "CONSIDERATION",
+        "target_persona": "New Customers",
+        "overall_score": 0.315,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 2.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "Struggling to find the perfect frames? Take our quick quiz and we'll find frames that fit your face and style.",
+          "value_propositions": "Simplify your eyewear search with our personalized frame finder. Get tailored recommendations and discover your ideal style.",
+          "recommended_ctas": "Take our quiz & find your perfect frames!",
+          "channel_focus": "Cross-platform",
+          "audience_sizing": "Large (500K+)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+        "success_metrics": "Quiz Completion Rate >50%, CPA <$60, Lead Generation +15%",
+        "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+        "strategic_summary": "VIRGIN_TERRITORY opportunity targeting New Customers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+        "confidence_level": "LOW"
+      }
+    ],
+    "performance_metrics": {
+      "duration_seconds": 13.286608,
+      "coverage": "FULL_DATASET",
+      "approach": "hybrid_chunked_enhanced",
+      "white_space_opportunities": 0
+    },
+    "data_quality": "high",
+    "competitive_gaps_detected": true,
+    "run_metadata": {
+      "run_id": "warby_parker_20250917_163215",
+      "brands_analyzed": 5,
+      "detection_method": "parallel_chunked_processing",
+      "target_met": true,
+      "intelligence_level": "STRATEGIC_DISCOVERY"
+    }
+  }
+}

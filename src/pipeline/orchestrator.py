@@ -66,7 +66,7 @@ class CompetitiveIntelligencePipeline:
         self._setup_logging()
         
         # Initialize progress tracker
-        self.progress = ProgressTracker(total_stages=10)  # Updated for Stage 6.5 Visual Intelligence
+        self.progress = ProgressTracker(total_stages=10)  # 10 stages total (1-10)
         
         # Stage timings
         self.stage_timings = {}
@@ -143,27 +143,29 @@ class CompetitiveIntelligencePipeline:
             embeddings_results = embeddings_stage.run(ingestion_results, self.progress)
             print(f"✅ Stage 6 complete - Generated {embeddings_results.embedding_count} embeddings")
 
-            # Stage 6.5: Visual Intelligence (Phase 3)
+            # Stage 7: Visual Intelligence
             visual_intel_stage = VisualIntelligenceStage(self.context, self.dry_run)
             visual_intel_results = visual_intel_stage.run(embeddings_results, self.progress)
-            print(f"✅ Stage 6.5 complete - Visual intelligence: {visual_intel_results.sampled_ads} ads analyzed, ${visual_intel_results.cost_estimate:.2f}")
+            print(f"✅ Stage 7 complete - Visual intelligence: {visual_intel_results.sampled_ads} ads analyzed, ${visual_intel_results.cost_estimate:.2f}")
 
-            # Stage 7: Strategic Analysis
+            # Stage 8: Strategic Analysis
             analysis_stage = AnalysisStage(self.context, self.dry_run, self.verbose)
             analysis_results = analysis_stage.run(embeddings_results, self.progress)
-            print(f"✅ Stage 7 complete - Strategic analysis complete")
+            print(f"✅ Stage 8 complete - Strategic analysis complete")
             
-            # Stage 8: Multi-Dimensional Intelligence
-            multidim_intel_stage = MultiDimensionalIntelligenceStage("Multi-Dimensional Intelligence", 8, self.run_id)
+            # Stage 9: Multi-Dimensional Intelligence
+            multidim_intel_stage = MultiDimensionalIntelligenceStage("Multi-Dimensional Intelligence", 9, self.run_id)
             # Pass competitor brands to the stage for proper analysis
             multidim_intel_stage.competitor_brands = self.context.competitor_brands + [self.context.brand]
+            # Pass Visual Intelligence results to the stage for L1-L4 integration
+            multidim_intel_stage.visual_intelligence_results = visual_intel_results.__dict__ if visual_intel_results else {}
             multidim_intel_results = multidim_intel_stage.run(analysis_results, self.progress)
-            print(f"✅ Stage 8 complete - Multi-dimensional intelligence analysis complete")
+            print(f"✅ Stage 9 complete - Multi-dimensional intelligence analysis complete")
             
-            # Stage 9: Intelligence Output
+            # Stage 10: Intelligence Output
             output_stage = EnhancedOutputStage(self.context, self.dry_run, self.verbose)
             intelligence_output = output_stage.run(multidim_intel_results, self.progress)
-            print(f"✅ Stage 9 complete - Intelligence output generated")
+            print(f"✅ Stage 10 complete - Intelligence output generated")
             
             # Success!
             duration = time.time() - start_time

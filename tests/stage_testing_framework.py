@@ -26,9 +26,10 @@ from src.pipeline.stages.ranking import RankingStage
 from src.pipeline.stages.ingestion import IngestionStage
 from src.pipeline.stages.strategic_labeling import StrategicLabelingStage
 from src.pipeline.stages.embeddings import EmbeddingsStage
+from src.pipeline.stages.visual_intelligence import VisualIntelligenceStage
 from src.pipeline.stages.analysis import AnalysisStage
 from src.pipeline.stages.multidimensional_intelligence import MultiDimensionalIntelligenceStage
-from src.pipeline.stages.output import OutputStage
+from src.pipeline.stages.enhanced_output import EnhancedOutputStage
 
 
 class StageTestingFramework:
@@ -47,7 +48,7 @@ class StageTestingFramework:
         
         # Initialize context
         self.context = PipelineContext(brand, vertical, self.test_id, verbose=True)
-        self.progress = ProgressTracker(total_stages=9)
+        self.progress = ProgressTracker(total_stages=10)
         
         # Stage results cache
         self.stage_results = {}
@@ -333,7 +334,246 @@ class StageTestingFramework:
             import traceback
             traceback.print_exc()
             return None
-    
+
+    def test_stage_5_strategic_labeling(self, ingestion_results = None, force_run: bool = False):
+        """Test Stage 5: Strategic Labeling independently"""
+        print("🏷️  TESTING STAGE 5: STRATEGIC LABELING")
+        print("-" * 40)
+
+        # Load input data
+        if ingestion_results is None:
+            ingestion_results = self.load_stage_result(4, "ingestion")
+            if not ingestion_results:
+                print("❌ No ingestion results available. Run Stage 4 first.")
+                return None
+
+        # Check for cached result
+        if not force_run:
+            cached = self.load_stage_result(5, "strategic_labeling")
+            if cached:
+                print("✅ Using cached Strategic Labeling results")
+                return cached
+
+        # Initialize and run strategic labeling stage
+        start_time = time.time()
+        strategic_stage = StrategicLabelingStage(self.context, dry_run=False, verbose=True)
+
+        try:
+            strategic_results = strategic_stage.run(ingestion_results, self.progress)
+            duration = time.time() - start_time
+
+            # Save results with full traceability
+            self.save_stage_result("Strategic Labeling", 5, ingestion_results, strategic_results, duration)
+
+            print(f"✅ Stage 5 Complete - Generated strategic labels for {strategic_results.labeled_ads} ads")
+            return strategic_results
+
+        except Exception as e:
+            print(f"❌ Stage 5 Failed: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return None
+
+    def test_stage_6_embeddings(self, ingestion_results = None, force_run: bool = False):
+        """Test Stage 6: Embeddings Generation independently"""
+        print("🔢 TESTING STAGE 6: EMBEDDINGS GENERATION")
+        print("-" * 40)
+
+        # Load input data
+        if ingestion_results is None:
+            ingestion_results = self.load_stage_result(4, "ingestion")
+            if not ingestion_results:
+                print("❌ No ingestion results available. Run Stage 4 first.")
+                return None
+
+        # Check for cached result
+        if not force_run:
+            cached = self.load_stage_result(6, "embeddings")
+            if cached:
+                print("✅ Using cached Embeddings results")
+                return cached
+
+        # Initialize and run embeddings stage
+        start_time = time.time()
+        embeddings_stage = EmbeddingsStage(self.context, dry_run=False, verbose=True)
+
+        try:
+            embeddings_results = embeddings_stage.run(ingestion_results, self.progress)
+            duration = time.time() - start_time
+
+            # Save results with full traceability
+            self.save_stage_result("Embeddings", 6, ingestion_results, embeddings_results, duration)
+
+            print(f"✅ Stage 6 Complete - Generated {embeddings_results.embedding_count} embeddings")
+            return embeddings_results
+
+        except Exception as e:
+            print(f"❌ Stage 6 Failed: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return None
+
+    def test_stage_7_visual_intelligence(self, embeddings_results = None, force_run: bool = False):
+        """Test Stage 7: Visual Intelligence independently"""
+        print("👁️  TESTING STAGE 7: VISUAL INTELLIGENCE")
+        print("-" * 40)
+
+        # Load input data
+        if embeddings_results is None:
+            embeddings_results = self.load_stage_result(6, "embeddings")
+            if not embeddings_results:
+                print("❌ No embeddings results available. Run Stage 6 first.")
+                return None
+
+        # Check for cached result
+        if not force_run:
+            cached = self.load_stage_result(7, "visual_intelligence")
+            if cached:
+                print("✅ Using cached Visual Intelligence results")
+                return cached
+
+        # Initialize and run visual intelligence stage
+        start_time = time.time()
+        visual_stage = VisualIntelligenceStage(self.context, dry_run=False)
+
+        try:
+            visual_results = visual_stage.run(embeddings_results, self.progress)
+            duration = time.time() - start_time
+
+            # Save results with full traceability
+            self.save_stage_result("Visual Intelligence", 7, embeddings_results, visual_results, duration)
+
+            print(f"✅ Stage 7 Complete - Visual intelligence: {visual_results.sampled_ads} ads analyzed, ${visual_results.cost_estimate:.2f}")
+            return visual_results
+
+        except Exception as e:
+            print(f"❌ Stage 7 Failed: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return None
+
+    def test_stage_8_analysis(self, embeddings_results = None, force_run: bool = False):
+        """Test Stage 8: Strategic Analysis independently"""
+        print("📈 TESTING STAGE 8: STRATEGIC ANALYSIS")
+        print("-" * 40)
+
+        # Load input data
+        if embeddings_results is None:
+            embeddings_results = self.load_stage_result(6, "embeddings")
+            if not embeddings_results:
+                print("❌ No embeddings results available. Run Stage 6 first.")
+                return None
+
+        # Check for cached result
+        if not force_run:
+            cached = self.load_stage_result(8, "analysis")
+            if cached:
+                print("✅ Using cached Analysis results")
+                return cached
+
+        # Initialize and run analysis stage
+        start_time = time.time()
+        analysis_stage = AnalysisStage(self.context, dry_run=False, verbose=True)
+
+        try:
+            analysis_results = analysis_stage.run(embeddings_results, self.progress)
+            duration = time.time() - start_time
+
+            # Save results with full traceability
+            self.save_stage_result("Analysis", 8, embeddings_results, analysis_results, duration)
+
+            print(f"✅ Stage 8 Complete - Strategic analysis complete")
+            return analysis_results
+
+        except Exception as e:
+            print(f"❌ Stage 8 Failed: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return None
+
+    def test_stage_9_multidimensional_intelligence(self, analysis_results = None, force_run: bool = False):
+        """Test Stage 9: Multi-Dimensional Intelligence independently"""
+        print("🧠 TESTING STAGE 9: MULTI-DIMENSIONAL INTELLIGENCE")
+        print("-" * 40)
+
+        # Load input data
+        if analysis_results is None:
+            analysis_results = self.load_stage_result(8, "analysis")
+            if not analysis_results:
+                print("❌ No analysis results available. Run Stage 8 first.")
+                return None
+
+        # Check for cached result
+        if not force_run:
+            cached = self.load_stage_result(9, "multidimensional_intelligence")
+            if cached:
+                print("✅ Using cached Multi-Dimensional Intelligence results")
+                return cached
+
+        # Initialize and run multidimensional intelligence stage
+        start_time = time.time()
+        multidim_stage = MultiDimensionalIntelligenceStage("Multi-Dimensional Intelligence", 9, self.test_id)
+        # Set up competitor brands
+        multidim_stage.competitor_brands = self.context.competitor_brands + [self.context.brand]
+        # Add visual intelligence results if available
+        visual_results = self.load_stage_result(7, "visual_intelligence")
+        multidim_stage.visual_intelligence_results = visual_results.__dict__ if visual_results else {}
+
+        try:
+            multidim_results = multidim_stage.run(analysis_results, self.progress)
+            duration = time.time() - start_time
+
+            # Save results with full traceability
+            self.save_stage_result("Multi-Dimensional Intelligence", 9, analysis_results, multidim_results, duration)
+
+            print(f"✅ Stage 9 Complete - Multi-dimensional intelligence analysis complete")
+            return multidim_results
+
+        except Exception as e:
+            print(f"❌ Stage 9 Failed: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return None
+
+    def test_stage_10_output(self, multidim_results = None, force_run: bool = False):
+        """Test Stage 10: Intelligence Output independently"""
+        print("📊 TESTING STAGE 10: INTELLIGENCE OUTPUT")
+        print("-" * 40)
+
+        # Load input data
+        if multidim_results is None:
+            multidim_results = self.load_stage_result(9, "multidimensional_intelligence")
+            if not multidim_results:
+                print("❌ No multi-dimensional intelligence results available. Run Stage 9 first.")
+                return None
+
+        # Check for cached result
+        if not force_run:
+            cached = self.load_stage_result(10, "output")
+            if cached:
+                print("✅ Using cached Output results")
+                return cached
+
+        # Initialize and run output stage
+        start_time = time.time()
+        output_stage = EnhancedOutputStage(self.context, dry_run=False, verbose=True)
+
+        try:
+            output_results = output_stage.run(multidim_results, self.progress)
+            duration = time.time() - start_time
+
+            # Save results with full traceability
+            self.save_stage_result("Output", 10, multidim_results, output_results, duration)
+
+            print(f"✅ Stage 10 Complete - Intelligence output generated")
+            return output_results
+
+        except Exception as e:
+            print(f"❌ Stage 10 Failed: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return None
+
     def _summarize_data(self, data: Any) -> str:
         """Create a summary of data for logging"""
         if isinstance(data, list):
@@ -406,7 +646,7 @@ def main():
     parser = argparse.ArgumentParser(description="Stage Testing Framework")
     parser.add_argument("--brand", required=True, help="Target brand name")
     parser.add_argument("--vertical", help="Brand vertical")
-    parser.add_argument("--stage", type=int, help="Test specific stage (1-9)")
+    parser.add_argument("--stage", type=int, help="Test specific stage (1-10)")
     parser.add_argument("--force", action="store_true", help="Force re-run even if cached")
     parser.add_argument("--clean", action="store_true", help="Clean tables before testing")
     
@@ -419,23 +659,53 @@ def main():
     # Initialize framework
     framework = StageTestingFramework(args.brand, args.vertical or "")
     
-    # Test specific stage or all stages
-    if args.stage == 1 or args.stage is None:
+    # Test specific stage or all stages with intelligent cache dependency management
+    if args.stage is None:
+        # Run all stages sequentially
+        print("🔄 Running all stages sequentially (1-10)")
         candidates = framework.test_stage_1_discovery(force_run=args.force)
-        
-        if args.stage is None and candidates:
-            # Continue to stage 2 if testing all stages
+        if candidates:
             validated_competitors = framework.test_stage_2_curation(candidates, force_run=args.force)
-            
             if validated_competitors:
-                # Continue to stage 3 if testing all stages
-                framework.test_stage_3_ranking(validated_competitors, force_run=args.force)
-    
+                ranked_competitors = framework.test_stage_3_ranking(validated_competitors, force_run=args.force)
+                if ranked_competitors:
+                    ingestion_results = framework.test_stage_4_ingestion(ranked_competitors, force_run=args.force)
+                    if ingestion_results:
+                        strategic_results = framework.test_stage_5_strategic_labeling(ingestion_results, force_run=args.force)
+                        if strategic_results:
+                            embeddings_results = framework.test_stage_6_embeddings(ingestion_results, force_run=args.force)
+                            if embeddings_results:
+                                visual_results = framework.test_stage_7_visual_intelligence(embeddings_results, force_run=args.force)
+                                if visual_results:
+                                    analysis_results = framework.test_stage_8_analysis(embeddings_results, force_run=args.force)
+                                    if analysis_results:
+                                        multidim_results = framework.test_stage_9_multidimensional_intelligence(analysis_results, force_run=args.force)
+                                        if multidim_results:
+                                            framework.test_stage_10_output(multidim_results, force_run=args.force)
+
+    elif args.stage == 1:
+        framework.test_stage_1_discovery(force_run=args.force)
     elif args.stage == 2:
         framework.test_stage_2_curation(force_run=args.force)
-    
     elif args.stage == 3:
         framework.test_stage_3_ranking(force_run=args.force)
+    elif args.stage == 4:
+        framework.test_stage_4_ingestion(force_run=args.force)
+    elif args.stage == 5:
+        framework.test_stage_5_strategic_labeling(force_run=args.force)
+    elif args.stage == 6:
+        framework.test_stage_6_embeddings(force_run=args.force)
+    elif args.stage == 7:
+        framework.test_stage_7_visual_intelligence(force_run=args.force)
+    elif args.stage == 8:
+        framework.test_stage_8_analysis(force_run=args.force)
+    elif args.stage == 9:
+        framework.test_stage_9_multidimensional_intelligence(force_run=args.force)
+    elif args.stage == 10:
+        framework.test_stage_10_output(force_run=args.force)
+    else:
+        print(f"❌ Invalid stage number: {args.stage}. Valid range is 1-10.")
+        return
     
     # Generate report
     framework.generate_test_report()
