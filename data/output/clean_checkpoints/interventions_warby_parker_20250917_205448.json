@@ -1,7 +1,23 @@
 {
   "immediate_actions": [
     {
-      "action": "Competitive copying detected from EyeBuyDirect (similarity: 72.4%)",
+      "action": "Low eyewear industry relevance in emotional messaging - tailor content for eyewear context",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.8,
+      "actionability": 0.9,
+      "timeline": "Immediate (1-2 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Emotional keyword usage rate",
+        "Brand sentiment score"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0.122,
+      "priority": "CRITICAL"
+    },
+    {
+      "action": "Competitive copying detected from EyeBuyDirect (similarity: 72.5%)",
       "rationale": "Based on Competitive Intelligence analysis",
       "confidence": 0.9,
       "business_impact": 0.8,
@@ -13,27 +29,11 @@
         "Strategic goal achievement"
       ],
       "source_module": "Competitive Intelligence",
-      "value": 0.7240816370398387,
+      "value": 0.7251335403708684,
       "priority": "CRITICAL"
     }
   ],
   "short_term_tactics": [
-    {
-      "action": "Creative text length optimization needed - content is too brief for engagement",
-      "rationale": "Based on Creative Intelligence analysis",
-      "confidence": 0.8,
-      "business_impact": 0.7,
-      "actionability": 0.9,
-      "timeline": "Short-term (2-4 weeks)",
-      "success_metrics": [
-        "Implementation completion rate",
-        "Average creative text length",
-        "Content engagement rate"
-      ],
-      "source_module": "Creative Intelligence",
-      "value": 0,
-      "priority": "HIGH"
-    },
     {
       "action": "Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger",
       "rationale": "Based on Channel Intelligence analysis",
@@ -67,6 +67,22 @@
       "priority": "HIGH"
     },
     {
+      "action": "Creative text may be too long - consider brevity for better performance",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.6,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Creative performance score",
+        "Brand message consistency"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 322.32,
+      "priority": "HIGH"
+    },
+    {
       "action": "Low brand mention frequency detected - increase brand presence in creative content",
       "rationale": "Based on Creative Intelligence analysis",
       "confidence": 0.7,
@@ -79,7 +95,41 @@
         "Brand message consistency"
       ],
       "source_module": "Creative Intelligence",
-      "value": 0,
+      "value": 0.0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low emotional intensity detected through AI analysis - strengthen emotional appeal for eyewear marketing",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "AI emotional intensity score",
+        "Emotional engagement rate",
+        "Brand resonance metrics"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0.2,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low positive/aspirational sentiment detected - increase uplifting messaging for eyewear brand building",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Positive sentiment rate",
+        "Aspirational messaging score",
+        "Brand uplift metrics"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 2.453825857519789,
       "priority": "HIGH"
     },
     {
@@ -127,7 +177,7 @@
         "Strategic goal achievement"
       ],
       "source_module": "Audience Intelligence",
-      "value": 323.0,
+      "value": 322.32,
       "priority": "HIGH"
     },
     {
@@ -143,7 +193,7 @@
         "Strategic goal achievement"
       ],
       "source_module": "Audience Intelligence",
-      "value": 85.26,
+      "value": 85.47999999999999,
       "priority": "HIGH"
     },
     {
@@ -159,23 +209,7 @@
         "Competitive advantage index"
       ],
       "source_module": "Visual Intelligence",
-      "value": 0.38947368421052636,
-      "priority": "HIGH"
-    },
-    {
-      "action": "Limited emotional language detected - incorporate more engaging emotional keywords",
-      "rationale": "Based on Creative Intelligence analysis",
-      "confidence": 0.6,
-      "business_impact": 0.6,
-      "actionability": 0.7,
-      "timeline": "Short-term (2-4 weeks)",
-      "success_metrics": [
-        "Implementation completion rate",
-        "Emotional keyword usage rate",
-        "Brand sentiment score"
-      ],
-      "source_module": "Creative Intelligence",
-      "value": 0,
+      "value": 0.3821428571428572,
       "priority": "HIGH"
     },
     {
@@ -207,7 +241,7 @@
         "Market differentiation rate"
       ],
       "source_module": "Visual Intelligence",
-      "value": "{'quadrant': 'Mid-Balanced', 'luxury': 0.27719298245614027, 'boldness': 0.4368421052631581}",
+      "value": "{'quadrant': 'Mid-Balanced', 'luxury': 0.28125, 'boldness': 0.4571428571428571}",
       "priority": "HIGH"
     }
   ],
@@ -227,30 +261,14 @@
       "source_module": "CTA Intelligence",
       "value": 9.47019867549669,
       "priority": "MEDIUM"
-    },
-    {
-      "action": "Content density optimization opportunity - enrich creative messaging",
-      "rationale": "Based on Creative Intelligence analysis",
-      "confidence": 0.5,
-      "business_impact": 0.5,
-      "actionability": 0.6,
-      "timeline": "Medium-term (4-8 weeks)",
-      "success_metrics": [
-        "Implementation completion rate",
-        "Creative performance score",
-        "Brand message consistency"
-      ],
-      "source_module": "Creative Intelligence",
-      "value": 0,
-      "priority": "MEDIUM"
     }
   ],
   "intervention_summary": {
-    "total_interventions": 15,
-    "immediate_count": 1,
-    "short_term_count": 12,
-    "monitoring_count": 2,
-    "avg_confidence": 0.6999999999999998,
-    "avg_actionability": 0.7733333333333334
+    "total_interventions": 16,
+    "immediate_count": 2,
+    "short_term_count": 13,
+    "monitoring_count": 1,
+    "avg_confidence": 0.73125,
+    "avg_actionability": 0.79375
   }
 }

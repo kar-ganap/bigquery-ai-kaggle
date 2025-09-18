@@ -44,7 +44,7 @@ Thumbs.db
 # Development utilities (shouldn't be tracked)
 tools/
 scripts/data/
-data/output/*
+!data/output/*
 !data/output/clean_checkpoints/
 
 # Editors

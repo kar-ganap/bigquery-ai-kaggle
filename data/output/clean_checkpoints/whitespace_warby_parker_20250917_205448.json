@@ -1,0 +1,173 @@
+{
+  "status": "success",
+  "opportunities_found": 3,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Convenience Seekers with FUNCTIONAL messaging in DECISION stage",
+    "MONOPOLY opportunity targeting Hearing Impaired Adults with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+    "VIRGIN_TERRITORY opportunity targeting Pragmatic Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Convenience Seekers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Need Glasses Fast? Get 2-Day Shipping on Your Next EyeBuyDirect Order!",
+        "value_propositions": "Quick and reliable delivery of your eyewear, eliminating the wait and hassle.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CTR >2%, Conversion Rate >3%, Cart Abandonment Rate Reduction -5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Convenience Seekers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Hearing Impaired Adults",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Silently Enhance Your Hearing with Nuance Audio Glasses. [Benefit Statement]",
+        "value_propositions": "Nuance Audio Glasses offer a discreet and comfortable solution for mild to moderate hearing loss, blending seamlessly with everyday life.",
+        "recommended_ctas": "Book a Demo",
+        "channel_focus": "Facebook, Video, Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, Demo Bookings +20%, CPA <$50",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Hearing Impaired Adults with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Pragmatic Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Tired of Choosing? Find Your Perfect Glasses Match Now!",
+        "value_propositions": "Simplify your glasses shopping experience with our easy-to-use quiz, and find frames you'll love. Enjoy free shipping and returns, with our 100% money-back guarantee, and affordable options.",
+        "recommended_ctas": "Try Our Quiz",
+        "channel_focus": "Facebook|Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Quiz Completion Rate > 15%, Conversion Rate from Quiz > 5%, CPA < $50",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Pragmatic Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 3 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Convenience Seekers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Need Glasses Fast? Get 2-Day Shipping on Your Next EyeBuyDirect Order!",
+        "value_propositions": "Quick and reliable delivery of your eyewear, eliminating the wait and hassle.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CTR >2%, Conversion Rate >3%, Cart Abandonment Rate Reduction -5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Convenience Seekers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Hearing Impaired Adults",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Silently Enhance Your Hearing with Nuance Audio Glasses. [Benefit Statement]",
+        "value_propositions": "Nuance Audio Glasses offer a discreet and comfortable solution for mild to moderate hearing loss, blending seamlessly with everyday life.",
+        "recommended_ctas": "Book a Demo",
+        "channel_focus": "Facebook, Video, Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, Demo Bookings +20%, CPA <$50",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Hearing Impaired Adults with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Pragmatic Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Tired of Choosing? Find Your Perfect Glasses Match Now!",
+        "value_propositions": "Simplify your glasses shopping experience with our easy-to-use quiz, and find frames you'll love. Enjoy free shipping and returns, with our 100% money-back guarantee, and affordable options.",
+        "recommended_ctas": "Try Our Quiz",
+        "channel_focus": "Facebook|Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Quiz Completion Rate > 15%, Conversion Rate from Quiz > 5%, CPA < $50",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Pragmatic Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 13.451292,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250917_205448",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

@@ -510,7 +510,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                 AND (creative_text IS NOT NULL OR title IS NOT NULL)
             ),
 
-            -- AI-Enhanced Sentiment Analysis (sampled for cost control)
+            -- AI-Enhanced Sentiment Analysis (redesigned for proper NULL handling)
             ai_sentiment_sample AS (
               SELECT
                 *,
@@ -520,7 +520,21 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
               WHERE LENGTH(COALESCE(creative_text, '')) > 10  -- Only analyze substantial text
             ),
 
-            ai_sentiment_analysis AS (
+            -- Only select ads that will get AI analysis (no NULLs)
+            ai_sentiment_selected AS (
+              SELECT
+                brand,
+                ad_archive_id,
+                creative_text,
+                title,
+                emotional_keyword_count,
+                brand_mention_frequency
+              FROM ai_sentiment_sample
+              WHERE sample_rank <= LEAST(CAST(brand_total_ads * 0.3 AS INT64), 20)  -- Sample 30% or max 20 per brand
+            ),
+
+            -- AI sentiment analysis (restructured to exactly match working Visual Intelligence pattern)
+            ai_sentiment_analyzed AS (
               SELECT
                 brand,
                 ad_archive_id,
@@ -528,9 +542,8 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                 title,
                 emotional_keyword_count,
                 brand_mention_frequency,
-                -- AI sentiment analysis (only for sampled ads)
-                CASE WHEN sample_rank <= LEAST(CAST(brand_total_ads * 0.3 AS INT64), 20)  -- Sample 30% or max 20 per brand
-                THEN AI.GENERATE(
+                -- Use same field naming pattern as Visual Intelligence
+                AI.GENERATE(
                   CONCAT(
                     'EYEWEAR AD SENTIMENT ANALYSIS: Analyze the emotional tone and sentiment of this eyewear advertisement.\\n\\n',
                     'BRAND: ', brand, '\\n',
@@ -545,42 +558,43 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                     '7. industry_relevance_score (0-1): How well emotion fits eyewear context'
                   ),
                   connection_id => 'bigquery-ai-kaggle-469620.us.gemini-connection'
-                )
-                ELSE NULL END as ai_sentiment_analysis
-              FROM ai_sentiment_sample
+                ) as sentiment_analysis
+              FROM ai_sentiment_selected
             ),
 
-            -- Extract AI sentiment metrics with JSON parsing
+            -- Extract AI sentiment metrics using exact Visual Intelligence pattern
             ai_sentiment_extracted AS (
               SELECT
                 brand,
-                ai_sentiment_analysis,
-                emotional_keyword_count,
-                -- Extract AI sentiment scores with fallback to regex counts
+                ad_archive_id,
+                -- Extract structured insights from AI.GENERATE result (exactly matching Visual Intelligence)
                 COALESCE(
-                  CASE WHEN ai_sentiment_analysis IS NOT NULL
-                    THEN CAST(JSON_VALUE(REGEXP_EXTRACT(ai_sentiment_analysis.result, '{json_regex}'), '$.emotional_intensity') AS FLOAT64)
-                    ELSE NULL
-                  END,
-                  emotional_keyword_count * 2.0  -- Fallback: scale regex count
+                  CAST(
+                    JSON_VALUE(
+                      REGEXP_EXTRACT(sentiment_analysis.result, '{json_regex}'),
+                      '$.emotional_intensity'
+                    ) AS FLOAT64
+                  ),
+                  emotional_keyword_count * 2.0
                 ) as ai_emotional_intensity,
                 COALESCE(
-                  CASE WHEN ai_sentiment_analysis IS NOT NULL
-                    THEN CAST(JSON_VALUE(REGEXP_EXTRACT(ai_sentiment_analysis.result, '{json_regex}'), '$.industry_relevance_score') AS FLOAT64)
-                    ELSE NULL
-                  END,
-                  CASE WHEN emotional_keyword_count > 0 THEN 0.5 ELSE 0.1 END  -- Fallback relevance
+                  CAST(
+                    JSON_VALUE(
+                      REGEXP_EXTRACT(sentiment_analysis.result, '{json_regex}'),
+                      '$.industry_relevance_score'
+                    ) AS FLOAT64
+                  ),
+                  CASE WHEN emotional_keyword_count > 0 THEN 0.5 ELSE 0.1 END
                 ) as ai_industry_relevance,
-                CASE WHEN ai_sentiment_analysis IS NOT NULL
-                  THEN JSON_VALUE(REGEXP_EXTRACT(ai_sentiment_analysis.result, '{json_regex}'), '$.sentiment_category')
-                  ELSE NULL
-                END as ai_sentiment_category,
-                CASE WHEN ai_sentiment_analysis IS NOT NULL
-                  THEN JSON_VALUE(REGEXP_EXTRACT(ai_sentiment_analysis.result, '{json_regex}'), '$.persuasion_style')
-                  ELSE NULL
-                END as ai_persuasion_style
-              FROM ai_sentiment_analysis
-              WHERE ai_sentiment_analysis IS NOT NULL
+                JSON_VALUE(
+                  REGEXP_EXTRACT(sentiment_analysis.result, '{json_regex}'),
+                  '$.sentiment_category'
+                ) as ai_sentiment_category,
+                JSON_VALUE(
+                  REGEXP_EXTRACT(sentiment_analysis.result, '{json_regex}'),
+                  '$.persuasion_style'
+                ) as ai_persuasion_style
+              FROM ai_sentiment_analyzed
             )
 
             SELECT
