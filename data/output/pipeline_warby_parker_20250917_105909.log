@@ -1,0 +1,37 @@
+2025-09-17 10:59:09,752 - pipeline_warby_parker_20250917_105909 - INFO - Starting Competitor Discovery
+2025-09-17 10:59:16,612 - pipeline_warby_parker_20250917_105909 - INFO - Completed Competitor Discovery in 6.9s
+2025-09-17 10:59:16,612 - pipeline_warby_parker_20250917_105909 - INFO - Starting AI Competitor Curation
+2025-09-17 11:00:56,655 - pipeline_warby_parker_20250917_105909 - INFO - Completed AI Competitor Curation in 100.0s
+2025-09-17 11:00:56,657 - pipeline_warby_parker_20250917_105909 - INFO - Starting Meta Ad Activity Ranking
+2025-09-17 11:01:22,074 - pipeline_warby_parker_20250917_105909 - INFO - Completed Meta Ad Activity Ranking in 25.4s
+2025-09-17 11:01:22,075 - pipeline_warby_parker_20250917_105909 - INFO - Starting Meta Ads Ingestion
+2025-09-17 11:02:18,751 - pipeline_warby_parker_20250917_105909 - INFO - Completed Meta Ads Ingestion in 56.7s
+2025-09-17 11:02:18,752 - pipeline_warby_parker_20250917_105909 - INFO - Starting Strategic Labeling
+2025-09-17 11:05:31,816 - pipeline_warby_parker_20250917_105909 - INFO - Completed Strategic Labeling in 193.1s
+2025-09-17 11:05:31,820 - pipeline_warby_parker_20250917_105909 - INFO - Starting Embeddings Generation
+2025-09-17 11:05:41,663 - pipeline_warby_parker_20250917_105909 - INFO - Completed Embeddings Generation in 9.8s
+2025-09-17 11:05:41,664 - pipeline_warby_parker_20250917_105909 - INFO - Starting Visual Intelligence
+2025-09-17 11:06:32,976 - pipeline_warby_parker_20250917_105909 - INFO - Completed Visual Intelligence in 51.3s
+2025-09-17 11:06:32,977 - pipeline_warby_parker_20250917_105909 - INFO - Starting Strategic Analysis
+2025-09-17 11:06:57,929 - pipeline_warby_parker_20250917_105909 - INFO - Completed Strategic Analysis in 25.0s
+2025-09-17 11:06:57,930 - pipeline_warby_parker_20250917_105909 - INFO - Starting Multi-Dimensional Intelligence
+2025-09-17 11:06:57,930 - pipeline_warby_parker_20250917_105909 - INFO - 🚀 Starting Comprehensive Intelligence Analysis - CTA, Audience, Creative & Channel
+2025-09-17 11:06:57,930 - pipeline_warby_parker_20250917_105909 - INFO - 🎯 Analyzing 5 brands (from orchestrator)
+2025-09-17 11:06:57,930 - pipeline_warby_parker_20250917_105909 - INFO - 👥 Executing Audience Intelligence Analysis...
+2025-09-17 11:07:03,675 - pipeline_warby_parker_20250917_105909 - INFO - 🎨 Executing Creative Intelligence Analysis...
+2025-09-17 11:07:08,808 - pipeline_warby_parker_20250917_105909 - INFO - 📡 Executing Channel Intelligence Analysis...
+2025-09-17 11:07:12,356 - pipeline_warby_parker_20250917_105909 - ERROR - Channel Intelligence analysis failed: 400 Unrecognized name: total_ads at [4:17]; reason: invalidQuery, location: query, message: Unrecognized name: total_ads at [4:17]
+
+Location: US
+Job ID: 4da4debb-7295-46d6-8c3c-d225557b5526
+
+2025-09-17 11:07:12,356 - pipeline_warby_parker_20250917_105909 - INFO - 🎯 Executing White Space Intelligence Analysis...
+2025-09-17 11:07:12,382 - pipeline_warby_parker_20250917_105909 - INFO - 🎯 Executing hybrid whitespace analysis (full dataset + campaign intelligence)...
+2025-09-17 11:07:26,007 - pipeline_warby_parker_20250917_105909 - INFO - ✅ Using Hybrid whitespace detector with campaign intelligence
+2025-09-17 11:07:26,007 - pipeline_warby_parker_20250917_105909 - INFO - 📊 Found 6 opportunities (6 campaign-ready)
+2025-09-17 11:07:26,007 - pipeline_warby_parker_20250917_105909 - INFO - ✅ Analysis completed in 13.6s - EXCELLENT
+2025-09-17 11:07:26,007 - pipeline_warby_parker_20250917_105909 - INFO - 📊 Generating Comprehensive Intelligence Summary...
+2025-09-17 11:07:29,689 - pipeline_warby_parker_20250917_105909 - INFO - ✅ Intelligence Analysis completed - 94.0% data completeness
+2025-09-17 11:07:29,689 - pipeline_warby_parker_20250917_105909 - INFO - Completed Multi-Dimensional Intelligence in 31.8s
+2025-09-17 11:07:29,689 - pipeline_warby_parker_20250917_105909 - INFO - Starting Enhanced Intelligence Output
+2025-09-17 11:07:29,700 - pipeline_warby_parker_20250917_105909 - INFO - Completed Enhanced Intelligence Output in 0.0s
