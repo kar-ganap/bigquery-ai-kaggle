@@ -151,8 +151,22 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
         if copying_detected:
             top_copier = analysis.influence.get('top_copier', 'Unknown competitor')
             similarity_score = analysis.influence.get('similarity_score', 0.0)
+
+            # Phase 5: Apply temporal enhancement to competitive intelligence
+            base_insight = f"Competitive copying detected from {top_copier} (similarity: {similarity_score:.1%})"
+            temporal_metadata = {
+                'temporal_trend': 'increasing',  # competitive copying is increasing (threat accelerating)
+                'timeframe': '6 weeks'
+            }
+            enhanced_insight = framework.add_temporal_context(
+                base_insight,
+                similarity_score,
+                'competitive_copying',
+                temporal_metadata
+            )
+
             framework.add_signal(
-                insight=f"Competitive copying detected from {top_copier} (similarity: {similarity_score:.1%})",
+                insight=enhanced_insight,
                 value=similarity_score,
                 confidence=0.9,
                 business_impact=0.8,
