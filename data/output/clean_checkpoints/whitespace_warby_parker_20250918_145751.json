@@ -1,0 +1,221 @@
+{
+  "status": "success",
+  "opportunities_found": 5,
+  "top_opportunities": [
+    "MONOPOLY opportunity targeting FSA/HSA Users with FUNCTIONAL messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Tech-Savvy Consumers with FUNCTIONAL messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in DECISION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "FSA/HSA Users",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Maximize Your FSA/HSA Dollars on Stylish Eyewear!",
+        "value_propositions": "Don't let your FSA/HSA funds go to waste! Use them to purchase high-quality glasses and sunglasses, with a wide selection to choose from.",
+        "recommended_ctas": "Shop FSA/HSA Eligible",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Cross-platform",
+      "success_metrics": "Conversion Rate >3%, AOV for FSA/HSA purchases >$120",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting FSA/HSA Users with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Tech-Savvy Consumers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Upgrade Your Vision: Blue Light Blocking Glasses for the Digital Age",
+        "value_propositions": "Protect your eyes from harmful blue light with Zenni's advanced lens technology. Improve your sleep and reduce eye strain with our stylish and functional blue light glasses.",
+        "recommended_ctas": "Shop Blue Light Glasses",
+        "channel_focus": "Video",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Conversion Rate (Blue Light) >3%, Average Order Value +5%, Customer Reviews +20%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Tech-Savvy Consumers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Free Shipping & Returns: Shop Eyewear with Confidence at LensCrafters",
+        "value_propositions": "Enjoy the convenience of free shipping and returns when you shop for glasses online at LensCrafters, ensuring a risk-free shopping experience.",
+        "recommended_ctas": "Buy Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Conversion Rate >3%, Order Value +5%, Customer Satisfaction Score +5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Gen Z Trendsetters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See the World Through Their Eyes: Join the #EyeBuyDirect Community.",
+        "value_propositions": "Discover the latest eyewear trends and styles through authentic content from real customers, showcasing the versatility and quality of EyeBuyDirect glasses.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram, TikTok",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Brand Mentions +20%, Social Media Engagement +30%, Website Traffic from Social +15%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Gen Z Trendsetters with SOCIAL_PROOF messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Hearing Impaired",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Tired of Bulky Hearing Aids? Discover Nuance Audio Glasses at LensCrafters!",
+        "value_propositions": "Nuance Audio Glasses offer an invisible and comfortable hearing solution, seamlessly integrated into stylish eyewear.",
+        "recommended_ctas": "Learn More",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, CPA <$50, Booked Demo Conversion Rate >5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Hearing Impaired with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 5 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "FSA/HSA Users",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Maximize Your FSA/HSA Dollars on Stylish Eyewear!",
+        "value_propositions": "Don't let your FSA/HSA funds go to waste! Use them to purchase high-quality glasses and sunglasses, with a wide selection to choose from.",
+        "recommended_ctas": "Shop FSA/HSA Eligible",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Cross-platform",
+      "success_metrics": "Conversion Rate >3%, AOV for FSA/HSA purchases >$120",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting FSA/HSA Users with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Tech-Savvy Consumers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Upgrade Your Vision: Blue Light Blocking Glasses for the Digital Age",
+        "value_propositions": "Protect your eyes from harmful blue light with Zenni's advanced lens technology. Improve your sleep and reduce eye strain with our stylish and functional blue light glasses.",
+        "recommended_ctas": "Shop Blue Light Glasses",
+        "channel_focus": "Video",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Conversion Rate (Blue Light) >3%, Average Order Value +5%, Customer Reviews +20%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Tech-Savvy Consumers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Free Shipping & Returns: Shop Eyewear with Confidence at LensCrafters",
+        "value_propositions": "Enjoy the convenience of free shipping and returns when you shop for glasses online at LensCrafters, ensuring a risk-free shopping experience.",
+        "recommended_ctas": "Buy Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Conversion Rate >3%, Order Value +5%, Customer Satisfaction Score +5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 13.964113,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250918_145751",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

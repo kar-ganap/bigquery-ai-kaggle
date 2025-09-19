@@ -253,9 +253,9 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
                 'TEXT: "', creative_text, '"\\n',
                 'IMAGE: [Image shows the primary visual creative]\\n\\n',
                 'Provide JSON analysis with:\\n',
-                '1. visual_text_alignment_score (0-1): How well visual and text align\\n',
-                '2. brand_consistency_score (0-1): Visual brand consistency\\n',
-                '3. creative_fatigue_risk (0-1): Risk of creative becoming stale\\n',
+                '1. visual_text_alignment_score (0.0-1.0): How well visual and text align (MUST be decimal 0.0-1.0)\\n',
+                '2. brand_consistency_score (0.0-1.0): Visual brand consistency (MUST be decimal 0.0-1.0)\\n',
+                '3. creative_fatigue_risk (0.0-1.0): Risk of creative becoming stale (MUST be decimal 0.0-1.0)\\n',
                 '4. key_visual_elements: [list of main visual elements]\\n',
                 '5. messaging_tone: Brief description of text tone\\n',
                 '6. visual_tone: Brief description of visual tone\\n',
@@ -277,13 +277,14 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
                 'TEXT: "', SUBSTR(creative_text, 1, 150), '"\\n',
                 'IMAGE: [Image shows visual creative elements]\\n\\n',
                 'Analyze for competitive positioning and provide JSON with:\\n',
-                '1. luxury_positioning_score (0-1): Luxury vs accessible visual positioning\\n',
-                '2. boldness_score (0-1): Bold vs subtle visual approach\\n',
+                '1. luxury_positioning_score (0.0-1.0): Luxury vs accessible visual positioning (MUST be decimal 0.0-1.0)\\n',
+                '2. boldness_score (0.0-1.0): Bold vs subtle visual approach (MUST be decimal 0.0-1.0)\\n',
                 '3. target_demographic: Likely demographic (young_professional, family_oriented, luxury_consumer, etc)\\n',
-                '4. visual_differentiation_level (0-1): How unique vs category-standard\\n',
-                '5. creative_pattern_risk (0-1): Risk of overused visual patterns\\n',
-                '6. positioning_strengths: [max 2 competitive strengths]\\n',
-                '7. positioning_gaps: [max 2 potential positioning opportunities]'
+                '4. visual_differentiation_level (0.0-1.0): How unique vs category-standard (MUST be decimal 0.0-1.0)\\n',
+                '5. creative_pattern_risk (0.0-1.0): Risk of overused visual patterns (MUST be decimal 0.0-1.0)\\n',
+                '6. visual_style: Primary visual style (MINIMALIST/LUXURY/BOLD/CASUAL/PROFESSIONAL)\\n',
+                '7. positioning_strengths: [max 2 competitive strengths]\\n',
+                '8. positioning_gaps: [max 2 potential positioning opportunities]'
               ),
               connection_id => 'bigquery-ai-kaggle-469620.us.gemini-connection'
             ) as competitive_analysis
@@ -300,55 +301,61 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
           visual_analysis,
           competitive_analysis,
 
-          -- Extract structured insights from AI.GENERATE result (markdown JSON)
-          CAST(
+          -- Extract structured insights from AI.GENERATE result (markdown JSON) with 0.0-1.0 normalization
+          GREATEST(0.0, LEAST(1.0, CAST(
             JSON_VALUE(
               REGEXP_EXTRACT(visual_analysis.result, '{json_regex}'),
               '$.visual_text_alignment_score'
             ) AS FLOAT64
-          ) as visual_text_alignment_score,
-          CAST(
+          ))) as visual_text_alignment_score,
+          GREATEST(0.0, LEAST(1.0, CAST(
             JSON_VALUE(
               REGEXP_EXTRACT(visual_analysis.result, '{json_regex}'),
               '$.brand_consistency_score'
             ) AS FLOAT64
-          ) as brand_consistency_score,
-          CAST(
+          ))) as brand_consistency_score,
+          GREATEST(0.0, LEAST(1.0, CAST(
             JSON_VALUE(
               REGEXP_EXTRACT(visual_analysis.result, '{json_regex}'),
               '$.creative_fatigue_risk'
             ) AS FLOAT64
-          ) as creative_fatigue_risk,
+          ))) as creative_fatigue_risk,
 
-          -- Extract competitive intelligence insights
-          CAST(
+          -- Extract competitive intelligence insights with 0.0-1.0 normalization
+          GREATEST(0.0, LEAST(1.0, CAST(
             JSON_VALUE(
               REGEXP_EXTRACT(competitive_analysis.result, '{json_regex}'),
               '$.luxury_positioning_score'
             ) AS FLOAT64
-          ) as luxury_positioning_score,
-          CAST(
+          ))) as luxury_positioning_score,
+          GREATEST(0.0, LEAST(1.0, CAST(
             JSON_VALUE(
               REGEXP_EXTRACT(competitive_analysis.result, '{json_regex}'),
               '$.boldness_score'
             ) AS FLOAT64
-          ) as boldness_score,
+          ))) as boldness_score,
           JSON_VALUE(
             REGEXP_EXTRACT(competitive_analysis.result, '{json_regex}'),
             '$.target_demographic'
           ) as target_demographic,
-          CAST(
+          GREATEST(0.0, LEAST(1.0, CAST(
             JSON_VALUE(
               REGEXP_EXTRACT(competitive_analysis.result, '{json_regex}'),
               '$.visual_differentiation_level'
             ) AS FLOAT64
-          ) as visual_differentiation_level,
-          CAST(
+          ))) as visual_differentiation_level,
+          GREATEST(0.0, LEAST(1.0, CAST(
             JSON_VALUE(
               REGEXP_EXTRACT(competitive_analysis.result, '{json_regex}'),
               '$.creative_pattern_risk'
             ) AS FLOAT64
-          ) as creative_pattern_risk
+          ))) as creative_pattern_risk,
+
+          -- Extract visual style for competitive matrix
+          JSON_VALUE(
+            REGEXP_EXTRACT(competitive_analysis.result, '{json_regex}'),
+            '$.visual_style'
+          ) as visual_style
 
         FROM competitive_analyzed
         ORDER BY brand, strategic_score DESC
