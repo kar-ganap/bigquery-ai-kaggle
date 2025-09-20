@@ -8,6 +8,7 @@ Implements the 3-question framework: Where are we? Where did we come from? Where
 from typing import Dict, List, Optional, Tuple
 import pandas as pd
 from datetime import datetime, timedelta
+from src.utils.sql_helpers import safe_brand_in_clause
 import logging
 
 class TemporalIntelligenceEngine:
@@ -77,7 +78,7 @@ class TemporalIntelligenceEngine:
           FROM `{self.project_id}.{self.dataset_id}.ads_with_dates` r
           LEFT JOIN `{self.project_id}.{self.dataset_id}.cta_aggressiveness_analysis` c
             ON r.brand = c.brand
-          WHERE r.brand IN ('{self.brand}', {', '.join(f"'{c}'" for c in self.competitors)})
+          WHERE r.brand IN {safe_brand_in_clause(self.brand, self.competitors)}
             AND r.creative_text IS NOT NULL
           GROUP BY r.brand
         )
@@ -134,7 +135,7 @@ class TemporalIntelligenceEngine:
           FROM `{self.project_id}.{self.dataset_id}.ads_with_dates` r
           LEFT JOIN `{self.project_id}.{self.dataset_id}.cta_aggressiveness_analysis` c
             ON r.ad_archive_id = c.ad_archive_id
-          WHERE r.brand IN ('{self.brand}', {', '.join(f"'{c}'" for c in self.competitors)})
+          WHERE r.brand IN {safe_brand_in_clause(self.brand, self.competitors)}
             AND DATE(r.start_timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
             AND r.creative_text IS NOT NULL
           GROUP BY r.brand, DATE(r.start_timestamp)
@@ -515,7 +516,7 @@ class TemporalIntelligenceEngine:
           FROM `{self.project_id}.{self.dataset_id}.ads_with_dates` r
           LEFT JOIN `{self.project_id}.{self.dataset_id}.cta_aggressiveness_analysis` c
             ON r.brand = c.brand
-          WHERE r.brand IN ('{self.brand}', {', '.join(f"'{c}'" for c in self.competitors)})
+          WHERE r.brand IN {safe_brand_in_clause(self.brand, self.competitors)}
             AND r.creative_text IS NOT NULL
             AND DATE(r.start_timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 WEEK)
           GROUP BY r.brand, week

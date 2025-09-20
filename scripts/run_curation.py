@@ -41,7 +41,7 @@ class BigQueryAICurator:
             print(f"🔧 Creating Gemini model connection: {model_id}")
             create_model_sql = f"""
             CREATE OR REPLACE MODEL `{model_id}`
-            REMOTE WITH CONNECTION `{self.project_id}.us.gemini-connection`
+            REMOTE WITH CONNECTION `{self.project_id}.us.vertex-ai`
             OPTIONS (ENDPOINT = 'gemini-2.5-flash');
             """
             

@@ -121,6 +121,7 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                     business_impact=0.8,
                     actionability=0.9,
                     source_module="Whitespace Intelligence",
+                    metric_name="whitespace_opportunity_score",
                     metadata={
                         'space_type': opp.get('space_type', 'Virgin Territory'),
                         'funnel_stage': opp.get('funnel_stage', 'Unknown'),
@@ -143,6 +144,7 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                 business_impact=0.9,
                 actionability=0.7,
                 source_module="Market Analysis",
+                metric_name="market_position_defensive",
                 metadata={'position': market_position, 'requires': 'strategic_action'}
             )
         
@@ -172,6 +174,7 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                 business_impact=0.8,
                 actionability=0.8,
                 source_module="Competitive Intelligence",
+                metric_name="competitive_similarity_score",
                 metadata={'copier': top_copier, 'similarity': similarity_score}
             )
         
@@ -186,6 +189,7 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                 business_impact=0.6,
                 actionability=0.5,
                 source_module="Momentum Analysis",
+                metric_name="momentum_velocity_positive",
                 metadata={'momentum': momentum, 'velocity_7d': velocity_7d}
             )
         
@@ -200,6 +204,7 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                     business_impact=0.7,
                     actionability=0.9,
                     source_module="CTA Intelligence",
+                    metric_name="cta_aggressiveness_low",
                     metadata={'current_score': cta_aggressiveness, 'target': 5.0}
                 )
             elif cta_aggressiveness > 7.0:
@@ -209,7 +214,8 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                     confidence=0.6,
                     business_impact=0.5,
                     actionability=0.6,
-                    source_module="CTA Intelligence", 
+                    source_module="CTA Intelligence",
+                    metric_name="cta_aggressiveness_high",
                     metadata={'current_score': cta_aggressiveness, 'recommendation': 'moderate'}
                 )
         
@@ -224,6 +230,7 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
                 business_impact=0.8,
                 actionability=0.6,
                 source_module="Forecasting Intelligence",
+                metric_name="business_impact_forecast_high",
                 metadata={'impact_score': business_impact_score, 'forecast_confidence': confidence}
             )
     

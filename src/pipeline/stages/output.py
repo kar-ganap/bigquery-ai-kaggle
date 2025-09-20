@@ -1,7 +1,25 @@
 """
-Stage 7: Intelligence Output Generation
+DEPRECATED: Legacy Stage 7 Output Generation
 
-Clean, focused implementation of 4-level progressive disclosure output.
+⚠️  THIS FILE IS DEPRECATED AS OF 2025-09-18 ⚠️
+
+This legacy output system has been replaced by the enhanced Intelligence Framework
+in enhanced_output.py with proper metric naming and structured intelligence signals.
+
+ISSUES RESOLVED BY ENHANCED FRAMEWORK:
+- Fixed meaningless metric names like "Creative Intelligence_2"
+- Added structured intelligence signals with business-friendly naming
+- Implemented proper temporal intelligence enhancements
+- Standardized on "immediate_actions" key instead of inconsistent "interventions"
+- Added whitespace intelligence integration
+- Improved signal filtering and thresholding
+
+USE: src/pipeline/stages/enhanced_output.py (EnhancedOutputStage)
+DEPRECATED: This file (OutputStage) - DO NOT USE
+
+The legacy system generated inconsistent output schemas and generic metric names
+that were "as good as not having anything" per user feedback. The enhanced system
+provides meaningful business intelligence with proper naming conventions.
 """
 import os
 import time
@@ -18,14 +36,21 @@ BQ_DATASET = os.environ.get("BQ_DATASET", "ads_demo")
 
 class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
     """
-    Stage 7: Intelligence Output Generation.
-    
-    Responsibilities:
-    - Generate Level 1: Executive Summary
-    - Generate Level 2: Strategic Dashboard  
-    - Generate Level 3: Actionable Interventions
-    - Generate Level 4: SQL Dashboards
-    - Display and save output files
+    ⚠️  DEPRECATED: DO NOT USE THIS CLASS ⚠️
+
+    This legacy output system has been DEPRECATED as of 2025-09-18.
+
+    USE INSTEAD: EnhancedOutputStage from enhanced_output.py
+
+    REASON FOR DEPRECATION:
+    - Generated meaningless metric names like "Creative Intelligence_2"
+    - Inconsistent output schema ("interventions" vs "immediate_actions")
+    - No structured intelligence signals
+    - Missing temporal intelligence enhancements
+    - No whitespace intelligence integration
+
+    The enhanced system provides business-friendly metric naming and
+    structured intelligence signals that are actually useful for analysis.
     """
     
     def __init__(self, context: PipelineContext, dry_run: bool = False, verbose: bool = False):
@@ -36,7 +61,14 @@ class OutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
     
     def execute(self, analysis: AnalysisResults) -> IntelligenceOutput:
         """Execute intelligence output generation"""
-        
+
+        # DEPRECATION WARNING
+        print("   ⚠️  WARNING: USING DEPRECATED OutputStage!")
+        print("   ⚠️  This legacy system generates meaningless metric names.")
+        print("   ⚠️  USE EnhancedOutputStage from enhanced_output.py instead!")
+        print("   ⚠️  The enhanced system has proper business-friendly naming.")
+        print()
+
         print("   📊 Generating 4-level intelligence framework...")
         
         # DEBUG: Log what we received from Analysis stage

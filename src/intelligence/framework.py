@@ -44,6 +44,7 @@ class IntelligenceSignal:
     source_module: str                             # Which intelligence module generated this
     signal_strength: SignalStrength                # Computed strength classification
     recommended_levels: List[IntelligenceLevel]    # Which L1-L4 levels to surface in
+    metric_name: str = ""                          # Descriptive name for this metric (e.g., 'competitive_similarity_threat')
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
@@ -78,32 +79,49 @@ class ProgressiveDisclosureFramework:
         self.signals: List[IntelligenceSignal] = []
     
     def add_signal(
-        self, 
-        insight: str, 
+        self,
+        insight: str,
         value: Union[float, int, str, Dict],
         confidence: float,
-        business_impact: float, 
+        business_impact: float,
         actionability: float,
         source_module: str,
+        metric_name: str = "",
         metadata: Optional[Dict] = None
     ) -> IntelligenceSignal:
         """Add a new intelligence signal with automatic classification"""
-        
+
+        # Normalize numerical values to exactly 2 decimal places
+        normalized_value = self._normalize_value(value)
+
         signal = IntelligenceSignal(
             insight=insight,
-            value=value,
+            value=normalized_value,
             confidence=confidence,
             business_impact=business_impact,
             actionability=actionability,
             source_module=source_module,
+            metric_name=metric_name,
             signal_strength=self._classify_signal_strength(confidence, business_impact, actionability),
             recommended_levels=self._determine_disclosure_levels(confidence, business_impact, actionability),
             metadata=metadata or {}
         )
-        
+
         self.signals.append(signal)
         return signal
-    
+
+    def _normalize_value(self, value: Union[float, int, str, Dict]) -> Union[float, int, str, Dict]:
+        """Normalize numerical values to exactly 2 decimal places for consistency"""
+        if isinstance(value, float):
+            # Round to exactly 2 decimal places
+            return round(value, 2)
+        elif isinstance(value, int):
+            # Keep integers as integers
+            return value
+        else:
+            # Keep strings, dicts, and other types unchanged
+            return value
+
     def _classify_signal_strength(
         self, 
         confidence: float, 
@@ -180,7 +198,7 @@ class ProgressiveDisclosureFramework:
         return {
             'executive_insights': [s.insight for s in top_signals],
             'critical_metrics': {
-                f"{s.source_module}_{i}": s.value 
+                s.metric_name or f"{s.source_module}_{i}": s.value
                 for i, s in enumerate(top_signals)
                 if isinstance(s.value, (int, float))
             },
@@ -1738,6 +1756,7 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.7,
             actionability=0.9,
             source_module="Creative Intelligence",
+            metric_name="creative_text_length_short",
             metadata=temporal_metadata
         )
     elif avg_length > 200:
@@ -1758,6 +1777,7 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.6,
             actionability=0.8,
             source_module="Creative Intelligence",
+            metric_name="creative_text_length_long",
             metadata=temporal_metadata
         )
     
@@ -1780,6 +1800,7 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.8,
             actionability=0.8,
             source_module="Creative Intelligence",
+            metric_name="brand_mention_frequency_low",
             metadata={'metric': 'brand_mentions', 'current': brand_mentions, 'target': 1.0}
         )
     
@@ -1792,21 +1813,23 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
         if ai_emotional_intensity < 3.0:
             framework.add_signal(
                 insight="Low emotional intensity detected through AI analysis - strengthen emotional appeal for eyewear marketing",
-                value=ai_emotional_intensity,
+                value=round(ai_emotional_intensity, 2),
                 confidence=0.8,
                 business_impact=0.7,
                 actionability=0.8,
                 source_module="Creative Intelligence",
+                metric_name="emotional_intensity_score",
                 metadata={'metric': 'ai_emotional_intensity', 'scale': '0-10', 'analysis_type': 'ai_generated'}
             )
         elif ai_emotional_intensity > 8.0:
             framework.add_signal(
                 insight="Very high emotional intensity detected - consider balanced approach for broader audience appeal",
-                value=ai_emotional_intensity,
+                value=round(ai_emotional_intensity, 2),
                 confidence=0.7,
                 business_impact=0.6,
                 actionability=0.7,
                 source_module="Creative Intelligence",
+                metric_name="emotional_intensity_score",
                 metadata={'metric': 'ai_emotional_intensity', 'scale': '0-10', 'analysis_type': 'ai_generated'}
             )
     else:
@@ -1820,6 +1843,7 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
                 business_impact=0.6,
                 actionability=0.7,
                 source_module="Creative Intelligence",
+                metric_name="emotional_keywords_limited",
                 metadata={'metric': 'emotional_keywords', 'examples': ['amazing', 'perfect', 'love'], 'analysis_type': 'regex_based'}
             )
 
@@ -1827,11 +1851,12 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
     if ai_industry_relevance > 0 and ai_industry_relevance < 0.4:
         framework.add_signal(
             insight="Low eyewear industry relevance in emotional messaging - tailor content for eyewear context",
-            value=ai_industry_relevance,
+            value=round(ai_industry_relevance, 2),
             confidence=0.8,
             business_impact=0.8,
             actionability=0.9,
             source_module="Creative Intelligence",
+            metric_name="industry_relevance_score",
             metadata={'metric': 'ai_industry_relevance', 'scale': '0-1', 'industry': 'eyewear'}
         )
 
@@ -1844,12 +1869,13 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
         if total_positive_aspirational < 30:  # Less than 30% positive/aspirational
             framework.add_signal(
                 insight="Low positive/aspirational sentiment detected - increase uplifting messaging for eyewear brand building",
-                value=total_positive_aspirational,
+                value=round(total_positive_aspirational, 2),
                 confidence=0.8,
                 business_impact=0.7,
                 actionability=0.8,
                 source_module="Creative Intelligence",
-                metadata={'metric': 'ai_sentiment_balance', 'positive_rate': ai_positive_rate, 'aspirational_rate': ai_aspirational_rate}
+                metric_name="positive_sentiment_rate_pct",
+                metadata={'metric': 'ai_sentiment_balance', 'positive_rate': ai_positive_rate, 'aspirational_rate': ai_aspirational_rate, 'scale': 'percentage'}
             )
 
     # AI Persuasion Style Analysis
@@ -1865,6 +1891,7 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
                 business_impact=0.6,
                 actionability=0.7,
                 source_module="Creative Intelligence",
+                metric_name="lifestyle_positioning_heavy",
                 metadata={'metric': 'ai_lifestyle_dominance', 'percentage': ai_lifestyle_rate}
             )
         elif ai_premium_rate > 60:
@@ -1875,17 +1902,19 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
                 business_impact=0.7,
                 actionability=0.8,
                 source_module="Creative Intelligence",
+                metric_name="premium_positioning_strong",
                 metadata={'metric': 'ai_premium_positioning', 'percentage': ai_premium_rate}
             )
         elif ai_lifestyle_rate + ai_premium_rate < 20:
             framework.add_signal(
                 insight="Limited lifestyle/premium positioning - opportunity to enhance brand appeal through emotional storytelling",
-                value=ai_lifestyle_rate + ai_premium_rate,
+                value=round(ai_lifestyle_rate + ai_premium_rate, 2),
                 confidence=0.8,
                 business_impact=0.8,
                 actionability=0.9,
                 source_module="Creative Intelligence",
-                metadata={'metric': 'ai_positioning_gap', 'total_rate': ai_lifestyle_rate + ai_premium_rate}
+                metric_name="emotional_positioning_rate_pct",
+                metadata={'metric': 'ai_positioning_gap', 'total_rate': ai_lifestyle_rate + ai_premium_rate, 'scale': 'percentage'}
             )
     
     # Creative Density Signal
@@ -1898,6 +1927,7 @@ def create_creative_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.5,
             actionability=0.6,
             source_module="Creative Intelligence",
+            metric_name="content_density_low",
             metadata={'metric': 'creative_density', 'interpretation': 'words_per_100_chars'}
         )
 
@@ -1925,6 +1955,7 @@ def create_channel_intelligence_signals(framework: ProgressiveDisclosureFramewor
             business_impact=0.7,
             actionability=0.8,
             source_module="Channel Intelligence",
+            metric_name="platform_diversification_low",
             metadata=temporal_metadata
         )
     
@@ -1947,6 +1978,7 @@ def create_channel_intelligence_signals(framework: ProgressiveDisclosureFramewor
             business_impact=0.8,
             actionability=0.9,
             source_module="Channel Intelligence",
+            metric_name="cross_platform_synergy_low",
             metadata={'metric': 'cross_platform_synergy', 'unit': 'percentage', 'target': 60.0}
         )
     
@@ -1960,6 +1992,7 @@ def create_channel_intelligence_signals(framework: ProgressiveDisclosureFramewor
             business_impact=0.6,
             actionability=0.7,
             source_module="Channel Intelligence",
+            metric_name="platform_optimization_needed",
             metadata={'metric': 'platform_optimization', 'instagram_optimal': '50-150 chars', 'facebook_optimal': '100+ chars'}
         )
     
@@ -1973,6 +2006,7 @@ def create_channel_intelligence_signals(framework: ProgressiveDisclosureFramewor
             business_impact=0.9,  # High business risk
             actionability=0.7,
             source_module="Channel Intelligence",
+            metric_name="channel_concentration_risk",
             metadata={'metric': 'concentration_risk', 'risk_type': 'policy_changes', 'mitigation': 'diversification'}
         )
 
@@ -1989,6 +2023,7 @@ def create_audience_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.7,
             actionability=0.8,
             source_module="Audience Intelligence",
+            metric_name="audience_cross_platform_low",
             metadata={'metric': 'cross_platform_rate', 'unit': 'percentage', 'target': 50.0}
         )
 
@@ -2002,6 +2037,7 @@ def create_audience_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.6,
             actionability=0.8,
             source_module="Audience Intelligence",
+            metric_name="communication_length_short",
             metadata={'metric': 'avg_text_length', 'unit': 'characters', 'optimal_range': '75-150'}
         )
     elif avg_text_length > 200:
@@ -2012,6 +2048,7 @@ def create_audience_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.6,
             actionability=0.8,
             source_module="Audience Intelligence",
+            metric_name="communication_length_long",
             metadata={'metric': 'avg_text_length', 'unit': 'characters', 'optimal_range': '75-150'}
         )
 
@@ -2025,6 +2062,7 @@ def create_audience_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.8,
             actionability=0.9,
             source_module="Audience Intelligence",
+            metric_name="price_consciousness_high",
             metadata={'metric': 'price_conscious_rate', 'unit': 'percentage', 'strategy': 'value_messaging'}
         )
 
@@ -2038,6 +2076,7 @@ def create_audience_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.7,
             actionability=0.8,
             source_module="Audience Intelligence",
+            metric_name="millennial_focus_strong",
             metadata={'metric': 'millennial_focus_rate', 'unit': 'percentage', 'strategy': 'digital_lifestyle_messaging'}
         )
 
@@ -2051,6 +2090,7 @@ def create_audience_intelligence_signals(framework: ProgressiveDisclosureFramewo
             business_impact=0.9,
             actionability=0.7,
             source_module="Audience Intelligence",
+            metric_name="platform_dependency_risk",
             metadata={'metric': 'platform_strategy', 'current': platform_strategy, 'recommendation': 'CROSS_PLATFORM'}
         )
 
@@ -2068,6 +2108,7 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
             business_impact=0.8,
             actionability=0.9,
             source_module="Visual Intelligence",
+            metric_name="visual_text_alignment_low",
             metadata={'metric': 'visual_text_alignment', 'threshold': 0.6, 'optimization': 'multimodal_consistency'}
         )
     elif avg_alignment > 0.85:
@@ -2078,6 +2119,7 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
             business_impact=0.6,
             actionability=0.5,
             source_module="Visual Intelligence",
+            metric_name="visual_text_alignment_high",
             metadata={'metric': 'visual_text_alignment', 'status': 'strength'}
         )
 
@@ -2091,6 +2133,7 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
             business_impact=0.9,  # Brand consistency is critical
             actionability=0.8,
             source_module="Visual Intelligence",
+            metric_name="brand_consistency_low",
             metadata={'metric': 'brand_consistency', 'impact': 'brand_recognition', 'threshold': 0.7}
         )
 
@@ -2127,6 +2170,7 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
         business_impact=business_impact,
         actionability=0.7,
         source_module="Visual Intelligence",
+        metric_name="competitive_positioning_matrix",
         metadata={'metric': 'competitive_positioning', 'quadrant': positioning_quadrant, 'matrix': '2D_luxury_boldness'}
     )
 
@@ -2140,6 +2184,7 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
             business_impact=0.7,
             actionability=0.8,
             source_module="Visual Intelligence",
+            metric_name="creative_fatigue_risk",
             metadata={'metric': 'creative_fatigue', 'risk_level': 'high', 'action': 'visual_refresh'}
         )
 
@@ -2153,6 +2198,7 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
             business_impact=0.8,
             actionability=0.8,
             source_module="Visual Intelligence",
+            metric_name="visual_differentiation_low",
             metadata={'metric': 'visual_differentiation', 'competitive_risk': 'commoditization', 'threshold': 0.5}
         )
     elif avg_differentiation > 0.8:
@@ -2163,6 +2209,7 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
             business_impact=0.6,
             actionability=0.5,
             source_module="Visual Intelligence",
+            metric_name="visual_differentiation_high",
             metadata={'metric': 'visual_differentiation', 'status': 'competitive_advantage'}
         )
 
@@ -2178,6 +2225,7 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
             business_impact=0.7,
             actionability=0.8,
             source_module="Visual Intelligence",
+            metric_name="demographic_targeting_clear",
             metadata={'metric': 'demographic_targeting', 'primary_audience': dominant_demographic, 'strategy': 'audience_optimization'}
         )
     elif demographic_confidence < 0.5:
@@ -2188,5 +2236,6 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
             business_impact=0.8,
             actionability=0.9,
             source_module="Visual Intelligence",
+            metric_name="demographic_targeting_unclear",
             metadata={'metric': 'demographic_targeting', 'issue': 'unclear_targeting', 'action_needed': 'audience_definition'}
         )

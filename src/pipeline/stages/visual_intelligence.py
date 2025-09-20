@@ -262,7 +262,7 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
                 '7. contradictions: Any visual-text contradictions\\n',
                 '8. recommendations: Max 2 actionable insights'
               ),
-              connection_id => 'bigquery-ai-kaggle-469620.us.gemini-connection'
+              connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai'
             ) as visual_analysis
           FROM top_sampled
         ),
@@ -286,7 +286,7 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
                 '7. positioning_strengths: [max 2 competitive strengths]\\n',
                 '8. positioning_gaps: [max 2 potential positioning opportunities]'
               ),
-              connection_id => 'bigquery-ai-kaggle-469620.us.gemini-connection'
+              connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai'
             ) as competitive_analysis
           FROM visual_analyzed
         )

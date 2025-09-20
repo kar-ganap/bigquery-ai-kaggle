@@ -557,7 +557,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                     '6. emotional_keywords_detected: [list of emotional trigger words found]\\n',
                     '7. industry_relevance_score (0-1): How well emotion fits eyewear context'
                   ),
-                  connection_id => 'bigquery-ai-kaggle-469620.us.gemini-connection'
+                  connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai'
                 ) as sentiment_analysis
               FROM ai_sentiment_selected
             ),

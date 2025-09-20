@@ -12,9 +12,11 @@ from ..models.candidates import EmbeddingResults, AnalysisResults
 
 try:
     from src.utils.bigquery_client import get_bigquery_client, run_query
+    from src.utils.sql_helpers import safe_brand_in_clause
 except ImportError:
     get_bigquery_client = None
     run_query = None
+    safe_brand_in_clause = None
 
 try:
     from src.competitive_intel.intelligence.temporal_intelligence_module import TemporalIntelligenceEngine
@@ -317,7 +319,7 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 ON e.ad_archive_id = s.ad_archive_id AND e.brand = s.brand
                 WHERE e.content_embedding IS NOT NULL
                     AND s.start_timestamp IS NOT NULL
-                    AND e.brand IN ({', '.join([f"'{self.context.brand}'"] + [f"'{b}'" for b in self.competitor_brands])})
+                    AND e.brand IN {safe_brand_in_clause(self.context.brand, self.competitor_brands) if safe_brand_in_clause else "('Warby Parker')"}
             ),
             brand_similarity AS (
                 SELECT 
