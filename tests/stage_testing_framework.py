@@ -239,7 +239,10 @@ class StageTestingFramework:
             self.save_stage_result("Ranking", 3, validated_competitors, ranked_competitors, duration)
             
             print(f"✅ Stage 3 Complete - {len(ranked_competitors)} ranked Meta-active competitors")
-            
+
+            # Store competitor brands in context for later stages (CRITICAL for Stage 9)
+            self.context.competitor_brands = [comp.company_name for comp in ranked_competitors]
+
             # Print detailed results
             print("\n📋 RANKING RESULTS:")
             for i, competitor in enumerate(ranked_competitors, 1):
@@ -251,7 +254,7 @@ class StageTestingFramework:
                 if hasattr(competitor, 'meta_classification'):
                     print(f"      Meta Activity: {competitor.meta_classification}")
                 print()
-            
+
             return ranked_competitors
             
         except Exception as e:

@@ -66,7 +66,7 @@ class CurationStage(PipelineStage[List[CompetitorCandidate], List[ValidatedCompe
             print(f"   🔧 Creating Gemini model connection: {model_id}")
             create_model_sql = f"""
             CREATE OR REPLACE MODEL `{model_id}`
-            REMOTE WITH CONNECTION `{BQ_PROJECT}.us.gemini-connection`
+            REMOTE WITH CONNECTION `{BQ_PROJECT}.us.vertex-ai`
             OPTIONS (ENDPOINT = 'gemini-2.5-flash');
             """
 
