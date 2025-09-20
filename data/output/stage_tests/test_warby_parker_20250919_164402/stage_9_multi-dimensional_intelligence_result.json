@@ -1,0 +1,372 @@
+{
+  "stage_info": {
+    "name": "Multi-Dimensional Intelligence",
+    "number": 9,
+    "timestamp": "2025-09-19T16:49:38.409790",
+    "duration_seconds": 44.00281596183777
+  },
+  "input_summary": "Object: AnalysisResults",
+  "output_summary": "Object: MultiDimensionalResults",
+  "full_output": {
+    "status": "success",
+    "message": "Data-driven intelligence completed for 5 brands with 95.7% data completeness",
+    "current_state": {
+      "promotional_intensity": 0.6788235294117645,
+      "urgency_score": 0.17470588235294113,
+      "brand_voice_score": 0.49117647058823527,
+      "market_position": "offensive",
+      "promotional_volatility": 0.16463821639254594,
+      "avg_cta_aggressiveness": 9.529411764705882
+    },
+    "influence": {
+      "copying_detected": true,
+      "top_copier": "LensCrafters",
+      "similarity_score": 0.7280064766997523,
+      "lag_days": 0
+    },
+    "evolution": {
+      "momentum_status": "STABLE",
+      "velocity_change_7d": -0.05555555555555555,
+      "velocity_change_30d": NaN,
+      "cta_intensity_shift": 1.0,
+      "creative_status": "FRESH_CREATIVES",
+      "avg_campaign_age": 9.10588235294118
+    },
+    "forecasts": {
+      "executive_summary": "\ud83d\udcca MODERATE: Urgency messaging escalation - EyeBuyDirect (+75%)",
+      "business_impact_score": 2,
+      "confidence": "MEDIUM",
+      "top_predictions": [
+        {
+          "brand": "EyeBuyDirect",
+          "forecast": "\ud83d\udcca MODERATE: Urgency messaging escalation - EyeBuyDirect (+75%)",
+          "impact_score": 2,
+          "video_change": 0.04,
+          "promotional_change": 0.33
+        }
+      ],
+      "next_7_days": "immediate_promotional_escalation_expected",
+      "next_14_days": "steady_competitive_equilibrium",
+      "next_30_days": "stable_market_continuation"
+    },
+    "velocity": {},
+    "patterns": {},
+    "rhythms": {},
+    "momentum": {},
+    "white_spaces": {},
+    "cascades": {},
+    "channel_intelligence": {
+      "status": "success",
+      "analysis_type": "channel_intelligence",
+      "run_id": "test_warby_parker_20250919_164402",
+      "brands_analyzed": 5,
+      "table_created": "channel_intelligence_test_warby_parker_20250919_164402",
+      "avg_platform_diversification": 0.9399999999999998,
+      "cross_platform_synergy_rate": 0.0,
+      "platform_optimization_rate": 0.0,
+      "total_ads": 350,
+      "dominant_platform_strategy": "CROSS_PLATFORM_SYNERGY",
+      "dominant_channel_focus": "CONVERSION_FOCUSED",
+      "metrics_analyzed": [
+        "Platform strategy distribution (cross-platform synergy vs single-platform focus)",
+        "Content richness by platform (visual vs detailed vs minimal content)",
+        "Channel focus analysis (visual marketing vs community marketing vs conversion)",
+        "Platform activity intensity (volume-based metrics without artificial impressions)",
+        "Dominant channel strategies by brand",
+        "P2: Platform diversification scoring (0-3 scale)",
+        "P2: Content optimization by platform (Instagram/Facebook optimization rates)",
+        "P2: Cross-platform messaging consistency analysis",
+        "L4: Multi-platform coordination insights",
+        "L4: Strategic channel alignment assessment"
+      ],
+      "channel_intelligence_insights": {
+        "platform_strategies": [
+          "Cross-Platform Synergy",
+          "Instagram Focused",
+          "Facebook Focused"
+        ],
+        "content_approaches": [
+          "Rich Visual",
+          "Detailed Social",
+          "Standard",
+          "Minimal"
+        ],
+        "channel_focus_areas": [
+          "Visual Marketing",
+          "Community Marketing",
+          "Conversion Focused",
+          "Brand Awareness"
+        ],
+        "data_approach": "Volume-based analysis without artificial impression metrics",
+        "p2_enhancements": {
+          "diversification_scale": "0 (Single Platform) to 3 (Full Meta Ecosystem)",
+          "optimization_categories": [
+            "Instagram Optimized",
+            "Facebook Optimized",
+            "Under-Optimized",
+            "Standard"
+          ],
+          "consistency_metrics": [
+            "Message Length Variance",
+            "Cross-Platform Range Analysis"
+          ]
+        },
+        "l4_progressive_disclosure": {
+          "L1_IMMEDIATE_ACTION": "High-diversification cross-platform campaigns for maximum reach and conversion",
+          "L2_ENGAGEMENT_DRIVER": "Platform-optimized content with consistent messaging for sustained engagement",
+          "L3_AWARENESS_BUILDER": "Visual-focused multi-channel strategies for brand awareness expansion",
+          "L4_CONSIDERATION_NURTURE": "Community-driven consistent messaging across platforms for consideration-stage nurturing"
+        }
+      }
+    },
+    "metadata": {
+      "run_id": "test_warby_parker_20250919_164402",
+      "brands_analyzed": [
+        "LensCrafters",
+        "GlassesUSA",
+        "EyeBuyDirect",
+        "Zenni Optical",
+        "Warby Parker"
+      ],
+      "p0_modules_implemented": [
+        "Audience Intelligence"
+      ],
+      "p1_modules_implemented": [
+        "Creative Intelligence",
+        "Channel Intelligence"
+      ],
+      "data_driven_approach": true,
+      "artificial_metrics_removed": true,
+      "analysis_timestamp": "2025-09-19T16:49:38.407732"
+    },
+    "audience_intelligence": {
+      "status": "success",
+      "analysis_type": "audience_intelligence",
+      "run_id": "test_warby_parker_20250919_164402",
+      "brands_analyzed": [
+        "LensCrafters",
+        "GlassesUSA",
+        "EyeBuyDirect",
+        "Zenni Optical",
+        "Warby Parker"
+      ],
+      "table_created": "audience_intelligence_test_warby_parker_20250919_164402",
+      "metrics_analyzed": [
+        "Platform strategy patterns (cross-platform vs single-platform)",
+        "Communication style analysis (detailed vs concise messaging)",
+        "Price positioning signals (premium vs value vs quality)",
+        "Lifestyle targeting patterns (professional vs fashion vs family)",
+        "AI-powered psychographic profiling (price-conscious, style-conscious, convenience-seeking, etc.)",
+        "Age group targeting analysis (Gen Z, Millennials, Gen X, Boomers)",
+        "Cross-brand competitive psychographic analysis",
+        "Dominant audience strategies by brand"
+      ],
+      "total_ads": 350,
+      "avg_cross_platform_rate": 0.0,
+      "avg_text_length": 326.88,
+      "avg_price_conscious_rate": 12.599999999999998,
+      "avg_millennial_focus_rate": 88.9,
+      "most_common_platform_strategy": "CROSS_PLATFORM",
+      "most_common_communication_style": "MODERATE_COMMUNICATION",
+      "most_common_psychographic": "STYLE_CONSCIOUS",
+      "most_common_age_group": "MILLENNIAL_25_34"
+    },
+    "creative_intelligence": {
+      "status": "success",
+      "analysis_type": "creative_intelligence",
+      "run_id": "test_warby_parker_20250919_164402",
+      "brands_analyzed": 5,
+      "table_created": "creative_intelligence_test_warby_parker_20250919_164402",
+      "avg_text_length": 326.88,
+      "avg_brand_mentions": 0.0,
+      "avg_emotional_keywords": 0.0,
+      "avg_creative_density": 16.6,
+      "avg_ai_emotional_intensity": 0.04,
+      "avg_ai_industry_relevance": 0.10600000000000001,
+      "ai_positive_sentiment_rate": 1.3390044108380592,
+      "ai_aspirational_sentiment_rate": 0.0,
+      "ai_lifestyle_style_rate": 0.0,
+      "ai_premium_style_rate": 0.0,
+      "total_ads": 6348,
+      "dominant_messaging_theme": "PERSONALIZATION_FOCUSED",
+      "dominant_emotional_tone": "URGENCY_DRIVEN",
+      "metrics_analyzed": [
+        "Messaging theme distribution (innovation, value, quality, personalization, style)",
+        "Emotional tone analysis (emotional-positive, rational-trust, convenience, urgency)",
+        "Content complexity patterns (detailed vs concise messaging)",
+        "Dominant creative strategies by brand",
+        "Average content length and messaging depth",
+        "P2: Text length classification (Short/Medium/Long)",
+        "P2: Brand mention frequency analysis",
+        "P2: Emotional keyword density detection",
+        "P2: Creative density scoring (content richness)",
+        "L4: High-emotion content identification",
+        "L4: Brand-heavy messaging patterns",
+        "L4: Content-rich creative strategies"
+      ],
+      "creative_intelligence_insights": {
+        "messaging_themes": [
+          "Innovation",
+          "Value",
+          "Quality",
+          "Personalization",
+          "Style"
+        ],
+        "emotional_tones": [
+          "Emotional Positive",
+          "Rational Trust",
+          "Convenience",
+          "Urgency"
+        ],
+        "content_strategies": [
+          "Detailed",
+          "Moderate",
+          "Concise",
+          "Minimal"
+        ],
+        "p2_enhancements": {
+          "text_lengths": [
+            "Short (\u226475 chars)",
+            "Medium (76-150 chars)",
+            "Long (>150 chars)"
+          ],
+          "brand_frequency": "Number of brand mentions per ad",
+          "emotional_keywords": "Count of emotional trigger words",
+          "creative_density": "Word-to-character ratio (content richness)"
+        },
+        "l4_progressive_disclosure": {
+          "L1_IMMEDIATE_ACTION": "Brand-heavy ads with high emotional keywords for immediate conversion",
+          "L2_ENGAGEMENT_DRIVER": "Content-rich ads with moderate emotional appeal for engagement",
+          "L3_AWARENESS_BUILDER": "Long-form messaging with innovation/style themes for awareness",
+          "L4_CONSIDERATION_NURTURE": "Detailed content with quality/trust themes for consideration"
+        }
+      }
+    },
+    "visual_intelligence": {
+      "status": "success",
+      "analysis_type": "visual_intelligence_metrics",
+      "run_id": "test_warby_parker_20250919_164402",
+      "table_source": "visual_intelligence_test_warby_parker_20250919_164402",
+      "avg_visual_text_alignment": 0.843,
+      "avg_brand_consistency": 0.8200000000000001,
+      "avg_creative_fatigue_risk": 0.45999999999999996,
+      "avg_luxury_positioning": 0.318,
+      "avg_boldness": 0.40900000000000003,
+      "avg_visual_differentiation": 0.38200000000000006,
+      "avg_creative_pattern_risk": 0.5860000000000002,
+      "total_visual_ads": 50,
+      "brands_analyzed": 5,
+      "metrics_analyzed": [
+        "Visual-text alignment scoring",
+        "Brand consistency across creative elements",
+        "Creative fatigue risk assessment",
+        "Luxury vs accessible positioning analysis",
+        "Bold vs subtle visual approach",
+        "Visual differentiation from competitors",
+        "Creative pattern risk evaluation"
+      ],
+      "visual_intelligence_insights": {
+        "multimodal_analysis": "AI-powered visual and text alignment scoring",
+        "brand_positioning": "Luxury-boldness competitive matrix",
+        "creative_strategy": "Visual differentiation and pattern analysis",
+        "risk_assessment": "Creative fatigue and pattern repetition detection"
+      }
+    },
+    "whitespace_intelligence": {
+      "status": "success",
+      "opportunities_found": 1,
+      "top_opportunities": [
+        "VIRGIN_TERRITORY opportunity targeting Young Adults with SOCIAL_PROOF messaging in AWARENESS stage"
+      ],
+      "strategic_opportunities": [
+        {
+          "space_type": "VIRGIN_TERRITORY",
+          "messaging_angle": "SOCIAL_PROOF",
+          "funnel_stage": "AWARENESS",
+          "target_persona": "Young Adults",
+          "overall_score": 0.28,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "See What Everyone's Loving: Trending Frames on EyeBuyDirect",
+            "value_propositions": "Discover the most popular styles among our community and find your next favorite pair of glasses.",
+            "recommended_ctas": "Explore Styles",
+            "channel_focus": "Cross-platform",
+            "audience_sizing": "Large (500K+)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+          "success_metrics": "Reach >200K, Engagement Rate >3%, Site traffic increase 15%",
+          "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+          "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Young Adults with SOCIAL_PROOF messaging in AWARENESS stage",
+          "confidence_level": "LOW"
+        }
+      ],
+      "analysis_summary": "Parallel analysis found 1 strategic opportunities",
+      "strategic_recommendations": [
+        {
+          "space_type": "VIRGIN_TERRITORY",
+          "messaging_angle": "SOCIAL_PROOF",
+          "funnel_stage": "AWARENESS",
+          "target_persona": "Young Adults",
+          "overall_score": 0.28,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "See What Everyone's Loving: Trending Frames on EyeBuyDirect",
+            "value_propositions": "Discover the most popular styles among our community and find your next favorite pair of glasses.",
+            "recommended_ctas": "Explore Styles",
+            "channel_focus": "Cross-platform",
+            "audience_sizing": "Large (500K+)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+          "success_metrics": "Reach >200K, Engagement Rate >3%, Site traffic increase 15%",
+          "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+          "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Young Adults with SOCIAL_PROOF messaging in AWARENESS stage",
+          "confidence_level": "LOW"
+        }
+      ],
+      "performance_metrics": {
+        "duration_seconds": 10.803052,
+        "coverage": "FULL_DATASET",
+        "approach": "hybrid_chunked_enhanced",
+        "white_space_opportunities": 0
+      },
+      "data_quality": "high",
+      "competitive_gaps_detected": true,
+      "run_metadata": {
+        "run_id": "test_warby_parker_20250919_164402",
+        "brands_analyzed": 5,
+        "detection_method": "parallel_chunked_processing",
+        "target_met": true,
+        "intelligence_level": "STRATEGIC_DISCOVERY"
+      }
+    },
+    "intelligence_summary": {
+      "status": "success",
+      "analysis_type": "data_driven_intelligence_summary",
+      "run_id": "test_warby_parker_20250919_164402",
+      "brands_analyzed": [
+        "LensCrafters",
+        "GlassesUSA",
+        "EyeBuyDirect",
+        "Zenni Optical",
+        "Warby Parker"
+      ],
+      "summary_view": "v_intelligence_summary_test_warby_parker_20250919_164402",
+      "data_approach": "p0_audience_focus",
+      "p0_deliverables": [
+        "Platform strategy and cross-platform usage analysis",
+        "Communication style and message length patterns",
+        "Audience intelligence competitive positioning"
+      ],
+      "intelligence_value": "Actionable competitive insights without artificial scoring"
+    },
+    "data_completeness": 95.7
+  }
+}

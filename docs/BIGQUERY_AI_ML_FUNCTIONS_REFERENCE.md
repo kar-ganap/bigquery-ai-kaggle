@@ -162,8 +162,8 @@ Based on our codebase analysis, we need to fix:
 3. `src/competitive_intel/intelligence/channel_performance.py`
 
 ### Required Changes:
-1. **Replace** `AI.GENERATE(..., connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai')`
-2. **With** `AI.GENERATE(..., connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai')`
+1. **Replace** `connection_id => 'bigquery-ai-kaggle-469620.us.gemini-connection'`
+2. **With** `connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai'`
 3. **Fix** any SQL escaping issues in generated queries
 4. **Test** all AI.GENERATE calls for proper execution
 

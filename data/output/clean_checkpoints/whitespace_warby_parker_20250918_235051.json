@@ -1,0 +1,221 @@
+{
+  "status": "success",
+  "opportunities_found": 5,
+  "top_opportunities": [
+    "MONOPOLY opportunity targeting Loyal Customers with EMOTIONAL messaging in RETENTION stage",
+    "VIRGIN_TERRITORY opportunity targeting Trend Followers with SOCIAL_PROOF messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Convenience Seekers with PROBLEM_SOLUTION messaging in DECISION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Loyal Customers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Your Vision, Our Priority: Exclusive Offers for Our Valued Customers.",
+        "value_propositions": "Show appreciation for loyalty with exclusive discounts, early access to new styles, and personalized eye care reminders to ensure optimal vision health.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email, SMS",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Email, SMS",
+      "success_metrics": "Email Open Rate >20%, Redemption Rate >5%, Customer Lifetime Value +10%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Loyal Customers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "DECISION",
+      "target_persona": "Trend Followers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See What Everyone's Seeing: Trending Styles at Unbeatable Prices.",
+        "value_propositions": "Join our community of stylish individuals and discover your perfect pair from our vast collection of on-trend frames.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Website Traffic +15%, Social Engagement +20%, Repeat Purchase Rate +3%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Followers with SOCIAL_PROOF messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "DECISION",
+      "target_persona": "Convenience Seekers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Need Glasses Fast? Get 2-Day Shipping on Your EyeBuyDirect Order!",
+        "value_propositions": "Experience the convenience of receiving your new glasses incredibly fast with our 2-day shipping option.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CTR >1.0%, Conversion Rate +5%, Increase in orders with 2-day shipping",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Convenience Seekers with PROBLEM_SOLUTION messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "First-Time Buyers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Overwhelmed? Find Your Perfect Glasses with Our Quick Quiz!",
+        "value_propositions": "Simplify your glasses selection with personalized recommendations. Discover the perfect pair that complements your style and fits your needs, eliminating the guesswork and reducing decision fatigue.",
+        "recommended_ctas": "Try Free",
+        "channel_focus": "Facebook|Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Quiz Completion Rate > 25%, Conversion Rate from Quiz > 5%, CPA < $XX",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting First-Time Buyers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Hearing Impaired Adults",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See, Hear, and Wear: The Future of Hearing is Here.",
+        "value_propositions": "Nuance Audio Glasses provide a discreet and comfortable hearing solution integrated into stylish eyewear, enhancing everyday life.",
+        "recommended_ctas": "Book Now",
+        "channel_focus": "Facebook, Instagram, Video",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, Demo Bookings >100 per week, Website Traffic +20%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Hearing Impaired Adults with FUNCTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 5 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Loyal Customers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Your Vision, Our Priority: Exclusive Offers for Our Valued Customers.",
+        "value_propositions": "Show appreciation for loyalty with exclusive discounts, early access to new styles, and personalized eye care reminders to ensure optimal vision health.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email, SMS",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Email, SMS",
+      "success_metrics": "Email Open Rate >20%, Redemption Rate >5%, Customer Lifetime Value +10%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Loyal Customers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "DECISION",
+      "target_persona": "Trend Followers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See What Everyone's Seeing: Trending Styles at Unbeatable Prices.",
+        "value_propositions": "Join our community of stylish individuals and discover your perfect pair from our vast collection of on-trend frames.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Website Traffic +15%, Social Engagement +20%, Repeat Purchase Rate +3%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Followers with SOCIAL_PROOF messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "DECISION",
+      "target_persona": "Convenience Seekers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Need Glasses Fast? Get 2-Day Shipping on Your EyeBuyDirect Order!",
+        "value_propositions": "Experience the convenience of receiving your new glasses incredibly fast with our 2-day shipping option.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CTR >1.0%, Conversion Rate +5%, Increase in orders with 2-day shipping",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Convenience Seekers with PROBLEM_SOLUTION messaging in DECISION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 14.258627,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250918_235051",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

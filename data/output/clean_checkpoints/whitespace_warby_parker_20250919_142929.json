@@ -1,0 +1,269 @@
+{
+  "status": "success",
+  "opportunities_found": 7,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting ASMR Enthusiasts with ASPIRATIONAL messaging in CONSIDERATION stage",
+    "VIRGIN_TERRITORY opportunity targeting Lifestyle Enthusiasts with EMOTIONAL messaging in AWARENESS stage",
+    "MONOPOLY opportunity targeting Loyal Customers with EMOTIONAL messaging in RETENTION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "ASMR Enthusiasts",
+      "overall_score": 0.495,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Organize your life, starting with your eyewear collection.  Clean frames, clear vision.",
+        "value_propositions": "Embrace the trend of organization and clarity with stylish glasses.  Perfect for a fresh start!",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "TikTok|Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Website Visits from ASMR content +20%, Engagement on ASMR focused posts",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting ASMR Enthusiasts with ASPIRATIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "MEDIUM"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Lifestyle Enthusiasts",
+      "overall_score": 0.44,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Express Yourself: Discover Glasses That Reflect Your Unique Style.",
+        "value_propositions": "Find glasses that not only improve your vision but also enhance your personal style and make a statement.  GlassesUSA: Where fashion meets function.",
+        "recommended_ctas": "Explore Styles",
+        "channel_focus": "Instagram|Video",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Brand Lift +5%, Video Completion Rate > 25%, Engagement Rate (likes, comments, shares) > 1%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Lifestyle Enthusiasts with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "MEDIUM"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Loyal Customers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Exclusive Offer for Our Valued Customers!",
+        "value_propositions": "As a thank you for your continued support, enjoy a special discount on your next pair of glasses or comprehensive eye exam.",
+        "recommended_ctas": "Learn More",
+        "channel_focus": "Email, Cross-platform",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Email, Cross-platform",
+      "success_metrics": "Email Open Rate >15%, Redemption Rate >5%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Loyal Customers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Struggling to find the perfect glasses? {Number} reasons GlassesUSA makes it easy.",
+        "value_propositions": "Eliminate the stress of online glasses shopping with our easy quiz, free returns, and money-back guarantee. Find the perfect fit and style without the hassle.",
+        "recommended_ctas": "Take the Quiz",
+        "channel_focus": "Facebook|Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Quiz completion rate > 15%, CTR from quiz results to product page > 5%, CPA < $40",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Eye Health Conscious",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Prioritize Your Eye Health: Schedule Your Comprehensive Eye Exam Today",
+        "value_propositions": "Stay proactive about your vision health with comprehensive eye exams at LensCrafters, ensuring early detection of potential issues and optimal vision for a better quality of life.",
+        "recommended_ctas": "Book Now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Instagram",
+      "success_metrics": "CTR >1%, Increase eye exam bookings by 8%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Eye Health Conscious with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Hearing Impaired",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Finally, [Benefit of Nuance Audio Glasses] with [Specific Feature] - Demo Today!",
+        "value_propositions": "Experience clear hearing in a stylish, discreet package with Nuance Audio Glasses, enhancing your daily life without compromising your look.",
+        "recommended_ctas": "Book Now",
+        "channel_focus": "Facebook, Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, CPA <$40, Demo bookings +15%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Hearing Impaired with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Trend Setters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "New Frames, New You: Upgrade your look with our diverse collection!",
+        "value_propositions": "Express your unique style and enhance your confidence with trendy and affordable glasses.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram|Video",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Reach 2M, Engagement Rate >2%, Website Visits +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Setters with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 7 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "ASMR Enthusiasts",
+      "overall_score": 0.495,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Organize your life, starting with your eyewear collection.  Clean frames, clear vision.",
+        "value_propositions": "Embrace the trend of organization and clarity with stylish glasses.  Perfect for a fresh start!",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "TikTok|Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Website Visits from ASMR content +20%, Engagement on ASMR focused posts",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting ASMR Enthusiasts with ASPIRATIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "MEDIUM"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Lifestyle Enthusiasts",
+      "overall_score": 0.44,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Express Yourself: Discover Glasses That Reflect Your Unique Style.",
+        "value_propositions": "Find glasses that not only improve your vision but also enhance your personal style and make a statement.  GlassesUSA: Where fashion meets function.",
+        "recommended_ctas": "Explore Styles",
+        "channel_focus": "Instagram|Video",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Brand Lift +5%, Video Completion Rate > 25%, Engagement Rate (likes, comments, shares) > 1%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Lifestyle Enthusiasts with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "MEDIUM"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Loyal Customers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Exclusive Offer for Our Valued Customers!",
+        "value_propositions": "As a thank you for your continued support, enjoy a special discount on your next pair of glasses or comprehensive eye exam.",
+        "recommended_ctas": "Learn More",
+        "channel_focus": "Email, Cross-platform",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Email, Cross-platform",
+      "success_metrics": "Email Open Rate >15%, Redemption Rate >5%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Loyal Customers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 12.785233,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250919_142929",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}
