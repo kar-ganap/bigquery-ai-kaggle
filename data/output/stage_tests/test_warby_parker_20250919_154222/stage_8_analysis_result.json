@@ -1,0 +1,42 @@
+{
+  "stage_info": {
+    "name": "Analysis",
+    "number": 8,
+    "timestamp": "2025-09-19T15:46:39.481620",
+    "duration_seconds": 13.558056831359863
+  },
+  "input_summary": "Object: EmbeddingResults",
+  "output_summary": "Object: AnalysisResults",
+  "full_output": {
+    "current_state": {
+      "promotional_intensity": 0.690705128205128,
+      "urgency_score": 0.2012820512820513,
+      "brand_voice_score": 0.4823717948717948,
+      "market_position": "offensive",
+      "promotional_volatility": 0.14466919853856214,
+      "avg_cta_aggressiveness": 9.461538461538462
+    },
+    "influence": {
+      "copying_detected": false,
+      "similarity_score": 0
+    },
+    "evolution": {
+      "trend_direction": "stable",
+      "data_available": false
+    },
+    "forecasts": {
+      "next_7_days": "stable_market",
+      "next_14_days": "stable_market",
+      "next_30_days": "stable_market",
+      "confidence": "LOW",
+      "data_available": false
+    },
+    "velocity": {},
+    "patterns": {},
+    "rhythms": {},
+    "momentum": {},
+    "white_spaces": {},
+    "cascades": {},
+    "status": "success"
+  }
+}

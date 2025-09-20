@@ -1,0 +1,16 @@
+{
+  "stage_info": {
+    "name": "Ranking",
+    "number": 3,
+    "timestamp": "2025-09-19T17:12:14.178062",
+    "duration_seconds": 26.357188940048218
+  },
+  "input_summary": "List with 7 items",
+  "output_summary": "List with 4 items",
+  "full_output": [
+    "ValidatedCompetitor(company_name='GlassesUSA', is_competitor=True, tier='Direct-Rival', market_overlap_pct=88, customer_substitution_ease='Easy', confidence=0.9333333333333332, reasoning='Consensus (3/3 votes): Both are online eyewear retailers offering prescription glasses, sunglasses, and contacts with competitive pricing and home try-on options. They target a similar customer base.', evidence_sources=\"General knowledge of online eyewear market; both companies' direct-to-consumer models & product offerings.\", quality_score=0.9677333333333333, meta_tier=3, estimated_ad_count='25+', meta_classification='Major Player (20+ ads)')",
+    "ValidatedCompetitor(company_name='LensCrafters', is_competitor=True, tier='Market-Leader', market_overlap_pct=88, customer_substitution_ease='Easy', confidence=0.9333333333333332, reasoning='Consensus (3/3 votes): Both companies operate in the eyewear industry, selling prescription glasses, sunglasses, and offering eye exams to a similar customer base.', evidence_sources='General knowledge of eyewear market, company websites, provided search result context.', quality_score=0.9677333333333333, meta_tier=3, estimated_ad_count='20+', meta_classification='Major Player (20+ ads)')",
+    "ValidatedCompetitor(company_name='Zenni Optical', is_competitor=True, tier='Direct-Rival', market_overlap_pct=85, customer_substitution_ease='Easy', confidence=0.9333333333333332, reasoning='Consensus (3/3 votes): Both are major online eyewear retailers offering prescription glasses and sunglasses directly to consumers, with competitive pricing and a focus on convenience.', evidence_sources='Web search results, general market knowledge of online eyewear retailers.', quality_score=0.9653333333333334, meta_tier=3, estimated_ad_count='26+', meta_classification='Major Player (20+ ads)')",
+    "ValidatedCompetitor(company_name='EyeBuyDirect', is_competitor=True, tier='Direct-Rival', market_overlap_pct=86, customer_substitution_ease='Easy', confidence=0.9, reasoning='Consensus (3/3 votes): Both are prominent online retailers for prescription glasses & sunglasses, competing on price, style, and convenience in the direct-to-consumer eyewear market.', evidence_sources='General knowledge of online eyewear retailers; provided search context mentioning competitor list.', quality_score=0.9608000000000001, meta_tier=3, estimated_ad_count='27+', meta_classification='Major Player (20+ ads)')"
+  ]
+}

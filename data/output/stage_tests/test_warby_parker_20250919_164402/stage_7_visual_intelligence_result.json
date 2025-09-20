@@ -1,0 +1,17 @@
+{
+  "stage_info": {
+    "name": "Visual Intelligence",
+    "number": 7,
+    "timestamp": "2025-09-19T16:48:29.920272",
+    "duration_seconds": 26.16248607635498
+  },
+  "input_summary": "Object: EmbeddingResults",
+  "output_summary": "Object: VisualIntelligenceResults",
+  "full_output": {
+    "sampled_ads": 52,
+    "visual_insights": 50,
+    "competitive_insights": 52,
+    "cost_estimate": 15.6,
+    "table_id": "visual_intelligence_20250919_164829"
+  }
+}

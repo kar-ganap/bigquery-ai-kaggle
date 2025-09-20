@@ -1,0 +1,58 @@
+{
+  "stage_info": {
+    "name": "Analysis",
+    "number": 8,
+    "timestamp": "2025-09-19T16:48:54.402851",
+    "duration_seconds": 24.479389905929565
+  },
+  "input_summary": "Object: EmbeddingResults",
+  "output_summary": "Object: AnalysisResults",
+  "full_output": {
+    "current_state": {
+      "promotional_intensity": 0.6788235294117645,
+      "urgency_score": 0.17470588235294113,
+      "brand_voice_score": 0.49117647058823527,
+      "market_position": "offensive",
+      "promotional_volatility": 0.16463821639254594,
+      "avg_cta_aggressiveness": 9.529411764705882
+    },
+    "influence": {
+      "copying_detected": true,
+      "top_copier": "LensCrafters",
+      "similarity_score": 0.7280064766997523,
+      "lag_days": 0
+    },
+    "evolution": {
+      "momentum_status": "STABLE",
+      "velocity_change_7d": -0.05555555555555555,
+      "velocity_change_30d": NaN,
+      "cta_intensity_shift": 1.0,
+      "creative_status": "FRESH_CREATIVES",
+      "avg_campaign_age": 9.10588235294118
+    },
+    "forecasts": {
+      "executive_summary": "\ud83d\udcca MODERATE: Urgency messaging escalation - EyeBuyDirect (+75%)",
+      "business_impact_score": 2,
+      "confidence": "MEDIUM",
+      "top_predictions": [
+        {
+          "brand": "EyeBuyDirect",
+          "forecast": "\ud83d\udcca MODERATE: Urgency messaging escalation - EyeBuyDirect (+75%)",
+          "impact_score": 2,
+          "video_change": 0.04,
+          "promotional_change": 0.33
+        }
+      ],
+      "next_7_days": "immediate_promotional_escalation_expected",
+      "next_14_days": "steady_competitive_equilibrium",
+      "next_30_days": "stable_market_continuation"
+    },
+    "velocity": {},
+    "patterns": {},
+    "rhythms": {},
+    "momentum": {},
+    "white_spaces": {},
+    "cascades": {},
+    "status": "success"
+  }
+}

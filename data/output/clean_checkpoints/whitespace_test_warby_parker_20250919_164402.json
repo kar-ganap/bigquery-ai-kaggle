@@ -1,0 +1,75 @@
+{
+  "status": "success",
+  "opportunities_found": 1,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Young Adults with SOCIAL_PROOF messaging in AWARENESS stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Young Adults",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See What Everyone's Loving: Trending Frames on EyeBuyDirect",
+        "value_propositions": "Discover the most popular styles among our community and find your next favorite pair of glasses.",
+        "recommended_ctas": "Explore Styles",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Reach >200K, Engagement Rate >3%, Site traffic increase 15%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Young Adults with SOCIAL_PROOF messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 1 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Young Adults",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See What Everyone's Loving: Trending Frames on EyeBuyDirect",
+        "value_propositions": "Discover the most popular styles among our community and find your next favorite pair of glasses.",
+        "recommended_ctas": "Explore Styles",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Reach >200K, Engagement Rate >3%, Site traffic increase 15%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Young Adults with SOCIAL_PROOF messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 10.803052,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "test_warby_parker_20250919_164402",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

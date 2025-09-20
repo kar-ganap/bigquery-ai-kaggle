@@ -22,12 +22,13 @@ except ImportError:
         MetaAdsFetcher = None
 
 try:
-    from src.utils.bigquery_client import load_dataframe_to_bq
+    from src.utils.bigquery_client import load_dataframe_to_bq, run_query
 except ImportError:
     try:
-        from scripts.utils.bigquery_client import load_dataframe_to_bq  # Legacy fallback
+        from scripts.utils.bigquery_client import load_dataframe_to_bq, run_query  # Legacy fallback
     except ImportError:
         load_dataframe_to_bq = None
+        run_query = None
 
 # Environment configuration
 BQ_PROJECT = os.environ.get("BQ_PROJECT", "bigquery-ai-kaggle-469620")
@@ -163,6 +164,9 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
                     print(f"   💾 Loading {len(ads_df)} ads to BigQuery table {ads_table_id}...")
                     load_dataframe_to_bq(ads_df, ads_table_id, write_disposition="WRITE_TRUNCATE")
                     results.ads_table_id = ads_table_id
+
+                    # Update ads_with_dates with intelligent deduplication (Option C)
+                    self._update_ads_with_dates_intelligent(ads_table_id)
                 except Exception as load_e:
                     print(f"   ⚠️  Could not load ads to BigQuery: {load_e}")
                     results.ads_table_id = None
@@ -336,3 +340,118 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
 
             'created_date': datetime.now().isoformat()
         }
+
+    def _update_ads_with_dates_intelligent(self, ads_table_id: str):
+        """
+        Update ads_with_dates with intelligent deduplication (Option C)
+
+        Merges new ads from current run with existing ads_with_dates table using:
+        - ROW_NUMBER() OVER (PARTITION BY ad_archive_id ORDER BY _ingestion_timestamp DESC)
+        - Keeps the most recent version of each ad
+        - Preserves historical data while avoiding duplicates
+        """
+        if not load_dataframe_to_bq or not run_query:
+            self.logger.warning("BigQuery client not available - skipping ads_with_dates update")
+            return
+
+        try:
+            ads_with_dates_table = f"{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates"
+
+            print(f"   🔄 Updating ads_with_dates with intelligent deduplication...")
+
+            # Check if ads_with_dates table exists
+            table_exists_query = f"""
+            SELECT COUNT(*) as count
+            FROM `{BQ_PROJECT}.{BQ_DATASET}.__TABLES_SUMMARY__`
+            WHERE table_id = 'ads_with_dates'
+            """
+
+            try:
+                result = run_query(table_exists_query)
+                table_exists = result.iloc[0]['count'] > 0 if not result.empty else False
+            except:
+                table_exists = False
+
+            if not table_exists:
+                # First time - just copy the current ads to ads_with_dates
+                print(f"      📝 First run - creating ads_with_dates from current ads...")
+                create_query = f"""
+                CREATE TABLE `{ads_with_dates_table}` AS
+                SELECT
+                    *,
+                    CURRENT_TIMESTAMP() as _ingestion_timestamp
+                FROM `{ads_table_id}`
+                """
+                run_query(create_query)
+                # Get count for reporting
+                count_result = run_query(f"SELECT COUNT(*) as count FROM `{ads_table_id}`")
+                ad_count = count_result.iloc[0]['count'] if not count_result.empty else 0
+                print(f"      ✅ Created ads_with_dates with {ad_count} ads")
+
+            else:
+                # Intelligent merge with deduplication
+                print(f"      🧠 Merging with existing ads_with_dates using intelligent deduplication...")
+
+                # Step 1: Create temporary table with combined data and deduplication logic
+                temp_table = f"{BQ_PROJECT}.{BQ_DATASET}.temp_ads_dedup_{self.context.run_id}"
+
+                merge_query = f"""
+                CREATE OR REPLACE TABLE `{temp_table}` AS
+                WITH combined_ads AS (
+                    -- Existing ads with their timestamps
+                    SELECT
+                        *,
+                        _ingestion_timestamp
+                    FROM `{ads_with_dates_table}`
+
+                    UNION ALL
+
+                    -- New ads with current timestamp
+                    SELECT
+                        *,
+                        CURRENT_TIMESTAMP() as _ingestion_timestamp
+                    FROM `{ads_table_id}`
+                ),
+                deduplicated_ads AS (
+                    SELECT
+                        *,
+                        ROW_NUMBER() OVER (
+                            PARTITION BY ad_archive_id
+                            ORDER BY _ingestion_timestamp DESC
+                        ) as row_rank
+                    FROM combined_ads
+                    WHERE ad_archive_id IS NOT NULL
+                )
+                SELECT * EXCEPT(row_rank)
+                FROM deduplicated_ads
+                WHERE row_rank = 1
+                """
+
+                run_query(merge_query)
+
+                # Step 2: Replace ads_with_dates with deduplicated data
+                replace_query = f"""
+                CREATE OR REPLACE TABLE `{ads_with_dates_table}` AS
+                SELECT * FROM `{temp_table}`
+                """
+
+                run_query(replace_query)
+
+                # Step 3: Clean up temporary table
+                cleanup_query = f"DROP TABLE IF EXISTS `{temp_table}`"
+                run_query(cleanup_query)
+
+                # Get counts for reporting
+                total_count = run_query(f"SELECT COUNT(*) as count FROM `{ads_with_dates_table}`").iloc[0]['count']
+                new_count = run_query(f"SELECT COUNT(*) as count FROM `{ads_table_id}`").iloc[0]['count']
+
+                print(f"      ✅ Intelligent merge completed:")
+                print(f"         📊 Total unique ads: {total_count}")
+                print(f"         📈 Current run ads: {new_count}")
+                print(f"         🧠 Deduplication prevented potential duplicates")
+
+        except Exception as e:
+            self.logger.warning(f"Failed to update ads_with_dates: {str(e)}")
+            print(f"      ⚠️  ads_with_dates update failed: {str(e)}")
+            # Don't fail the whole ingestion if this fails
+            pass

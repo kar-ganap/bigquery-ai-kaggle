@@ -50,17 +50,21 @@ def check_infrastructure():
         else:
             print("   🔧 Creating Vertex AI connection...")
             try:
-                # Create connection directly (more robust than reading from file)
-                connection_sql = f"""
-                CREATE OR REPLACE EXTERNAL CONNECTION `{project_id}.us.vertex-ai`
-                CONNECTION_TYPE = 'CLOUD_RESOURCE'
-                LOCATION = 'us'
-                PROPERTIES = (
-                  "serviceAccountId" = "bqcx-{project_id.split('-')[-1]}-bqremote@gcp-sa-bigquery-condel.iam.gserviceaccount.com"
-                );
-                """
-                run_query(connection_sql)
-                print("   ✅ Vertex AI connection created successfully")
+                # Use bq command line tool for connection creation (SQL DDL doesn't support this)
+                import subprocess
+                connection_cmd = [
+                    "bq", "mk", "--connection",
+                    "--location=us",
+                    "--project_id=" + project_id,
+                    "--connection_type=CLOUD_RESOURCE",
+                    "vertex-ai"
+                ]
+                result = subprocess.run(connection_cmd, capture_output=True, text=True)
+                if result.returncode == 0:
+                    print("   ✅ Vertex AI connection created successfully")
+                else:
+                    print(f"   ⚠️  Connection creation via bq CLI failed: {result.stderr}")
+                    print("   📄 Will attempt to use existing connection or fallback methods")
             except Exception as e:
                 print(f"   ⚠️  Connection creation skipped: {e}")
                 print("   📄 Will attempt to use existing connection or fallback methods")

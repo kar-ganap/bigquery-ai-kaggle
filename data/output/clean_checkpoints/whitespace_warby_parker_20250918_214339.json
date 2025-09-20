@@ -1,0 +1,245 @@
+{
+  "status": "success",
+  "opportunities_found": 6,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Style Conscious with ASPIRATIONAL messaging in RETENTION stage",
+    "MONOPOLY opportunity targeting Value Seekers with FUNCTIONAL messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Gen Z Trendsetters with EMOTIONAL messaging in AWARENESS stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Style Conscious",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "New Frames, New You! Refresh your wardrobe with our latest collection",
+        "value_propositions": "Stay fashionable by easily coordinating your eyewear with any outfit; Upgrade your style with our latest eyewear collection.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email, retargeting",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Repeat Purchase Rate >5%, AOV +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Style Conscious with ASPIRATIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Value Seekers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Free Shipping & Returns on the Perfect Pair of Glasses",
+        "value_propositions": "Eliminate risk with LensCrafters' hassle-free free shipping and return policy, allowing you to find the perfect pair of glasses with confidence.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Website banner ads, targeted emails",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Conversion rate lift of 2%, increased cart size, Return rate < 10%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Value Seekers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Gen Z Trendsetters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Level up your look with these trending frames! \u2728 [Frame Name]",
+        "value_propositions": "Express your unique personality and stay on top of the latest eyewear styles at affordable prices.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram, TikTok",
+        "audience_sizing": "Medium (400K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, CPA <$25, Website Visits +20%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Gen Z Trendsetters with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Value-Seeking Shoppers",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Glasses Under $50: Style & Savings!",
+        "value_propositions": "Find affordable frames without compromising on quality. GlassesUSA offers a wide selection of stylish glasses under $50, with free shipping and returns.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >2%, Brand Awareness +10%, Website traffic increase of 20%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Value-Seeking Shoppers with FUNCTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Proactive Health Seekers",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Prioritize Your Eye Health. Book Your Comprehensive Eye Exam at LensCrafters Today!",
+        "value_propositions": "Maintain optimal vision and detect potential health issues early with LensCrafters' expert eye exams, utilizing advanced technology and personalized care.",
+        "recommended_ctas": "Book Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Cross-platform",
+      "success_metrics": "Appointment Bookings +15%, CPA < $50, Website Traffic +10%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Proactive Health Seekers with FUNCTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Hearing Impaired",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Struggling to Hear? Discover [Nuance Audio Glasses Benefit] at LensCrafters",
+        "value_propositions": "Seamlessly integrate hearing enhancement into stylish eyewear for improved sound perception without the stigma of traditional hearing aids.",
+        "recommended_ctas": "Plan your Demo Now",
+        "channel_focus": "Facebook|Cross-platform|Video",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, Demo Bookings +10%, Brand Recall +5%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Hearing Impaired with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 6 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Style Conscious",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "New Frames, New You! Refresh your wardrobe with our latest collection",
+        "value_propositions": "Stay fashionable by easily coordinating your eyewear with any outfit; Upgrade your style with our latest eyewear collection.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email, retargeting",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Repeat Purchase Rate >5%, AOV +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Style Conscious with ASPIRATIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Value Seekers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Free Shipping & Returns on the Perfect Pair of Glasses",
+        "value_propositions": "Eliminate risk with LensCrafters' hassle-free free shipping and return policy, allowing you to find the perfect pair of glasses with confidence.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Website banner ads, targeted emails",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Conversion rate lift of 2%, increased cart size, Return rate < 10%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Value Seekers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Gen Z Trendsetters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Level up your look with these trending frames! \u2728 [Frame Name]",
+        "value_propositions": "Express your unique personality and stay on top of the latest eyewear styles at affordable prices.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram, TikTok",
+        "audience_sizing": "Medium (400K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, CPA <$25, Website Visits +20%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Gen Z Trendsetters with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 14.503329,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250918_214339",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}
