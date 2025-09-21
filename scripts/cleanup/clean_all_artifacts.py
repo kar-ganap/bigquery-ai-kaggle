@@ -136,13 +136,14 @@ def clean_pipeline_artifacts(clean_persistent: bool = False):
     # Tables to preserve (base data and infrastructure)
     PRESERVE_TABLES = {
         'text_embedding_model',  # Always preserve infrastructure - will be recreated if needed
+        'ads_with_dates',        # ALWAYS preserve our precious accumulated competitive intelligence data!
     }
 
     # Conditionally preserve base data tables
     if not clean_persistent:
         PRESERVE_TABLES.update({
             'ads_raw',           # Base Meta Ad Library data
-            'ads_with_dates',    # Processed base data with timestamps
+            # ads_with_dates now always preserved above
         })
 
     # Table patterns to clean (analysis results)
@@ -168,6 +169,7 @@ def clean_pipeline_artifacts(clean_persistent: bool = False):
     if clean_persistent:
         CLEAN_PATTERNS.extend([
             'ads_raw_',              # Raw Meta ads data (demo clean slate)
+            # 'ads_with_dates' REMOVED - NEVER delete our precious accumulated data!
         ])
 
     try:

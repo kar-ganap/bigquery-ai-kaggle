@@ -1,0 +1,75 @@
+{
+  "status": "success",
+  "opportunities_found": 1,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Trend Followers with SOCIAL_PROOF messaging in CONSIDERATION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Trend Followers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Trending Now: See What Everyone's Wearing!",
+        "value_propositions": "Discover the most popular and stylish eyewear frames on EyeBuyDirect, validated by a community of fashion-forward individuals.",
+        "recommended_ctas": "Explore Trends",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Engagement Rate >3%, Customer Reviews +15%, Social Shares +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Followers with SOCIAL_PROOF messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 1 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Trend Followers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Trending Now: See What Everyone's Wearing!",
+        "value_propositions": "Discover the most popular and stylish eyewear frames on EyeBuyDirect, validated by a community of fashion-forward individuals.",
+        "recommended_ctas": "Explore Trends",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Engagement Rate >3%, Customer Reviews +15%, Social Shares +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Followers with SOCIAL_PROOF messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 10.783385,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_233308",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

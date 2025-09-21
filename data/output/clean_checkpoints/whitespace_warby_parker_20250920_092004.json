@@ -1,0 +1,124 @@
+{
+  "status": "success",
+  "opportunities_found": 2,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Style Conscious with EMOTIONAL messaging in CONSIDERATION stage",
+    "VIRGIN_TERRITORY opportunity targeting Trend Setters with ASPIRATIONAL messaging in AWARENESS stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Style Conscious",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Level Up Your Look: New Frames, New You! \ud83d\ude0d",
+        "value_propositions": "Discover thousands of stylish frames to express your individuality and enhance your personal style.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >1.8%, CPA <$35, Website Conversion Rate +5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Style Conscious with EMOTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Trend Setters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Good 2025 Vibes Start Now: Clear Your Clutter and See the World Clearly with EBD",
+        "value_propositions": "Align your style with your aspirations. Organize your life & vision for the future.",
+        "recommended_ctas": "Shop now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >0.9%, CPM <$10, Social Engagement +15%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Setters with ASPIRATIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 2 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Style Conscious",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Level Up Your Look: New Frames, New You! \ud83d\ude0d",
+        "value_propositions": "Discover thousands of stylish frames to express your individuality and enhance your personal style.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >1.8%, CPA <$35, Website Conversion Rate +5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Style Conscious with EMOTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Trend Setters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Good 2025 Vibes Start Now: Clear Your Clutter and See the World Clearly with EBD",
+        "value_propositions": "Align your style with your aspirations. Organize your life & vision for the future.",
+        "recommended_ctas": "Shop now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >0.9%, CPM <$10, Social Engagement +15%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Setters with ASPIRATIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 11.797951,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_092004",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

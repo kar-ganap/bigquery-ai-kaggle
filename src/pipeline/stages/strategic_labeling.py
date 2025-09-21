@@ -79,8 +79,12 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
             
             with open(script_path, 'r') as f:
                 sql_template = f.read()
-            
-            # Replace template placeholders with actual project/dataset
+
+            # IMPORTANT: Handle deduplication BEFORE replacing project/dataset placeholders
+            # This ensures the string replacement matches the original SQL template
+            sql_template = self._prepare_deduplication_sql(sql_template)
+
+            # Now replace template placeholders with actual project/dataset
             ads_table = ads.ads_table_id if ads.ads_table_id else f"{BQ_PROJECT}.{BQ_DATASET}.ads_raw"
             strategic_sql = sql_template.replace("yourproj.ads_demo.ads_raw", ads_table)
             strategic_sql = strategic_sql.replace("yourproj.ads_demo.ads_with_dates", f"{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates")
@@ -159,3 +163,78 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
             
             # Return 0 to indicate failure
             return 0
+
+    def _prepare_deduplication_sql(self, sql: str) -> str:
+        """
+        Prepare SQL to handle first-run case where ads_with_dates doesn't exist yet.
+        Uses BigQuery error handling to gracefully fall back to current run only.
+        """
+        if not run_query:
+            return sql
+
+        # Check if ads_with_dates table exists
+        table_name = f"{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates"
+        try:
+            check_query = f"""
+            SELECT COUNT(*) as count
+            FROM `{BQ_PROJECT}.{BQ_DATASET}.__TABLES_SUMMARY__`
+            WHERE table_id = 'ads_with_dates'
+            """
+            result = run_query(check_query)
+            table_exists = result.iloc[0]['count'] > 0 if not result.empty else False
+
+            if not table_exists:
+                print("   📝 First run detected - no existing ads_with_dates table")
+                print("   🔄 Skipping deduplication, using current run data only")
+
+                # Remove the existing ads union from the SQL for first run
+                modified_sql = sql.replace("""
+  UNION ALL
+
+  -- Existing ads with strategic labels (if table exists)
+  SELECT
+    ad_archive_id,
+    brand,
+    creative_text,
+    title,
+    media_type,
+    media_storage_path,
+    start_date_string,
+    end_date_string,
+    publisher_platforms,
+    image_urls,
+    video_urls,
+    'existing' AS source_type
+  FROM `yourproj.ads_demo.ads_with_dates`
+  WHERE 1=1  -- This will fail gracefully if table doesn't exist""", "")
+
+                return modified_sql
+            else:
+                print("   🔄 Existing ads_with_dates found - applying intelligent deduplication")
+                return sql
+
+        except Exception as e:
+            print(f"   ⚠️  Table existence check failed: {e}")
+            print("   📝 Assuming first run - using current data only")
+            # Fallback to first-run mode
+            modified_sql = sql.replace("""
+  UNION ALL
+
+  -- Existing ads with strategic labels (if table exists)
+  SELECT
+    ad_archive_id,
+    brand,
+    creative_text,
+    title,
+    media_type,
+    media_storage_path,
+    start_date_string,
+    end_date_string,
+    publisher_platforms,
+    image_urls,
+    video_urls,
+    'existing' AS source_type
+  FROM `yourproj.ads_demo.ads_with_dates`
+  WHERE 1=1  -- This will fail gracefully if table doesn't exist""", "")
+
+            return modified_sql

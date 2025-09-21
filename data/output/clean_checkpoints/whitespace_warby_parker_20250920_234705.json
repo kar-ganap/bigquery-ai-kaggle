@@ -1,0 +1,124 @@
+{
+  "status": "success",
+  "opportunities_found": 2,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Risk Averse with FUNCTIONAL messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Existing Customers with EMOTIONAL messaging in RETENTION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Risk Averse",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Worry-Free Shopping: 14-Day Free Returns at EyeBuyDirect.",
+        "value_propositions": "Shop with confidence knowing you can return your glasses within 14 days if they're not perfect. No risk, all style.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform, Video",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Cart Abandonment Rate -5%, Customer Satisfaction Score +3%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Risk Averse with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Existing Customers",
+      "overall_score": 0.245,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "A Fresh Look for Every You",
+        "value_propositions": "Maintain your eye health and express your unique style with LensCrafters' wide range of eyewear and eye care services.",
+        "recommended_ctas": "Book Now",
+        "channel_focus": "Email, SMS, Retargeting",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Repeat Purchase Rate +3%, Appointment Reminders/Reschedules +7%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Existing Customers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 2 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Risk Averse",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Worry-Free Shopping: 14-Day Free Returns at EyeBuyDirect.",
+        "value_propositions": "Shop with confidence knowing you can return your glasses within 14 days if they're not perfect. No risk, all style.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform, Video",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Cart Abandonment Rate -5%, Customer Satisfaction Score +3%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Risk Averse with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Existing Customers",
+      "overall_score": 0.245,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "A Fresh Look for Every You",
+        "value_propositions": "Maintain your eye health and express your unique style with LensCrafters' wide range of eyewear and eye care services.",
+        "recommended_ctas": "Book Now",
+        "channel_focus": "Email, SMS, Retargeting",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Repeat Purchase Rate +3%, Appointment Reminders/Reschedules +7%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Existing Customers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 11.242474,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_234705",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

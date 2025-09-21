@@ -1,0 +1,173 @@
+{
+  "status": "success",
+  "opportunities_found": 3,
+  "top_opportunities": [
+    "MONOPOLY opportunity targeting Value-Conscious Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+    "VIRGIN_TERRITORY opportunity targeting Cart Abandoners with EMOTIONAL messaging in RETENTION stage",
+    "VIRGIN_TERRITORY opportunity targeting Abandoned Cart Recovery with EMOTIONAL messaging in RETENTION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Value-Conscious Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Worried About Buying Glasses Online? {Benefit Headline, eg. 'Try Before You Buy, Risk-Free!'}",
+        "value_propositions": "Eliminate the risk of buying glasses online with our 14-day free returns. Find the perfect fit and style with confidence.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, CPA <$35, Conversion Rate +2%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Value-Conscious Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Cart Abandoners",
+      "overall_score": 0.245,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still Thinking About Those Glasses? [Frame Image]",
+        "value_propositions": "Don't miss out on completing your look! We've saved your cart. Complete your purchase and experience the joy of clear vision and stylish frames.",
+        "recommended_ctas": "Return to Cart",
+        "channel_focus": "Email|Retargeting Ads",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart Recovery Rate > 15%, Conversion Rate from Email > 5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Cart Abandoners with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Abandoned Cart Recovery",
+      "overall_score": 0.245,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still thinking about it? Your Perfect Look is Waiting!",
+        "value_propositions": "Don't miss out on the style you loved! Complete your order now and enjoy [Discount]% off + Free Shipping & Returns.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart recovery rate +15%, AOV +5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Abandoned Cart Recovery with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 3 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Value-Conscious Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Worried About Buying Glasses Online? {Benefit Headline, eg. 'Try Before You Buy, Risk-Free!'}",
+        "value_propositions": "Eliminate the risk of buying glasses online with our 14-day free returns. Find the perfect fit and style with confidence.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, CPA <$35, Conversion Rate +2%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Value-Conscious Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Cart Abandoners",
+      "overall_score": 0.245,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still Thinking About Those Glasses? [Frame Image]",
+        "value_propositions": "Don't miss out on completing your look! We've saved your cart. Complete your purchase and experience the joy of clear vision and stylish frames.",
+        "recommended_ctas": "Return to Cart",
+        "channel_focus": "Email|Retargeting Ads",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart Recovery Rate > 15%, Conversion Rate from Email > 5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Cart Abandoners with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Abandoned Cart Recovery",
+      "overall_score": 0.245,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still thinking about it? Your Perfect Look is Waiting!",
+        "value_propositions": "Don't miss out on the style you loved! Complete your order now and enjoy [Discount]% off + Free Shipping & Returns.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart recovery rate +15%, AOV +5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Abandoned Cart Recovery with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 13.368962,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_124205",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "status": "success",
+  "opportunities_found": 4,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Visually Inspired with SOCIAL_PROOF messaging in AWARENESS stage",
+    "VIRGIN_TERRITORY opportunity targeting Hesitant Shoppers with FUNCTIONAL messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in CONSIDERATION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Visually Inspired",
+      "overall_score": 0.44,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Inspired Looks: See How Others Style Their EyeBuyDirect Frames.",
+        "value_propositions": "Discover diverse styles and build confidence in your eyewear choice with real-life inspiration from our community of happy customers.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-300K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >0.8%, Engagement Rate >2%, Social Shares +X%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Visually Inspired with SOCIAL_PROOF messaging in AWARENESS stage",
+      "confidence_level": "MEDIUM"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Hesitant Shoppers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still Browsing? Your Perfect Pair Awaits + Free Shipping & Returns!",
+        "value_propositions": "Reassure hesitant buyers by reminding them of completed actions (quiz, viewed cart) with incentives like free shipping, easy returns, and money-back guarantee. Focus on convenience and minimal risk to finalize the purchase.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email|Retargeting Ads",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Cart Abandonment Recovery Rate +5%, Conversion Rate > 3%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Hesitant Shoppers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Simplify Your Life: Transition Lenses - One Pair, All Conditions!",
+        "value_propositions": "Eliminate the hassle of switching between glasses with Transitions lenses. Enjoy clear vision indoors and automatically adapt to sunlight outdoors, all with free shipping, returns, and a money-back guarantee.",
+        "recommended_ctas": "Shop Transitions lenses",
+        "channel_focus": "Facebook|Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CTR > 1.5%, Conversion rate on Transitions lenses > 1.2%, Increase in Transitions lens adoption rate by X%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Gen Z Trendsetters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Express Yourself: New Frames, New [Adjective describing a desirable trait, e.g., 'You']",
+        "value_propositions": "Find affordable frames that match your unique personality and style, allowing you to express yourself without breaking the bank.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram, TikTok",
+        "audience_sizing": "Medium (200K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, CPA <$25, Brand lift +5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Gen Z Trendsetters with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 4 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Visually Inspired",
+      "overall_score": 0.44,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Inspired Looks: See How Others Style Their EyeBuyDirect Frames.",
+        "value_propositions": "Discover diverse styles and build confidence in your eyewear choice with real-life inspiration from our community of happy customers.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-300K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >0.8%, Engagement Rate >2%, Social Shares +X%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Visually Inspired with SOCIAL_PROOF messaging in AWARENESS stage",
+      "confidence_level": "MEDIUM"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Hesitant Shoppers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still Browsing? Your Perfect Pair Awaits + Free Shipping & Returns!",
+        "value_propositions": "Reassure hesitant buyers by reminding them of completed actions (quiz, viewed cart) with incentives like free shipping, easy returns, and money-back guarantee. Focus on convenience and minimal risk to finalize the purchase.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email|Retargeting Ads",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Cart Abandonment Recovery Rate +5%, Conversion Rate > 3%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Hesitant Shoppers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Simplify Your Life: Transition Lenses - One Pair, All Conditions!",
+        "value_propositions": "Eliminate the hassle of switching between glasses with Transitions lenses. Enjoy clear vision indoors and automatically adapt to sunlight outdoors, all with free shipping, returns, and a money-back guarantee.",
+        "recommended_ctas": "Shop Transitions lenses",
+        "channel_focus": "Facebook|Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CTR > 1.5%, Conversion rate on Transitions lenses > 1.2%, Increase in Transitions lens adoption rate by X%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 14.3961,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_093736",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

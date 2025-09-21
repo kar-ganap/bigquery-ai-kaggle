@@ -79,7 +79,7 @@ class MetaAdsFetcher:
         # Resolve page ID if needed
         if not page_id and company_name:
             print(f"🔍 Resolving page ID for '{company_name}'...")
-            page_data = self.page_resolver.resolve_page_id(company_name)
+            page_data = self.page_resolver.resolve_page_id(company_name, vertical="eyewear")
             
             if not page_data:
                 return AdsFetchResult(
@@ -306,11 +306,21 @@ class MetaAdsFetcher:
         
         # Normalize ads to match old format expected by pipeline
         normalized_ads = []
+        skipped_ads = 0
         for ad in ads:
             # The raw ad data from API needs to be normalized
             snapshot = ad.get("snapshot", {}) or {}
             cards = snapshot.get("cards", []) or []
             
+            # Check for essential fields - skip ad if missing critical data
+            ad_id = ad.get("ad_archive_id")
+            start_date = ad.get("start_date_string")
+            end_date = ad.get("end_date_string")
+
+            if not ad_id or not start_date:
+                skipped_ads += 1
+                continue
+
             # Extract creative text from various possible locations
             body_text = (snapshot.get("body", {}) or {}).get("text", "")
             title = snapshot.get("title") or ""
@@ -398,6 +408,11 @@ class MetaAdsFetcher:
             video_urls = []  # Keep empty - Meta API doesn't provide actual video URLs
             primary_image_url = None  # For visual intelligence
 
+            # Initialize URL variables for all ads (including text-only ads with no cards)
+            original_url = None
+            resized_url = None
+            video_preview_url = None
+
             if cards and len(cards) > 0:
                 first_card = cards[0] if isinstance(cards[0], dict) else {}
 
@@ -405,6 +420,20 @@ class MetaAdsFetcher:
                 original_url = first_card.get("original_image_url")
                 resized_url = first_card.get("resized_image_url")
                 video_preview_url = first_card.get("video_preview_image_url")
+
+            # If all media URLs are missing, try fallback endpoint for just the URLs
+            if not original_url and not resized_url and not video_preview_url:
+                if ad_id:
+                    fallback_urls = self._fetch_fallback_media_urls(ad_id)
+                    if fallback_urls:
+                        original_url = fallback_urls.get("original_image_url")
+                        resized_url = fallback_urls.get("resized_image_url")
+                        video_preview_url = fallback_urls.get("video_preview_image_url")
+
+                    # If fallback also fails, skip the ad entirely
+                    if not original_url and not resized_url and not video_preview_url:
+                        skipped_ads += 1
+                        continue
 
                 # Determine media type based on which URLs are null
                 if original_url is None and resized_url is None and video_preview_url:
@@ -442,6 +471,10 @@ class MetaAdsFetcher:
                 'last_seen': ad.get("end_date_string"),
                 'start_date_string': ad.get("start_date_string"),
                 'end_date_string': ad.get("end_date_string"),
+                # API media URL fields for MediaStorageManager
+                'original_image_url': original_url,
+                'resized_image_url': resized_url,
+                'video_preview_image_url': video_preview_url,
                 # Additional fields for better analysis
                 'body_text': body_text,
                 'card_titles': ", ".join(card_titles) if card_titles else "",
@@ -462,9 +495,13 @@ class MetaAdsFetcher:
             "pages_fetched": result.pages_fetched,
             "fetch_time": result.fetch_time,
             "error": result.error,
-            "page_id": result.page_id
+            "page_id": result.page_id,
+            "skipped_ads": skipped_ads
         }
-        
+
+        if skipped_ads > 0:
+            print(f"   ⚠️  Skipped {skipped_ads} ads (missing essential fields or media URLs)")
+
         return normalized_ads, result_dict
     
     def fetch_multiple_companies(self, 
@@ -612,7 +649,7 @@ class MetaAdsFetcher:
             try:
                 # First resolve company name to page ID for robust API calls
                 print(f"🔍 Resolving page ID for '{company_name}'...")
-                page_data = self.page_resolver.resolve_page_id(company_name)
+                page_data = self.page_resolver.resolve_page_id(company_name, vertical="eyewear")
                 
                 if not page_data:
                     print(f"   ❌ {company_name}: Cannot resolve to valid page ID - skipping")
@@ -627,7 +664,13 @@ class MetaAdsFetcher:
                 
                 page_id = page_data['page_id']
                 print(f"   ✅ Resolved to page ID: {page_id} ({page_data['name']})")
-                
+
+                # Add delay between page ID resolution calls to avoid API rate limiting
+                if checked_count > 0:  # Skip delay for first company
+                    delay = 2.0  # 2 second delay to prevent API throttling
+                    print(f"   ⏱️  Waiting {delay}s before next API call...")
+                    time.sleep(delay)
+
                 # Probe first page only using page ID for robust API calls
                 params = {
                     "pageId": page_id,  # Use page ID instead of company name
@@ -741,6 +784,42 @@ class MetaAdsFetcher:
         
         print(f"   📈 Final results: Found {found_active} Meta-active competitors from {checked_count} checked")
         return results
+
+    def _fetch_fallback_media_urls(self, ad_id: str) -> Optional[Dict]:
+        """Fallback API endpoint to get media URLs when bulk endpoint fails"""
+        try:
+            params = {"id": ad_id}
+            response = requests.get("https://api.scrapecreators.com/v1/facebook/adLibrary/ad",
+                                  params=params, headers={"x-api-key": self.api_key}, timeout=30)
+
+            if response.status_code == 200:
+                data = response.json()
+                if data and isinstance(data, dict):
+                    # Parse the different response structure from individual endpoint
+                    images = data.get('images', [])
+                    videos = data.get('videos', [])
+
+                    result = {
+                        'original_image_url': None,
+                        'resized_image_url': None,
+                        'video_preview_image_url': None
+                    }
+
+                    # Parse images array
+                    if images and len(images) > 0:
+                        first_image = images[0] if isinstance(images[0], dict) else {}
+                        result['original_image_url'] = first_image.get('original_image_url')
+                        result['resized_image_url'] = first_image.get('resized_image_url')
+
+                    # Parse videos array for preview image
+                    if videos and len(videos) > 0:
+                        first_video = videos[0] if isinstance(videos[0], dict) else {}
+                        result['video_preview_image_url'] = first_video.get('video_preview_image_url')
+
+                    return result
+            return None
+        except Exception:
+            return None
 
     def get_stats(self) -> Dict:
         """Get fetcher statistics"""

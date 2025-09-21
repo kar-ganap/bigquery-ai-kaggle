@@ -9,13 +9,7 @@ from typing import List
 from ..core.base import PipelineStage, PipelineContext
 from ..models.candidates import ValidatedCompetitor
 
-try:
-    from src.utils.ads_fetcher import MetaAdsFetcher
-except ImportError:
-    try:
-        from scripts.utils.ads_fetcher import MetaAdsFetcher  # Legacy fallback
-    except ImportError:
-        MetaAdsFetcher = None
+from src.utils.ads_fetcher import MetaAdsFetcher
 
 
 class RankingStage(PipelineStage[List[ValidatedCompetitor], List[ValidatedCompetitor]]):

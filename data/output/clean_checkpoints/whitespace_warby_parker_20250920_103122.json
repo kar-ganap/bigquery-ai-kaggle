@@ -1,0 +1,124 @@
+{
+  "status": "success",
+  "opportunities_found": 2,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Brand Conscious with ASPIRATIONAL messaging in CONSIDERATION stage",
+    "VIRGIN_TERRITORY opportunity targeting Indecisive Shoppers with PROBLEM_SOLUTION messaging in AWARENESS stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Brand Conscious",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Elevate Your Style with COACH Eyewear - Limited Time Offer!",
+        "value_propositions": "Shop the latest COACH glasses and express your unique style with premium eyewear.",
+        "recommended_ctas": "Shop Coach",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CTR > 1%, Website Engagement (Time on Page) +10%, Branded Search Lift +5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Brand Conscious with ASPIRATIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Indecisive Shoppers",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Overwhelmed by Glasses Choices? {Brand Name} Makes It Easy!",
+        "value_propositions": "Find your perfect glasses match with our fun and helpful quiz. No more endless scrolling!",
+        "recommended_ctas": "Try Free Quiz",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Quiz completion rate > 20%, CTR > 1.5%, Cost per Qualified Lead < $10",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Indecisive Shoppers with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 2 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Brand Conscious",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Elevate Your Style with COACH Eyewear - Limited Time Offer!",
+        "value_propositions": "Shop the latest COACH glasses and express your unique style with premium eyewear.",
+        "recommended_ctas": "Shop Coach",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CTR > 1%, Website Engagement (Time on Page) +10%, Branded Search Lift +5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Brand Conscious with ASPIRATIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Indecisive Shoppers",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Overwhelmed by Glasses Choices? {Brand Name} Makes It Easy!",
+        "value_propositions": "Find your perfect glasses match with our fun and helpful quiz. No more endless scrolling!",
+        "recommended_ctas": "Try Free Quiz",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Quiz completion rate > 20%, CTR > 1.5%, Cost per Qualified Lead < $10",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Indecisive Shoppers with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 11.180389,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_103122",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "status": "success",
+  "opportunities_found": 1,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Trendsetters with ASPIRATIONAL messaging in AWARENESS stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Trendsetters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Summer 2025: Get The Newest Warby Parker Frames! They're Like a Vacation For Your Face!",
+        "value_propositions": "Elevate your look with our latest, stylish frames, designed to capture the essence of the season and make a statement. (Vacation for your face)",
+        "recommended_ctas": "Learn More",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Engagement rate >2%, Brand awareness lift +5%, Web traffic increase for new arrivals +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trendsetters with ASPIRATIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 1 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Trendsetters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Summer 2025: Get The Newest Warby Parker Frames! They're Like a Vacation For Your Face!",
+        "value_propositions": "Elevate your look with our latest, stylish frames, designed to capture the essence of the season and make a statement. (Vacation for your face)",
+        "recommended_ctas": "Learn More",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Engagement rate >2%, Brand awareness lift +5%, Web traffic increase for new arrivals +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trendsetters with ASPIRATIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 13.512587,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_085009",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

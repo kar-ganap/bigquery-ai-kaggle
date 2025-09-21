@@ -145,7 +145,7 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
           SELECT
             brand,
             COUNT(*) as total_ads,
-            COUNT(CASE WHEN ARRAY_LENGTH(image_urls) > 0 THEN 1 END) as ads_with_images,
+            COUNT(CASE WHEN media_type IN ('image', 'carousel', 'video') AND media_storage_path IS NOT NULL THEN 1 END) as ads_with_media,
             -- Calculate adaptive sample size based on brand portfolio
             CASE
               WHEN COUNT(*) <= 20 THEN LEAST(CAST(COUNT(*) * 0.5 AS INT64), {self.per_brand_budget})  -- 50% coverage, max per-brand budget
@@ -154,8 +154,8 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
               ELSE LEAST({self.per_brand_budget}, 15)  -- Fixed per-brand budget, but capped at 15 for very large brands
             END as target_sample_size
           FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates`
-          WHERE image_urls IS NOT NULL
-            AND ARRAY_LENGTH(image_urls) > 0
+          WHERE media_type IN ('image', 'carousel', 'video')
+            AND media_storage_path IS NOT NULL
           GROUP BY brand
         ),
         budget_allocation AS (
@@ -175,7 +175,7 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
         SELECT
           brand,
           total_ads,
-          ads_with_images,
+          ads_with_media,
           target_sample_size,
           final_sample_size,
           total_brands,
@@ -204,12 +204,13 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
               0.3 * (1.0 - DATE_DIFF(CURRENT_DATE(), DATE(a.start_timestamp), DAY) / 365.0) +
               -- Visual complexity weight (25%)
               0.25 * CASE
-                WHEN ARRAY_LENGTH(a.image_urls) > 2 THEN 1.0  -- Carousel
+                WHEN a.media_type = 'carousel' THEN 1.0  -- Carousel
                 WHEN a.media_type = 'video' THEN 0.8  -- Video
-                ELSE 0.5  -- Single image
+                WHEN a.media_type = 'image' THEN 0.5  -- Single image
+                ELSE 0.3  -- Unknown
               END +
               -- Card variations weight (25%)
-              0.25 * LEAST(LENGTH(COALESCE(a.card_bodies, '')) / 50.0, 1.0) +
+              0.25 * LEAST(LENGTH(COALESCE(a.creative_text, '')) / 200.0, 1.0) +
               -- Strategic diversity weight (20%) - extreme promotional intensities
               0.2 * ABS(0.5 - LEAST(LENGTH(a.creative_text) / 200.0, 1.0))
             ) as strategic_score,
@@ -218,18 +219,19 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
               ORDER BY (
                 0.3 * (1.0 - DATE_DIFF(CURRENT_DATE(), DATE(a.start_timestamp), DAY) / 365.0) +
                 0.25 * CASE
-                  WHEN ARRAY_LENGTH(a.image_urls) > 2 THEN 1.0
+                  WHEN a.media_type = 'carousel' THEN 1.0
                   WHEN a.media_type = 'video' THEN 0.8
-                  ELSE 0.5
+                  WHEN a.media_type = 'image' THEN 0.5
+                  ELSE 0.3
                 END +
-                0.25 * LEAST(LENGTH(COALESCE(a.card_bodies, '')) / 50.0, 1.0) +
+                0.25 * LEAST(LENGTH(COALESCE(a.creative_text, '')) / 200.0, 1.0) +
                 0.2 * ABS(0.5 - LEAST(LENGTH(a.creative_text) / 200.0, 1.0))
               ) DESC
             ) as brand_rank
           FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates` a
           JOIN `{BQ_PROJECT}.{BQ_DATASET}.visual_sampling_strategy` s ON a.brand = s.brand
-          WHERE a.image_urls IS NOT NULL
-            AND ARRAY_LENGTH(a.image_urls) > 0
+          WHERE a.media_type IN ('image', 'carousel', 'video')
+            AND a.media_storage_path IS NOT NULL
             AND s.final_sample_size > 0
         ),
         top_sampled AS (
@@ -242,8 +244,8 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
             brand,
             ad_archive_id,
             creative_text,
-            image_urls[OFFSET(0)] as primary_image_url,
-            ARRAY_LENGTH(image_urls) as image_count,
+            media_storage_path as primary_image_url,
+            1 as image_count,  -- Always 1 since we store single media per ad
             media_type,
             strategic_score,
             -- Multimodal Analysis using BigQuery AI

@@ -1,0 +1,526 @@
+{
+  "brand": "Warby Parker",
+  "run_id": "warby_parker_20250920_021945",
+  "timestamp": 1758360403.5591629,
+  "level_1": {
+    "executive_insights": [
+      "Competitive copying detected from LensCrafters (similarity: 72.6%) - threat accelerating over 6 weeks, competitive pressure increasing",
+      "Low eyewear industry relevance in emotional messaging - tailor content for eyewear context",
+      "Low emotional intensity detected through AI analysis - strengthen emotional appeal for eyewear marketing",
+      "Low positive/aspirational sentiment detected - increase uplifting messaging for eyewear brand building",
+      "Platform diversification opportunity - expand cross-platform presence to reduce risk - stable pattern over 8 weeks"
+    ],
+    "critical_metrics": {
+      "competitive_similarity_score": 0.73,
+      "industry_relevance_score": 0.14,
+      "emotional_intensity_score": 0.34,
+      "positive_sentiment_rate_pct": 3.66,
+      "platform_diversification_low": 0.94
+    },
+    "threat_level": "CRITICAL",
+    "confidence_score": 0.82,
+    "signal_count": 5,
+    "filtered_signals": 2
+  },
+  "level_2": {
+    "strategic_intelligence": {
+      "Competitive Intelligence": {
+        "insights": [
+          "Competitive copying detected from LensCrafters (similarity: 72.6%) - threat accelerating over 6 weeks, competitive pressure increasing"
+        ],
+        "key_metrics": {
+          "competitive_intelligence_0": 0.73
+        },
+        "confidence_avg": 0.9,
+        "business_impact_avg": 0.8,
+        "signal_count": 1
+      },
+      "CTA Intelligence": {
+        "insights": [
+          "High CTA aggressiveness (9.4/10) - consider moderation for brand trust"
+        ],
+        "key_metrics": {
+          "cta_intelligence_0": 9.37
+        },
+        "confidence_avg": 0.6,
+        "business_impact_avg": 0.5,
+        "signal_count": 1
+      },
+      "Creative Intelligence": {
+        "insights": [
+          "Low eyewear industry relevance in emotional messaging - tailor content for eyewear context",
+          "Low brand mention frequency detected - increase brand presence in creative content - concerning downward trend over 6 weeks",
+          "Low emotional intensity detected through AI analysis - strengthen emotional appeal for eyewear marketing",
+          "Low positive/aspirational sentiment detected - increase uplifting messaging for eyewear brand building",
+          "Creative text may be too long - consider brevity for better performance - improving trend over 3 weeks"
+        ],
+        "key_metrics": {
+          "creative_intelligence_0": 0.14,
+          "creative_intelligence_1": 0.0,
+          "creative_intelligence_2": 0.34
+        },
+        "confidence_avg": 0.76,
+        "business_impact_avg": 0.72,
+        "signal_count": 5
+      },
+      "Channel Intelligence": {
+        "insights": [
+          "Platform diversification opportunity - expand cross-platform presence to reduce risk - stable pattern over 8 weeks",
+          "Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger - unstable pattern over 5 weeks, requires monitoring",
+          "Platform-specific content optimization needed - tailor messaging for each channel's audience"
+        ],
+        "key_metrics": {
+          "channel_intelligence_0": 0.94,
+          "channel_intelligence_1": 0.0,
+          "channel_intelligence_2": 0.0
+        },
+        "confidence_avg": 0.7000000000000001,
+        "business_impact_avg": 0.7000000000000001,
+        "signal_count": 3
+      },
+      "Audience Intelligence": {
+        "insights": [
+          "Low cross-platform presence - expand beyond single channel to reach broader audiences",
+          "Strong millennial focus detected - tailor messaging for digital-native preferences and lifestyle",
+          "Very long messaging detected - consider more concise communication for better engagement"
+        ],
+        "key_metrics": {
+          "audience_intelligence_0": 0.0,
+          "audience_intelligence_1": 85.08,
+          "audience_intelligence_2": 308.64
+        },
+        "confidence_avg": 0.7666666666666666,
+        "business_impact_avg": 0.6666666666666666,
+        "signal_count": 3
+      },
+      "Visual Intelligence": {
+        "insights": [
+          "Low visual differentiation detected - increase unique visual elements to stand out from competitors",
+          "Unclear visual demographic targeting - define target audience and align visual language accordingly",
+          "Balanced positioning - opportunity to differentiate through stronger visual identity"
+        ],
+        "key_metrics": {
+          "visual_intelligence_0": 0.39
+        },
+        "confidence_avg": 0.6666666666666666,
+        "business_impact_avg": 0.7666666666666666,
+        "signal_count": 3
+      }
+    },
+    "cross_module_patterns": [
+      "Multi-module intelligence available from 6 sources",
+      "Consistent high-confidence insights across multiple intelligence modules",
+      "Creative and Channel intelligence provide complementary insights",
+      "Visual and Creative intelligence show multimodal consistency patterns",
+      "Multi-dimensional intelligence active: Creative, Channel, Visual modules provide comprehensive competitive analysis"
+    ],
+    "strategic_priorities": [
+      "Competitive Intelligence: Competitive copying detected from LensCrafters (similarity: 72.6%) - threat accelerating over 6 week...",
+      "Creative Intelligence: Low brand mention frequency detected - increase brand presence in creative content - concerning down...",
+      "Creative Intelligence: Low eyewear industry relevance in emotional messaging - tailor content for eyewear context..."
+    ],
+    "total_signals": 16,
+    "modules_active": 6
+  },
+  "level_3": {
+    "immediate_actions": [
+      {
+        "action": "Low eyewear industry relevance in emotional messaging - tailor content for eyewear context",
+        "rationale": "Based on Creative Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.8,
+        "actionability": 0.9,
+        "timeline": "Immediate (1-2 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Emotional keyword usage rate",
+          "Brand sentiment score"
+        ],
+        "source_module": "Creative Intelligence",
+        "value": 0.14,
+        "priority": "CRITICAL"
+      },
+      {
+        "action": "Competitive copying detected from LensCrafters (similarity: 72.6%) - threat accelerating over 6 weeks, competitive pressure increasing",
+        "rationale": "Based on Competitive Intelligence analysis",
+        "confidence": 0.9,
+        "business_impact": 0.8,
+        "actionability": 0.8,
+        "timeline": "Immediate (1-2 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "Competitive Intelligence",
+        "value": 0.73,
+        "priority": "CRITICAL"
+      }
+    ],
+    "short_term_tactics": [
+      {
+        "action": "Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger - unstable pattern over 5 weeks, requires monitoring",
+        "rationale": "Based on Channel Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.8,
+        "actionability": 0.9,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Cross-platform synergy rate",
+          "Multi-channel reach"
+        ],
+        "source_module": "Channel Intelligence",
+        "value": 0.0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Unclear visual demographic targeting - define target audience and align visual language accordingly",
+        "rationale": "Based on Visual Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.8,
+        "actionability": 0.9,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Visual intelligence score",
+          "Multimodal effectiveness"
+        ],
+        "source_module": "Visual Intelligence",
+        "value": "{'demographic': 'undefined', 'confidence': 0}",
+        "priority": "HIGH"
+      },
+      {
+        "action": "Creative text may be too long - consider brevity for better performance - improving trend over 3 weeks",
+        "rationale": "Based on Creative Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.6,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Creative performance score",
+          "Brand message consistency"
+        ],
+        "source_module": "Creative Intelligence",
+        "value": 308.64,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Low brand mention frequency detected - increase brand presence in creative content - concerning downward trend over 6 weeks",
+        "rationale": "Based on Creative Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.8,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Creative performance score",
+          "Brand message consistency"
+        ],
+        "source_module": "Creative Intelligence",
+        "value": 0.0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Low emotional intensity detected through AI analysis - strengthen emotional appeal for eyewear marketing",
+        "rationale": "Based on Creative Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.7,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "AI emotional intensity score",
+          "Emotional engagement rate",
+          "Brand resonance metrics"
+        ],
+        "source_module": "Creative Intelligence",
+        "value": 0.34,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Low positive/aspirational sentiment detected - increase uplifting messaging for eyewear brand building",
+        "rationale": "Based on Creative Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.7,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Positive sentiment rate",
+          "Aspirational messaging score",
+          "Brand uplift metrics"
+        ],
+        "source_module": "Creative Intelligence",
+        "value": 3.66,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Platform diversification opportunity - expand cross-platform presence to reduce risk - stable pattern over 8 weeks",
+        "rationale": "Based on Channel Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.7,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Cross-platform synergy rate",
+          "Multi-channel reach"
+        ],
+        "source_module": "Channel Intelligence",
+        "value": 0.94,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Low cross-platform presence - expand beyond single channel to reach broader audiences",
+        "rationale": "Based on Audience Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.7,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "Audience Intelligence",
+        "value": 0.0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Very long messaging detected - consider more concise communication for better engagement",
+        "rationale": "Based on Audience Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.6,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "Audience Intelligence",
+        "value": 308.64,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Strong millennial focus detected - tailor messaging for digital-native preferences and lifestyle",
+        "rationale": "Based on Audience Intelligence analysis",
+        "confidence": 0.8,
+        "business_impact": 0.7,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "Audience Intelligence",
+        "value": 85.08,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Low visual differentiation detected - increase unique visual elements to stand out from competitors",
+        "rationale": "Based on Visual Intelligence analysis",
+        "confidence": 0.7,
+        "business_impact": 0.8,
+        "actionability": 0.8,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Visual differentiation score",
+          "Competitive advantage index"
+        ],
+        "source_module": "Visual Intelligence",
+        "value": 0.39,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Platform-specific content optimization needed - tailor messaging for each channel's audience",
+        "rationale": "Based on Channel Intelligence analysis",
+        "confidence": 0.6,
+        "business_impact": 0.6,
+        "actionability": 0.7,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Channel efficiency score",
+          "Platform optimization rate"
+        ],
+        "source_module": "Channel Intelligence",
+        "value": 0.0,
+        "priority": "HIGH"
+      },
+      {
+        "action": "Balanced positioning - opportunity to differentiate through stronger visual identity",
+        "rationale": "Based on Visual Intelligence analysis",
+        "confidence": 0.6,
+        "business_impact": 0.7,
+        "actionability": 0.7,
+        "timeline": "Short-term (2-4 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Competitive positioning score",
+          "Market differentiation rate"
+        ],
+        "source_module": "Visual Intelligence",
+        "value": "{'quadrant': 'Mid-Balanced', 'luxury': 0.3176470588235293, 'boldness': 0.4196078431372549}",
+        "priority": "HIGH"
+      }
+    ],
+    "monitoring_actions": [
+      {
+        "action": "High CTA aggressiveness (9.4/10) - consider moderation for brand trust",
+        "rationale": "Based on CTA Intelligence analysis",
+        "confidence": 0.6,
+        "business_impact": 0.5,
+        "actionability": 0.6,
+        "timeline": "Medium-term (4-8 weeks)",
+        "success_metrics": [
+          "Implementation completion rate",
+          "Performance improvement %",
+          "Strategic goal achievement"
+        ],
+        "source_module": "CTA Intelligence",
+        "value": 9.37,
+        "priority": "MEDIUM"
+      }
+    ],
+    "intervention_summary": {
+      "total_interventions": 16,
+      "immediate_count": 2,
+      "short_term_count": 13,
+      "monitoring_count": 1,
+      "avg_confidence": 0.73125,
+      "avg_actionability": 0.79375
+    }
+  },
+  "level_4": {
+    "bigquery_project": "bigquery-ai-kaggle-469620",
+    "bigquery_dataset": "ads_demo",
+    "dashboard_queries": {
+      "audience_intelligence_analysis": "\n            -- General Intelligence Dashboard with Temporal Analysis (Phase 1)\n            WITH weekly_general_metrics AS (\n              SELECT\n                brand,\n                DATE_TRUNC(DATE(start_timestamp), WEEK(MONDAY)) as week_start,\n                COUNT(*) as weekly_signals,\n                COUNT(DISTINCT DATE(start_timestamp)) as active_days_in_week,\n                AVG(LENGTH(COALESCE(creative_text, ''))) as avg_content_length,\n                COUNT(DISTINCT publisher_platforms) as platform_count_in_week,\n                COUNT(DISTINCT ad_archive_id) as unique_campaigns_in_week\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              WHERE start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 WEEK)\n              GROUP BY brand, week_start\n            ),\n            temporal_analysis AS (\n              SELECT\n                brand, week_start, weekly_signals, active_days_in_week, avg_content_length,\n                platform_count_in_week, unique_campaigns_in_week,\n                -- Week-over-week changes\n                LAG(weekly_signals) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_signals,\n                LAG(avg_content_length) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_content_length,\n                LAG(platform_count_in_week) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_platforms,\n                -- Competitive ranking\n                RANK() OVER (PARTITION BY week_start ORDER BY weekly_signals DESC) as weekly_activity_rank,\n                RANK() OVER (PARTITION BY week_start ORDER BY platform_count_in_week DESC) as weekly_platform_reach_rank\n              FROM weekly_general_metrics\n            ),\n            general_summary AS (\n              SELECT\n                brand,\n                COUNT(*) as weeks_active,\n                SUM(weekly_signals) as total_signals,\n                SUM(active_days_in_week) as total_active_days,\n                AVG(avg_content_length) as overall_avg_content_length,\n                AVG(platform_count_in_week) as avg_platform_count,\n                AVG(unique_campaigns_in_week) as avg_campaigns_per_week,\n                MIN(week_start) as first_seen_week,\n                MAX(week_start) as last_seen_week,\n                -- Temporal insights\n                AVG(weekly_signals - COALESCE(prev_week_signals, weekly_signals)) as avg_weekly_activity_change,\n                AVG(avg_content_length - COALESCE(prev_week_content_length, avg_content_length)) as avg_content_length_change,\n                AVG(platform_count_in_week - COALESCE(prev_week_platforms, platform_count_in_week)) as avg_platform_expansion_change,\n                AVG(weekly_activity_rank) as avg_activity_rank,\n                AVG(weekly_platform_reach_rank) as avg_platform_reach_rank,\n                -- Activity trends\n                CASE\n                  WHEN AVG(weekly_signals - COALESCE(prev_week_signals, weekly_signals)) > 2 THEN 'INCREASING_ACTIVITY'\n                  WHEN AVG(weekly_signals - COALESCE(prev_week_signals, weekly_signals)) < -2 THEN 'DECREASING_ACTIVITY'\n                  ELSE 'STABLE_ACTIVITY'\n                END as activity_trend,\n                CASE\n                  WHEN AVG(avg_content_length - COALESCE(prev_week_content_length, avg_content_length)) > 10 THEN 'EXPANDING_CONTENT'\n                  WHEN AVG(avg_content_length - COALESCE(prev_week_content_length, avg_content_length)) < -10 THEN 'SHORTENING_CONTENT'\n                  ELSE 'STABLE_CONTENT_LENGTH'\n                END as content_evolution_trend,\n                CASE\n                  WHEN AVG(platform_count_in_week - COALESCE(prev_week_platforms, platform_count_in_week)) > 0.5 THEN 'EXPANDING_REACH'\n                  WHEN AVG(platform_count_in_week - COALESCE(prev_week_platforms, platform_count_in_week)) < -0.5 THEN 'CONSOLIDATING_REACH'\n                  ELSE 'STABLE_REACH'\n                END as platform_reach_trend,\n                -- Competitive positioning\n                CASE\n                  WHEN AVG(weekly_activity_rank) <= 2 THEN 'MARKET_LEADER'\n                  WHEN AVG(weekly_activity_rank) <= 4 THEN 'STRONG_PLAYER'\n                  ELSE 'CHALLENGER'\n                END as competitive_position\n              FROM temporal_analysis\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              weeks_active,\n              total_signals,\n              total_active_days,\n              ROUND(overall_avg_content_length, 1) as avg_content_length,\n              ROUND(avg_platform_count, 1) as avg_platform_count,\n              ROUND(avg_campaigns_per_week, 1) as avg_campaigns_per_week,\n              first_seen_week,\n              last_seen_week,\n              ROUND(avg_weekly_activity_change, 1) as avg_weekly_activity_change,\n              ROUND(avg_content_length_change, 1) as avg_content_length_change,\n              ROUND(avg_platform_expansion_change, 1) as avg_platform_expansion_change,\n              activity_trend,\n              content_evolution_trend,\n              platform_reach_trend,\n              competitive_position,\n              ROUND(avg_activity_rank, 1) as avg_activity_rank,\n              ROUND(avg_platform_reach_rank, 1) as avg_platform_reach_rank\n            FROM general_summary\n            ORDER BY total_signals DESC\n            ",
+      "channel_intelligence_analysis": "\n            -- Channel Intelligence Dashboard with Temporal Analysis (Phase 1)\n            WITH weekly_channel_metrics AS (\n              SELECT\n                brand,\n                DATE_TRUNC(DATE(start_timestamp), WEEK(MONDAY)) as week_start,\n                COUNT(*) as weekly_ads,\n                COUNT(DISTINCT publisher_platforms) as unique_platforms,\n                AVG(CASE WHEN publisher_platforms LIKE '%,%' THEN 1.0 ELSE 0.0 END) as cross_platform_rate,\n                AVG(CASE\n                  WHEN REGEXP_CONTAINS(publisher_platforms, 'Facebook') AND\n                       REGEXP_CONTAINS(publisher_platforms, 'Instagram') AND\n                       REGEXP_CONTAINS(publisher_platforms, 'Messenger') THEN 3\n                  WHEN REGEXP_CONTAINS(publisher_platforms, 'Facebook') AND\n                       REGEXP_CONTAINS(publisher_platforms, 'Instagram') THEN 2\n                  WHEN publisher_platforms LIKE '%,%' THEN 1\n                  ELSE 0\n                END) as platform_diversification_score\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              WHERE start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 WEEK)\n              GROUP BY brand, week_start\n            ),\n            temporal_analysis AS (\n              SELECT\n                brand, week_start, weekly_ads, unique_platforms, cross_platform_rate, platform_diversification_score,\n                -- Week-over-week changes\n                LAG(weekly_ads) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_ads,\n                LAG(unique_platforms) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_platforms,\n                LAG(cross_platform_rate) OVER (PARTITION BY brand ORDER BY week_start) as prev_cross_platform_rate,\n                -- Competitive ranking\n                RANK() OVER (PARTITION BY week_start ORDER BY weekly_ads DESC) as weekly_volume_rank,\n                RANK() OVER (PARTITION BY week_start ORDER BY unique_platforms DESC) as weekly_platform_diversity_rank,\n                RANK() OVER (PARTITION BY week_start ORDER BY cross_platform_rate DESC) as weekly_cross_platform_rank\n              FROM weekly_channel_metrics\n            ),\n            channel_summary AS (\n              SELECT\n                brand,\n                COUNT(*) as weeks_active,\n                SUM(weekly_ads) as total_ads,\n                AVG(unique_platforms) as avg_platforms,\n                AVG(cross_platform_rate) as avg_cross_platform_rate,\n                AVG(platform_diversification_score) as avg_diversification_score,\n                -- Temporal insights\n                AVG(weekly_ads - COALESCE(prev_week_ads, weekly_ads)) as avg_weekly_volume_change,\n                AVG(unique_platforms - COALESCE(prev_week_platforms, unique_platforms)) as avg_platform_expansion_change,\n                AVG(cross_platform_rate - COALESCE(prev_cross_platform_rate, cross_platform_rate)) as avg_cross_platform_change,\n                AVG(weekly_volume_rank) as avg_volume_rank,\n                AVG(weekly_platform_diversity_rank) as avg_platform_diversity_rank,\n                -- Trend classification\n                CASE\n                  WHEN AVG(weekly_ads - COALESCE(prev_week_ads, weekly_ads)) > 2 THEN 'INCREASING_VOLUME'\n                  WHEN AVG(weekly_ads - COALESCE(prev_week_ads, weekly_ads)) < -2 THEN 'DECREASING_VOLUME'\n                  ELSE 'STABLE_VOLUME'\n                END as volume_trend,\n                CASE\n                  WHEN AVG(unique_platforms - COALESCE(prev_week_platforms, unique_platforms)) > 0.5 THEN 'EXPANDING_CHANNELS'\n                  WHEN AVG(unique_platforms - COALESCE(prev_week_platforms, unique_platforms)) < -0.5 THEN 'CONSOLIDATING_CHANNELS'\n                  ELSE 'STABLE_CHANNELS'\n                END as channel_expansion_trend,\n                CASE\n                  WHEN AVG(cross_platform_rate - COALESCE(prev_cross_platform_rate, cross_platform_rate)) > 0.1 THEN 'INCREASING_CROSS_PLATFORM'\n                  WHEN AVG(cross_platform_rate - COALESCE(prev_cross_platform_rate, cross_platform_rate)) < -0.1 THEN 'DECREASING_CROSS_PLATFORM'\n                  ELSE 'STABLE_CROSS_PLATFORM'\n                END as cross_platform_trend,\n                -- Competitive positioning\n                CASE\n                  WHEN AVG(weekly_volume_rank) <= 2 THEN 'CHANNEL_LEADER'\n                  WHEN AVG(weekly_volume_rank) <= 4 THEN 'STRONG_CHANNEL_PLAYER'\n                  ELSE 'CHANNEL_CHALLENGER'\n                END as competitive_position,\n                -- Movement indicators\n                CASE\n                  WHEN AVG(weekly_volume_rank) - LAG(AVG(weekly_volume_rank)) OVER (ORDER BY brand) < -0.5 THEN 'IMPROVING_POSITION'\n                  WHEN AVG(weekly_volume_rank) - LAG(AVG(weekly_volume_rank)) OVER (ORDER BY brand) > 0.5 THEN 'DECLINING_POSITION'\n                  ELSE 'STABLE_POSITION'\n                END as competitive_movement\n              FROM temporal_analysis\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              weeks_active,\n              total_ads,\n              ROUND(avg_platforms, 1) as avg_platforms,\n              ROUND(avg_cross_platform_rate * 100, 1) as avg_cross_platform_pct,\n              ROUND(avg_diversification_score, 1) as avg_diversification_score,\n              ROUND(avg_weekly_volume_change, 1) as avg_weekly_volume_change,\n              ROUND(avg_platform_expansion_change, 1) as avg_platform_expansion_change,\n              ROUND(avg_cross_platform_change * 100, 1) as avg_cross_platform_change_pct,\n              volume_trend,\n              channel_expansion_trend,\n              cross_platform_trend,\n              competitive_position,\n              competitive_movement,\n              ROUND(avg_volume_rank, 1) as avg_volume_rank,\n              ROUND(avg_platform_diversity_rank, 1) as avg_platform_diversity_rank\n            FROM channel_summary\n            ORDER BY total_ads DESC\n            ",
+      "cta_intelligence_analysis": "\n            -- General Intelligence Dashboard with Temporal Analysis (Phase 1)\n            WITH weekly_general_metrics AS (\n              SELECT\n                brand,\n                DATE_TRUNC(DATE(start_timestamp), WEEK(MONDAY)) as week_start,\n                COUNT(*) as weekly_signals,\n                COUNT(DISTINCT DATE(start_timestamp)) as active_days_in_week,\n                AVG(LENGTH(COALESCE(creative_text, ''))) as avg_content_length,\n                COUNT(DISTINCT publisher_platforms) as platform_count_in_week,\n                COUNT(DISTINCT ad_archive_id) as unique_campaigns_in_week\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              WHERE start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 WEEK)\n              GROUP BY brand, week_start\n            ),\n            temporal_analysis AS (\n              SELECT\n                brand, week_start, weekly_signals, active_days_in_week, avg_content_length,\n                platform_count_in_week, unique_campaigns_in_week,\n                -- Week-over-week changes\n                LAG(weekly_signals) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_signals,\n                LAG(avg_content_length) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_content_length,\n                LAG(platform_count_in_week) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_platforms,\n                -- Competitive ranking\n                RANK() OVER (PARTITION BY week_start ORDER BY weekly_signals DESC) as weekly_activity_rank,\n                RANK() OVER (PARTITION BY week_start ORDER BY platform_count_in_week DESC) as weekly_platform_reach_rank\n              FROM weekly_general_metrics\n            ),\n            general_summary AS (\n              SELECT\n                brand,\n                COUNT(*) as weeks_active,\n                SUM(weekly_signals) as total_signals,\n                SUM(active_days_in_week) as total_active_days,\n                AVG(avg_content_length) as overall_avg_content_length,\n                AVG(platform_count_in_week) as avg_platform_count,\n                AVG(unique_campaigns_in_week) as avg_campaigns_per_week,\n                MIN(week_start) as first_seen_week,\n                MAX(week_start) as last_seen_week,\n                -- Temporal insights\n                AVG(weekly_signals - COALESCE(prev_week_signals, weekly_signals)) as avg_weekly_activity_change,\n                AVG(avg_content_length - COALESCE(prev_week_content_length, avg_content_length)) as avg_content_length_change,\n                AVG(platform_count_in_week - COALESCE(prev_week_platforms, platform_count_in_week)) as avg_platform_expansion_change,\n                AVG(weekly_activity_rank) as avg_activity_rank,\n                AVG(weekly_platform_reach_rank) as avg_platform_reach_rank,\n                -- Activity trends\n                CASE\n                  WHEN AVG(weekly_signals - COALESCE(prev_week_signals, weekly_signals)) > 2 THEN 'INCREASING_ACTIVITY'\n                  WHEN AVG(weekly_signals - COALESCE(prev_week_signals, weekly_signals)) < -2 THEN 'DECREASING_ACTIVITY'\n                  ELSE 'STABLE_ACTIVITY'\n                END as activity_trend,\n                CASE\n                  WHEN AVG(avg_content_length - COALESCE(prev_week_content_length, avg_content_length)) > 10 THEN 'EXPANDING_CONTENT'\n                  WHEN AVG(avg_content_length - COALESCE(prev_week_content_length, avg_content_length)) < -10 THEN 'SHORTENING_CONTENT'\n                  ELSE 'STABLE_CONTENT_LENGTH'\n                END as content_evolution_trend,\n                CASE\n                  WHEN AVG(platform_count_in_week - COALESCE(prev_week_platforms, platform_count_in_week)) > 0.5 THEN 'EXPANDING_REACH'\n                  WHEN AVG(platform_count_in_week - COALESCE(prev_week_platforms, platform_count_in_week)) < -0.5 THEN 'CONSOLIDATING_REACH'\n                  ELSE 'STABLE_REACH'\n                END as platform_reach_trend,\n                -- Competitive positioning\n                CASE\n                  WHEN AVG(weekly_activity_rank) <= 2 THEN 'MARKET_LEADER'\n                  WHEN AVG(weekly_activity_rank) <= 4 THEN 'STRONG_PLAYER'\n                  ELSE 'CHALLENGER'\n                END as competitive_position\n              FROM temporal_analysis\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              weeks_active,\n              total_signals,\n              total_active_days,\n              ROUND(overall_avg_content_length, 1) as avg_content_length,\n              ROUND(avg_platform_count, 1) as avg_platform_count,\n              ROUND(avg_campaigns_per_week, 1) as avg_campaigns_per_week,\n              first_seen_week,\n              last_seen_week,\n              ROUND(avg_weekly_activity_change, 1) as avg_weekly_activity_change,\n              ROUND(avg_content_length_change, 1) as avg_content_length_change,\n              ROUND(avg_platform_expansion_change, 1) as avg_platform_expansion_change,\n              activity_trend,\n              content_evolution_trend,\n              platform_reach_trend,\n              competitive_position,\n              ROUND(avg_activity_rank, 1) as avg_activity_rank,\n              ROUND(avg_platform_reach_rank, 1) as avg_platform_reach_rank\n            FROM general_summary\n            ORDER BY total_signals DESC\n            ",
+      "competitive_intelligence_analysis": "\n            -- General Intelligence Dashboard with Temporal Analysis (Phase 1)\n            WITH weekly_general_metrics AS (\n              SELECT\n                brand,\n                DATE_TRUNC(DATE(start_timestamp), WEEK(MONDAY)) as week_start,\n                COUNT(*) as weekly_signals,\n                COUNT(DISTINCT DATE(start_timestamp)) as active_days_in_week,\n                AVG(LENGTH(COALESCE(creative_text, ''))) as avg_content_length,\n                COUNT(DISTINCT publisher_platforms) as platform_count_in_week,\n                COUNT(DISTINCT ad_archive_id) as unique_campaigns_in_week\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              WHERE start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 WEEK)\n              GROUP BY brand, week_start\n            ),\n            temporal_analysis AS (\n              SELECT\n                brand, week_start, weekly_signals, active_days_in_week, avg_content_length,\n                platform_count_in_week, unique_campaigns_in_week,\n                -- Week-over-week changes\n                LAG(weekly_signals) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_signals,\n                LAG(avg_content_length) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_content_length,\n                LAG(platform_count_in_week) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_platforms,\n                -- Competitive ranking\n                RANK() OVER (PARTITION BY week_start ORDER BY weekly_signals DESC) as weekly_activity_rank,\n                RANK() OVER (PARTITION BY week_start ORDER BY platform_count_in_week DESC) as weekly_platform_reach_rank\n              FROM weekly_general_metrics\n            ),\n            general_summary AS (\n              SELECT\n                brand,\n                COUNT(*) as weeks_active,\n                SUM(weekly_signals) as total_signals,\n                SUM(active_days_in_week) as total_active_days,\n                AVG(avg_content_length) as overall_avg_content_length,\n                AVG(platform_count_in_week) as avg_platform_count,\n                AVG(unique_campaigns_in_week) as avg_campaigns_per_week,\n                MIN(week_start) as first_seen_week,\n                MAX(week_start) as last_seen_week,\n                -- Temporal insights\n                AVG(weekly_signals - COALESCE(prev_week_signals, weekly_signals)) as avg_weekly_activity_change,\n                AVG(avg_content_length - COALESCE(prev_week_content_length, avg_content_length)) as avg_content_length_change,\n                AVG(platform_count_in_week - COALESCE(prev_week_platforms, platform_count_in_week)) as avg_platform_expansion_change,\n                AVG(weekly_activity_rank) as avg_activity_rank,\n                AVG(weekly_platform_reach_rank) as avg_platform_reach_rank,\n                -- Activity trends\n                CASE\n                  WHEN AVG(weekly_signals - COALESCE(prev_week_signals, weekly_signals)) > 2 THEN 'INCREASING_ACTIVITY'\n                  WHEN AVG(weekly_signals - COALESCE(prev_week_signals, weekly_signals)) < -2 THEN 'DECREASING_ACTIVITY'\n                  ELSE 'STABLE_ACTIVITY'\n                END as activity_trend,\n                CASE\n                  WHEN AVG(avg_content_length - COALESCE(prev_week_content_length, avg_content_length)) > 10 THEN 'EXPANDING_CONTENT'\n                  WHEN AVG(avg_content_length - COALESCE(prev_week_content_length, avg_content_length)) < -10 THEN 'SHORTENING_CONTENT'\n                  ELSE 'STABLE_CONTENT_LENGTH'\n                END as content_evolution_trend,\n                CASE\n                  WHEN AVG(platform_count_in_week - COALESCE(prev_week_platforms, platform_count_in_week)) > 0.5 THEN 'EXPANDING_REACH'\n                  WHEN AVG(platform_count_in_week - COALESCE(prev_week_platforms, platform_count_in_week)) < -0.5 THEN 'CONSOLIDATING_REACH'\n                  ELSE 'STABLE_REACH'\n                END as platform_reach_trend,\n                -- Competitive positioning\n                CASE\n                  WHEN AVG(weekly_activity_rank) <= 2 THEN 'MARKET_LEADER'\n                  WHEN AVG(weekly_activity_rank) <= 4 THEN 'STRONG_PLAYER'\n                  ELSE 'CHALLENGER'\n                END as competitive_position\n              FROM temporal_analysis\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              weeks_active,\n              total_signals,\n              total_active_days,\n              ROUND(overall_avg_content_length, 1) as avg_content_length,\n              ROUND(avg_platform_count, 1) as avg_platform_count,\n              ROUND(avg_campaigns_per_week, 1) as avg_campaigns_per_week,\n              first_seen_week,\n              last_seen_week,\n              ROUND(avg_weekly_activity_change, 1) as avg_weekly_activity_change,\n              ROUND(avg_content_length_change, 1) as avg_content_length_change,\n              ROUND(avg_platform_expansion_change, 1) as avg_platform_expansion_change,\n              activity_trend,\n              content_evolution_trend,\n              platform_reach_trend,\n              competitive_position,\n              ROUND(avg_activity_rank, 1) as avg_activity_rank,\n              ROUND(avg_platform_reach_rank, 1) as avg_platform_reach_rank\n            FROM general_summary\n            ORDER BY total_signals DESC\n            ",
+      "creative_intelligence_analysis": "\n            -- Creative Intelligence Dashboard with Temporal Analysis (Phase 1)\n            WITH weekly_creative_metrics AS (\n              SELECT\n                brand,\n                DATE_TRUNC(DATE(start_timestamp), WEEK(MONDAY)) as week_start,\n                COUNT(*) as weekly_ads,\n                AVG(LENGTH(COALESCE(creative_text, ''))) as avg_creative_length,\n                COUNT(DISTINCT REGEXP_EXTRACT(creative_text, r'\\b(\\w+)\\b')) as unique_words,\n                SUM(CASE WHEN creative_text LIKE '%!%' THEN 1 ELSE 0 END) as exclamation_ads,\n                AVG(CASE WHEN LENGTH(creative_text) > 100 THEN 1.0 ELSE 0.0 END) as long_form_rate,\n                AVG(CASE\n                  WHEN LENGTH(COALESCE(creative_text, '')) > 150 THEN 3\n                  WHEN LENGTH(COALESCE(creative_text, '')) > 75 THEN 2\n                  ELSE 1\n                END) as text_length_score,\n                AVG(\n                  (LENGTH(UPPER(COALESCE(creative_text, ''))) - LENGTH(REPLACE(UPPER(COALESCE(creative_text, '')), brand, ''))) /\n                  GREATEST(LENGTH(brand), 1)\n                ) as brand_mention_density\n              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n              WHERE creative_text IS NOT NULL\n                AND start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 WEEK)\n              GROUP BY brand, week_start\n            ),\n            temporal_analysis AS (\n              SELECT\n                brand,\n                week_start,\n                weekly_ads,\n                avg_creative_length,\n                text_length_score,\n                brand_mention_density,\n                -- Week-over-week changes\n                LAG(weekly_ads) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_ads,\n                LAG(avg_creative_length) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_length,\n                LAG(text_length_score) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_text_score,\n                -- Competitive ranking\n                RANK() OVER (PARTITION BY week_start ORDER BY weekly_ads DESC) as weekly_volume_rank,\n                RANK() OVER (PARTITION BY week_start ORDER BY avg_creative_length DESC) as weekly_length_rank,\n                LAG(RANK() OVER (PARTITION BY week_start ORDER BY weekly_ads DESC)) OVER (PARTITION BY brand ORDER BY week_start) as prev_volume_rank\n              FROM weekly_creative_metrics\n            ),\n            creative_summary AS (\n              SELECT\n                brand,\n                COUNT(DISTINCT week_start) as weeks_active,\n                SUM(weekly_ads) as total_ads,\n                AVG(avg_creative_length) as avg_creative_length,\n                AVG(text_length_score) as avg_text_score,\n                AVG(brand_mention_density) as avg_brand_density,\n                -- Temporal insights\n                AVG(weekly_ads - COALESCE(prev_week_ads, weekly_ads)) as avg_weekly_volume_change,\n                AVG(avg_creative_length - COALESCE(prev_week_length, avg_creative_length)) as avg_weekly_length_change,\n                AVG(weekly_volume_rank) as avg_volume_rank,\n                MIN(weekly_volume_rank) as best_volume_rank,\n                MAX(weekly_volume_rank) as worst_volume_rank,\n                -- Trend indicators\n                CASE\n                  WHEN AVG(weekly_ads - COALESCE(prev_week_ads, weekly_ads)) > 2 THEN 'INCREASING_VOLUME'\n                  WHEN AVG(weekly_ads - COALESCE(prev_week_ads, weekly_ads)) < -2 THEN 'DECREASING_VOLUME'\n                  ELSE 'STABLE_VOLUME'\n                END as volume_trend,\n                CASE\n                  WHEN AVG(avg_creative_length - COALESCE(prev_week_length, avg_creative_length)) > 10 THEN 'LENGTHENING_CONTENT'\n                  WHEN AVG(avg_creative_length - COALESCE(prev_week_length, avg_creative_length)) < -10 THEN 'SHORTENING_CONTENT'\n                  ELSE 'STABLE_LENGTH'\n                END as content_trend\n              FROM temporal_analysis\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              weeks_active,\n              total_ads,\n              ROUND(avg_creative_length, 1) as avg_creative_length,\n              ROUND(avg_text_score, 2) as text_optimization_score,\n              ROUND(avg_brand_density, 3) as brand_mention_density,\n              -- Temporal intelligence\n              ROUND(avg_weekly_volume_change, 1) as avg_weekly_volume_change,\n              ROUND(avg_weekly_length_change, 1) as avg_weekly_length_change,\n              ROUND(avg_volume_rank, 1) as avg_competitive_rank,\n              volume_trend,\n              content_trend,\n              -- Competitive positioning\n              CASE\n                WHEN avg_volume_rank <= 2 THEN 'MARKET_LEADER'\n                WHEN avg_volume_rank <= 4 THEN 'STRONG_PLAYER'\n                ELSE 'CHALLENGER'\n              END as competitive_position,\n              -- Movement indicator\n              CASE\n                WHEN best_volume_rank < worst_volume_rank THEN 'IMPROVING_POSITION'\n                WHEN best_volume_rank > worst_volume_rank THEN 'DECLINING_POSITION'\n                ELSE 'STABLE_POSITION'\n              END as competitive_movement\n            FROM creative_summary\n            ORDER BY total_ads DESC\n            ",
+      "visual_intelligence_analysis": "\n            -- Visual Intelligence Dashboard with Temporal Analysis (Phase 1)\n            WITH weekly_visual_metrics AS (\n              SELECT\n                brand,\n                DATE_TRUNC(DATE(start_timestamp), WEEK(MONDAY)) as week_start,\n                COUNT(*) as weekly_visual_ads,\n                AVG(visual_text_alignment_score) as avg_visual_alignment,\n                AVG(brand_consistency_score) as avg_brand_consistency,\n                AVG(luxury_positioning_score) as avg_luxury_position,\n                AVG(boldness_score) as avg_boldness,\n                AVG(visual_differentiation_level) as avg_differentiation,\n                AVG(creative_pattern_risk) as avg_pattern_risk,\n                -- Visual health score per week\n                (AVG(visual_text_alignment_score) * 0.3 +\n                 AVG(brand_consistency_score) * 0.3 +\n                 AVG(visual_differentiation_level) * 0.2 +\n                 (1 - AVG(creative_pattern_risk)) * 0.2) as weekly_visual_health_score\n              FROM (\n                SELECT * FROM `bigquery-ai-kaggle-469620.ads_demo.visual_intelligence_*`\n                WHERE luxury_positioning_score IS NOT NULL\n                  AND start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 12 WEEK)\n              )\n              GROUP BY brand, week_start\n            ),\n            temporal_analysis AS (\n              SELECT\n                brand, week_start, weekly_visual_ads, avg_visual_alignment, avg_brand_consistency,\n                avg_luxury_position, avg_boldness, avg_differentiation, avg_pattern_risk, weekly_visual_health_score,\n                -- Week-over-week changes\n                LAG(weekly_visual_ads) OVER (PARTITION BY brand ORDER BY week_start) as prev_week_ads,\n                LAG(avg_luxury_position) OVER (PARTITION BY brand ORDER BY week_start) as prev_luxury_position,\n                LAG(avg_boldness) OVER (PARTITION BY brand ORDER BY week_start) as prev_boldness,\n                LAG(avg_brand_consistency) OVER (PARTITION BY brand ORDER BY week_start) as prev_brand_consistency,\n                LAG(avg_pattern_risk) OVER (PARTITION BY brand ORDER BY week_start) as prev_pattern_risk,\n                -- Competitive ranking\n                RANK() OVER (PARTITION BY week_start ORDER BY weekly_visual_ads DESC) as weekly_volume_rank,\n                RANK() OVER (PARTITION BY week_start ORDER BY avg_luxury_position DESC) as weekly_luxury_rank,\n                RANK() OVER (PARTITION BY week_start ORDER BY avg_boldness DESC) as weekly_boldness_rank,\n                RANK() OVER (PARTITION BY week_start ORDER BY weekly_visual_health_score DESC) as weekly_health_rank\n              FROM weekly_visual_metrics\n            ),\n            visual_summary AS (\n              SELECT\n                brand,\n                COUNT(*) as weeks_active,\n                SUM(weekly_visual_ads) as total_visual_ads,\n                AVG(avg_visual_alignment) as overall_visual_alignment,\n                AVG(avg_brand_consistency) as overall_brand_consistency,\n                AVG(avg_luxury_position) as overall_luxury_position,\n                AVG(avg_boldness) as overall_boldness,\n                AVG(avg_differentiation) as overall_differentiation,\n                AVG(avg_pattern_risk) as overall_pattern_risk,\n                AVG(weekly_visual_health_score) as overall_visual_health_score,\n                -- Temporal insights\n                AVG(weekly_visual_ads - COALESCE(prev_week_ads, weekly_visual_ads)) as avg_weekly_volume_change,\n                AVG(avg_luxury_position - COALESCE(prev_luxury_position, avg_luxury_position)) as avg_luxury_shift,\n                AVG(avg_boldness - COALESCE(prev_boldness, avg_boldness)) as avg_boldness_shift,\n                AVG(avg_brand_consistency - COALESCE(prev_brand_consistency, avg_brand_consistency)) as avg_consistency_shift,\n                AVG(avg_pattern_risk - COALESCE(prev_pattern_risk, avg_pattern_risk)) as avg_fatigue_trend,\n                AVG(weekly_volume_rank) as avg_volume_rank,\n                AVG(weekly_luxury_rank) as avg_luxury_rank,\n                AVG(weekly_boldness_rank) as avg_boldness_rank,\n                -- Visual strategy evolution trends\n                CASE\n                  WHEN AVG(avg_luxury_position - COALESCE(prev_luxury_position, avg_luxury_position)) > 0.05 THEN 'MOVING_UPMARKET'\n                  WHEN AVG(avg_luxury_position - COALESCE(prev_luxury_position, avg_luxury_position)) < -0.05 THEN 'MOVING_ACCESSIBLE'\n                  ELSE 'STABLE_POSITIONING'\n                END as luxury_positioning_trend,\n                CASE\n                  WHEN AVG(avg_boldness - COALESCE(prev_boldness, avg_boldness)) > 0.05 THEN 'INCREASING_BOLDNESS'\n                  WHEN AVG(avg_boldness - COALESCE(prev_boldness, avg_boldness)) < -0.05 THEN 'DECREASING_BOLDNESS'\n                  ELSE 'STABLE_BOLDNESS'\n                END as boldness_trend,\n                CASE\n                  WHEN AVG(avg_pattern_risk - COALESCE(prev_pattern_risk, avg_pattern_risk)) > 0.1 THEN 'INCREASING_FATIGUE_RISK'\n                  WHEN AVG(avg_pattern_risk - COALESCE(prev_pattern_risk, avg_pattern_risk)) < -0.1 THEN 'DECREASING_FATIGUE_RISK'\n                  ELSE 'STABLE_FATIGUE'\n                END as creative_fatigue_trend,\n                -- Positioning quadrant classification\n                CASE\n                  WHEN AVG(avg_luxury_position) > 0.7 AND AVG(avg_boldness) > 0.7 THEN 'Luxury-Bold'\n                  WHEN AVG(avg_luxury_position) > 0.7 AND AVG(avg_boldness) < 0.4 THEN 'Luxury-Subtle'\n                  WHEN AVG(avg_luxury_position) < 0.4 AND AVG(avg_boldness) > 0.7 THEN 'Accessible-Bold'\n                  ELSE 'Mid-Balanced'\n                END as positioning_quadrant,\n                -- Competitive positioning\n                CASE\n                  WHEN AVG(weekly_volume_rank) <= 2 THEN 'VISUAL_LEADER'\n                  WHEN AVG(weekly_volume_rank) <= 4 THEN 'STRONG_VISUAL_PLAYER'\n                  ELSE 'VISUAL_CHALLENGER'\n                END as competitive_position\n              FROM temporal_analysis\n              GROUP BY brand\n            )\n            SELECT\n              brand,\n              weeks_active,\n              total_visual_ads,\n              ROUND(overall_visual_alignment, 3) as visual_alignment_score,\n              ROUND(overall_brand_consistency, 3) as brand_consistency_score,\n              ROUND(overall_luxury_position, 3) as luxury_positioning,\n              ROUND(overall_boldness, 3) as boldness_score,\n              ROUND(overall_differentiation, 3) as differentiation_level,\n              ROUND(overall_pattern_risk, 3) as fatigue_risk,\n              ROUND(overall_visual_health_score, 3) as overall_visual_health,\n              ROUND(avg_weekly_volume_change, 1) as avg_weekly_volume_change,\n              ROUND(avg_luxury_shift, 3) as avg_luxury_shift,\n              ROUND(avg_boldness_shift, 3) as avg_boldness_shift,\n              ROUND(avg_consistency_shift, 3) as avg_consistency_shift,\n              ROUND(avg_fatigue_trend, 3) as avg_fatigue_trend,\n              luxury_positioning_trend,\n              boldness_trend,\n              creative_fatigue_trend,\n              positioning_quadrant,\n              competitive_position,\n              ROUND(avg_volume_rank, 1) as avg_volume_rank,\n              ROUND(avg_luxury_rank, 1) as avg_luxury_rank,\n              ROUND(avg_boldness_rank, 1) as avg_boldness_rank\n            FROM visual_summary\n            ORDER BY total_visual_ads DESC\n            ",
+      "visual_style_competitive_matrix": "\n        -- Visual Style Competitive Matrix\n        -- Enhanced Visual Intelligence Dashboard for Style Analysis\n        WITH style_matrix AS (\n          SELECT\n            brand,\n            COUNT(*) as total_ads,\n            COUNTIF(visual_style = 'MINIMALIST') * 100.0 / COUNT(*) as minimalist_pct,\n            COUNTIF(visual_style = 'LUXURY') * 100.0 / COUNT(*) as luxury_pct,\n            COUNTIF(visual_style = 'BOLD') * 100.0 / COUNT(*) as bold_pct,\n            COUNTIF(visual_style = 'CASUAL') * 100.0 / COUNT(*) as casual_pct,\n            COUNTIF(visual_style = 'PROFESSIONAL') * 100.0 / COUNT(*) as professional_pct,\n            AVG(brand_consistency_score) as avg_brand_consistency,\n            AVG(luxury_positioning_score) as avg_luxury_score,\n            AVG(boldness_score) as avg_boldness_score\n          FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n          WHERE visual_style IS NOT NULL\n          GROUP BY brand\n        ),\n        competitive_gaps AS (\n          SELECT\n            'MINIMALIST' as style,\n            AVG(minimalist_pct) as market_avg,\n            MAX(minimalist_pct) - MIN(minimalist_pct) as market_spread,\n            STDDEV(minimalist_pct) as market_volatility\n          FROM style_matrix\n          UNION ALL\n          SELECT\n            'LUXURY' as style,\n            AVG(luxury_pct) as market_avg,\n            MAX(luxury_pct) - MIN(luxury_pct) as market_spread,\n            STDDEV(luxury_pct) as market_volatility\n          FROM style_matrix\n          UNION ALL\n          SELECT\n            'BOLD' as style,\n            AVG(bold_pct) as market_avg,\n            MAX(bold_pct) - MIN(bold_pct) as market_spread,\n            STDDEV(bold_pct) as market_volatility\n          FROM style_matrix\n          UNION ALL\n          SELECT\n            'CASUAL' as style,\n            AVG(casual_pct) as market_avg,\n            MAX(casual_pct) - MIN(casual_pct) as market_spread,\n            STDDEV(casual_pct) as market_volatility\n          FROM style_matrix\n          UNION ALL\n          SELECT\n            'PROFESSIONAL' as style,\n            AVG(professional_pct) as market_avg,\n            MAX(professional_pct) - MIN(professional_pct) as market_spread,\n            STDDEV(professional_pct) as market_volatility\n          FROM style_matrix\n        ),\n        competitive_advantage AS (\n          SELECT\n            sm.brand,\n            sm.total_ads,\n            ROUND(sm.minimalist_pct, 1) as minimalist_pct,\n            ROUND(sm.luxury_pct, 1) as luxury_pct,\n            ROUND(sm.bold_pct, 1) as bold_pct,\n            ROUND(sm.casual_pct, 1) as casual_pct,\n            ROUND(sm.professional_pct, 1) as professional_pct,\n            ROUND(sm.avg_brand_consistency, 3) as brand_consistency_score,\n            ROUND(sm.avg_luxury_score, 3) as luxury_positioning_score,\n            ROUND(sm.avg_boldness_score, 3) as boldness_score,\n            -- Competitive advantage indicators\n            CASE\n              WHEN sm.minimalist_pct > (SELECT market_avg FROM competitive_gaps WHERE style = 'MINIMALIST') + 20 THEN 'DOMINATES_MINIMALIST'\n              WHEN sm.luxury_pct > (SELECT market_avg FROM competitive_gaps WHERE style = 'LUXURY') + 20 THEN 'DOMINATES_LUXURY'\n              WHEN sm.bold_pct > (SELECT market_avg FROM competitive_gaps WHERE style = 'BOLD') + 20 THEN 'DOMINATES_BOLD'\n              WHEN sm.casual_pct > (SELECT market_avg FROM competitive_gaps WHERE style = 'CASUAL') + 20 THEN 'DOMINATES_CASUAL'\n              WHEN sm.professional_pct > (SELECT market_avg FROM competitive_gaps WHERE style = 'PROFESSIONAL') + 20 THEN 'DOMINATES_PROFESSIONAL'\n              ELSE 'BALANCED_PORTFOLIO'\n            END as style_advantage,\n            -- Style diversification score (lower = more focused, higher = more diverse)\n            (sm.minimalist_pct * sm.minimalist_pct + sm.luxury_pct * sm.luxury_pct +\n             sm.bold_pct * sm.bold_pct + sm.casual_pct * sm.casual_pct +\n             sm.professional_pct * sm.professional_pct) / 10000.0 as style_concentration_index\n          FROM style_matrix sm\n        )\n        SELECT\n          brand,\n          total_ads,\n          minimalist_pct,\n          luxury_pct,\n          bold_pct,\n          casual_pct,\n          professional_pct,\n          brand_consistency_score,\n          luxury_positioning_score,\n          boldness_score,\n          style_advantage,\n          ROUND(style_concentration_index, 3) as style_focus_score,\n          CASE\n            WHEN style_concentration_index > 0.4 THEN 'HIGHLY_FOCUSED'\n            WHEN style_concentration_index > 0.25 THEN 'MODERATELY_FOCUSED'\n            ELSE 'DIVERSIFIED'\n          END as style_strategy\n        FROM competitive_advantage\n        ORDER BY total_ads DESC\n        ",
+      "competitive_velocity_analysis": "\n        -- Competitive Velocity Analysis Dashboard (Phase 2)\n        -- Measures acceleration and deceleration across all intelligence dimensions\n\n        WITH weekly_intelligence_metrics AS (\n          SELECT\n            brand,\n            DATE_TRUNC(DATE(start_timestamp), WEEK(MONDAY)) as week_start,\n\n            -- Creative Velocity Metrics\n            COUNT(*) as weekly_ads,\n            AVG(LENGTH(COALESCE(creative_text, ''))) as avg_creative_length,\n            COUNT(DISTINCT REGEXP_EXTRACT(creative_text, r'\\b(\\w+)\\b')) as unique_creative_words,\n\n            -- Channel Momentum Metrics\n            COUNT(DISTINCT media_type) as channel_diversity,\n            AVG(ARRAY_LENGTH(platforms_array)) as avg_platform_reach,\n            SUM(CASE WHEN media_type = 'VIDEO' THEN 1 ELSE 0 END) as video_ads,\n\n            -- Visual Evolution Metrics\n            AVG(CASE WHEN LENGTH(creative_text) > 100 THEN 1.0 ELSE 0.0 END) as long_form_rate,\n            AVG(duration_quality_weight) as avg_quality_score\n\n          FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n          WHERE creative_text IS NOT NULL\n            AND start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 16 WEEK)\n          GROUP BY brand, week_start\n        ),\n\n        velocity_calculations AS (\n          SELECT\n            brand,\n            week_start,\n            weekly_ads,\n            avg_creative_length,\n            unique_creative_words,\n            channel_diversity,\n            avg_platform_reach,\n            video_ads,\n            long_form_rate,\n            avg_quality_score,\n\n            -- Creative Velocity: Rate of change in creative output\n            (weekly_ads - LAG(weekly_ads, 1) OVER (PARTITION BY brand ORDER BY week_start)) as creative_volume_velocity_1w,\n            (weekly_ads - LAG(weekly_ads, 4) OVER (PARTITION BY brand ORDER BY week_start)) / 4.0 as creative_volume_velocity_4w,\n\n            -- Creative Sophistication Velocity\n            (avg_creative_length - LAG(avg_creative_length, 1) OVER (PARTITION BY brand ORDER BY week_start)) as creative_length_velocity_1w,\n            (unique_creative_words - LAG(unique_creative_words, 1) OVER (PARTITION BY brand ORDER BY week_start)) as creative_diversity_velocity_1w,\n\n            -- Channel Momentum: Rate of platform expansion\n            (avg_platform_reach - LAG(avg_platform_reach, 1) OVER (PARTITION BY brand ORDER BY week_start)) as platform_momentum_1w,\n            (channel_diversity - LAG(channel_diversity, 1) OVER (PARTITION BY brand ORDER BY week_start)) as channel_expansion_velocity_1w,\n\n            -- Visual Evolution Speed\n            (video_ads - LAG(video_ads, 1) OVER (PARTITION BY brand ORDER BY week_start)) as video_adoption_velocity_1w,\n            (long_form_rate - LAG(long_form_rate, 1) OVER (PARTITION BY brand ORDER BY week_start)) as content_sophistication_velocity_1w\n\n          FROM weekly_intelligence_metrics\n        ),\n\n        competitive_velocity_ranking AS (\n          SELECT\n            *,\n\n            -- Current week competitive velocity rankings\n            RANK() OVER (PARTITION BY week_start ORDER BY ABS(COALESCE(creative_volume_velocity_1w, 0)) DESC) as creative_velocity_rank,\n            RANK() OVER (PARTITION BY week_start ORDER BY ABS(COALESCE(platform_momentum_1w, 0)) DESC) as platform_momentum_rank,\n            RANK() OVER (PARTITION BY week_start ORDER BY ABS(COALESCE(channel_expansion_velocity_1w, 0)) DESC) as channel_velocity_rank,\n            RANK() OVER (PARTITION BY week_start ORDER BY ABS(COALESCE(video_adoption_velocity_1w, 0)) DESC) as visual_velocity_rank,\n\n            -- Velocity classification\n            CASE\n              WHEN COALESCE(creative_volume_velocity_1w, 0) >= 5 THEN 'ACCELERATING_FAST'\n              WHEN COALESCE(creative_volume_velocity_1w, 0) >= 2 THEN 'ACCELERATING'\n              WHEN COALESCE(creative_volume_velocity_1w, 0) <= -5 THEN 'DECELERATING_FAST'\n              WHEN COALESCE(creative_volume_velocity_1w, 0) <= -2 THEN 'DECELERATING'\n              ELSE 'STABLE_VELOCITY'\n            END as creative_velocity_classification,\n\n            CASE\n              WHEN COALESCE(platform_momentum_1w, 0) >= 1.0 THEN 'EXPANDING_FAST'\n              WHEN COALESCE(platform_momentum_1w, 0) >= 0.5 THEN 'EXPANDING'\n              WHEN COALESCE(platform_momentum_1w, 0) <= -1.0 THEN 'CONTRACTING_FAST'\n              WHEN COALESCE(platform_momentum_1w, 0) <= -0.5 THEN 'CONTRACTING'\n              ELSE 'STABLE_REACH'\n            END as platform_momentum_classification\n\n          FROM velocity_calculations\n        ),\n\n        velocity_summary AS (\n          SELECT\n            brand,\n            week_start,\n\n            -- Current metrics\n            weekly_ads,\n            ROUND(avg_creative_length, 1) as avg_creative_length,\n            unique_creative_words,\n            channel_diversity,\n            ROUND(avg_platform_reach, 1) as avg_platform_reach,\n            video_ads,\n            ROUND(long_form_rate * 100, 1) as long_form_pct,\n            ROUND(avg_quality_score, 3) as avg_quality_score,\n\n            -- Velocity metrics (1-week)\n            ROUND(COALESCE(creative_volume_velocity_1w, 0), 1) as creative_volume_velocity_1w,\n            ROUND(COALESCE(creative_length_velocity_1w, 0), 1) as creative_length_velocity_1w,\n            ROUND(COALESCE(creative_diversity_velocity_1w, 0), 1) as creative_diversity_velocity_1w,\n            ROUND(COALESCE(platform_momentum_1w, 0), 2) as platform_momentum_1w,\n            ROUND(COALESCE(channel_expansion_velocity_1w, 0), 1) as channel_expansion_velocity_1w,\n            ROUND(COALESCE(video_adoption_velocity_1w, 0), 1) as video_adoption_velocity_1w,\n            ROUND(COALESCE(content_sophistication_velocity_1w, 0), 3) as content_sophistication_velocity_1w,\n\n            -- Velocity metrics (4-week trend)\n            ROUND(COALESCE(creative_volume_velocity_4w, 0), 2) as creative_volume_velocity_4w,\n\n            -- Competitive rankings\n            creative_velocity_rank,\n            platform_momentum_rank,\n            channel_velocity_rank,\n            visual_velocity_rank,\n\n            -- Classifications\n            creative_velocity_classification,\n            platform_momentum_classification,\n\n            -- Overall velocity score (composite of all dimensions)\n            ROUND((\n              ABS(COALESCE(creative_volume_velocity_1w, 0)) * 0.3 +\n              ABS(COALESCE(platform_momentum_1w, 0)) * 10 * 0.3 +  -- Scale platform momentum\n              ABS(COALESCE(channel_expansion_velocity_1w, 0)) * 0.2 +\n              ABS(COALESCE(video_adoption_velocity_1w, 0)) * 0.2\n            ), 2) as overall_velocity_score,\n\n            -- Strategic velocity insight\n            CASE\n              WHEN creative_velocity_rank <= 2 AND platform_momentum_rank <= 2 THEN 'MULTI_DIMENSIONAL_LEADER'\n              WHEN creative_velocity_rank <= 2 THEN 'CREATIVE_VELOCITY_LEADER'\n              WHEN platform_momentum_rank <= 2 THEN 'PLATFORM_MOMENTUM_LEADER'\n              WHEN channel_velocity_rank <= 2 THEN 'CHANNEL_EXPANSION_LEADER'\n              WHEN visual_velocity_rank <= 2 THEN 'VISUAL_EVOLUTION_LEADER'\n              ELSE 'STABLE_STRATEGIC_POSITION'\n            END as velocity_leadership_type\n\n          FROM competitive_velocity_ranking\n        )\n\n        SELECT *\n        FROM velocity_summary\n        WHERE week_start >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 WEEK)  -- Last 12 weeks\n        ORDER BY week_start DESC, overall_velocity_score DESC\n        ",
+      "strategic_inflection_detection": "\n        -- Strategic Inflection Detection Dashboard (Phase 3)\n        -- Identifies when competitive dynamics shifted significantly\n\n        WITH weekly_metrics AS (\n          SELECT\n            brand,\n            DATE_TRUNC(DATE(start_timestamp), WEEK(MONDAY)) as week_start,\n\n            -- Core strategic metrics\n            COUNT(*) as weekly_ads,\n            AVG(LENGTH(COALESCE(creative_text, ''))) as avg_creative_length,\n            COUNT(DISTINCT media_type) as media_diversity,\n            AVG(ARRAY_LENGTH(platforms_array)) as avg_platform_reach,\n            SUM(CASE WHEN media_type = 'VIDEO' THEN 1 ELSE 0 END) / COUNT(*) as video_ratio,\n            AVG(duration_quality_weight) as avg_quality,\n\n            -- Text sophistication metrics\n            AVG(CASE WHEN creative_text LIKE '%limited%' OR creative_text LIKE '%exclusive%'\n                     OR creative_text LIKE '%sale%' THEN 1 ELSE 0 END) as urgency_ratio,\n            AVG(CASE WHEN creative_text LIKE '%free%' OR creative_text LIKE '%discount%'\n                     OR creative_text LIKE '%off%' THEN 1 ELSE 0 END) as promo_ratio\n\n          FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n          WHERE creative_text IS NOT NULL\n            AND start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 WEEK)\n          GROUP BY brand, week_start\n        ),\n\n        inflection_detection AS (\n          SELECT\n            brand,\n            week_start,\n            weekly_ads,\n            avg_creative_length,\n            media_diversity,\n            avg_platform_reach,\n            video_ratio,\n            avg_quality,\n            urgency_ratio,\n            promo_ratio,\n\n            -- Calculate rolling averages for stability baseline\n            AVG(weekly_ads) OVER (\n              PARTITION BY brand\n              ORDER BY week_start\n              ROWS BETWEEN 4 PRECEDING AND 1 PRECEDING\n            ) as rolling_avg_ads_4w,\n\n            STDDEV(weekly_ads) OVER (\n              PARTITION BY brand\n              ORDER BY week_start\n              ROWS BETWEEN 4 PRECEDING AND 1 PRECEDING\n            ) as rolling_stddev_ads_4w,\n\n            -- Media strategy baseline\n            AVG(video_ratio) OVER (\n              PARTITION BY brand\n              ORDER BY week_start\n              ROWS BETWEEN 4 PRECEDING AND 1 PRECEDING\n            ) as rolling_avg_video_ratio_4w,\n\n            -- Platform strategy baseline\n            AVG(avg_platform_reach) OVER (\n              PARTITION BY brand\n              ORDER BY week_start\n              ROWS BETWEEN 4 PRECEDING AND 1 PRECEDING\n            ) as rolling_avg_platform_4w,\n\n            -- Creative strategy baseline\n            AVG(avg_creative_length) OVER (\n              PARTITION BY brand\n              ORDER BY week_start\n              ROWS BETWEEN 4 PRECEDING AND 1 PRECEDING\n            ) as rolling_avg_creative_length_4w\n\n          FROM weekly_metrics\n        ),\n\n        anomaly_detection AS (\n          SELECT\n            *,\n\n            -- Volume anomaly detection (2 standard deviations)\n            CASE\n              WHEN ABS(weekly_ads - COALESCE(rolling_avg_ads_4w, weekly_ads)) >\n                   2 * COALESCE(rolling_stddev_ads_4w, 0.001) THEN 1\n              ELSE 0\n            END as volume_anomaly,\n\n            -- Media strategy shift detection (>30% change)\n            CASE\n              WHEN ABS(video_ratio - COALESCE(rolling_avg_video_ratio_4w, video_ratio)) > 0.3 THEN 1\n              ELSE 0\n            END as media_strategy_shift,\n\n            -- Platform expansion detection (>1.5 platform change)\n            CASE\n              WHEN ABS(avg_platform_reach - COALESCE(rolling_avg_platform_4w, avg_platform_reach)) > 1.5 THEN 1\n              ELSE 0\n            END as platform_strategy_shift,\n\n            -- Creative evolution detection (>50 char average change)\n            CASE\n              WHEN ABS(avg_creative_length - COALESCE(rolling_avg_creative_length_4w, avg_creative_length)) > 50 THEN 1\n              ELSE 0\n            END as creative_strategy_shift,\n\n            -- Calculate Z-scores for magnitude\n            SAFE_DIVIDE(\n              weekly_ads - COALESCE(rolling_avg_ads_4w, weekly_ads),\n              COALESCE(rolling_stddev_ads_4w, 1)\n            ) as volume_z_score\n\n          FROM inflection_detection\n        ),\n\n        competitive_responses AS (\n          SELECT\n            a.brand,\n            a.week_start,\n            a.weekly_ads,\n            a.volume_anomaly,\n            a.media_strategy_shift,\n            a.platform_strategy_shift,\n            a.creative_strategy_shift,\n            a.volume_z_score,\n\n            -- Check if competitors had inflections in the same or following week\n            SUM(CASE\n              WHEN b.brand != a.brand AND b.volume_anomaly = 1\n                   AND b.week_start BETWEEN a.week_start AND DATE_ADD(a.week_start, INTERVAL 2 WEEK)\n              THEN 1 ELSE 0\n            END) as competitive_response_count,\n\n            -- Identify market-wide shifts\n            SUM(CASE\n              WHEN b.week_start = a.week_start AND (\n                b.volume_anomaly = 1 OR\n                b.media_strategy_shift = 1 OR\n                b.platform_strategy_shift = 1\n              ) THEN 1 ELSE 0\n            END) as market_shift_breadth\n\n          FROM anomaly_detection a\n          CROSS JOIN anomaly_detection b\n          GROUP BY 1,2,3,4,5,6,7,8\n        ),\n\n        inflection_summary AS (\n          SELECT\n            brand,\n            week_start,\n            weekly_ads,\n            ROUND(volume_z_score, 2) as volume_z_score,\n\n            -- Strategic shift indicators\n            volume_anomaly,\n            media_strategy_shift,\n            platform_strategy_shift,\n            creative_strategy_shift,\n\n            -- Total strategic changes this week\n            (volume_anomaly + media_strategy_shift + platform_strategy_shift + creative_strategy_shift) as total_shifts,\n\n            -- Competitive dynamics\n            competitive_response_count,\n            market_shift_breadth,\n\n            -- Classify inflection type\n            CASE\n              WHEN (volume_anomaly + media_strategy_shift + platform_strategy_shift + creative_strategy_shift) >= 3\n                THEN 'MAJOR_STRATEGIC_PIVOT'\n              WHEN (volume_anomaly + media_strategy_shift + platform_strategy_shift + creative_strategy_shift) >= 2\n                THEN 'SIGNIFICANT_ADJUSTMENT'\n              WHEN volume_anomaly = 1 AND volume_z_score > 3\n                THEN 'VOLUME_SURGE'\n              WHEN volume_anomaly = 1 AND volume_z_score < -3\n                THEN 'VOLUME_COLLAPSE'\n              WHEN media_strategy_shift = 1\n                THEN 'MEDIA_STRATEGY_CHANGE'\n              WHEN platform_strategy_shift = 1\n                THEN 'PLATFORM_EXPANSION'\n              WHEN creative_strategy_shift = 1\n                THEN 'CREATIVE_EVOLUTION'\n              ELSE 'STABLE_STRATEGY'\n            END as inflection_type,\n\n            -- Competitive response pattern\n            CASE\n              WHEN competitive_response_count >= 3 THEN 'TRIGGERED_MARKET_RESPONSE'\n              WHEN competitive_response_count >= 1 THEN 'PROMPTED_COMPETITOR_ACTION'\n              WHEN market_shift_breadth >= 4 THEN 'PART_OF_MARKET_SHIFT'\n              WHEN market_shift_breadth >= 2 THEN 'ALIGNED_WITH_TREND'\n              ELSE 'INDEPENDENT_MOVE'\n            END as competitive_context,\n\n            -- Strategic importance score\n            ROUND(\n              ABS(COALESCE(volume_z_score, 0)) * 0.3 +\n              (volume_anomaly + media_strategy_shift + platform_strategy_shift + creative_strategy_shift) * 2 +\n              LEAST(competitive_response_count, 3) * 0.5 +\n              LEAST(market_shift_breadth, 5) * 0.2\n            , 2) as inflection_importance_score\n\n          FROM competitive_responses\n        )\n\n        SELECT\n          brand,\n          week_start,\n          weekly_ads,\n          volume_z_score,\n          inflection_type,\n          competitive_context,\n          inflection_importance_score,\n          total_shifts,\n          competitive_response_count,\n          market_shift_breadth,\n\n          -- Strategic shift details\n          CASE WHEN volume_anomaly = 1 THEN 'VOLUME' ELSE NULL END as volume_shift,\n          CASE WHEN media_strategy_shift = 1 THEN 'MEDIA' ELSE NULL END as media_shift,\n          CASE WHEN platform_strategy_shift = 1 THEN 'PLATFORM' ELSE NULL END as platform_shift,\n          CASE WHEN creative_strategy_shift = 1 THEN 'CREATIVE' ELSE NULL END as creative_shift\n\n        FROM inflection_summary\n        WHERE week_start >= DATE_SUB(CURRENT_DATE(), INTERVAL 16 WEEK)\n          AND inflection_type != 'STABLE_STRATEGY'  -- Only show actual inflections\n        ORDER BY inflection_importance_score DESC, week_start DESC\n        ",
+      "predictive_competitive_forecast": "\n        -- Predictive Competitive Forecast Dashboard (Phase 4)\n        -- Integrates ML.FORECAST models with current competitive intelligence\n\n        WITH current_competitive_state AS (\n          SELECT\n            brand,\n            DATE_TRUNC(DATE(start_timestamp), WEEK(MONDAY)) as week_start,\n            COUNT(*) as current_weekly_ads,\n            AVG(duration_quality_weight) as current_avg_quality,\n            COUNT(DISTINCT media_type) as current_media_diversity,\n            AVG(ARRAY_LENGTH(platforms_array)) as current_platform_reach,\n            SUM(CASE WHEN media_type = 'VIDEO' THEN 1 ELSE 0 END) / COUNT(*) * 100 as current_video_pct\n\n          FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n          WHERE creative_text IS NOT NULL\n            AND start_timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 8 WEEK)\n          GROUP BY brand, week_start\n        ),\n\n        -- Get latest actual values for comparison baseline\n        latest_actuals AS (\n          SELECT\n            brand,\n            MAX(week_start) as latest_week,\n            ARRAY_AGG(current_weekly_ads ORDER BY week_start DESC LIMIT 1)[OFFSET(0)] as latest_weekly_ads,\n            ARRAY_AGG(current_avg_quality ORDER BY week_start DESC LIMIT 1)[OFFSET(0)] as latest_avg_quality,\n            ARRAY_AGG(current_platform_reach ORDER BY week_start DESC LIMIT 1)[OFFSET(0)] as latest_platform_reach,\n            ARRAY_AGG(current_video_pct ORDER BY week_start DESC LIMIT 1)[OFFSET(0)] as latest_video_pct\n          FROM current_competitive_state\n          GROUP BY brand\n        ),\n\n        -- ML.FORECAST Volume Predictions (4-week horizon)\n        volume_forecasts AS (\n          SELECT\n            forecast_timestamp,\n            brand_id as brand,\n            forecast_value as predicted_weekly_ads,\n            prediction_interval_lower_bound as ads_lower_bound,\n            prediction_interval_upper_bound as ads_upper_bound,\n            confidence_level\n          FROM ML.FORECAST(MODEL `bigquery-ai-kaggle-469620.ads_demo.forecast_ad_volume`,\n                          STRUCT(4 as horizon))\n          WHERE forecast_timestamp > CURRENT_DATE()\n        ),\n\n        -- ML.FORECAST Aggressiveness Predictions\n        aggressiveness_forecasts AS (\n          SELECT\n            forecast_timestamp,\n            brand_id as brand,\n            forecast_value as predicted_aggressiveness,\n            prediction_interval_lower_bound as aggressiveness_lower,\n            prediction_interval_upper_bound as aggressiveness_upper\n          FROM ML.FORECAST(MODEL `bigquery-ai-kaggle-469620.ads_demo.forecast_aggressiveness`,\n                          STRUCT(4 as horizon))\n          WHERE forecast_timestamp > CURRENT_DATE()\n        ),\n\n        -- ML.FORECAST Cross-Platform Predictions\n        platform_forecasts AS (\n          SELECT\n            forecast_timestamp,\n            brand_id as brand,\n            forecast_value as predicted_cross_platform_pct,\n            prediction_interval_lower_bound as platform_lower,\n            prediction_interval_upper_bound as platform_upper\n          FROM ML.FORECAST(MODEL `bigquery-ai-kaggle-469620.ads_demo.forecast_cross_platform`,\n                          STRUCT(4 as horizon))\n          WHERE forecast_timestamp > CURRENT_DATE()\n        ),\n\n        -- Combine all forecasts with current state\n        integrated_forecasts AS (\n          SELECT\n            v.forecast_timestamp,\n            v.brand,\n\n            -- Current baseline (latest actuals)\n            l.latest_weekly_ads,\n            l.latest_avg_quality,\n            l.latest_platform_reach,\n            l.latest_video_pct,\n\n            -- Volume forecasts\n            ROUND(v.predicted_weekly_ads, 1) as predicted_weekly_ads,\n            ROUND(v.ads_lower_bound, 1) as ads_lower_bound,\n            ROUND(v.ads_upper_bound, 1) as ads_upper_bound,\n            v.confidence_level,\n\n            -- Aggressiveness forecasts\n            ROUND(COALESCE(a.predicted_aggressiveness, l.latest_avg_quality), 3) as predicted_aggressiveness,\n            ROUND(COALESCE(a.aggressiveness_lower, l.latest_avg_quality * 0.9), 3) as aggressiveness_lower,\n            ROUND(COALESCE(a.aggressiveness_upper, l.latest_avg_quality * 1.1), 3) as aggressiveness_upper,\n\n            -- Platform forecasts\n            ROUND(COALESCE(p.predicted_cross_platform_pct, l.latest_platform_reach), 2) as predicted_platform_reach,\n            ROUND(COALESCE(p.platform_lower, l.latest_platform_reach * 0.8), 2) as platform_lower,\n            ROUND(COALESCE(p.platform_upper, l.latest_platform_reach * 1.2), 2) as platform_upper,\n\n            -- Calculate predicted changes from current state\n            ROUND(v.predicted_weekly_ads - l.latest_weekly_ads, 1) as predicted_volume_change,\n            ROUND((v.predicted_weekly_ads - l.latest_weekly_ads) / NULLIF(l.latest_weekly_ads, 0) * 100, 1) as predicted_volume_change_pct,\n\n            -- Strategic prediction categories\n            CASE\n              WHEN v.predicted_weekly_ads > l.latest_weekly_ads * 1.2 THEN 'SIGNIFICANT_EXPANSION'\n              WHEN v.predicted_weekly_ads > l.latest_weekly_ads * 1.1 THEN 'MODERATE_GROWTH'\n              WHEN v.predicted_weekly_ads < l.latest_weekly_ads * 0.8 THEN 'SIGNIFICANT_CONTRACTION'\n              WHEN v.predicted_weekly_ads < l.latest_weekly_ads * 0.9 THEN 'MODERATE_DECLINE'\n              ELSE 'STABLE_VOLUME'\n            END as predicted_volume_trend,\n\n            -- Competitive forecast insights\n            RANK() OVER (PARTITION BY v.forecast_timestamp ORDER BY v.predicted_weekly_ads DESC) as predicted_volume_rank,\n            RANK() OVER (PARTITION BY v.forecast_timestamp ORDER BY COALESCE(a.predicted_aggressiveness, l.latest_avg_quality) DESC) as predicted_aggressiveness_rank\n\n          FROM volume_forecasts v\n          LEFT JOIN latest_actuals l ON v.brand = l.brand\n          LEFT JOIN aggressiveness_forecasts a ON v.brand = a.brand AND v.forecast_timestamp = a.forecast_timestamp\n          LEFT JOIN platform_forecasts p ON v.brand = p.brand AND v.forecast_timestamp = p.forecast_timestamp\n        ),\n\n        -- Add week-ahead competitive dynamics\n        competitive_forecast_analysis AS (\n          SELECT\n            *,\n\n            -- Forecast horizon analysis\n            DATE_DIFF(forecast_timestamp, CURRENT_DATE(), DAY) as days_ahead,\n            CASE\n              WHEN DATE_DIFF(forecast_timestamp, CURRENT_DATE(), DAY) <= 7 THEN 'WEEK_1'\n              WHEN DATE_DIFF(forecast_timestamp, CURRENT_DATE(), DAY) <= 14 THEN 'WEEK_2'\n              WHEN DATE_DIFF(forecast_timestamp, CURRENT_DATE(), DAY) <= 21 THEN 'WEEK_3'\n              ELSE 'WEEK_4'\n            END as forecast_horizon,\n\n            -- Strategic forecast alerts\n            CASE\n              WHEN predicted_volume_change_pct > 25 THEN 'HIGH_EXPANSION_ALERT'\n              WHEN predicted_volume_change_pct < -25 THEN 'HIGH_CONTRACTION_ALERT'\n              WHEN predicted_volume_rank <= 2 AND predicted_volume_change_pct > 10 THEN 'EMERGING_LEADER_ALERT'\n              WHEN predicted_aggressiveness_rank <= 2 THEN 'AGGRESSIVENESS_LEADER_ALERT'\n              ELSE 'NORMAL_FORECAST'\n            END as strategic_alert,\n\n            -- Confidence in predictions\n            CASE\n              WHEN confidence_level >= 0.95 THEN 'HIGH_CONFIDENCE'\n              WHEN confidence_level >= 0.80 THEN 'MEDIUM_CONFIDENCE'\n              ELSE 'LOW_CONFIDENCE'\n            END as forecast_confidence_level\n\n          FROM integrated_forecasts\n        )\n\n        SELECT\n          brand,\n          forecast_timestamp,\n          days_ahead,\n          forecast_horizon,\n\n          -- Current state\n          latest_weekly_ads as current_weekly_ads,\n          latest_avg_quality as current_avg_quality,\n          latest_platform_reach as current_platform_reach,\n\n          -- Predicted state\n          predicted_weekly_ads,\n          predicted_aggressiveness,\n          predicted_platform_reach,\n\n          -- Prediction intervals\n          ads_lower_bound,\n          ads_upper_bound,\n          aggressiveness_lower,\n          aggressiveness_upper,\n          platform_lower,\n          platform_upper,\n\n          -- Changes and trends\n          predicted_volume_change,\n          predicted_volume_change_pct,\n          predicted_volume_trend,\n\n          -- Competitive positioning\n          predicted_volume_rank,\n          predicted_aggressiveness_rank,\n\n          -- Strategic insights\n          strategic_alert,\n          forecast_confidence_level,\n\n          -- Forecast metadata\n          ROUND(confidence_level * 100, 1) as confidence_pct\n\n        FROM competitive_forecast_analysis\n        ORDER BY brand, forecast_timestamp\n        "
+    },
+    "signal_explorer_query": "\n        -- Intelligence Signal Explorer\n        WITH signal_metadata AS (\n            \n            SELECT \n                'Competitive Intelligence' as module,\n                'Competitive copying detected from LensCrafters (similarity: 72.6%) - threat accelerating over 6 week...' as insight_preview,\n                0.9 as confidence,\n                0.8 as business_impact,\n                'CRITICAL' as strength UNION ALL \n            SELECT \n                'CTA Intelligence' as module,\n                'High CTA aggressiveness (9.4/10) - consider moderation for brand trust...' as insight_preview,\n                0.6 as confidence,\n                0.5 as business_impact,\n                'MEDIUM' as strength UNION ALL \n            SELECT \n                'Creative Intelligence' as module,\n                'Creative text may be too long - consider brevity for better performance - improving trend over 3 wee...' as insight_preview,\n                0.7 as confidence,\n                0.6 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Creative Intelligence' as module,\n                'Low brand mention frequency detected - increase brand presence in creative content - concerning down...' as insight_preview,\n                0.7 as confidence,\n                0.8 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Creative Intelligence' as module,\n                'Low emotional intensity detected through AI analysis - strengthen emotional appeal for eyewear marke...' as insight_preview,\n                0.8 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Creative Intelligence' as module,\n                'Low eyewear industry relevance in emotional messaging - tailor content for eyewear context...' as insight_preview,\n                0.8 as confidence,\n                0.8 as business_impact,\n                'CRITICAL' as strength UNION ALL \n            SELECT \n                'Creative Intelligence' as module,\n                'Low positive/aspirational sentiment detected - increase uplifting messaging for eyewear brand buildi...' as insight_preview,\n                0.8 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Channel Intelligence' as module,\n                'Platform diversification opportunity - expand cross-platform presence to reduce risk - stable patter...' as insight_preview,\n                0.8 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Channel Intelligence' as module,\n                'Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger ...' as insight_preview,\n                0.7 as confidence,\n                0.8 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Channel Intelligence' as module,\n                'Platform-specific content optimization needed - tailor messaging for each channel''s audience...' as insight_preview,\n                0.6 as confidence,\n                0.6 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Audience Intelligence' as module,\n                'Low cross-platform presence - expand beyond single channel to reach broader audiences...' as insight_preview,\n                0.8 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Audience Intelligence' as module,\n                'Very long messaging detected - consider more concise communication for better engagement...' as insight_preview,\n                0.7 as confidence,\n                0.6 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Audience Intelligence' as module,\n                'Strong millennial focus detected - tailor messaging for digital-native preferences and lifestyle...' as insight_preview,\n                0.8 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Visual Intelligence' as module,\n                'Balanced positioning - opportunity to differentiate through stronger visual identity...' as insight_preview,\n                0.6 as confidence,\n                0.7 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Visual Intelligence' as module,\n                'Low visual differentiation detected - increase unique visual elements to stand out from competitors...' as insight_preview,\n                0.7 as confidence,\n                0.8 as business_impact,\n                'HIGH' as strength UNION ALL \n            SELECT \n                'Visual Intelligence' as module,\n                'Unclear visual demographic targeting - define target audience and align visual language accordingly...' as insight_preview,\n                0.7 as confidence,\n                0.8 as business_impact,\n                'HIGH' as strength\n        )\n        SELECT \n            module,\n            COUNT(*) as signal_count,\n            ROUND(AVG(confidence), 3) as avg_confidence,\n            ROUND(AVG(business_impact), 3) as avg_business_impact,\n            COUNT(CASE WHEN strength = 'CRITICAL' THEN 1 END) as critical_signals,\n            COUNT(CASE WHEN strength = 'HIGH' THEN 1 END) as high_signals\n        FROM signal_metadata  \n        GROUP BY module\n        ORDER BY signal_count DESC\n        ",
+    "confidence_analysis_query": "\n        -- Confidence Analysis Across Data Sources\n        SELECT\n            brand,\n            COUNT(*) as total_data_points,\n            COUNT(CASE WHEN creative_text IS NOT NULL AND LENGTH(creative_text) > 10 THEN 1 END) as creative_data_points,\n            COUNT(CASE WHEN publisher_platforms IS NOT NULL THEN 1 END) as channel_data_points,\n            ROUND(COUNT(CASE WHEN creative_text IS NOT NULL AND LENGTH(creative_text) > 10 THEN 1 END) * 100.0 / COUNT(*), 2) as creative_coverage_pct,\n            ROUND(COUNT(CASE WHEN publisher_platforms IS NOT NULL THEN 1 END) * 100.0 / COUNT(*), 2) as channel_coverage_pct,\n            -- Data quality indicators\n            AVG(LENGTH(COALESCE(creative_text, ''))) as avg_text_richness,\n            COUNT(DISTINCT publisher_platforms) as platform_diversity,\n            ROUND((COUNT(CASE WHEN creative_text IS NOT NULL AND LENGTH(creative_text) > 10 THEN 1 END) + \n                   COUNT(CASE WHEN publisher_platforms IS NOT NULL THEN 1 END)) / (COUNT(*) * 2.0) * 100, 1) as overall_data_quality_score\n        FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`\n        GROUP BY brand\n        ORDER BY total_data_points DESC\n        ",
+    "module_performance_metrics": {
+      "Audience Intelligence": {
+        "signal_count": 3,
+        "avg_confidence": 0.7666666666666666,
+        "avg_business_impact": 0.6666666666666666
+      },
+      "Channel Intelligence": {
+        "signal_count": 3,
+        "avg_confidence": 0.7000000000000001,
+        "avg_business_impact": 0.7000000000000001
+      },
+      "CTA Intelligence": {
+        "signal_count": 1,
+        "avg_confidence": 0.6,
+        "avg_business_impact": 0.5
+      },
+      "Competitive Intelligence": {
+        "signal_count": 1,
+        "avg_confidence": 0.9,
+        "avg_business_impact": 0.8
+      },
+      "Creative Intelligence": {
+        "signal_count": 5,
+        "avg_confidence": 0.76,
+        "avg_business_impact": 0.72
+      },
+      "Visual Intelligence": {
+        "signal_count": 3,
+        "avg_confidence": 0.6666666666666666,
+        "avg_business_impact": 0.7666666666666666
+      }
+    },
+    "total_signals": 16,
+    "filtered_noise_count": 0
+  },
+  "whitespace_intelligence": {
+    "status": "success",
+    "opportunities_found": 1,
+    "top_opportunities": [
+      "VIRGIN_TERRITORY opportunity targeting Young Adults with SOCIAL_PROOF messaging in AWARENESS stage"
+    ],
+    "strategic_opportunities": [
+      {
+        "space_type": "VIRGIN_TERRITORY",
+        "messaging_angle": "SOCIAL_PROOF",
+        "funnel_stage": "AWARENESS",
+        "target_persona": "Young Adults",
+        "overall_score": 0.28,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 2.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "As Seen On: [Influencer Name] Rocks EyeBuyDirect Frames!",
+          "value_propositions": "Discover the frames that are trending now! See how influencers are styling EyeBuyDirect and get inspired for your next look.",
+          "recommended_ctas": "Learn More",
+          "channel_focus": "Cross-platform",
+          "audience_sizing": "Medium (200K-400K)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+        "success_metrics": "CTR > 2.0%, Brand lift +5%, Engagement Rate (Likes/Comments) > 3%",
+        "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+        "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Young Adults with SOCIAL_PROOF messaging in AWARENESS stage",
+        "confidence_level": "LOW"
+      }
+    ],
+    "analysis_summary": "Parallel analysis found 1 strategic opportunities",
+    "strategic_recommendations": [
+      {
+        "space_type": "VIRGIN_TERRITORY",
+        "messaging_angle": "SOCIAL_PROOF",
+        "funnel_stage": "AWARENESS",
+        "target_persona": "Young Adults",
+        "overall_score": 0.28,
+        "competitor_count": 1,
+        "market_potential": 1.0,
+        "competitive_intensity": 2.0,
+        "recent_activity": 0,
+        "campaign_brief": {
+          "sample_headlines": "As Seen On: [Influencer Name] Rocks EyeBuyDirect Frames!",
+          "value_propositions": "Discover the frames that are trending now! See how influencers are styling EyeBuyDirect and get inspired for your next look.",
+          "recommended_ctas": "Learn More",
+          "channel_focus": "Cross-platform",
+          "audience_sizing": "Medium (200K-400K)",
+          "readiness_level": "CAMPAIGN_READY"
+        },
+        "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+        "success_metrics": "CTR > 2.0%, Brand lift +5%, Engagement Rate (Likes/Comments) > 3%",
+        "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+        "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Young Adults with SOCIAL_PROOF messaging in AWARENESS stage",
+        "confidence_level": "LOW"
+      }
+    ],
+    "performance_metrics": {
+      "duration_seconds": 11.018075,
+      "coverage": "FULL_DATASET",
+      "approach": "hybrid_chunked_enhanced",
+      "white_space_opportunities": 0
+    },
+    "data_quality": "high",
+    "competitive_gaps_detected": true,
+    "run_metadata": {
+      "run_id": "warby_parker_20250920_021945",
+      "brands_analyzed": 5,
+      "detection_method": "parallel_chunked_processing",
+      "target_met": true,
+      "intelligence_level": "STRATEGIC_DISCOVERY"
+    }
+  }
+}

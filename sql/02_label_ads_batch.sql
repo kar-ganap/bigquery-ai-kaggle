@@ -1,35 +1,76 @@
--- BATCH OPTIMIZED VERSION: Process all ads in one AI.GENERATE_TABLE call
--- This reduces from 150 individual AI calls to 1 batch call
+-- BATCH OPTIMIZED VERSION WITH INTELLIGENT DEDUPLICATION
+-- Handles API variability by merging new ads with existing ads_with_dates
+-- Prefers new data while preserving strategic labels from existing data
 CREATE OR REPLACE TABLE `yourproj.ads_demo.ads_with_dates` AS
 
-WITH base_ads AS (
+WITH all_raw_ads AS (
+  -- New ads from current ingestion run
+  SELECT
+    ad_archive_id,
+    brand,
+    creative_text,
+    title,
+    -- Use new computed media type (with fallback to old field)
+    COALESCE(computed_media_type, media_type, 'unknown') AS media_type,
+    media_storage_path,
+    start_date_string,
+    end_date_string,
+    publisher_platforms,
+    -- Keep legacy fields for backwards compatibility with existing logic
+    CASE
+      WHEN computed_media_type IN ('image', 'video') AND media_storage_path IS NOT NULL
+      THEN [media_storage_path]
+      ELSE []
+    END AS image_urls,
+    CASE
+      WHEN computed_media_type = 'video' AND media_storage_path IS NOT NULL
+      THEN [media_storage_path]
+      ELSE []
+    END AS video_urls,
+    'current' AS source_type
+  FROM `yourproj.ads_demo.ads_raw`
+  WHERE (creative_text IS NOT NULL OR title IS NOT NULL)
+
+  UNION ALL
+
+  -- Existing ads with strategic labels (if table exists)
   SELECT
     ad_archive_id,
     brand,
     creative_text,
     title,
     media_type,
+    media_storage_path,
     start_date_string,
     end_date_string,
     publisher_platforms,
-    -- Include multimodal fields (properly restored from JSON strings)
-    CASE
-      WHEN image_urls_json IS NOT NULL AND image_urls_json != '[]'
-      THEN JSON_EXTRACT_STRING_ARRAY(image_urls_json)
-      WHEN image_url IS NOT NULL
-      THEN [image_url]
-      ELSE []
-    END AS image_urls,
-    CASE
-      WHEN video_urls_json IS NOT NULL AND video_urls_json != '[]'
-      THEN JSON_EXTRACT_STRING_ARRAY(video_urls_json)
-      WHEN video_url IS NOT NULL
-      THEN [video_url]
-      ELSE []
-    END AS video_urls,
-    COALESCE(card_bodies, title, '') AS card_bodies
-  FROM `yourproj.ads_demo.ads_raw`
-  WHERE (creative_text IS NOT NULL OR title IS NOT NULL)
+    image_urls,
+    video_urls,
+    'existing' AS source_type
+  FROM `yourproj.ads_demo.ads_with_dates`
+  WHERE 1=1  -- This will fail gracefully if table doesn't exist
+),
+
+deduplicated_ads AS (
+  SELECT * EXCEPT(source_type, row_rank)
+  FROM (
+    SELECT *,
+      ROW_NUMBER() OVER (
+        PARTITION BY ad_archive_id
+        ORDER BY
+          -- Prefer current run data (newest from API)
+          CASE WHEN source_type = 'current' THEN 1 ELSE 2 END,
+          -- Secondary sort by brand for consistency
+          brand
+      ) AS row_rank
+    FROM all_raw_ads
+    WHERE ad_archive_id IS NOT NULL
+  )
+  WHERE row_rank = 1
+),
+
+base_ads AS (
+  SELECT * FROM deduplicated_ads
 ),
 
 -- Generate temporal data from timestamps  
@@ -93,12 +134,13 @@ ai_batch_results AS (
 )
 
 -- Join AI results back to original data using ad_archive_id
-SELECT 
+SELECT
   de.ad_archive_id,
   de.brand,
-  de.creative_text, 
+  de.creative_text,
   de.title,
   de.media_type,
+  de.media_storage_path,
   de.start_date_string,
   de.end_date_string,
   de.start_timestamp,
@@ -110,7 +152,6 @@ SELECT
   -- Multimodal fields for visual intelligence
   de.image_urls,
   de.video_urls,
-  de.card_bodies,
   -- AI-generated intelligence fields
   ai.funnel,
   ai.angles,

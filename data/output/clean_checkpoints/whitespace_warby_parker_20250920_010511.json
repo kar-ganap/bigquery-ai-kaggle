@@ -1,0 +1,75 @@
+{
+  "status": "success",
+  "opportunities_found": 1,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Vision Focused with EMOTIONAL messaging in CONSIDERATION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Vision Focused",
+      "overall_score": 0.495,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See the World Clearly, Worry-Free: 14-Day Free Returns.",
+        "value_propositions": "Experience sharp and comfortable vision with our stylish glasses, knowing you can return them within 14 days if they're not a perfect fit.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CPA <$30, Return Rate <5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Vision Focused with EMOTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "MEDIUM"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 1 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Vision Focused",
+      "overall_score": 0.495,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See the World Clearly, Worry-Free: 14-Day Free Returns.",
+        "value_propositions": "Experience sharp and comfortable vision with our stylish glasses, knowing you can return them within 14 days if they're not a perfect fit.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "CPA <$30, Return Rate <5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Vision Focused with EMOTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "MEDIUM"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 13.455193,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_010511",
+    "brands_analyzed": 3,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}
