@@ -3,6 +3,16 @@
 Validate 1:1 sync between BigQuery ads_with_dates and GCS media files
 """
 import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+# Load environment variables
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv not available, use system environment variables
+
 from google.cloud import storage
 from src.utils.bigquery_client import run_query
 
@@ -11,6 +21,7 @@ def validate_sync():
 
     BQ_PROJECT = os.environ.get("BQ_PROJECT", "bigquery-ai-kaggle-469620")
     BQ_DATASET = os.environ.get("BQ_DATASET", "ads_demo")
+    GCS_BUCKET = os.environ.get("GCS_BUCKET", "ads-media-storage-bigquery-ai-kaggle")
 
     print("🔍 VALIDATING 1:1 SYNC: BigQuery ↔ GCS")
     print("=" * 50)
@@ -49,8 +60,7 @@ def validate_sync():
     # 2. Count GCS files
     try:
         client = storage.Client()
-        bucket_name = "ads-media-storage-bigquery-ai-kaggle"
-        bucket = client.bucket(bucket_name)
+        bucket = client.bucket(GCS_BUCKET)
 
         # Count files by brand
         brand_counts = {}
@@ -75,6 +85,7 @@ def validate_sync():
                     total_files += 1
 
         print(f"\n📁 GCS SUMMARY:")
+        print(f"   Bucket: {GCS_BUCKET}")
         print(f"   Total media files: {total_files}")
         print(f"   Brands with media: {len(brand_counts)}")
 
@@ -149,4 +160,5 @@ def validate_sync():
     return sync_status and all_brands_match
 
 if __name__ == "__main__":
-    validate_sync()
+    success = validate_sync()
+    exit(0 if success else 1)

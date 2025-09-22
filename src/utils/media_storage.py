@@ -12,8 +12,15 @@ from google.cloud import storage
 import tempfile
 import time
 
+# Load environment variables
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv not available, use system environment variables
+
 # Storage configuration
-BUCKET_NAME = "ads-media-storage-bigquery-ai-kaggle"
+BUCKET_NAME = os.environ.get("GCS_BUCKET", "ads-media-storage-bigquery-ai-kaggle")
 MEDIA_BASE_PATH = "ad-media"
 
 class MediaStorageManager:
