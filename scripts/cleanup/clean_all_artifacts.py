@@ -137,6 +137,7 @@ def clean_pipeline_artifacts(clean_persistent: bool = False):
     PRESERVE_TABLES = {
         'text_embedding_model',  # Always preserve infrastructure - will be recreated if needed
         'ads_with_dates',        # ALWAYS preserve our precious accumulated competitive intelligence data!
+        'ads_embeddings',        # ALWAYS preserve embeddings - expensive to regenerate!
     }
 
     # Conditionally preserve base data tables

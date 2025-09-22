@@ -1,0 +1,173 @@
+{
+  "status": "success",
+  "opportunities_found": 3,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Past Purchasers with EMOTIONAL messaging in RETENTION stage",
+    "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in CONSIDERATION stage",
+    "VIRGIN_TERRITORY opportunity targeting Indecisive Shoppers with PROBLEM_SOLUTION messaging in AWARENESS stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Past Purchasers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Your Perfect Pair Is Waiting! Don't Miss Out on Exclusive Savings.",
+        "value_propositions": "Complete your order and get up to 50% off, plus free shipping and returns. Treat yourself to a fresh new look!",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email, Facebook retargeting",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart abandonment recovery rate > 10%, repeat purchase rate increase +5%, CTR > 0.8%, Cost per conversion <$20",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Past Purchasers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "New Glasses? Find Your Perfect Frames With Our Quiz",
+        "value_propositions": "Simplify your search and find frames that complement your face shape and style preferences with our easy-to-use online quiz.",
+        "recommended_ctas": "Take Our Quiz",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Quiz Completion Rate >40%, Conversion Rate from Quiz >5%, Cost per Lead <$10",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Indecisive Shoppers",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Struggling to Choose Glasses? Find Your Perfect Pair with Our Quiz!",
+        "value_propositions": "Eliminate decision fatigue and discover glasses that perfectly match your style and needs with our easy-to-use quiz.",
+        "recommended_ctas": "Try Free",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Quiz completion rate > 30%, CTR > 1.5%, CPA < $25, Increase in first-time buyers",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Indecisive Shoppers with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 3 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Past Purchasers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Your Perfect Pair Is Waiting! Don't Miss Out on Exclusive Savings.",
+        "value_propositions": "Complete your order and get up to 50% off, plus free shipping and returns. Treat yourself to a fresh new look!",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email, Facebook retargeting",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart abandonment recovery rate > 10%, repeat purchase rate increase +5%, CTR > 0.8%, Cost per conversion <$20",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Past Purchasers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "New Glasses? Find Your Perfect Frames With Our Quiz",
+        "value_propositions": "Simplify your search and find frames that complement your face shape and style preferences with our easy-to-use online quiz.",
+        "recommended_ctas": "Take Our Quiz",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Quiz Completion Rate >40%, Conversion Rate from Quiz >5%, Cost per Lead <$10",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Indecisive Shoppers",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Struggling to Choose Glasses? Find Your Perfect Pair with Our Quiz!",
+        "value_propositions": "Eliminate decision fatigue and discover glasses that perfectly match your style and needs with our easy-to-use quiz.",
+        "recommended_ctas": "Try Free",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Quiz completion rate > 30%, CTR > 1.5%, CPA < $25, Increase in first-time buyers",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Indecisive Shoppers with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 11.90835,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250921_192950",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

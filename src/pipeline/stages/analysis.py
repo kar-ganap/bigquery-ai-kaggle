@@ -261,16 +261,7 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 try:
                     cta_query = f"""
                     SELECT
-                        -- Calculate numeric CTA aggressiveness score (0-10 scale)
-                        CASE
-                            WHEN cta_adoption_rate = 0 THEN 0.0
-                            ELSE
-                                (high_urgency_ctas * 10.0 +
-                                 medium_engagement_ctas * 6.0 +
-                                 consultative_ctas * 4.0 +
-                                 low_pressure_ctas * 2.0) /
-                                GREATEST(ads_with_cta, 1)
-                        END as avg_cta_aggressiveness
+                        avg_cta_aggressiveness
                     FROM `{BQ_PROJECT}.{BQ_DATASET}.cta_aggressiveness_analysis`
                     WHERE brand = '{self.context.brand}'
                     """
@@ -712,69 +703,156 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
         brands = [self.context.brand] + self.competitor_brands
         brands_filter = "', '".join(brands)
 
-        # Enhanced CTA Intelligence SQL - creates the table that temporal intelligence expects
+        # Enhanced CTA Intelligence SQL with proper 0-10 aggressiveness scoring
         cta_analysis_sql = f"""
         CREATE OR REPLACE TABLE `{BQ_PROJECT}.{BQ_DATASET}.cta_aggressiveness_analysis` AS
 
-        WITH cta_analysis AS (
+        WITH cta_scoring AS (
           SELECT
             brand,
             ad_archive_id,
             cta_text,
-            LENGTH(COALESCE(cta_text, '')) as cta_length,
+            UPPER(COALESCE(cta_text, '')) as cta_upper,
 
-            -- CTA Presence Analysis
+            -- CTA Aggressiveness Score (0-10 scale)
             CASE
-              WHEN cta_text IS NOT NULL AND LENGTH(cta_text) > 0 THEN 'HAS_CTA'
-              ELSE 'NO_CTA'
-            END as cta_presence,
+              WHEN cta_text IS NULL OR LENGTH(TRIM(cta_text)) = 0 THEN 0.0
+              ELSE
+                -- Base score for having a CTA
+                2.0 +
 
-            -- Enhanced CTA Aggressiveness Classification
-            CASE
-              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BUY NOW|ORDER NOW|SHOP NOW|LIMITED TIME|ACT FAST|HURRY)\\b') THEN 'HIGH_URGENCY'
-              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(LEARN MORE|GET STARTED|DISCOVER|EXPLORE)\\b') THEN 'MEDIUM_ENGAGEMENT'
-              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BROWSE|VIEW|SEE MORE|FIND OUT)\\b') THEN 'LOW_PRESSURE'
-              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BOOK|SCHEDULE|CONSULT|TRY|EXPERIENCE)\\b') THEN 'CONSULTATIVE'
-              WHEN cta_text IS NOT NULL AND LENGTH(cta_text) > 0 THEN 'OTHER'
-              ELSE 'NO_CTA'
-            END as cta_aggressiveness_score
+                -- High urgency keywords (+3.0 each, max +6.0)
+                LEAST(6.0,
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bNOW\\b') THEN 3.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bTODAY\\b') THEN 2.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bURGENT\\b') THEN 3.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bHURRY\\b') THEN 2.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bLIMITED\\b') THEN 2.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bENDING\\b') THEN 2.0 ELSE 0.0 END)
+                ) +
+
+                -- Action intensity keywords (+2.0 max)
+                LEAST(2.0,
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bBUY NOW\\b') THEN 2.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bSHOP NOW\\b') THEN 1.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bORDER\\b') THEN 1.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bPURCHASE\\b') THEN 1.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bGET\\b') THEN 1.0 ELSE 0.0 END)
+                ) +
+
+                -- Promotion/discount keywords (+1.5 max)
+                LEAST(1.5,
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bSALE\\b') THEN 1.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bOFF\\b') THEN 1.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bDISCOUNT\\b') THEN 1.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bFREE\\b') THEN 1.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bDEAL\\b') THEN 1.0 ELSE 0.0 END)
+                ) -
+
+                -- Consultative language (reduces aggressiveness)
+                (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bLEARN\\b') THEN 1.0 ELSE 0.0 END) -
+                (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bDISCOVER\\b') THEN 0.5 ELSE 0.0 END) -
+                (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bEXPLORE\\b') THEN 0.5 ELSE 0.0 END) -
+                (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bFIND OUT\\b') THEN 1.0 ELSE 0.0 END)
+            END as raw_aggressiveness_score
 
           FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates`
           WHERE brand IN ('{brands_filter}')
+        ),
+
+        cta_analysis AS (
+          SELECT
+            brand,
+            ad_archive_id,
+            cta_text,
+            -- Cap score between 0 and 10
+            GREATEST(0.0, LEAST(10.0, raw_aggressiveness_score)) as cta_aggressiveness_score,
+
+            -- Categorize based on proper score ranges
+            CASE
+              WHEN raw_aggressiveness_score >= 7.0 THEN 'ULTRA_AGGRESSIVE'
+              WHEN raw_aggressiveness_score >= 5.0 THEN 'AGGRESSIVE'
+              WHEN raw_aggressiveness_score >= 3.0 THEN 'MODERATE'
+              WHEN raw_aggressiveness_score >= 1.0 THEN 'CONSULTATIVE'
+              ELSE 'MINIMAL'
+            END as cta_category,
+
+            -- Specific strategy classifications with accurate naming
+            CASE
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BUY NOW|ORDER NOW|SHOP NOW|LIMITED TIME|ACT FAST|HURRY)\\b') THEN 'URGENCY_DRIVEN'
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(SHOP|BUY|GET|ORDER|PURCHASE)\\b') THEN 'ACTION_FOCUSED'
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(LEARN MORE|DISCOVER|EXPLORE|FIND OUT)\\b') THEN 'EXPLORATORY'
+              WHEN cta_text IS NOT NULL AND LENGTH(TRIM(cta_text)) > 0 THEN 'SOFT_SELL'
+              ELSE 'NO_CTA'
+            END as cta_strategy_type
+
+          FROM cta_scoring
         )
 
         SELECT
           brand,
           COUNT(*) as total_ads,
-          COUNT(CASE WHEN cta_presence = 'HAS_CTA' THEN 1 END) as ads_with_cta,
-          ROUND(COUNT(CASE WHEN cta_presence = 'HAS_CTA' THEN 1 END) * 100.0 / COUNT(*), 1) as cta_adoption_rate,
-          ROUND(AVG(CASE WHEN cta_length > 0 THEN cta_length END), 1) as avg_cta_length,
-          COUNT(CASE WHEN cta_aggressiveness_score = 'HIGH_URGENCY' THEN 1 END) as high_urgency_ctas,
-          COUNT(CASE WHEN cta_aggressiveness_score = 'MEDIUM_ENGAGEMENT' THEN 1 END) as medium_engagement_ctas,
-          COUNT(CASE WHEN cta_aggressiveness_score = 'LOW_PRESSURE' THEN 1 END) as low_pressure_ctas,
-          COUNT(CASE WHEN cta_aggressiveness_score = 'CONSULTATIVE' THEN 1 END) as consultative_ctas,
 
-          -- Dominant Strategy
+          -- Remove meaningless "adoption rate" - focus on aggressiveness
+          ROUND(AVG(cta_aggressiveness_score), 2) as avg_cta_aggressiveness,
+          ROUND(STDDEV(cta_aggressiveness_score), 2) as cta_aggressiveness_stddev,
+
+          -- Calculate correct category in SQL, not in notebook
           CASE
-            WHEN COUNT(CASE WHEN cta_aggressiveness_score = 'HIGH_URGENCY' THEN 1 END) >= GREATEST(
-              COUNT(CASE WHEN cta_aggressiveness_score = 'MEDIUM_ENGAGEMENT' THEN 1 END),
-              COUNT(CASE WHEN cta_aggressiveness_score = 'LOW_PRESSURE' THEN 1 END),
-              COUNT(CASE WHEN cta_aggressiveness_score = 'CONSULTATIVE' THEN 1 END)
-            ) THEN 'HIGH_URGENCY'
-            WHEN COUNT(CASE WHEN cta_aggressiveness_score = 'MEDIUM_ENGAGEMENT' THEN 1 END) >= GREATEST(
-              COUNT(CASE WHEN cta_aggressiveness_score = 'LOW_PRESSURE' THEN 1 END),
-              COUNT(CASE WHEN cta_aggressiveness_score = 'CONSULTATIVE' THEN 1 END)
-            ) THEN 'MEDIUM_ENGAGEMENT'
-            WHEN COUNT(CASE WHEN cta_aggressiveness_score = 'LOW_PRESSURE' THEN 1 END) >= COUNT(CASE WHEN cta_aggressiveness_score = 'CONSULTATIVE' THEN 1 END)
-            THEN 'LOW_PRESSURE'
-            ELSE 'CONSULTATIVE'
+            WHEN AVG(cta_aggressiveness_score) >= 7.0 THEN 'ULTRA_AGGRESSIVE'
+            WHEN AVG(cta_aggressiveness_score) >= 5.0 THEN 'AGGRESSIVE'
+            WHEN AVG(cta_aggressiveness_score) >= 3.0 THEN 'MODERATE'
+            WHEN AVG(cta_aggressiveness_score) >= 1.0 THEN 'CONSULTATIVE'
+            ELSE 'MINIMAL'
+          END as correct_category,
+
+          -- Calculate consistency category
+          CASE
+            WHEN STDDEV(cta_aggressiveness_score) <= 1.0 THEN 'HIGH_CONSISTENCY'
+            WHEN STDDEV(cta_aggressiveness_score) <= 2.0 THEN 'MEDIUM_CONSISTENCY'
+            ELSE 'LOW_CONSISTENCY'
+          END as consistency_category,
+
+          -- Strategy distribution counts with accurate naming
+          COUNT(CASE WHEN cta_strategy_type = 'URGENCY_DRIVEN' THEN 1 END) as urgency_driven_ctas,
+          COUNT(CASE WHEN cta_strategy_type = 'ACTION_FOCUSED' THEN 1 END) as action_focused_ctas,
+          COUNT(CASE WHEN cta_strategy_type = 'EXPLORATORY' THEN 1 END) as exploratory_ctas,
+          COUNT(CASE WHEN cta_strategy_type = 'SOFT_SELL' THEN 1 END) as soft_sell_ctas,
+
+          -- Category distribution
+          COUNT(CASE WHEN cta_category = 'ULTRA_AGGRESSIVE' THEN 1 END) as ultra_aggressive_count,
+          COUNT(CASE WHEN cta_category = 'AGGRESSIVE' THEN 1 END) as aggressive_count,
+          COUNT(CASE WHEN cta_category = 'MODERATE' THEN 1 END) as moderate_count,
+          COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END) as consultative_count,
+          COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END) as minimal_count,
+
+          -- Dominant strategy based on highest count
+          CASE
+            WHEN COUNT(CASE WHEN cta_category = 'ULTRA_AGGRESSIVE' THEN 1 END) >= GREATEST(
+              COUNT(CASE WHEN cta_category = 'AGGRESSIVE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'MODERATE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END)
+            ) THEN 'ULTRA_AGGRESSIVE'
+            WHEN COUNT(CASE WHEN cta_category = 'AGGRESSIVE' THEN 1 END) >= GREATEST(
+              COUNT(CASE WHEN cta_category = 'MODERATE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END)
+            ) THEN 'AGGRESSIVE'
+            WHEN COUNT(CASE WHEN cta_category = 'MODERATE' THEN 1 END) >= GREATEST(
+              COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END)
+            ) THEN 'MODERATE'
+            WHEN COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END) >= COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END)
+            THEN 'CONSULTATIVE'
+            ELSE 'MINIMAL'
           END as dominant_cta_strategy,
 
           CURRENT_TIMESTAMP() as analysis_timestamp
 
         FROM cta_analysis
         GROUP BY brand
-        ORDER BY cta_adoption_rate DESC;
+        ORDER BY avg_cta_aggressiveness DESC;
         """
 
         # Execute the CTA Intelligence analysis

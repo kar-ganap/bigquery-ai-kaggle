@@ -87,7 +87,7 @@ class Enhanced3DWhiteSpaceDetector:
               connection_id => 'bigquery-ai-kaggle-469620.us.vertex-ai'
             ) as target_persona_raw,
             -- Message quality from CTA analysis (brand-level)
-            COALESCE(c.cta_adoption_rate * 5.0, 3.0) as message_strength
+            COALESCE(c.avg_cta_aggressiveness * 0.5, 3.0) as message_strength
           FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates` r
           LEFT JOIN `{BQ_PROJECT}.{BQ_DATASET}.cta_aggressiveness_analysis` c
             ON r.brand = c.brand

@@ -167,6 +167,7 @@ class EmbeddingsStage(PipelineStage[StrategicLabelResults, EmbeddingResults]):
             CONCAT(
               'Title: ', COALESCE(title, ''),
               ' Content: ', COALESCE(creative_text, ''),
+              ' CTA: ', COALESCE(cta_text, ''),
               ' Brand: ', COALESCE(brand, '')
             ) as structured_text,
 
@@ -185,10 +186,19 @@ class EmbeddingsStage(PipelineStage[StrategicLabelResults, EmbeddingResults]):
           FROM ML.GENERATE_EMBEDDING(
             MODEL `{BQ_PROJECT}.{BQ_DATASET}.text_embedding_model`,
             (
-              SELECT 
+              SELECT
                 ad_archive_id,
                 brand,
                 creative_text,
+                title,                 -- INCLUDE: Needed for final output
+                cta_text,             -- INCLUDE: Needed for final output
+                media_type,
+                media_storage_path,
+                start_date_string,
+                end_date_string,
+                publisher_platforms,
+                page_name,
+                snapshot_url,
                 structured_text as content,
                 has_title,
                 has_body,

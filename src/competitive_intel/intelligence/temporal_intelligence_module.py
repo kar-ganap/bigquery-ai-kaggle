@@ -50,12 +50,12 @@ class TemporalIntelligenceEngine:
                       THEN 1 END) as ads_prior_30d,
             
             -- CTA intensity evolution (using brand-level CTA data)
-            MAX(c.cta_adoption_rate) as current_cta_adoption_rate,
-            MAX(c.high_urgency_ctas) as high_urgency_cta_count,
+            MAX(c.avg_cta_aggressiveness) as current_cta_aggressiveness,
+            MAX(c.urgency_driven_ctas) as urgency_driven_cta_count,
             MAX(CASE
-              WHEN c.dominant_cta_strategy = 'HIGH_URGENCY' THEN 1.0
-              WHEN c.dominant_cta_strategy = 'MEDIUM_ENGAGEMENT' THEN 0.7
-              WHEN c.dominant_cta_strategy = 'LOW_PRESSURE' THEN 0.3
+              WHEN c.dominant_cta_strategy = 'URGENCY_DRIVEN' THEN 1.0
+              WHEN c.dominant_cta_strategy = 'ACTION_FOCUSED' THEN 0.7
+              WHEN c.dominant_cta_strategy = 'SOFT_SELL' THEN 0.3
               ELSE 0.1
             END) as cta_intensity_score,
             
@@ -500,14 +500,14 @@ class TemporalIntelligenceEngine:
             COUNT(DISTINCT r.publisher_platforms) as platform_diversity,
 
             -- Tier 4 Advanced: CTA Intelligence Integration (Brand-level)
-            MAX(c.cta_adoption_rate) / 100.0 as cta_adoption_rate,
+            MAX(c.avg_cta_aggressiveness) / 10.0 as cta_aggressiveness_rate,
             MAX(CASE
-              WHEN c.dominant_cta_strategy = 'HIGH_URGENCY' THEN 1.0
-              WHEN c.dominant_cta_strategy = 'MEDIUM_ENGAGEMENT' THEN 0.7
-              WHEN c.dominant_cta_strategy = 'LOW_PRESSURE' THEN 0.3
+              WHEN c.dominant_cta_strategy = 'URGENCY_DRIVEN' THEN 1.0
+              WHEN c.dominant_cta_strategy = 'ACTION_FOCUSED' THEN 0.7
+              WHEN c.dominant_cta_strategy = 'SOFT_SELL' THEN 0.3
               ELSE 0.1
             END) as cta_aggressiveness_score,
-            MAX(c.high_urgency_ctas) / NULLIF(MAX(c.total_ads), 0) as high_urgency_cta_ratio,
+            MAX(c.urgency_driven_ctas) / NULLIF(MAX(c.total_ads), 0) as urgency_driven_cta_ratio,
 
             -- Message complexity and audience sophistication
             AVG(LENGTH(r.creative_text) / 100.0) as message_complexity,

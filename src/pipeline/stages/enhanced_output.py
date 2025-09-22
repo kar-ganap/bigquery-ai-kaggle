@@ -45,10 +45,25 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
     
     def execute(self, analysis: AnalysisResults) -> IntelligenceOutput:
         """Execute systematic intelligence output generation with L1→L4 framework"""
-        
+
         print("   📊 Generating systematic L1→L4 intelligence framework...")
         print("   🎯 Using intelligent signal filtering and thresholding")
-        
+
+        try:
+            return self._execute_internal(analysis)
+        except NameError as e:
+            print(f"   🚨 NameError caught at top level: {e}")
+            import traceback
+            traceback.print_exc()
+            raise
+        except Exception as e:
+            print(f"   ❌ Other error caught at top level: {e}")
+            import traceback
+            traceback.print_exc()
+            raise
+
+    def _execute_internal(self, analysis: AnalysisResults) -> IntelligenceOutput:
+        """Internal execution logic"""
         # Initialize progressive disclosure framework
         framework = ProgressiveDisclosureFramework()
         
@@ -73,7 +88,18 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
 
         print(f"   🔍 DEBUG: creative_data defined with {len(creative_data)} keys")
 
-        create_creative_intelligence_signals(framework, creative_data)
+        try:
+            create_creative_intelligence_signals(framework, creative_data)
+        except NameError as e:
+            print(f"   🚨 NameError in create_creative_intelligence_signals: {e}")
+            import traceback
+            traceback.print_exc()
+            raise
+        except Exception as e:
+            print(f"   ❌ Other error in create_creative_intelligence_signals: {e}")
+            import traceback
+            traceback.print_exc()
+            raise
         print(f"   🎨 Added Creative Intelligence signals (with fatigue/copying): {len([s for s in framework.signals if 'Creative' in s.source_module or 'Strategic Analysis' in s.source_module])}")
         
         # Add Channel Intelligence signals (P2 enhancements)
@@ -100,18 +126,38 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
         output = IntelligenceOutput()
         
         print(f"   📈 Framework Stats: {framework.get_framework_stats()['total_signals']} total signals, {framework.get_framework_stats()['framework_efficiency']:.1%} efficiency")
-        
+
         print("   🎯 Level 1: Executive Summary (Top 5 Critical Insights)")
-        output.level_1 = framework.generate_level_1_executive()
-        
+        try:
+            output.level_1 = framework.generate_level_1_executive()
+            print("   ✅ Level 1 complete")
+        except Exception as e:
+            print(f"   ❌ Level 1 failed: {e}")
+            raise
+
         print("   📈 Level 2: Strategic Dashboard (Strategic Intelligence)")
-        output.level_2 = framework.generate_level_2_strategic()
-        
+        try:
+            output.level_2 = framework.generate_level_2_strategic()
+            print("   ✅ Level 2 complete")
+        except Exception as e:
+            print(f"   ❌ Level 2 failed: {e}")
+            raise
+
         print("   🎮 Level 3: Actionable Interventions (Tactical Detail)")
-        output.level_3 = framework.generate_level_3_interventions()
-        
+        try:
+            output.level_3 = framework.generate_level_3_interventions()
+            print("   ✅ Level 3 complete")
+        except Exception as e:
+            print(f"   ❌ Level 3 failed: {e}")
+            raise
+
         print("   📋 Level 4: SQL Dashboards (Full Analytical Detail)")
-        output.level_4 = framework.generate_level_4_dashboards(BQ_PROJECT, BQ_DATASET)
+        try:
+            output.level_4 = framework.generate_level_4_dashboards(BQ_PROJECT, BQ_DATASET)
+            print("   ✅ Level 4 complete")
+        except Exception as e:
+            print(f"   ❌ Level 4 failed: {e}")
+            raise
         
         # Display output with framework stats
         self._display_systematic_output(output, framework)

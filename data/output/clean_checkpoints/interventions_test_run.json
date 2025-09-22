@@ -1,0 +1,79 @@
+{
+  "immediate_actions": [],
+  "short_term_tactics": [
+    {
+      "action": "Creative text length optimization needed - content is too brief for engagement - declining performance over 4 weeks, immediate action required",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.9,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Average creative text length",
+        "Content engagement rate"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low brand mention frequency detected - increase brand presence in creative content - concerning downward trend over 6 weeks",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.8,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Creative performance score",
+        "Brand message consistency"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Limited emotional language detected - incorporate more engaging emotional keywords",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.6,
+      "business_impact": 0.6,
+      "actionability": 0.7,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Emotional keyword usage rate",
+        "Brand sentiment score"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0,
+      "priority": "HIGH"
+    }
+  ],
+  "monitoring_actions": [
+    {
+      "action": "Content density optimization opportunity - enrich creative messaging",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.5,
+      "business_impact": 0.5,
+      "actionability": 0.6,
+      "timeline": "Medium-term (4-8 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Creative performance score",
+        "Brand message consistency"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0,
+      "priority": "MEDIUM"
+    }
+  ],
+  "intervention_summary": {
+    "total_interventions": 4,
+    "immediate_count": 0,
+    "short_term_count": 3,
+    "monitoring_count": 1,
+    "avg_confidence": 0.65,
+    "avg_actionability": 0.7500000000000001
+  }
+}
