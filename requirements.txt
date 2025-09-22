@@ -1,31 +1,37 @@
-# Core existing dependencies
-google-cloud-bigquery
-pandas
-pyarrow
-requests
-python-dateutil
+# Core BigQuery and data processing
+google-cloud-bigquery       # BigQuery client and AI/ML functions
+google-cloud-storage        # Google Cloud Storage for media files
+pandas                     # Data manipulation and analysis
+pyarrow                    # Columnar data format (BigQuery requirement)
+numpy                      # Numerical computing
+db-dtypes                  # BigQuery DataFrame operations support
+pandas-gbq                 # Enhanced BigQuery pandas integration
 
-# BigQuery DataFrame support
-db-dtypes                   # Required for BigQuery DataFrame operations
-pandas-gbq                  # Enhanced BigQuery pandas integration
+# API integrations
+requests                   # HTTP requests for Meta Ads API
+google-api-python-client   # Google Custom Search API
+beautifulsoup4            # HTML parsing for search results
+python-dateutil           # Date parsing and manipulation
 
-# New dependencies for competitor discovery
-google-api-python-client     # Google Custom Search API
-beautifulsoup4              # HTML parsing for search results
-nltk                        # Text processing for company name extraction
-
-# New dependencies for enhanced analytics
-scikit-learn               # Clustering and ML utilities
-matplotlib                 # Plotting for analysis
-seaborn                   # Statistical visualizations
-jupyter                   # Notebook environment
-
-# Hybrid mode AI dependencies (optional - for fallback only)
-google-cloud-aiplatform   # Vertex AI integration for hybrid curation
+# AI/ML and Vertex AI
+google-cloud-aiplatform    # Vertex AI integration
 vertexai                  # Vertex AI Python SDK
+
+# Notebook and visualization (for demo)
+jupyter                   # Jupyter notebook environment
+matplotlib                # Plotting and visualization
+seaborn                   # Statistical visualizations
+ipython                   # Enhanced interactive Python (notebook requirement)
+
+# Optional analysis dependencies (not core to pipeline)
+scikit-learn              # ML utilities for advanced analytics
+nltk                      # Text processing utilities
 
 # Development and testing
 pytest                    # Testing framework
 black                     # Code formatting
 flake8                   # Code linting
-python-dotenv            # .env file loading (alternative to direnv)
+python-dotenv            # Environment variable management
+
+# Additional utility packages discovered in codebase
+# (These may already be dependencies of the above packages)
