@@ -4,7 +4,7 @@ A **BigQuery AI-native** competitive intelligence system that transforms Meta Ad
 
 > **Competition Highlight**: *"From 466 competitor candidates to 5 critical insights using only BigQuery AI—detecting 73.7% copying similarity, identifying 6 untapped market opportunities, and forecasting competitive moves 30 days ahead."*
 
-## What You Get
+## Overview
 
 - **10-Stage Pipeline**: Automated competitor discovery → validation → analysis → progressive intelligence
 - **Real-Time Intelligence**: Copying detection, creative fatigue analysis, and market gap identification
