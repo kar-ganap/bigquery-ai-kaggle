@@ -107,13 +107,13 @@ else:
     visual_intel = stage9_results.visual_intelligence
     if visual_intel.get('status') == 'success':
         print(f"📊 Visual Ads Analyzed: {visual_intel.get('total_visual_ads', 0):,}")
-        print(f"🎯 Visual-Text Alignment: {visual_intel.get('avg_visual_text_alignment', 0):.1f}/10")
-        print(f"🏷️ Brand Consistency: {visual_intel.get('avg_brand_consistency', 0):.1f}/10")
-        print(f"⚠️ Creative Fatigue Risk: {visual_intel.get('avg_creative_fatigue_risk', 0):.1f}/10")
-        print(f"💎 Luxury Positioning: {visual_intel.get('avg_luxury_positioning', 0):.1f}/10")
-        print(f"💪 Visual Boldness: {visual_intel.get('avg_boldness', 0):.1f}/10")
-        print(f"🔄 Visual Differentiation: {visual_intel.get('avg_visual_differentiation', 0):.1f}/10")
-        print(f"🎭 Pattern Risk Score: {visual_intel.get('avg_creative_pattern_risk', 0):.1f}/10")
+        print(f"🎯 Visual-Text Alignment: {visual_intel.get('avg_visual_text_alignment', 0)*100:.0f}%")
+        print(f"🏷️ Brand Consistency: {visual_intel.get('avg_brand_consistency', 0)*100:.0f}%")
+        print(f"⚠️ Creative Fatigue Risk: {visual_intel.get('avg_creative_fatigue_risk', 0)*100:.0f}%")
+        print(f"💎 Luxury Positioning: {visual_intel.get('avg_luxury_positioning', 0)*100:.0f}%")
+        print(f"💪 Visual Boldness: {visual_intel.get('avg_boldness', 0)*100:.0f}%")
+        print(f"🔄 Visual Differentiation: {visual_intel.get('avg_visual_differentiation', 0)*100:.0f}%")
+        print(f"🎭 Pattern Risk Score: {visual_intel.get('avg_creative_pattern_risk', 0)*100:.0f}%")
     else:
         print(f"⚠️ Visual Intelligence: {visual_intel.get('error', 'Analysis incomplete')}")
 
