@@ -54,3 +54,4 @@ scripts/data/
 *.swo
 gcp-creds.json
 *.json # Block all JSON files to be safe
+gcp-creds.json
