@@ -45,16 +45,26 @@ graph LR
         D2[ML.FORECAST<br/>4-week Horizon<br/>Trend Prediction]
     end
 
+    subgraph "Stage 9: Intelligence"
+        E1[AI.GENERATE<br/>Creative Intelligence<br/>Emotion Analysis]
+        E2[AI.GENERATE<br/>5 Intelligence<br/>Dimensions]
+    end
+
     A1 --> B1
     B1 --> C1
     B1 --> D1
     C1 --> D2
+    C1 --> E1
+    D1 --> E2
+    D2 --> E2
 
     style A1 fill:#e3f2fd
     style B1 fill:#e3f2fd
     style C1 fill:#e3f2fd
     style D1 fill:#e3f2fd
     style D2 fill:#e3f2fd
+    style E1 fill:#e3f2fd
+    style E2 fill:#e3f2fd
 ```
 
 ## 3. Progressive Disclosure Hierarchy
