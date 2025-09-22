@@ -55,10 +55,26 @@ class EnhancedOutputStage(PipelineStage[AnalysisResults, IntelligenceOutput]):
         # Add signals from core analysis
         self._add_core_analysis_signals(framework, analysis)
         
-        # Add Creative Intelligence signals (P2 enhancements)
+        # Add Creative Intelligence signals (P2 enhancements + fatigue/copying analysis)
+        creative_data = {}
         if hasattr(analysis, 'creative_intelligence') and analysis.creative_intelligence:
-            create_creative_intelligence_signals(framework, analysis.creative_intelligence)
-            print(f"   🎨 Added Creative Intelligence signals: {len([s for s in framework.signals if 'Creative' in s.source_module])}")
+            creative_data.update(analysis.creative_intelligence)
+
+        # Add fatigue and copying data from current_state and influence
+        creative_data.update({
+            'creative_fatigue_score': analysis.current_state.get('avg_fatigue_score', 0.3),
+            'creative_originality_score': analysis.current_state.get('avg_originality_score', 0.7),
+            'fatigue_level': analysis.current_state.get('fatigue_level', 'MEDIUM'),
+            'copying_detected': analysis.influence.get('copying_detected', False),
+            'top_copier': analysis.influence.get('top_copier', 'Unknown'),
+            'similarity_score': analysis.influence.get('similarity_score', 0.0),
+            'lag_days': analysis.influence.get('lag_days', 0)
+        })
+
+        print(f"   🔍 DEBUG: creative_data defined with {len(creative_data)} keys")
+
+        create_creative_intelligence_signals(framework, creative_data)
+        print(f"   🎨 Added Creative Intelligence signals (with fatigue/copying): {len([s for s in framework.signals if 'Creative' in s.source_module or 'Strategic Analysis' in s.source_module])}")
         
         # Add Channel Intelligence signals (P2 enhancements)
         if hasattr(analysis, 'channel_intelligence') and analysis.channel_intelligence:

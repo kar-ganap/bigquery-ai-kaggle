@@ -163,12 +163,13 @@ def clean_pipeline_artifacts(clean_persistent: bool = False):
         'competitors_batch_',        # Competitor batches
         'gemini_model',              # Gemini model instances (will be recreated)
         'v_intelligence_summary_',   # Intelligence summary views
+        'ads_raw_',                  # Run-specific raw ads tables (ALWAYS clean these)
     ]
 
     # Additional patterns to clean when --clean-persistent is used
     if clean_persistent:
         CLEAN_PATTERNS.extend([
-            'ads_raw_',              # Raw Meta ads data (demo clean slate)
+            # 'ads_raw_' now always cleaned above
             # 'ads_with_dates' REMOVED - NEVER delete our precious accumulated data!
         ])
 

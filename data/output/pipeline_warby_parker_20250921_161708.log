@@ -1,0 +1,35 @@
+2025-09-21 16:17:08,916 - pipeline_warby_parker_20250921_161708 - INFO - Starting Competitor Discovery
+2025-09-21 16:17:14,167 - pipeline_warby_parker_20250921_161708 - INFO - Completed Competitor Discovery in 5.3s
+2025-09-21 16:17:14,167 - pipeline_warby_parker_20250921_161708 - INFO - Starting AI Competitor Curation
+2025-09-21 16:18:45,901 - pipeline_warby_parker_20250921_161708 - INFO - Completed AI Competitor Curation in 91.7s
+2025-09-21 16:18:45,901 - pipeline_warby_parker_20250921_161708 - INFO - Starting Meta Ad Activity Ranking
+2025-09-21 16:19:16,567 - pipeline_warby_parker_20250921_161708 - INFO - Completed Meta Ad Activity Ranking in 30.7s
+2025-09-21 16:19:16,569 - pipeline_warby_parker_20250921_161708 - INFO - Starting Meta Ads Ingestion
+2025-09-21 16:27:25,262 - pipeline_warby_parker_20250921_161708 - INFO - Completed Meta Ads Ingestion in 488.7s
+2025-09-21 16:27:25,262 - pipeline_warby_parker_20250921_161708 - INFO - Starting Strategic Labeling
+2025-09-21 16:27:28,902 - pipeline_warby_parker_20250921_161708 - INFO - Completed Strategic Labeling in 3.6s
+2025-09-21 16:27:28,902 - pipeline_warby_parker_20250921_161708 - INFO - Starting Embeddings Generation
+2025-09-21 16:27:39,614 - pipeline_warby_parker_20250921_161708 - INFO - Completed Embeddings Generation in 10.7s
+2025-09-21 16:27:39,614 - pipeline_warby_parker_20250921_161708 - INFO - Starting Visual Intelligence
+2025-09-21 16:27:48,417 - pipeline_warby_parker_20250921_161708 - INFO - Completed Visual Intelligence in 8.8s
+2025-09-21 16:27:48,417 - pipeline_warby_parker_20250921_161708 - INFO - Starting Strategic Analysis
+2025-09-21 16:28:54,565 - pipeline_warby_parker_20250921_161708 - INFO - Completed Strategic Analysis in 66.1s
+2025-09-21 16:28:54,565 - pipeline_warby_parker_20250921_161708 - INFO - Starting Multi-Dimensional Intelligence
+2025-09-21 16:28:54,565 - pipeline_warby_parker_20250921_161708 - INFO - 🚀 Starting Comprehensive Intelligence Analysis - CTA, Audience, Creative & Channel
+2025-09-21 16:28:54,565 - pipeline_warby_parker_20250921_161708 - INFO - 🎯 Analyzing 5 brands (from orchestrator)
+2025-09-21 16:28:54,565 - pipeline_warby_parker_20250921_161708 - INFO - 👥 Executing Audience Intelligence Analysis...
+2025-09-21 16:28:59,657 - pipeline_warby_parker_20250921_161708 - INFO - 🎨 Executing Creative Intelligence Analysis...
+2025-09-21 16:29:17,808 - pipeline_warby_parker_20250921_161708 - INFO - 📡 Executing Channel Intelligence Analysis...
+2025-09-21 16:29:22,874 - pipeline_warby_parker_20250921_161708 - INFO - 🎨 Extracting Visual Intelligence Metrics...
+2025-09-21 16:29:25,257 - pipeline_warby_parker_20250921_161708 - ERROR - Visual intelligence metrics extraction failed: boolean value of NA is ambiguous
+2025-09-21 16:29:25,258 - pipeline_warby_parker_20250921_161708 - INFO - 🎯 Executing White Space Intelligence Analysis...
+2025-09-21 16:29:25,261 - pipeline_warby_parker_20250921_161708 - INFO - 🎯 Executing hybrid whitespace analysis (full dataset + campaign intelligence)...
+2025-09-21 16:29:28,232 - pipeline_warby_parker_20250921_161708 - INFO - ✅ Using Hybrid whitespace detector with campaign intelligence
+2025-09-21 16:29:28,232 - pipeline_warby_parker_20250921_161708 - INFO - 📊 Found 0 opportunities (0 campaign-ready)
+2025-09-21 16:29:28,233 - pipeline_warby_parker_20250921_161708 - INFO - ✅ Analysis completed in 3.0s - EXCELLENT
+2025-09-21 16:29:28,233 - pipeline_warby_parker_20250921_161708 - INFO - 📊 Generating Comprehensive Intelligence Summary...
+2025-09-21 16:29:31,805 - pipeline_warby_parker_20250921_161708 - INFO - ✅ Intelligence Analysis completed - 98.9% data completeness
+2025-09-21 16:29:31,805 - pipeline_warby_parker_20250921_161708 - INFO - Completed Multi-Dimensional Intelligence in 37.2s
+2025-09-21 16:29:31,805 - pipeline_warby_parker_20250921_161708 - INFO - Starting Enhanced Intelligence Output
+2025-09-21 16:29:31,806 - pipeline_warby_parker_20250921_161708 - ERROR - Enhanced Intelligence Output failed: name 'creative_data' is not defined
+2025-09-21 16:29:31,806 - pipeline_warby_parker_20250921_161708 - ERROR - Pipeline failed: Enhanced Intelligence Output failed: name 'creative_data' is not defined

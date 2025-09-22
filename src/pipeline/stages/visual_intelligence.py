@@ -281,10 +281,10 @@ class VisualIntelligenceStage(PipelineStage[AnalysisResults, VisualIntelligenceR
                 'Analyze for competitive positioning and provide JSON with:\\n',
                 '1. luxury_positioning_score (0.0-1.0): Luxury vs accessible visual positioning (MUST be decimal 0.0-1.0)\\n',
                 '2. boldness_score (0.0-1.0): Bold vs subtle visual approach (MUST be decimal 0.0-1.0)\\n',
-                '3. target_demographic: Likely demographic (young_professional, family_oriented, luxury_consumer, etc)\\n',
+                '3. target_demographic: EXACTLY one of these buckets: YOUNG_ADULTS | PROFESSIONALS | FAMILIES | AFFLUENT | SENIORS\\n',
                 '4. visual_differentiation_level (0.0-1.0): How unique vs category-standard (MUST be decimal 0.0-1.0)\\n',
                 '5. creative_pattern_risk (0.0-1.0): Risk of overused visual patterns (MUST be decimal 0.0-1.0)\\n',
-                '6. visual_style: Primary visual style (MINIMALIST/LUXURY/BOLD/CASUAL/PROFESSIONAL)\\n',
+                '6. visual_style: EXACTLY one of these styles: MINIMALIST | PROFESSIONAL | CASUAL | BOLD\\n',
                 '7. positioning_strengths: [max 2 competitive strengths]\\n',
                 '8. positioning_gaps: [max 2 potential positioning opportunities]'
               ),

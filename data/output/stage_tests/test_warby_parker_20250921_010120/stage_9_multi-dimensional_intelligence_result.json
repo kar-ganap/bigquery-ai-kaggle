@@ -1,0 +1,542 @@
+{
+  "stage_info": {
+    "name": "Multi-Dimensional Intelligence",
+    "number": 9,
+    "timestamp": "2025-09-21T01:15:39.662743",
+    "duration_seconds": 45.69444298744202
+  },
+  "input_summary": "Object: AnalysisResults",
+  "output_summary": "Object: MultiDimensionalResults",
+  "full_output": {
+    "status": "success",
+    "message": "Data-driven intelligence completed for 5 brands with 98.2% data completeness",
+    "current_state": {
+      "promotional_intensity": 0.7286713286713287,
+      "urgency_score": 0.2076923076923078,
+      "brand_voice_score": 0.45314685314685327,
+      "market_position": "offensive",
+      "promotional_volatility": 0.12051671476755017,
+      "avg_cta_aggressiveness": 9.771428571428572
+    },
+    "influence": {
+      "copying_detected": true,
+      "top_copier": "EyeBuyDirect",
+      "similarity_score": 0.7288921448843566,
+      "lag_days": 0
+    },
+    "evolution": {
+      "momentum_status": "DECELERATING",
+      "velocity_change_7d": -0.29411764705882354,
+      "velocity_change_30d": 3.28,
+      "cta_intensity_shift": 1.0,
+      "creative_status": "MODERATE_FATIGUE",
+      "avg_campaign_age": 26.90209790209788
+    },
+    "forecasts": {
+      "executive_summary": "\ud83d\udd04 STABLE: Baseline competitive positioning - LensCrafters",
+      "business_impact_score": 2,
+      "confidence": "MEDIUM",
+      "top_predictions": [
+        {
+          "brand": "LensCrafters",
+          "forecast": "\ud83d\udd04 STABLE: Baseline competitive positioning - LensCrafters",
+          "impact_score": 2,
+          "video_change": 0.39,
+          "promotional_change": 0.015
+        }
+      ],
+      "next_7_days": "stable_short_term_outlook",
+      "next_14_days": "content_strategy_pivot_emerging",
+      "next_30_days": "stable_market_continuation"
+    },
+    "velocity": {},
+    "patterns": {},
+    "rhythms": {},
+    "momentum": {},
+    "white_spaces": {},
+    "cascades": {},
+    "channel_intelligence": {
+      "status": "success",
+      "analysis_type": "channel_intelligence",
+      "run_id": "test_warby_parker_20250921_010120",
+      "brands_analyzed": 5,
+      "table_created": "channel_intelligence_test_warby_parker_20250921_010120",
+      "avg_platform_diversification": 1.0,
+      "cross_platform_synergy_rate": 0.0,
+      "platform_optimization_rate": 0.0,
+      "total_ads": 391,
+      "dominant_platform_strategy": "CROSS_PLATFORM_SYNERGY",
+      "dominant_channel_focus": "CONVERSION_FOCUSED",
+      "metrics_analyzed": [
+        "Platform strategy distribution (cross-platform synergy vs single-platform focus)",
+        "Content richness by platform (visual vs detailed vs minimal content)",
+        "Channel focus analysis (visual marketing vs community marketing vs conversion)",
+        "Platform activity intensity (volume-based metrics without artificial impressions)",
+        "Dominant channel strategies by brand",
+        "P2: Platform diversification scoring (0-3 scale)",
+        "P2: Content optimization by platform (Instagram/Facebook optimization rates)",
+        "P2: Cross-platform messaging consistency analysis",
+        "L4: Multi-platform coordination insights",
+        "L4: Strategic channel alignment assessment"
+      ],
+      "channel_intelligence_insights": {
+        "platform_strategies": [
+          "Cross-Platform Synergy",
+          "Instagram Focused",
+          "Facebook Focused"
+        ],
+        "content_approaches": [
+          "Rich Visual",
+          "Detailed Social",
+          "Standard",
+          "Minimal"
+        ],
+        "channel_focus_areas": [
+          "Visual Marketing",
+          "Community Marketing",
+          "Conversion Focused",
+          "Brand Awareness"
+        ],
+        "data_approach": "Volume-based analysis without artificial impression metrics",
+        "p2_enhancements": {
+          "diversification_scale": "0 (Single Platform) to 3 (Full Meta Ecosystem)",
+          "optimization_categories": [
+            "Instagram Optimized",
+            "Facebook Optimized",
+            "Under-Optimized",
+            "Standard"
+          ],
+          "consistency_metrics": [
+            "Message Length Variance",
+            "Cross-Platform Range Analysis"
+          ]
+        },
+        "l4_progressive_disclosure": {
+          "L1_IMMEDIATE_ACTION": "High-diversification cross-platform campaigns for maximum reach and conversion",
+          "L2_ENGAGEMENT_DRIVER": "Platform-optimized content with consistent messaging for sustained engagement",
+          "L3_AWARENESS_BUILDER": "Visual-focused multi-channel strategies for brand awareness expansion",
+          "L4_CONSIDERATION_NURTURE": "Community-driven consistent messaging across platforms for consideration-stage nurturing"
+        }
+      }
+    },
+    "metadata": {
+      "run_id": "test_warby_parker_20250921_010120",
+      "brands_analyzed": [
+        "LensCrafters",
+        "GlassesUSA",
+        "Zenni Optical",
+        "EyeBuyDirect",
+        "Warby Parker"
+      ],
+      "p0_modules_implemented": [
+        "Audience Intelligence"
+      ],
+      "p1_modules_implemented": [
+        "Creative Intelligence",
+        "Channel Intelligence"
+      ],
+      "data_driven_approach": true,
+      "artificial_metrics_removed": true,
+      "analysis_timestamp": "2025-09-21T01:15:39.662608"
+    },
+    "audience_intelligence": {
+      "status": "success",
+      "analysis_type": "audience_intelligence",
+      "run_id": "test_warby_parker_20250921_010120",
+      "brands_analyzed": [
+        "LensCrafters",
+        "GlassesUSA",
+        "Zenni Optical",
+        "EyeBuyDirect",
+        "Warby Parker"
+      ],
+      "table_created": "audience_intelligence_test_warby_parker_20250921_010120",
+      "metrics_analyzed": [
+        "Platform strategy patterns (cross-platform vs single-platform)",
+        "Communication style analysis (detailed vs concise messaging)",
+        "Price positioning signals (premium vs value vs quality)",
+        "Lifestyle targeting patterns (professional vs fashion vs family)",
+        "AI-powered psychographic profiling (price-conscious, style-conscious, convenience-seeking, etc.)",
+        "Age group targeting analysis (Gen Z, Millennials, Gen X, Boomers)",
+        "Cross-brand competitive psychographic analysis",
+        "Dominant audience strategies by brand"
+      ],
+      "total_ads": 391,
+      "avg_cross_platform_rate": 0.0,
+      "avg_text_length": 362.28000000000003,
+      "avg_price_conscious_rate": 20.64,
+      "avg_millennial_focus_rate": 86.1,
+      "most_common_platform_strategy": "CROSS_PLATFORM",
+      "most_common_communication_style": "MODERATE_COMMUNICATION",
+      "most_common_psychographic": "STYLE_CONSCIOUS",
+      "most_common_age_group": "MILLENNIAL_25_34"
+    },
+    "creative_intelligence": {
+      "status": "success",
+      "analysis_type": "creative_intelligence",
+      "run_id": "test_warby_parker_20250921_010120",
+      "brands_analyzed": 5,
+      "table_created": "creative_intelligence_test_warby_parker_20250921_010120",
+      "avg_text_length": 362.28000000000003,
+      "avg_brand_mentions": 0.0,
+      "avg_emotional_keywords": 0.0,
+      "avg_creative_density": 16.32,
+      "avg_ai_emotional_intensity": 0.36,
+      "avg_ai_industry_relevance": 0.146,
+      "ai_positive_sentiment_rate": 1.213660739486311,
+      "ai_aspirational_sentiment_rate": 0.8608523849844764,
+      "ai_lifestyle_style_rate": 0.0,
+      "ai_premium_style_rate": 0.0,
+      "total_ads": 7086,
+      "dominant_messaging_theme": "PERSONALIZATION_FOCUSED",
+      "dominant_emotional_tone": "URGENCY_DRIVEN",
+      "metrics_analyzed": [
+        "Messaging theme distribution (innovation, value, quality, personalization, style)",
+        "Emotional tone analysis (emotional-positive, rational-trust, convenience, urgency)",
+        "Content complexity patterns (detailed vs concise messaging)",
+        "Dominant creative strategies by brand",
+        "Average content length and messaging depth",
+        "P2: Text length classification (Short/Medium/Long)",
+        "P2: Brand mention frequency analysis",
+        "P2: Emotional keyword density detection",
+        "P2: Creative density scoring (content richness)",
+        "L4: High-emotion content identification",
+        "L4: Brand-heavy messaging patterns",
+        "L4: Content-rich creative strategies"
+      ],
+      "creative_intelligence_insights": {
+        "messaging_themes": [
+          "Innovation",
+          "Value",
+          "Quality",
+          "Personalization",
+          "Style"
+        ],
+        "emotional_tones": [
+          "Emotional Positive",
+          "Rational Trust",
+          "Convenience",
+          "Urgency"
+        ],
+        "content_strategies": [
+          "Detailed",
+          "Moderate",
+          "Concise",
+          "Minimal"
+        ],
+        "p2_enhancements": {
+          "text_lengths": [
+            "Short (\u226475 chars)",
+            "Medium (76-150 chars)",
+            "Long (>150 chars)"
+          ],
+          "brand_frequency": "Number of brand mentions per ad",
+          "emotional_keywords": "Count of emotional trigger words",
+          "creative_density": "Word-to-character ratio (content richness)"
+        },
+        "l4_progressive_disclosure": {
+          "L1_IMMEDIATE_ACTION": "Brand-heavy ads with high emotional keywords for immediate conversion",
+          "L2_ENGAGEMENT_DRIVER": "Content-rich ads with moderate emotional appeal for engagement",
+          "L3_AWARENESS_BUILDER": "Long-form messaging with innovation/style themes for awareness",
+          "L4_CONSIDERATION_NURTURE": "Detailed content with quality/trust themes for consideration"
+        }
+      }
+    },
+    "visual_intelligence": {
+      "status": "success",
+      "analysis_type": "visual_intelligence_metrics",
+      "run_id": "test_warby_parker_20250921_010120",
+      "table_source": "visual_intelligence_test_warby_parker_20250921_010120",
+      "avg_visual_text_alignment": 0.8391666666666666,
+      "avg_brand_consistency": 0.7999999999999999,
+      "avg_creative_fatigue_risk": 0.4283333333333334,
+      "avg_luxury_positioning": 0.28706896551724137,
+      "avg_boldness": 0.4396551724137932,
+      "avg_visual_differentiation": 0.396551724137931,
+      "avg_creative_pattern_risk": 0.5672413793103448,
+      "total_visual_ads": 60,
+      "brands_analyzed": 5,
+      "metrics_analyzed": [
+        "Visual-text alignment scoring",
+        "Brand consistency across creative elements",
+        "Creative fatigue risk assessment",
+        "Luxury vs accessible positioning analysis",
+        "Bold vs subtle visual approach",
+        "Visual differentiation from competitors",
+        "Creative pattern risk evaluation"
+      ],
+      "visual_intelligence_insights": {
+        "multimodal_analysis": "AI-powered visual and text alignment scoring",
+        "brand_positioning": "Luxury-boldness competitive matrix",
+        "creative_strategy": "Visual differentiation and pattern analysis",
+        "risk_assessment": "Creative fatigue and pattern repetition detection"
+      }
+    },
+    "whitespace_intelligence": {
+      "status": "success",
+      "opportunities_found": 6,
+      "top_opportunities": [
+        "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in DECISION stage",
+        "MONOPOLY opportunity targeting Informed Shoppers with FUNCTIONAL messaging in DECISION stage",
+        "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage"
+      ],
+      "strategic_opportunities": [
+        {
+          "space_type": "VIRGIN_TERRITORY",
+          "messaging_angle": "FUNCTIONAL",
+          "funnel_stage": "DECISION",
+          "target_persona": "Practical Shoppers",
+          "overall_score": 0.35,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "Worry-Free Eyewear Shopping: 14-Day Free Returns on ALL EyeBuyDirect Purchases.",
+            "value_propositions": "Enjoy peace of mind when shopping for eyewear online. EyeBuyDirect's 14-day free return policy eliminates the risk of buying frames that don't fit or aren't quite right.",
+            "recommended_ctas": "Shop Now",
+            "channel_focus": "Facebook",
+            "audience_sizing": "Medium (100K-500K)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+          "success_metrics": "Return Rate < 5%, Customer Satisfaction (CSAT) Score +5%, Repeat Purchase Rate +8%",
+          "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+          "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in DECISION stage",
+          "confidence_level": "LOW"
+        },
+        {
+          "space_type": "MONOPOLY",
+          "messaging_angle": "FUNCTIONAL",
+          "funnel_stage": "DECISION",
+          "target_persona": "Informed Shoppers",
+          "overall_score": 0.35,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "See Clearly, Live Comfortably: Enhance Your Hearing with Nuance Audio Glasses.",
+            "value_propositions": "Experience innovative hearing solutions without compromising on style or comfort. Book a demo and see the difference.",
+            "recommended_ctas": "Plan Your Demo Now",
+            "channel_focus": "Cross-platform|Video",
+            "audience_sizing": "Small (50K-100K)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+          "success_metrics": "Demo Bookings >100, Leads generated from Demo request >200",
+          "timeline": "Launch in 3-4 weeks (campaign optimization)",
+          "strategic_summary": "MONOPOLY opportunity targeting Informed Shoppers with FUNCTIONAL messaging in DECISION stage",
+          "confidence_level": "LOW"
+        },
+        {
+          "space_type": "VIRGIN_TERRITORY",
+          "messaging_angle": "PROBLEM_SOLUTION",
+          "funnel_stage": "CONSIDERATION",
+          "target_persona": "Practical Shoppers",
+          "overall_score": 0.315,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "Tired of [Specific Eyewear Problem]? Find the Perfect Solution at GlassesUSA!",
+            "value_propositions": "Solving everyday eyewear challenges with the right frames and lenses, at unbeatable prices with free shipping and returns.",
+            "recommended_ctas": "Shop Now",
+            "channel_focus": "Cross-platform",
+            "audience_sizing": "Large (500K+)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+          "success_metrics": "CTR >1.5%, CPA <$30, Conversion Rate +10%",
+          "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+          "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+          "confidence_level": "LOW"
+        },
+        {
+          "space_type": "VIRGIN_TERRITORY",
+          "messaging_angle": "SOCIAL_PROOF",
+          "funnel_stage": "CONSIDERATION",
+          "target_persona": "Trend Followers",
+          "overall_score": 0.315,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "Join the Style Squad: See What Everyone's Raving About in EyeBuyDirect Glasses.",
+            "value_propositions": "Discover our most popular styles and see why customers love EyeBuyDirect.  Free returns included!",
+            "recommended_ctas": "Shop Now",
+            "channel_focus": "Cross-platform",
+            "audience_sizing": "Medium (100K-500K)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+          "success_metrics": "CTR >1.5%, CPA <$40, Conversion Rate +3%",
+          "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+          "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Followers with SOCIAL_PROOF messaging in CONSIDERATION stage",
+          "confidence_level": "LOW"
+        },
+        {
+          "space_type": "MONOPOLY",
+          "messaging_angle": "PROBLEM_SOLUTION",
+          "funnel_stage": "AWARENESS",
+          "target_persona": "Hearing Impaired",
+          "overall_score": 0.28,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "Reimagine Hearing: Discreet Audio Glasses by LensCrafters.",
+            "value_propositions": "Experience clear hearing with the style and comfort of everyday glasses. Invisible hearing technology with style.",
+            "recommended_ctas": "Book a Demo",
+            "channel_focus": "Facebook|Cross-platform|Video",
+            "audience_sizing": "Medium (100K-500K)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+          "success_metrics": "CTR >1.5%, Demo Booking Rate >5%, Awareness Lift +10%",
+          "timeline": "Launch in 3-4 weeks (campaign optimization)",
+          "strategic_summary": "MONOPOLY opportunity targeting Hearing Impaired with PROBLEM_SOLUTION messaging in AWARENESS stage",
+          "confidence_level": "LOW"
+        },
+        {
+          "space_type": "VIRGIN_TERRITORY",
+          "messaging_angle": "PROBLEM_SOLUTION",
+          "funnel_stage": "AWARENESS",
+          "target_persona": "Value Seekers",
+          "overall_score": 0.28,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "Stylish Glasses Without the Guilt: Find Affordable Frames You'll Love.",
+            "value_propositions": "Get designer-inspired glasses without breaking the bank, plus enjoy our free returns policy.",
+            "recommended_ctas": "Shop Now",
+            "channel_focus": "Facebook",
+            "audience_sizing": "Large (500K+)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+          "success_metrics": "CTR >1%, CPA <$25, Website traffic +10%",
+          "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+          "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Value Seekers with PROBLEM_SOLUTION messaging in AWARENESS stage",
+          "confidence_level": "LOW"
+        }
+      ],
+      "analysis_summary": "Parallel analysis found 6 strategic opportunities",
+      "strategic_recommendations": [
+        {
+          "space_type": "VIRGIN_TERRITORY",
+          "messaging_angle": "FUNCTIONAL",
+          "funnel_stage": "DECISION",
+          "target_persona": "Practical Shoppers",
+          "overall_score": 0.35,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "Worry-Free Eyewear Shopping: 14-Day Free Returns on ALL EyeBuyDirect Purchases.",
+            "value_propositions": "Enjoy peace of mind when shopping for eyewear online. EyeBuyDirect's 14-day free return policy eliminates the risk of buying frames that don't fit or aren't quite right.",
+            "recommended_ctas": "Shop Now",
+            "channel_focus": "Facebook",
+            "audience_sizing": "Medium (100K-500K)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+          "success_metrics": "Return Rate < 5%, Customer Satisfaction (CSAT) Score +5%, Repeat Purchase Rate +8%",
+          "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+          "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in DECISION stage",
+          "confidence_level": "LOW"
+        },
+        {
+          "space_type": "MONOPOLY",
+          "messaging_angle": "FUNCTIONAL",
+          "funnel_stage": "DECISION",
+          "target_persona": "Informed Shoppers",
+          "overall_score": 0.35,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "See Clearly, Live Comfortably: Enhance Your Hearing with Nuance Audio Glasses.",
+            "value_propositions": "Experience innovative hearing solutions without compromising on style or comfort. Book a demo and see the difference.",
+            "recommended_ctas": "Plan Your Demo Now",
+            "channel_focus": "Cross-platform|Video",
+            "audience_sizing": "Small (50K-100K)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+          "success_metrics": "Demo Bookings >100, Leads generated from Demo request >200",
+          "timeline": "Launch in 3-4 weeks (campaign optimization)",
+          "strategic_summary": "MONOPOLY opportunity targeting Informed Shoppers with FUNCTIONAL messaging in DECISION stage",
+          "confidence_level": "LOW"
+        },
+        {
+          "space_type": "VIRGIN_TERRITORY",
+          "messaging_angle": "PROBLEM_SOLUTION",
+          "funnel_stage": "CONSIDERATION",
+          "target_persona": "Practical Shoppers",
+          "overall_score": 0.315,
+          "competitor_count": 1,
+          "market_potential": 1.0,
+          "competitive_intensity": 2.0,
+          "recent_activity": 0,
+          "campaign_brief": {
+            "sample_headlines": "Tired of [Specific Eyewear Problem]? Find the Perfect Solution at GlassesUSA!",
+            "value_propositions": "Solving everyday eyewear challenges with the right frames and lenses, at unbeatable prices with free shipping and returns.",
+            "recommended_ctas": "Shop Now",
+            "channel_focus": "Cross-platform",
+            "audience_sizing": "Large (500K+)",
+            "readiness_level": "CAMPAIGN_READY"
+          },
+          "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+          "success_metrics": "CTR >1.5%, CPA <$30, Conversion Rate +10%",
+          "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+          "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+          "confidence_level": "LOW"
+        }
+      ],
+      "performance_metrics": {
+        "duration_seconds": 11.85517,
+        "coverage": "FULL_DATASET",
+        "approach": "hybrid_chunked_enhanced",
+        "white_space_opportunities": 0
+      },
+      "data_quality": "high",
+      "competitive_gaps_detected": true,
+      "run_metadata": {
+        "run_id": "test_warby_parker_20250921_010120",
+        "brands_analyzed": 5,
+        "detection_method": "parallel_chunked_processing",
+        "target_met": true,
+        "intelligence_level": "STRATEGIC_DISCOVERY"
+      }
+    },
+    "intelligence_summary": {
+      "status": "success",
+      "analysis_type": "data_driven_intelligence_summary",
+      "run_id": "test_warby_parker_20250921_010120",
+      "brands_analyzed": [
+        "LensCrafters",
+        "GlassesUSA",
+        "Zenni Optical",
+        "EyeBuyDirect",
+        "Warby Parker"
+      ],
+      "summary_view": "v_intelligence_summary_test_warby_parker_20250921_010120",
+      "data_approach": "p0_audience_focus",
+      "p0_deliverables": [
+        "Platform strategy and cross-platform usage analysis",
+        "Communication style and message length patterns",
+        "Audience intelligence competitive positioning"
+      ],
+      "intelligence_value": "Actionable competitive insights without artificial scoring"
+    },
+    "data_completeness": 98.2
+  }
+}

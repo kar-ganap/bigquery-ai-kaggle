@@ -2174,7 +2174,7 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
         metadata={'metric': 'competitive_positioning', 'quadrant': positioning_quadrant, 'matrix': '2D_luxury_boldness'}
     )
 
-    # Creative Fatigue Detection Signal
+    # Creative Fatigue Detection Signal (Enhanced with semantic analysis)
     avg_pattern_risk = visual_data.get('avg_creative_pattern_risk', 0)
     if avg_pattern_risk > 0.7:
         framework.add_signal(
@@ -2186,6 +2186,107 @@ def create_visual_intelligence_signals(framework: ProgressiveDisclosureFramework
             source_module="Visual Intelligence",
             metric_name="creative_fatigue_risk",
             metadata={'metric': 'creative_fatigue', 'risk_level': 'high', 'action': 'visual_refresh'}
+        )
+
+    # Enhanced Semantic Fatigue Detection (from Strategic Analysis)
+    creative_fatigue_score = creative_data.get('creative_fatigue_score', 0.3)
+    creative_originality_score = creative_data.get('creative_originality_score', 0.7)
+    fatigue_level = creative_data.get('fatigue_level', 'MEDIUM')
+
+    if creative_fatigue_score > 0.7:
+        framework.add_signal(
+            insight=f"URGENT: High semantic fatigue detected ({fatigue_level}) - immediate creative refresh needed",
+            value=creative_fatigue_score,
+            confidence=0.85,
+            business_impact=0.9,
+            actionability=0.95,
+            source_module="Strategic Analysis",
+            metric_name="semantic_fatigue_score",
+            metadata={
+                'metric': 'semantic_fatigue',
+                'fatigue_level': fatigue_level,
+                'originality_score': creative_originality_score,
+                'analysis_type': 'embedding_similarity',
+                'action': 'immediate_refresh'
+            }
+        )
+    elif creative_fatigue_score > 0.5:
+        framework.add_signal(
+            insight=f"Moderate creative fatigue detected - consider content diversification",
+            value=creative_fatigue_score,
+            confidence=0.75,
+            business_impact=0.6,
+            actionability=0.8,
+            source_module="Strategic Analysis",
+            metric_name="semantic_fatigue_score",
+            metadata={
+                'metric': 'semantic_fatigue',
+                'fatigue_level': fatigue_level,
+                'originality_score': creative_originality_score,
+                'analysis_type': 'embedding_similarity',
+                'action': 'content_diversification'
+            }
+        )
+
+    # Creative Originality Signal
+    if creative_originality_score < 0.4:
+        framework.add_signal(
+            insight=f"Low creative originality detected - explore new messaging angles",
+            value=creative_originality_score,
+            confidence=0.8,
+            business_impact=0.7,
+            actionability=0.85,
+            source_module="Strategic Analysis",
+            metric_name="creative_originality_score",
+            metadata={
+                'metric': 'creative_originality',
+                'threshold': 0.4,
+                'analysis_type': 'semantic_diversity',
+                'action': 'messaging_exploration'
+            }
+        )
+
+    # Competitive Copying Detection Signals (from Strategic Analysis)
+    copying_detected = creative_data.get('copying_detected', False)
+    top_copier = creative_data.get('top_copier', 'Unknown')
+    similarity_score = creative_data.get('similarity_score', 0.0)
+    lag_days = creative_data.get('lag_days', 0)
+
+    if copying_detected and similarity_score > 0.8:
+        framework.add_signal(
+            insight=f"CRITICAL: High similarity copying detected from {top_copier} (similarity: {similarity_score:.2f})",
+            value=similarity_score,
+            confidence=0.9,
+            business_impact=0.85,
+            actionability=0.9,
+            source_module="Strategic Analysis",
+            metric_name="competitive_copying_threat",
+            metadata={
+                'metric': 'competitive_copying',
+                'copier': top_copier,
+                'similarity_score': similarity_score,
+                'lag_days': lag_days,
+                'threat_level': 'critical',
+                'action': 'immediate_differentiation'
+            }
+        )
+    elif copying_detected and similarity_score > 0.6:
+        framework.add_signal(
+            insight=f"Moderate copying detected from {top_copier} - monitor and differentiate",
+            value=similarity_score,
+            confidence=0.8,
+            business_impact=0.6,
+            actionability=0.75,
+            source_module="Strategic Analysis",
+            metric_name="competitive_copying_threat",
+            metadata={
+                'metric': 'competitive_copying',
+                'copier': top_copier,
+                'similarity_score': similarity_score,
+                'lag_days': lag_days,
+                'threat_level': 'moderate',
+                'action': 'monitor_and_differentiate'
+            }
         )
 
     # Visual Differentiation Signal

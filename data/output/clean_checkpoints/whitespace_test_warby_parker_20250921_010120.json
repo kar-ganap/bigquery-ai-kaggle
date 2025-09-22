@@ -1,0 +1,245 @@
+{
+  "status": "success",
+  "opportunities_found": 6,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in DECISION stage",
+    "MONOPOLY opportunity targeting Informed Shoppers with FUNCTIONAL messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Worry-Free Eyewear Shopping: 14-Day Free Returns on ALL EyeBuyDirect Purchases.",
+        "value_propositions": "Enjoy peace of mind when shopping for eyewear online. EyeBuyDirect's 14-day free return policy eliminates the risk of buying frames that don't fit or aren't quite right.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Return Rate < 5%, Customer Satisfaction (CSAT) Score +5%, Repeat Purchase Rate +8%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Informed Shoppers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See Clearly, Live Comfortably: Enhance Your Hearing with Nuance Audio Glasses.",
+        "value_propositions": "Experience innovative hearing solutions without compromising on style or comfort. Book a demo and see the difference.",
+        "recommended_ctas": "Plan Your Demo Now",
+        "channel_focus": "Cross-platform|Video",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Demo Bookings >100, Leads generated from Demo request >200",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Informed Shoppers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Tired of [Specific Eyewear Problem]? Find the Perfect Solution at GlassesUSA!",
+        "value_propositions": "Solving everyday eyewear challenges with the right frames and lenses, at unbeatable prices with free shipping and returns.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >1.5%, CPA <$30, Conversion Rate +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Trend Followers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Join the Style Squad: See What Everyone's Raving About in EyeBuyDirect Glasses.",
+        "value_propositions": "Discover our most popular styles and see why customers love EyeBuyDirect.  Free returns included!",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >1.5%, CPA <$40, Conversion Rate +3%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Followers with SOCIAL_PROOF messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Hearing Impaired",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Reimagine Hearing: Discreet Audio Glasses by LensCrafters.",
+        "value_propositions": "Experience clear hearing with the style and comfort of everyday glasses. Invisible hearing technology with style.",
+        "recommended_ctas": "Book a Demo",
+        "channel_focus": "Facebook|Cross-platform|Video",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, Demo Booking Rate >5%, Awareness Lift +10%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Hearing Impaired with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Value Seekers",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Stylish Glasses Without the Guilt: Find Affordable Frames You'll Love.",
+        "value_propositions": "Get designer-inspired glasses without breaking the bank, plus enjoy our free returns policy.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1%, CPA <$25, Website traffic +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Value Seekers with PROBLEM_SOLUTION messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 6 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Worry-Free Eyewear Shopping: 14-Day Free Returns on ALL EyeBuyDirect Purchases.",
+        "value_propositions": "Enjoy peace of mind when shopping for eyewear online. EyeBuyDirect's 14-day free return policy eliminates the risk of buying frames that don't fit or aren't quite right.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Return Rate < 5%, Customer Satisfaction (CSAT) Score +5%, Repeat Purchase Rate +8%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Informed Shoppers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See Clearly, Live Comfortably: Enhance Your Hearing with Nuance Audio Glasses.",
+        "value_propositions": "Experience innovative hearing solutions without compromising on style or comfort. Book a demo and see the difference.",
+        "recommended_ctas": "Plan Your Demo Now",
+        "channel_focus": "Cross-platform|Video",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Demo Bookings >100, Leads generated from Demo request >200",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Informed Shoppers with FUNCTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Practical Shoppers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Tired of [Specific Eyewear Problem]? Find the Perfect Solution at GlassesUSA!",
+        "value_propositions": "Solving everyday eyewear challenges with the right frames and lenses, at unbeatable prices with free shipping and returns.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >1.5%, CPA <$30, Conversion Rate +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Practical Shoppers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 11.85517,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "test_warby_parker_20250921_010120",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

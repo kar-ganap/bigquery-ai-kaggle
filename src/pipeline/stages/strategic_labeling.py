@@ -25,16 +25,16 @@ BQ_DATASET = os.environ.get("BQ_DATASET", "ads_demo")
 class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResults]):
     """
     Stage 5: Strategic Labeling.
-    
+
     Responsibilities:
     - Execute existing SQL script (sql/02_label_ads.sql) with dynamic project/dataset
     - Generate comprehensive strategic labels using AI.GENERATE_TABLE
     - Create ads_with_dates table with both original and temporal intelligence fields
     - Bridge between raw ad ingestion and sophisticated temporal analysis
     """
-    
+
     def __init__(self, context: PipelineContext, dry_run: bool = False, verbose: bool = False):
-        super().__init__("Strategic Labeling", 4.5, context.run_id)
+        super().__init__("Strategic Labeling", 5, context.run_id)
         self.context = context
         self.dry_run = dry_run
         self.verbose = verbose
@@ -46,7 +46,7 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
         
         if self.dry_run:
             return self._create_mock_labels(ads)
-        
+
         return self._run_real_labeling(ads)
     
     def _create_mock_labels(self, ads: IngestionResults) -> StrategicLabelResults:
@@ -85,7 +85,7 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
             sql_template = self._prepare_deduplication_sql(sql_template)
 
             # Now replace template placeholders with actual project/dataset
-            ads_table = ads.ads_table_id if ads.ads_table_id else f"{BQ_PROJECT}.{BQ_DATASET}.ads_raw"
+            ads_table = ads.ads_table_id if hasattr(ads, 'ads_table_id') and ads.ads_table_id else f"{BQ_PROJECT}.{BQ_DATASET}.ads_raw"
             strategic_sql = sql_template.replace("yourproj.ads_demo.ads_raw", ads_table)
             strategic_sql = strategic_sql.replace("yourproj.ads_demo.ads_with_dates", f"{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates")
             
@@ -115,8 +115,8 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
             
             # Fallback - just pass through without strategic labels
             return StrategicLabelResults(
-                table_id="ads_with_dates_fallback", 
-                labeled_ads=ads.total_ads,
+                table_id="ads_with_dates_fallback",
+                labeled_ads=getattr(ads, 'total_ads', 0),
                 generation_time=0.0
             )
     
@@ -134,15 +134,16 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
             
             # Verify both original and temporal intelligence fields were generated
             verification_sql = f"""
-            SELECT 
+            SELECT
                 COUNT(*) as total_records,
                 COUNT(promotional_intensity) as with_temporal_labels,
                 COUNT(funnel) as with_funnel_labels,
-                COUNT(angles) as with_angle_labels
-            FROM `{labels_table}` 
+                COUNT(angles) as with_angle_labels,
+                COUNTIF(funnel NOT IN ('Upper', 'Mid', 'Lower')) as invalid_funnel_values
+            FROM `{labels_table}`
             WHERE brand IN ({brand_list})
             """
-            
+
             verification_result = run_query(verification_sql)
             if not verification_result.empty:
                 row = verification_result.iloc[0]
@@ -150,6 +151,25 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
                       f"{row['with_temporal_labels']} with temporal labels, "
                       f"{row['with_funnel_labels']} with funnel, "
                       f"{row['with_angle_labels']} with angles")
+
+                # Warn about invalid funnel values
+                if row['invalid_funnel_values'] > 0:
+                    print(f"   ⚠️  Found {row['invalid_funnel_values']} ads with non-standard funnel values")
+                    print("   🔧 Auto-normalizing funnel values...")
+
+                    # Auto-fix any remaining inconsistencies
+                    normalize_sql = f"""
+                    UPDATE `{labels_table}`
+                    SET funnel = CASE
+                        WHEN UPPER(funnel) LIKE 'UPPER%' THEN 'Upper'
+                        WHEN UPPER(funnel) LIKE 'MID%' THEN 'Mid'
+                        WHEN UPPER(funnel) LIKE 'LOWER%' THEN 'Lower'
+                        ELSE funnel
+                    END
+                    WHERE brand IN ({brand_list}) AND funnel NOT IN ('Upper', 'Mid', 'Lower')
+                    """
+                    run_query(normalize_sql)
+                    print("   ✅ Funnel values normalized")
             
             return labeled_count
             
@@ -187,26 +207,21 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
                 print("   📝 First run detected - no existing ads_with_dates table")
                 print("   🔄 Skipping deduplication, using current run data only")
 
-                # Remove the existing ads union from the SQL for first run
-                modified_sql = sql.replace("""
-  UNION ALL
+                # ROBUST APPROACH: Remove union section using markers (no need to change between runs)
+                start_marker = "-- START_UNION_SECTION_FOR_EXISTING_DATA"
+                end_marker = "-- END_UNION_SECTION_FOR_EXISTING_DATA"
 
-  -- Existing ads with strategic labels (if table exists)
-  SELECT
-    ad_archive_id,
-    brand,
-    creative_text,
-    title,
-    media_type,
-    media_storage_path,
-    start_date_string,
-    end_date_string,
-    publisher_platforms,
-    image_urls,
-    video_urls,
-    'existing' AS source_type
-  FROM `yourproj.ads_demo.ads_with_dates`
-  WHERE 1=1  -- This will fail gracefully if table doesn't exist""", "")
+                start_pos = sql.find(start_marker)
+                end_pos = sql.find(end_marker)
+
+                if start_pos != -1 and end_pos != -1:
+                    # Remove everything between markers (inclusive)
+                    end_pos += len(end_marker)
+                    modified_sql = sql[:start_pos] + sql[end_pos:]
+                    print(f"   🔧 Removed union section for first run ({end_pos - start_pos} characters)")
+                else:
+                    print(f"   ⚠️  Could not find union markers, using SQL as-is")
+                    modified_sql = sql
 
                 return modified_sql
             else:
@@ -216,25 +231,20 @@ class StrategicLabelingStage(PipelineStage[IngestionResults, StrategicLabelResul
         except Exception as e:
             print(f"   ⚠️  Table existence check failed: {e}")
             print("   📝 Assuming first run - using current data only")
-            # Fallback to first-run mode
-            modified_sql = sql.replace("""
-  UNION ALL
+            # Fallback to first-run mode using robust marker approach
+            start_marker = "-- START_UNION_SECTION_FOR_EXISTING_DATA"
+            end_marker = "-- END_UNION_SECTION_FOR_EXISTING_DATA"
 
-  -- Existing ads with strategic labels (if table exists)
-  SELECT
-    ad_archive_id,
-    brand,
-    creative_text,
-    title,
-    media_type,
-    media_storage_path,
-    start_date_string,
-    end_date_string,
-    publisher_platforms,
-    image_urls,
-    video_urls,
-    'existing' AS source_type
-  FROM `yourproj.ads_demo.ads_with_dates`
-  WHERE 1=1  -- This will fail gracefully if table doesn't exist""", "")
+            start_pos = sql.find(start_marker)
+            end_pos = sql.find(end_marker)
+
+            if start_pos != -1 and end_pos != -1:
+                # Remove everything between markers (inclusive)
+                end_pos += len(end_marker)
+                modified_sql = sql[:start_pos] + sql[end_pos:]
+                print(f"   🔧 Fallback: Removed union section for first run ({end_pos - start_pos} characters)")
+            else:
+                print(f"   ⚠️  Could not find union markers in fallback, using SQL as-is")
+                modified_sql = sql
 
             return modified_sql

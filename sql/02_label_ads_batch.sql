@@ -4,18 +4,30 @@
 CREATE OR REPLACE TABLE `yourproj.ads_demo.ads_with_dates` AS
 
 WITH all_raw_ads AS (
-  -- New ads from current ingestion run
+  -- New ads from current ingestion run - PRESERVE ALL CORE INVIOLABLE FIELDS
   SELECT
+    -- Core identification fields
     ad_archive_id,
     brand,
+
+    -- Content fields (inviolable - from API)
     creative_text,
     title,
+    cta_text,  -- CRITICAL: CTA text for CTA analysis
+
+    -- Media fields (inviolable - from API)
     -- Use new computed media type (with fallback to old field)
     COALESCE(computed_media_type, media_type, 'unknown') AS media_type,
     media_storage_path,
+
+    -- Temporal fields (inviolable - from API)
     start_date_string,
     end_date_string,
-    publisher_platforms,
+
+    -- Platform and metadata fields (inviolable - from API)
+    publisher_platforms,  -- CRITICAL: Used in channel intelligence
+    page_name,           -- PRESERVE: Err on side of caution
+    snapshot_url,        -- PRESERVE: Err on side of caution
     -- Keep legacy fields for backwards compatibility with existing logic
     CASE
       WHEN computed_media_type IN ('image', 'video') AND media_storage_path IS NOT NULL
@@ -31,24 +43,38 @@ WITH all_raw_ads AS (
   FROM `yourproj.ads_demo.ads_raw`
   WHERE (creative_text IS NOT NULL OR title IS NOT NULL)
 
+  -- START_UNION_SECTION_FOR_EXISTING_DATA
   UNION ALL
 
-  -- Existing ads with strategic labels (if table exists)
+  -- Existing ads with strategic labels (if table exists) - PRESERVE ALL CORE FIELDS
   SELECT
+    -- Core identification fields
     ad_archive_id,
     brand,
+
+    -- Content fields (inviolable - from API)
     creative_text,
     title,
+    cta_text,  -- CRITICAL: CTA text for CTA analysis
+
+    -- Media fields (inviolable - from API)
     media_type,
     media_storage_path,
+
+    -- Temporal fields (inviolable - from API)
     start_date_string,
     end_date_string,
-    publisher_platforms,
+
+    -- Platform and metadata fields (inviolable - from API)
+    publisher_platforms,  -- CRITICAL: Used in channel intelligence
+    page_name,           -- PRESERVE: Err on side of caution
+    snapshot_url,        -- PRESERVE: Err on side of caution
     image_urls,
     video_urls,
     'existing' AS source_type
   FROM `yourproj.ads_demo.ads_with_dates`
   WHERE 1=1  -- This will fail gracefully if table doesn't exist
+  -- END_UNION_SECTION_FOR_EXISTING_DATA
 ),
 
 deduplicated_ads AS (
@@ -117,7 +143,7 @@ ai_batch_results AS (
           'Headline: ', COALESCE(title, ''), '\n',
           'Brand: ', brand, '\n\n',
           'Return structured analysis with:\n',
-          '1. funnel: Upper (brand/storytelling) | Mid (consideration/benefits) | Lower (offers/urgency)\n',
+          '1. funnel: EXACTLY one of these three values (case-sensitive): "Upper", "Mid", or "Lower"\n',
           '2. angles: up to 3 from [discount,benefits,UGC,social proof,launch,brand story,urgency,feature,sustainability,guarantee,testimonial]\n',
           '3. promotional_intensity: 0.0-1.0 (0=brand-focused, 1=heavy promotion)\n',
           '4. urgency_score: 0.0-1.0 (0=no urgency, 1=very urgent)\n', 
@@ -139,6 +165,7 @@ SELECT
   de.brand,
   de.creative_text,
   de.title,
+  de.cta_text,              -- CRITICAL: CTA text for CTA analysis
   de.media_type,
   de.media_storage_path,
   de.start_date_string,
@@ -149,11 +176,18 @@ SELECT
   de.last_seen,
   de.active_days,
   de.publisher_platforms,
+  de.page_name,             -- CRITICAL: Page name field
+  de.snapshot_url,          -- CRITICAL: Snapshot URL field
   -- Multimodal fields for visual intelligence
   de.image_urls,
   de.video_urls,
-  -- AI-generated intelligence fields
-  ai.funnel,
+  -- AI-generated intelligence fields (with normalization)
+  CASE
+    WHEN UPPER(ai.funnel) LIKE 'UPPER%' THEN 'Upper'
+    WHEN UPPER(ai.funnel) LIKE 'MID%' THEN 'Mid'
+    WHEN UPPER(ai.funnel) LIKE 'LOWER%' THEN 'Lower'
+    ELSE ai.funnel
+  END AS funnel,
   ai.angles,
   ai.promotional_intensity,
   ai.urgency_score,

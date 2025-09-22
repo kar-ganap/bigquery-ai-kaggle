@@ -1,0 +1,28 @@
+2025-09-21 16:36:35,446 - pipeline_warby_parker_20250921_163635 - INFO - Starting Competitor Discovery
+2025-09-21 16:36:40,675 - pipeline_warby_parker_20250921_163635 - INFO - Completed Competitor Discovery in 5.2s
+2025-09-21 16:36:40,675 - pipeline_warby_parker_20250921_163635 - INFO - Starting AI Competitor Curation
+2025-09-21 16:38:09,389 - pipeline_warby_parker_20250921_163635 - INFO - Completed AI Competitor Curation in 88.7s
+2025-09-21 16:38:09,389 - pipeline_warby_parker_20250921_163635 - INFO - Starting Meta Ad Activity Ranking
+2025-09-21 16:38:38,691 - pipeline_warby_parker_20250921_163635 - INFO - Completed Meta Ad Activity Ranking in 29.3s
+2025-09-21 16:38:38,693 - pipeline_warby_parker_20250921_163635 - INFO - Starting Meta Ads Ingestion
+2025-09-21 16:44:43,926 - pipeline_warby_parker_20250921_163635 - INFO - Completed Meta Ads Ingestion in 365.2s
+2025-09-21 16:44:43,927 - pipeline_warby_parker_20250921_163635 - INFO - Starting Strategic Labeling
+2025-09-21 16:44:47,211 - pipeline_warby_parker_20250921_163635 - INFO - Completed Strategic Labeling in 3.3s
+2025-09-21 16:44:47,211 - pipeline_warby_parker_20250921_163635 - INFO - Starting Embeddings Generation
+2025-09-21 16:44:54,146 - pipeline_warby_parker_20250921_163635 - INFO - Completed Embeddings Generation in 6.9s
+2025-09-21 16:44:54,146 - pipeline_warby_parker_20250921_163635 - INFO - Starting Visual Intelligence
+2025-09-21 16:44:54,776 - pipeline_warby_parker_20250921_163635 - ERROR - Visual intelligence analysis failed: 404 Not found: Table bigquery-ai-kaggle-469620:ads_demo.ads_with_dates was not found in location US; reason: notFound, message: Not found: Table bigquery-ai-kaggle-469620:ads_demo.ads_with_dates was not found in location US
+
+Location: US
+Job ID: 3cf122a8-d24c-41e0-afda-3a57e56a5dcb
+
+2025-09-21 16:44:54,777 - pipeline_warby_parker_20250921_163635 - ERROR - Visual Intelligence failed: 404 Not found: Table bigquery-ai-kaggle-469620:ads_demo.ads_with_dates was not found in location US; reason: notFound, message: Not found: Table bigquery-ai-kaggle-469620:ads_demo.ads_with_dates was not found in location US
+
+Location: US
+Job ID: 3cf122a8-d24c-41e0-afda-3a57e56a5dcb
+
+2025-09-21 16:44:54,777 - pipeline_warby_parker_20250921_163635 - ERROR - Pipeline failed: Visual Intelligence failed: 404 Not found: Table bigquery-ai-kaggle-469620:ads_demo.ads_with_dates was not found in location US; reason: notFound, message: Not found: Table bigquery-ai-kaggle-469620:ads_demo.ads_with_dates was not found in location US
+
+Location: US
+Job ID: 3cf122a8-d24c-41e0-afda-3a57e56a5dcb
+
