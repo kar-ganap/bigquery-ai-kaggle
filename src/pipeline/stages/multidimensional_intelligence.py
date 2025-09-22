@@ -52,7 +52,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
         try:
             self.logger.info("🚀 Starting Comprehensive Intelligence Analysis - CTA, Audience, Creative & Channel")
             
-            # Use pipeline's run_id to access ads_raw_{run_id} table from Stage 4
+            # Use pipeline's run_id to access ads_with_dates table from Stage 4
             run_id = self.run_id
             
             # Use competitor brands if available from orchestrator, otherwise extract from results  
@@ -250,7 +250,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                   ELSE 'MILLENNIAL_25_34'
                 END as age_group_raw
                 
-              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_raw_{run_id}`
+              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`
               WHERE brand IN ('{brands_filter}')  
                 AND creative_text IS NOT NULL
             ),
@@ -505,7 +505,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                   GREATEST(LENGTH(COALESCE(creative_text, '')), 1.0) * 100, 2
                 ) as creative_density_score
                 
-              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_raw_{run_id}`
+              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`
               WHERE brand IN ('{brands_filter}')
                 AND (creative_text IS NOT NULL OR title IS NOT NULL)
             ),
@@ -895,7 +895,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                 -- P2 Enhancement: Cross-platform Messaging Consistency Score
                 LENGTH(COALESCE(creative_text, '') || ' ' || COALESCE(title, '')) as total_message_length
                 
-              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_raw_{run_id}`
+              FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`
               WHERE brand IN ('{brands_filter}')
                 AND publisher_platforms IS NOT NULL
             )
@@ -1258,7 +1258,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                  COUNT(CASE WHEN publisher_platforms IS NOT NULL THEN 1 END)
                 ) * 100.0 / (COUNT(*) * 4), 1
               ) as data_completeness_pct
-            FROM `bigquery-ai-kaggle-469620.ads_demo.ads_raw_{run_id}`
+            FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`
             WHERE brand IN ('{brands_filter}')
             """
             
@@ -1401,7 +1401,7 @@ class MultiDimensionalIntelligenceStage(PipelineStage[AnalysisResults, MultiDime
                 END as messaging_theme,
                 COUNT(*) as competitor_usage,
                 COUNT(DISTINCT brand) as brands_using_theme
-            FROM `bigquery-ai-kaggle-469620.ads_demo.ads_raw_{run_id}`
+            FROM `bigquery-ai-kaggle-469620.ads_demo.ads_with_dates`
             WHERE brand IN ('{brands_filter}')
                 AND cta_text IS NOT NULL
             GROUP BY messaging_theme

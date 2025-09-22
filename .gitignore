@@ -52,3 +52,5 @@ scripts/data/
 .idea/
 *.swp
 *.swo
+gcp-creds.json
+*.json # Block all JSON files to be safe
