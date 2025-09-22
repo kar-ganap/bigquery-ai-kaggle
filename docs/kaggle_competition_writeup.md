@@ -540,4 +540,4 @@ The Warby Parker implementation proves the concept. **Your competitive intellige
 - **Code Repository**: [GitHub - BigQuery AI Competitive Intelligence](https://github.com/kar-ganap/bigquery-ai-kaggle)
 - **Demo Notebook**: [`notebooks/demo_competitive_intelligence.ipynb`](../notebooks/demo_competitive_intelligence.ipynb)
 - **Technical Documentation**: [Pipeline Architecture](./pipeline_architecture_documentation.md) | [BigQuery Commands](./bigquery_command_reference.md)
-- **Video Demo**: [10-minute Pipeline Walkthrough](https://example.com/demo-video)
+- **Video Demo**: [Demo Notebook Walkthrough](https://www.youtube.com/watch?v=2m_0HYDXGnY)

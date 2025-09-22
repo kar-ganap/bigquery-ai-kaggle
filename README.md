@@ -129,17 +129,85 @@ jupyter notebook
 ```
 The demo notebook walks through the complete pipeline using Warby Parker as an example.
 
-### 2. Analyze Your Own Brand
-```bash
-# Run complete pipeline for your brand
-python -m src.pipeline.main --target_brand "Your Brand Name"
+### 2. Run the Pipeline
 
-# Check results in BigQuery
+#### Option A: Complete Pipeline (One-Shot)
+```bash
+# Run entire 10-stage pipeline
+python -m src.pipeline.orchestrator --brand "Your Brand Name"
+
+# With optional parameters
+python -m src.pipeline.orchestrator \
+  --brand "Your Brand Name" \
+  --vertical "eyewear" \
+  --verbose
+
+# Dry run for testing
+python -m src.pipeline.orchestrator \
+  --brand "Test Brand" \
+  --dry-run
+```
+
+#### Option B: Stage-by-Stage Testing
+```bash
+# Run all stages sequentially with caching
+python tests/stage_testing_framework.py \
+  --brand "Your Brand Name" \
+  --vertical "eyewear"
+
+# Run a specific stage (uses cached results from previous stages)
+python tests/stage_testing_framework.py \
+  --brand "Your Brand Name" \
+  --stage 1    # Discovery
+
+python tests/stage_testing_framework.py \
+  --brand "Your Brand Name" \
+  --stage 2    # AI Curation
+
+# Continue with stages 3-10...
+python tests/stage_testing_framework.py --brand "Your Brand Name" --stage 3  # Ranking
+python tests/stage_testing_framework.py --brand "Your Brand Name" --stage 4  # Ingestion
+python tests/stage_testing_framework.py --brand "Your Brand Name" --stage 5  # Strategic Labeling
+python tests/stage_testing_framework.py --brand "Your Brand Name" --stage 6  # Embeddings
+python tests/stage_testing_framework.py --brand "Your Brand Name" --stage 7  # Visual Intelligence
+python tests/stage_testing_framework.py --brand "Your Brand Name" --stage 8  # Strategic Analysis
+python tests/stage_testing_framework.py --brand "Your Brand Name" --stage 9  # Multi-Dimensional Intelligence
+python tests/stage_testing_framework.py --brand "Your Brand Name" --stage 10 # Enhanced Output
+
+# Force re-run (ignore cache)
+python tests/stage_testing_framework.py \
+  --brand "Your Brand Name" \
+  --stage 5 \
+  --force
+
+# Clean tables before testing
+python tests/stage_testing_framework.py \
+  --brand "Your Brand Name" \
+  --clean
+```
+
+#### Stage Testing Benefits
+- **Cached Results**: Each stage caches its output for subsequent stages
+- **Independent Testing**: Test any stage without re-running earlier stages
+- **Full Traceability**: Results saved in `data/output/stage_tests/[test_id]/`
+- **Debugging Support**: Detailed logs and intermediate outputs
+
+#### Check Results
+```bash
+# View run ID from output
+echo "Run ID displayed in pipeline output"
+
+# Query BigQuery results
 bq query --use_legacy_sql=false '
 SELECT * FROM `'$BQ_PROJECT'.'$BQ_DATASET'.strategic_intelligence_[RUN_ID]`
 WHERE signal_strength = "CRITICAL"
-ORDER BY confidence DESC
 '
+
+# Check output files
+ls -la data/output/systematic_intelligence_*.json
+ls -la data/output/interventions_*.json
+ls -la data/output/whitespace_*.json
+ls -la data/output/sql_dashboards_*/
 ```
 
 ### 3. Explore Intelligence Levels
@@ -175,9 +243,10 @@ SELECT * FROM `your-project.competitive_intelligence.interventions_[RUN_ID]`
 - **[Pipeline Architecture](docs/pipeline_architecture_documentation.md)** - Detailed 10-stage pipeline specifications
 - **[BigQuery Command Reference](docs/bigquery_command_reference.md)** - Complete AI primitive usage guide
 
-### Demo & Examples
+### Demo
 - **[Demo Notebook](notebooks/demo_competitive_intelligence.ipynb)** - Interactive pipeline walkthrough
-- **[Presentation Guide](docs/demo_presentation_guide.md)** - Demo and presentation materials
+- **[Demo Video](https://www.youtube.com/watch?v=2m_0HYDXGnY)** - Video of Demo Notebook walkthrough  
+
 
 ### Competition Submission
 - **[Kaggle Competition Writeup](docs/kaggle_competition_writeup.md)** - Complete competition submission with innovation highlights
