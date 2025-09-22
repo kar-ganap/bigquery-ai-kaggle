@@ -8,6 +8,7 @@ Implements the 3-question framework: Where are we? Where did we come from? Where
 from typing import Dict, List, Optional, Tuple
 import pandas as pd
 from datetime import datetime, timedelta
+from src.utils.sql_helpers import safe_brand_in_clause
 import logging
 
 class TemporalIntelligenceEngine:
@@ -49,12 +50,12 @@ class TemporalIntelligenceEngine:
                       THEN 1 END) as ads_prior_30d,
             
             -- CTA intensity evolution (using brand-level CTA data)
-            MAX(c.cta_adoption_rate) as current_cta_adoption_rate,
-            MAX(c.high_urgency_ctas) as high_urgency_cta_count,
+            MAX(c.avg_cta_aggressiveness) as current_cta_aggressiveness,
+            MAX(c.urgency_driven_ctas) as urgency_driven_cta_count,
             MAX(CASE
-              WHEN c.dominant_cta_strategy = 'HIGH_URGENCY' THEN 1.0
-              WHEN c.dominant_cta_strategy = 'MEDIUM_ENGAGEMENT' THEN 0.7
-              WHEN c.dominant_cta_strategy = 'LOW_PRESSURE' THEN 0.3
+              WHEN c.dominant_cta_strategy = 'URGENCY_DRIVEN' THEN 1.0
+              WHEN c.dominant_cta_strategy = 'ACTION_FOCUSED' THEN 0.7
+              WHEN c.dominant_cta_strategy = 'SOFT_SELL' THEN 0.3
               ELSE 0.1
             END) as cta_intensity_score,
             
@@ -77,7 +78,7 @@ class TemporalIntelligenceEngine:
           FROM `{self.project_id}.{self.dataset_id}.ads_with_dates` r
           LEFT JOIN `{self.project_id}.{self.dataset_id}.cta_aggressiveness_analysis` c
             ON r.brand = c.brand
-          WHERE r.brand IN ('{self.brand}', {', '.join(f"'{c}'" for c in self.competitors)})
+          WHERE r.brand IN {safe_brand_in_clause(self.brand, self.competitors)}
             AND r.creative_text IS NOT NULL
           GROUP BY r.brand
         )
@@ -134,7 +135,7 @@ class TemporalIntelligenceEngine:
           FROM `{self.project_id}.{self.dataset_id}.ads_with_dates` r
           LEFT JOIN `{self.project_id}.{self.dataset_id}.cta_aggressiveness_analysis` c
             ON r.ad_archive_id = c.ad_archive_id
-          WHERE r.brand IN ('{self.brand}', {', '.join(f"'{c}'" for c in self.competitors)})
+          WHERE r.brand IN {safe_brand_in_clause(self.brand, self.competitors)}
             AND DATE(r.start_timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)
             AND r.creative_text IS NOT NULL
           GROUP BY r.brand, DATE(r.start_timestamp)
@@ -499,14 +500,14 @@ class TemporalIntelligenceEngine:
             COUNT(DISTINCT r.publisher_platforms) as platform_diversity,
 
             -- Tier 4 Advanced: CTA Intelligence Integration (Brand-level)
-            MAX(c.cta_adoption_rate) / 100.0 as cta_adoption_rate,
+            MAX(c.avg_cta_aggressiveness) / 10.0 as cta_aggressiveness_rate,
             MAX(CASE
-              WHEN c.dominant_cta_strategy = 'HIGH_URGENCY' THEN 1.0
-              WHEN c.dominant_cta_strategy = 'MEDIUM_ENGAGEMENT' THEN 0.7
-              WHEN c.dominant_cta_strategy = 'LOW_PRESSURE' THEN 0.3
+              WHEN c.dominant_cta_strategy = 'URGENCY_DRIVEN' THEN 1.0
+              WHEN c.dominant_cta_strategy = 'ACTION_FOCUSED' THEN 0.7
+              WHEN c.dominant_cta_strategy = 'SOFT_SELL' THEN 0.3
               ELSE 0.1
             END) as cta_aggressiveness_score,
-            MAX(c.high_urgency_ctas) / NULLIF(MAX(c.total_ads), 0) as high_urgency_cta_ratio,
+            MAX(c.urgency_driven_ctas) / NULLIF(MAX(c.total_ads), 0) as urgency_driven_cta_ratio,
 
             -- Message complexity and audience sophistication
             AVG(LENGTH(r.creative_text) / 100.0) as message_complexity,
@@ -515,7 +516,7 @@ class TemporalIntelligenceEngine:
           FROM `{self.project_id}.{self.dataset_id}.ads_with_dates` r
           LEFT JOIN `{self.project_id}.{self.dataset_id}.cta_aggressiveness_analysis` c
             ON r.brand = c.brand
-          WHERE r.brand IN ('{self.brand}', {', '.join(f"'{c}'" for c in self.competitors)})
+          WHERE r.brand IN {safe_brand_in_clause(self.brand, self.competitors)}
             AND r.creative_text IS NOT NULL
             AND DATE(r.start_timestamp) >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 WEEK)
           GROUP BY r.brand, week

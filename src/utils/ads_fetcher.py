@@ -79,7 +79,7 @@ class MetaAdsFetcher:
         # Resolve page ID if needed
         if not page_id and company_name:
             print(f"🔍 Resolving page ID for '{company_name}'...")
-            page_data = self.page_resolver.resolve_page_id(company_name)
+            page_data = self.page_resolver.resolve_page_id(company_name, vertical="eyewear")
             
             if not page_data:
                 return AdsFetchResult(
@@ -306,15 +306,26 @@ class MetaAdsFetcher:
         
         # Normalize ads to match old format expected by pipeline
         normalized_ads = []
+        skipped_ads = 0
         for ad in ads:
             # The raw ad data from API needs to be normalized
             snapshot = ad.get("snapshot", {}) or {}
             cards = snapshot.get("cards", []) or []
             
+            # Check for essential fields - skip ad if missing critical data
+            ad_id = ad.get("ad_archive_id")
+            start_date = ad.get("start_date_string")
+            end_date = ad.get("end_date_string")
+
+            if not ad_id or not start_date:
+                skipped_ads += 1
+                continue
+
             # Extract creative text from various possible locations
             body_text = (snapshot.get("body", {}) or {}).get("text", "")
             title = snapshot.get("title") or ""
             link_description = snapshot.get("link_description") or ""
+            cta_text = snapshot.get("cta_text") or ""  # Extract main CTA text
             cta_text = snapshot.get("cta_text") or ""
 
             # Handle string 'None' values from API
@@ -323,26 +334,125 @@ class MetaAdsFetcher:
             if title == 'None':
                 title = ""
 
-            # Extract titles from cards array if available
+            # Extract titles and bodies from cards with precise deduplication
             card_titles = []
+            card_bodies = []
+            card_ctas = []  # Add CTA collection
+            seen_card_titles = set()  # Dedupe card titles against each other
+            seen_card_bodies = set()  # Dedupe card bodies against each other
+            seen_card_ctas = set()  # Track CTAs too
+
             if cards:
                 for card in cards:
-                    if isinstance(card, dict) and card.get("title"):
-                        card_titles.append(card["title"])
+                    if isinstance(card, dict):
+                        # Extract and deduplicate card titles (card-to-card)
+                        card_title = card.get("title", "")
+                        if card_title and card_title not in seen_card_titles:
+                            card_titles.append(card_title)
+                            seen_card_titles.add(card_title)
 
-            # Combine all text for creative_text field
-            text_parts = [title, body_text, link_description] + card_titles
+                        # Extract and deduplicate card bodies (card-to-card)
+                        card_body = card.get("body", "")
+                        if card_body and card_body not in seen_card_bodies:
+                            card_bodies.append(card_body)
+                            seen_card_bodies.add(card_body)
+
+                        # Extract and deduplicate card CTAs
+                        card_cta = card.get("cta_text", "")
+                        if card_cta and card_cta not in seen_card_ctas:
+                            card_ctas.append(card_cta)
+                            seen_card_ctas.add(card_cta)
+
+            # Smart deduplication: only dedupe where it makes logical sense
+            main_text_parts = []
+            duplicate_flags = {
+                'title_in_cards': False,
+                'body_in_cards': False,
+                'link_desc_in_cards': False,
+                'cta_in_cards': False
+            }
+
+            # Add title if not already in card titles (logical duplication)
+            if title and title not in seen_card_titles:
+                main_text_parts.append(title)
+            elif title and title in seen_card_titles:
+                duplicate_flags['title_in_cards'] = True
+
+            # Add body_text - no deduplication vs card content (different contexts)
+            if body_text:
+                main_text_parts.append(body_text)
+
+            # Add link_description - no deduplication vs card content (different contexts)
+            if link_description:
+                main_text_parts.append(link_description)
+
+            # Add CTA if not already in card CTAs
+            if cta_text and cta_text not in seen_card_ctas:
+                main_text_parts.append(cta_text)
+            elif cta_text and cta_text in seen_card_ctas:
+                duplicate_flags['cta_in_cards'] = True
+
+            # Combine all text parts (including CTAs)
+            text_parts = main_text_parts + card_titles + card_bodies + card_ctas
             creative_text = " ".join([part for part in text_parts if part]).strip()
+
+            # Calculate comprehensive dedup stats
+            total_possible_parts = len([x for x in [title, body_text, link_description] if x]) + len(card_titles) + len(card_bodies)
+            total_unique_parts = len([x for x in main_text_parts + card_titles + card_bodies if x])
+            has_any_duplicates = any(duplicate_flags.values()) or len(seen_card_titles) < len([card.get('title', '') for card in cards if isinstance(card, dict) and card.get('title')]) or len(seen_card_bodies) < len([card.get('body', '') for card in cards if isinstance(card, dict) and card.get('body')])
             
-            # Extract media info
+            # Extract media info and image URLs for multimodal integration
+            # Per budget constraint: Only look at cards[0]
             media_type = "unknown"
-            if cards:
-                if any("video" in str(card).lower() for card in cards):
+            image_urls = []
+            video_urls = []  # Keep empty - Meta API doesn't provide actual video URLs
+            primary_image_url = None  # For visual intelligence
+
+            # Initialize URL variables for all ads (including text-only ads with no cards)
+            original_url = None
+            resized_url = None
+            video_preview_url = None
+
+            if cards and len(cards) > 0:
+                first_card = cards[0] if isinstance(cards[0], dict) else {}
+
+                # Check for image URLs in first card only
+                original_url = first_card.get("original_image_url")
+                resized_url = first_card.get("resized_image_url")
+                video_preview_url = first_card.get("video_preview_image_url")
+
+            # If all media URLs are missing, try fallback endpoint for just the URLs
+            if not original_url and not resized_url and not video_preview_url:
+                if ad_id:
+                    fallback_urls = self._fetch_fallback_media_urls(ad_id)
+                    if fallback_urls:
+                        original_url = fallback_urls.get("original_image_url")
+                        resized_url = fallback_urls.get("resized_image_url")
+                        video_preview_url = fallback_urls.get("video_preview_image_url")
+
+                    # If fallback also fails, skip the ad entirely
+                    if not original_url and not resized_url and not video_preview_url:
+                        skipped_ads += 1
+                        continue
+
+                # Determine media type based on which URLs are null
+                if original_url is None and resized_url is None and video_preview_url:
+                    # No image URLs but has video preview = VIDEO
                     media_type = "video"
-                elif any("image" in str(card).lower() for card in cards):
-                    media_type = "image"
+                    image_urls.append(video_preview_url)  # Use video preview for visual analysis
+                    primary_image_url = video_preview_url
+                elif original_url or resized_url:
+                    # Has image URL = IMAGE or CAROUSEL (doesn't matter per your note)
+                    media_type = "image" if len(cards) == 1 else "carousel"
+                    # Prefer original over resized
+                    if original_url:
+                        image_urls.append(original_url)
+                        primary_image_url = original_url
+                    elif resized_url:
+                        image_urls.append(resized_url)
+                        primary_image_url = resized_url
                 else:
-                    media_type = "carousel" if len(cards) > 1 else "image"
+                    media_type = "unknown"
             
             # Normalize to expected format
             normalized_ad = {
@@ -351,7 +461,8 @@ class MetaAdsFetcher:
                 'page_name': ad.get("page_name") or company_name,
                 'creative_text': creative_text,
                 'title': title,  # Add separate title field
-                'cta_text': cta_text,  # Add separate CTA text field
+                'cta_text': cta_text,  # Add separate CTA text field (main + cards)
+                'primary_image_url': primary_image_url,  # For visual intelligence
                 'publisher_platforms': ",".join(ad.get("publisher_platform", [])) if isinstance(ad.get("publisher_platform"), list) else str(ad.get("publisher_platform", "")),
                 'media_type': media_type,
                 'snapshot_url': ad.get("url"),
@@ -360,9 +471,19 @@ class MetaAdsFetcher:
                 'last_seen': ad.get("end_date_string"),
                 'start_date_string': ad.get("start_date_string"),
                 'end_date_string': ad.get("end_date_string"),
+                # API media URL fields for MediaStorageManager
+                'original_image_url': original_url,
+                'resized_image_url': resized_url,
+                'video_preview_image_url': video_preview_url,
                 # Additional fields for better analysis
                 'body_text': body_text,
-                'card_titles': ", ".join(card_titles) if card_titles else ""
+                'card_titles': ", ".join(card_titles) if card_titles else "",
+                'card_bodies': ", ".join(card_bodies) if card_bodies else "",
+                'image_urls': image_urls,  # Array of image URLs for multimodal analysis
+                'video_urls': video_urls,  # Array of video URLs
+                'total_unique_text_parts': total_unique_parts,  # Deduplication stats
+                'has_duplicate_content': has_any_duplicates,
+                'dedup_details': duplicate_flags  # Specific duplicate information
             }
             
             normalized_ads.append(normalized_ad)
@@ -374,9 +495,13 @@ class MetaAdsFetcher:
             "pages_fetched": result.pages_fetched,
             "fetch_time": result.fetch_time,
             "error": result.error,
-            "page_id": result.page_id
+            "page_id": result.page_id,
+            "skipped_ads": skipped_ads
         }
-        
+
+        if skipped_ads > 0:
+            print(f"   ⚠️  Skipped {skipped_ads} ads (missing essential fields or media URLs)")
+
         return normalized_ads, result_dict
     
     def fetch_multiple_companies(self, 
@@ -524,7 +649,7 @@ class MetaAdsFetcher:
             try:
                 # First resolve company name to page ID for robust API calls
                 print(f"🔍 Resolving page ID for '{company_name}'...")
-                page_data = self.page_resolver.resolve_page_id(company_name)
+                page_data = self.page_resolver.resolve_page_id(company_name, vertical="eyewear")
                 
                 if not page_data:
                     print(f"   ❌ {company_name}: Cannot resolve to valid page ID - skipping")
@@ -539,7 +664,13 @@ class MetaAdsFetcher:
                 
                 page_id = page_data['page_id']
                 print(f"   ✅ Resolved to page ID: {page_id} ({page_data['name']})")
-                
+
+                # Add delay between page ID resolution calls to avoid API rate limiting
+                if checked_count > 0:  # Skip delay for first company
+                    delay = 2.0  # 2 second delay to prevent API throttling
+                    print(f"   ⏱️  Waiting {delay}s before next API call...")
+                    time.sleep(delay)
+
                 # Probe first page only using page ID for robust API calls
                 params = {
                     "pageId": page_id,  # Use page ID instead of company name
@@ -653,6 +784,42 @@ class MetaAdsFetcher:
         
         print(f"   📈 Final results: Found {found_active} Meta-active competitors from {checked_count} checked")
         return results
+
+    def _fetch_fallback_media_urls(self, ad_id: str) -> Optional[Dict]:
+        """Fallback API endpoint to get media URLs when bulk endpoint fails"""
+        try:
+            params = {"id": ad_id}
+            response = requests.get("https://api.scrapecreators.com/v1/facebook/adLibrary/ad",
+                                  params=params, headers={"x-api-key": self.api_key}, timeout=30)
+
+            if response.status_code == 200:
+                data = response.json()
+                if data and isinstance(data, dict):
+                    # Parse the different response structure from individual endpoint
+                    images = data.get('images', [])
+                    videos = data.get('videos', [])
+
+                    result = {
+                        'original_image_url': None,
+                        'resized_image_url': None,
+                        'video_preview_image_url': None
+                    }
+
+                    # Parse images array
+                    if images and len(images) > 0:
+                        first_image = images[0] if isinstance(images[0], dict) else {}
+                        result['original_image_url'] = first_image.get('original_image_url')
+                        result['resized_image_url'] = first_image.get('resized_image_url')
+
+                    # Parse videos array for preview image
+                    if videos and len(videos) > 0:
+                        first_video = videos[0] if isinstance(videos[0], dict) else {}
+                        result['video_preview_image_url'] = first_video.get('video_preview_image_url')
+
+                    return result
+            return None
+        except Exception:
+            return None
 
     def get_stats(self) -> Dict:
         """Get fetcher statistics"""

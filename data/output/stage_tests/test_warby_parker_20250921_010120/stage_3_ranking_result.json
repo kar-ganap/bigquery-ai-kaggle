@@ -1,0 +1,16 @@
+{
+  "stage_info": {
+    "name": "Ranking",
+    "number": 3,
+    "timestamp": "2025-09-21T01:03:36.984693",
+    "duration_seconds": 29.953707218170166
+  },
+  "input_summary": "List with 7 items",
+  "output_summary": "List with 4 items",
+  "full_output": [
+    "ValidatedCompetitor(company_name='LensCrafters', is_competitor=True, tier='Direct-Rival', market_overlap_pct=86, customer_substitution_ease='Easy', confidence=0.9500000000000001, reasoning='Consensus (3/3 votes): Both sell prescription eyewear and sunglasses, and offer eye exams. LensCrafters is a traditional retail giant; Warby Parker disrupted with online sales and now has physical stores. They target similar needs.', evidence_sources='General knowledge of eyewear market, company business models (online/brick-and-mortar, eye exams, product offerings).', quality_score=0.9688000000000001, meta_tier=3, estimated_ad_count='20+', meta_classification='Major Player (20+ ads)')",
+    "ValidatedCompetitor(company_name='GlassesUSA', is_competitor=True, tier='Direct-Rival', market_overlap_pct=90, customer_substitution_ease='Easy', confidence=0.9166666666666666, reasoning='Consensus (3/3 votes): Both are prominent online retailers offering prescription eyeglasses and sunglasses with a direct-to-consumer model, directly competing for the same customer base.', evidence_sources=\"Prompt context (search query, title); general knowledge of GlassesUSA and Warby Parker's business models and offerings.\", quality_score=0.9666666666666667, meta_tier=3, estimated_ad_count='25+', meta_classification='Major Player (20+ ads)')",
+    "ValidatedCompetitor(company_name='Zenni Optical', is_competitor=True, tier='Direct-Rival', market_overlap_pct=85, customer_substitution_ease='Easy', confidence=0.9166666666666666, reasoning='Consensus (3/3 votes): Both are online-first eyewear retailers offering affordable, stylish prescription glasses & sunglasses. They directly compete for value-conscious consumers seeking quality & convenience.', evidence_sources=\"Web search result 'Top 30 Warby Parker Alternatives & Competitors in 2025', general market knowledge of both brands' offerings.\", quality_score=0.9626666666666667, meta_tier=3, estimated_ad_count='27+', meta_classification='Major Player (20+ ads)')",
+    "ValidatedCompetitor(company_name='EyeBuyDirect', is_competitor=True, tier='Direct-Rival', market_overlap_pct=88, customer_substitution_ease='Easy', confidence=0.9, reasoning='Consensus (3/3 votes): Both are online direct-to-consumer eyewear retailers offering prescription glasses and sunglasses, targeting similar customers with a focus on affordability and style.', evidence_sources='User query context, general knowledge of online eyewear retailers, company websites (implicit).', quality_score=0.9624, meta_tier=3, estimated_ad_count='27+', meta_classification='Major Player (20+ ads)')"
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "status": "success",
+  "opportunities_found": 2,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting First-Time Buyers with SOCIAL_PROOF messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Trend Seekers with SOCIAL_PROOF messaging in CONSIDERATION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "DECISION",
+      "target_persona": "First-Time Buyers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Join Thousands of Happy EyeBuyDirect Customers. Shop With Confidence.",
+        "value_propositions": "Build trust and reduce purchase anxiety by highlighting positive customer experiences and guarantees like free returns.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Conversion Rate +10%, Cart Abandonment Rate -5%, Positive Customer Reviews +20%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting First-Time Buyers with SOCIAL_PROOF messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Trend Seekers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Join the [Brand Name] Community! See What's Trending in Eyewear.",
+        "value_propositions": "Showcase user-generated content and customer testimonials to build trust and demonstrate the popularity of EyeBuyDirect's styles.",
+        "recommended_ctas": "See Trending Styles",
+        "channel_focus": "Instagram, Facebook",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Engagement Rate >3%, Conversion Rate >1.5%, User-Generated Content Submissions +20%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Seekers with SOCIAL_PROOF messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 2 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "DECISION",
+      "target_persona": "First-Time Buyers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Join Thousands of Happy EyeBuyDirect Customers. Shop With Confidence.",
+        "value_propositions": "Build trust and reduce purchase anxiety by highlighting positive customer experiences and guarantees like free returns.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Conversion Rate +10%, Cart Abandonment Rate -5%, Positive Customer Reviews +20%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting First-Time Buyers with SOCIAL_PROOF messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Trend Seekers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Join the [Brand Name] Community! See What's Trending in Eyewear.",
+        "value_propositions": "Showcase user-generated content and customer testimonials to build trust and demonstrate the popularity of EyeBuyDirect's styles.",
+        "recommended_ctas": "See Trending Styles",
+        "channel_focus": "Instagram, Facebook",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Engagement Rate >3%, Conversion Rate >1.5%, User-Generated Content Submissions +20%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trend Seekers with SOCIAL_PROOF messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 12.033684,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_200029",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

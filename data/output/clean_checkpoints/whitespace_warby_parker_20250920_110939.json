@@ -1,0 +1,197 @@
+{
+  "status": "success",
+  "opportunities_found": 4,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Cart Abandoners with EMOTIONAL messaging in RETENTION stage",
+    "VIRGIN_TERRITORY opportunity targeting Style Conscious with EMOTIONAL messaging in CONSIDERATION stage",
+    "VIRGIN_TERRITORY opportunity targeting Value Seekers with FUNCTIONAL messaging in CONSIDERATION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Cart Abandoners",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still Thinking About It? Your Perfect Pair is Waiting \u2013 Plus [Discount/Offer]!",
+        "value_propositions": "Don't miss out! Finish your order now and enjoy [Discount/Offer] on your chosen frames.",
+        "recommended_ctas": "Complete Order",
+        "channel_focus": "Email, Retargeting",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart Recovery Rate >10%, ROI >3x",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Cart Abandoners with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Style Conscious",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Find Your Perfect Frames: Express Your Unique Vision",
+        "value_propositions": "Empower self-expression through a vast selection of stylish frames, appealing to individuality and personal style.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >2.0%, Conversion rate +5%, Engagement Rate >1.5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Style Conscious with EMOTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Value Seekers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Don't Know Where to Start? Find Your Perfect Glasses with Our Quiz!",
+        "value_propositions": "Take the guesswork out of buying glasses online. Our quiz matches you with frames you'll love.",
+        "recommended_ctas": "Try Our Quiz",
+        "channel_focus": "Facebook, Instagram",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Quiz Completion Rate >40%, Click-through Rate >1%, CPA <$40",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Value Seekers with FUNCTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Social Media Savvy",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Inspired by @_faithyyy: Get the Look with Eyebuydirect",
+        "value_propositions": "Leverage user-generated content and influencer marketing to build trust and demonstrate real-world appeal.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, Reach +20%, Social Sharing +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Social Media Savvy with SOCIAL_PROOF messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 4 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Cart Abandoners",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still Thinking About It? Your Perfect Pair is Waiting \u2013 Plus [Discount/Offer]!",
+        "value_propositions": "Don't miss out! Finish your order now and enjoy [Discount/Offer] on your chosen frames.",
+        "recommended_ctas": "Complete Order",
+        "channel_focus": "Email, Retargeting",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart Recovery Rate >10%, ROI >3x",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Cart Abandoners with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Style Conscious",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Find Your Perfect Frames: Express Your Unique Vision",
+        "value_propositions": "Empower self-expression through a vast selection of stylish frames, appealing to individuality and personal style.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >2.0%, Conversion rate +5%, Engagement Rate >1.5%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Style Conscious with EMOTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Value Seekers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Don't Know Where to Start? Find Your Perfect Glasses with Our Quiz!",
+        "value_propositions": "Take the guesswork out of buying glasses online. Our quiz matches you with frames you'll love.",
+        "recommended_ctas": "Try Our Quiz",
+        "channel_focus": "Facebook, Instagram",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Quiz Completion Rate >40%, Click-through Rate >1%, CPA <$40",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Value Seekers with FUNCTIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 14.373168,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_110939",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

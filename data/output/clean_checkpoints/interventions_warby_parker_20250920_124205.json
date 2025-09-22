@@ -1,0 +1,290 @@
+{
+  "immediate_actions": [
+    {
+      "action": "Low eyewear industry relevance in emotional messaging - tailor content for eyewear context",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.8,
+      "actionability": 0.9,
+      "timeline": "Immediate (1-2 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Emotional keyword usage rate",
+        "Brand sentiment score"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0.16,
+      "priority": "CRITICAL"
+    },
+    {
+      "action": "Limited lifestyle/premium positioning - opportunity to enhance brand appeal through emotional storytelling",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.8,
+      "actionability": 0.9,
+      "timeline": "Immediate (1-2 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Emotional keyword usage rate",
+        "Brand sentiment score"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 1.11,
+      "priority": "CRITICAL"
+    },
+    {
+      "action": "Competitive copying detected from Zenni Optical (similarity: 73.7%) - threat accelerating over 6 weeks, competitive pressure increasing",
+      "rationale": "Based on Competitive Intelligence analysis",
+      "confidence": 0.9,
+      "business_impact": 0.8,
+      "actionability": 0.8,
+      "timeline": "Immediate (1-2 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Performance improvement %",
+        "Strategic goal achievement"
+      ],
+      "source_module": "Competitive Intelligence",
+      "value": 0.74,
+      "priority": "CRITICAL"
+    }
+  ],
+  "short_term_tactics": [
+    {
+      "action": "Low cross-platform synergy detected - integrate campaigns across Facebook, Instagram, and Messenger - unstable pattern over 5 weeks, requires monitoring",
+      "rationale": "Based on Channel Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.8,
+      "actionability": 0.9,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Cross-platform synergy rate",
+        "Multi-channel reach"
+      ],
+      "source_module": "Channel Intelligence",
+      "value": 0.0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Unclear visual demographic targeting - define target audience and align visual language accordingly",
+      "rationale": "Based on Visual Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.8,
+      "actionability": 0.9,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Visual intelligence score",
+        "Multimodal effectiveness"
+      ],
+      "source_module": "Visual Intelligence",
+      "value": "{'demographic': 'undefined', 'confidence': 0}",
+      "priority": "HIGH"
+    },
+    {
+      "action": "Creative text may be too long - consider brevity for better performance - improving trend over 3 weeks",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.6,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Creative performance score",
+        "Brand message consistency"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 297.04,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low brand mention frequency detected - increase brand presence in creative content - concerning downward trend over 6 weeks",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.8,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Creative performance score",
+        "Brand message consistency"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0.0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low emotional intensity detected through AI analysis - strengthen emotional appeal for eyewear marketing",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "AI emotional intensity score",
+        "Emotional engagement rate",
+        "Brand resonance metrics"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 0.5,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low positive/aspirational sentiment detected - increase uplifting messaging for eyewear brand building",
+      "rationale": "Based on Creative Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Positive sentiment rate",
+        "Aspirational messaging score",
+        "Brand uplift metrics"
+      ],
+      "source_module": "Creative Intelligence",
+      "value": 3.34,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Platform diversification opportunity - expand cross-platform presence to reduce risk - stable pattern over 8 weeks",
+      "rationale": "Based on Channel Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Cross-platform synergy rate",
+        "Multi-channel reach"
+      ],
+      "source_module": "Channel Intelligence",
+      "value": 0.9,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low cross-platform presence - expand beyond single channel to reach broader audiences",
+      "rationale": "Based on Audience Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Performance improvement %",
+        "Strategic goal achievement"
+      ],
+      "source_module": "Audience Intelligence",
+      "value": 0.0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Very long messaging detected - consider more concise communication for better engagement",
+      "rationale": "Based on Audience Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.6,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Performance improvement %",
+        "Strategic goal achievement"
+      ],
+      "source_module": "Audience Intelligence",
+      "value": 297.06,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Strong millennial focus detected - tailor messaging for digital-native preferences and lifestyle",
+      "rationale": "Based on Audience Intelligence analysis",
+      "confidence": 0.8,
+      "business_impact": 0.7,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Performance improvement %",
+        "Strategic goal achievement"
+      ],
+      "source_module": "Audience Intelligence",
+      "value": 92.12,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Low visual differentiation detected - increase unique visual elements to stand out from competitors",
+      "rationale": "Based on Visual Intelligence analysis",
+      "confidence": 0.7,
+      "business_impact": 0.8,
+      "actionability": 0.8,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Visual differentiation score",
+        "Competitive advantage index"
+      ],
+      "source_module": "Visual Intelligence",
+      "value": 0.4,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Platform-specific content optimization needed - tailor messaging for each channel's audience",
+      "rationale": "Based on Channel Intelligence analysis",
+      "confidence": 0.6,
+      "business_impact": 0.6,
+      "actionability": 0.7,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Channel efficiency score",
+        "Platform optimization rate"
+      ],
+      "source_module": "Channel Intelligence",
+      "value": 0.0,
+      "priority": "HIGH"
+    },
+    {
+      "action": "Balanced positioning - opportunity to differentiate through stronger visual identity",
+      "rationale": "Based on Visual Intelligence analysis",
+      "confidence": 0.6,
+      "business_impact": 0.7,
+      "actionability": 0.7,
+      "timeline": "Short-term (2-4 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Competitive positioning score",
+        "Market differentiation rate"
+      ],
+      "source_module": "Visual Intelligence",
+      "value": "{'quadrant': 'Mid-Balanced', 'luxury': 0.2649122807017543, 'boldness': 0.4315789473684211}",
+      "priority": "HIGH"
+    }
+  ],
+  "monitoring_actions": [
+    {
+      "action": "High CTA aggressiveness (9.9/10) - consider moderation for brand trust",
+      "rationale": "Based on CTA Intelligence analysis",
+      "confidence": 0.6,
+      "business_impact": 0.5,
+      "actionability": 0.6,
+      "timeline": "Medium-term (4-8 weeks)",
+      "success_metrics": [
+        "Implementation completion rate",
+        "Performance improvement %",
+        "Strategic goal achievement"
+      ],
+      "source_module": "CTA Intelligence",
+      "value": 9.87,
+      "priority": "MEDIUM"
+    }
+  ],
+  "intervention_summary": {
+    "total_interventions": 17,
+    "immediate_count": 3,
+    "short_term_count": 13,
+    "monitoring_count": 1,
+    "avg_confidence": 0.7352941176470589,
+    "avg_actionability": 0.7999999999999999
+  }
+}

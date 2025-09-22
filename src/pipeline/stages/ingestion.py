@@ -13,21 +13,17 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..core.base import PipelineStage, PipelineContext  
 from ..models.candidates import ValidatedCompetitor, IngestionResults
 
-try:
-    from src.utils.ads_fetcher import MetaAdsFetcher
-except ImportError:
-    try:
-        from scripts.utils.ads_fetcher import MetaAdsFetcher  # Legacy fallback
-    except ImportError:
-        MetaAdsFetcher = None
+from src.utils.ads_fetcher import MetaAdsFetcher
+from src.utils.media_storage import MediaStorageManager
 
 try:
-    from src.utils.bigquery_client import load_dataframe_to_bq
+    from src.utils.bigquery_client import load_dataframe_to_bq, run_query
 except ImportError:
     try:
-        from scripts.utils.bigquery_client import load_dataframe_to_bq  # Legacy fallback
+        from scripts.utils.bigquery_client import load_dataframe_to_bq, run_query  # Legacy fallback
     except ImportError:
         load_dataframe_to_bq = None
+        run_query = None
 
 # Environment configuration
 BQ_PROJECT = os.environ.get("BQ_PROJECT", "bigquery-ai-kaggle-469620")
@@ -50,6 +46,21 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
         self.context = context
         self.dry_run = dry_run
         self.verbose = verbose
+
+        # Load configuration from environment
+        self.max_ads = int(os.getenv('MAX_ADS_PER_COMPANY', '500'))
+        self.max_pages = int(os.getenv('MAX_PAGES_PER_COMPANY', '10'))
+        self.delay_between_requests = float(os.getenv('DELAY_BETWEEN_REQUESTS', '0.5'))
+        self.image_budget = int(os.getenv('MULTIMODAL_IMAGE_BUDGET', '60'))
+
+        # Initialize media storage manager for classify-and-download
+        try:
+            self.media_manager = MediaStorageManager()
+            self.media_storage_enabled = True
+        except Exception as e:
+            print(f"   ⚠️  Media storage disabled: {str(e)}")
+            self.media_manager = None
+            self.media_storage_enabled = False
     
     def execute(self, competitors: List[ValidatedCompetitor]) -> IngestionResults:
         """Execute Meta ads ingestion"""
@@ -108,10 +119,14 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
             all_ads = []
             brands_with_ads = []
             
-            # Parallel fetching with 3 workers to prevent timeout
-            all_ads, brands_with_ads = self._fetch_competitor_ads_parallel(fetcher, top_competitors)
+            # Sequential fetching with delays (no parallel processing to avoid API issues)
+            all_ads, brands_with_ads = self._fetch_competitor_ads_sequential(fetcher, top_competitors)
             
-            # Also fetch ads for the target brand itself
+            # Also fetch ads for the target brand itself (with delay if we fetched competitor ads)
+            if brands_with_ads:
+                delay = self.delay_between_requests * 2
+                print(f"   ⏱️  Waiting {delay}s before fetching target brand...")
+                time.sleep(delay)
             target_ads = self._fetch_target_brand_ads(fetcher)
             if target_ads:
                 all_ads.extend(target_ads)
@@ -130,11 +145,36 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
             # Load ads to BigQuery for embedding generation
             if len(all_ads) > 0 and load_dataframe_to_bq:
                 try:
-                    ads_df = pd.DataFrame(all_ads)
+                    # Prepare ads data for BigQuery by handling array fields correctly
+                    prepared_ads = []
+                    for ad in all_ads:
+                        prepared_ad = ad.copy()
+
+                        # Convert array fields to JSON strings for BigQuery compatibility
+                        if 'image_urls' in prepared_ad and isinstance(prepared_ad['image_urls'], list):
+                            # Store as JSON string array for now, will convert properly in strategic labeling
+                            prepared_ad['image_urls_json'] = str(prepared_ad['image_urls'])
+                            # Keep first image for backward compatibility
+                            prepared_ad['image_url'] = prepared_ad['image_urls'][0] if prepared_ad['image_urls'] else None
+                            del prepared_ad['image_urls']
+
+                        if 'video_urls' in prepared_ad and isinstance(prepared_ad['video_urls'], list):
+                            # Store as JSON string array for now, will convert properly in strategic labeling
+                            prepared_ad['video_urls_json'] = str(prepared_ad['video_urls'])
+                            # Keep first video for backward compatibility
+                            prepared_ad['video_url'] = prepared_ad['video_urls'][0] if prepared_ad['video_urls'] else None
+                            del prepared_ad['video_urls']
+
+                        prepared_ads.append(prepared_ad)
+
+                    ads_df = pd.DataFrame(prepared_ads)
                     ads_table_id = f"{BQ_PROJECT}.{BQ_DATASET}.ads_raw_{self.context.run_id}"
                     print(f"   💾 Loading {len(ads_df)} ads to BigQuery table {ads_table_id}...")
                     load_dataframe_to_bq(ads_df, ads_table_id, write_disposition="WRITE_TRUNCATE")
                     results.ads_table_id = ads_table_id
+
+                    # Note: Deduplication is handled in Stage 5 (Strategic Labeling)
+                    # where ads_raw is transformed into ads_with_dates
                 except Exception as load_e:
                     print(f"   ⚠️  Could not load ads to BigQuery: {load_e}")
                     results.ads_table_id = None
@@ -149,6 +189,55 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
             # Return empty results rather than failing completely
             return IngestionResults(ads=[], brands=[], total_ads=0, ingestion_time=0.0, ads_table_id=None)
     
+    def _fetch_competitor_ads_sequential(self, fetcher, competitors: List[ValidatedCompetitor]):
+        """Fetch ads for competitors using sequential processing with delays to avoid API issues"""
+
+        print(f"\n   🔄 Sequential fetching with delays between calls...")
+
+        all_ads = []
+        brands_with_ads = []
+
+        for i, comp in enumerate(competitors):
+            try:
+                start_time = time.time()
+                print(f"   📲 Starting fetch for {comp.company_name} ({i+1}/{len(competitors)})...")
+
+                # Add delay between API calls (except for first call)
+                if i > 0:
+                    delay = self.delay_between_requests * 2  # Double the normal delay between competitors
+                    print(f"   ⏱️  Waiting {delay}s before next API call...")
+                    time.sleep(delay)
+
+                # Fetch ads for this competitor
+                ads, fetch_result = fetcher.fetch_company_ads_with_metadata(
+                    company_name=comp.company_name,
+                    max_ads=self.max_ads,
+                    max_pages=self.max_pages,
+                    delay_between_requests=self.delay_between_requests
+                )
+
+                elapsed = time.time() - start_time
+
+                if ads:
+                    # Process ads to pipeline format
+                    processed_ads = []
+                    for ad in ads:
+                        ad_data = self._normalize_ad_data(ad, comp.company_name)
+                        processed_ads.append(ad_data)
+
+                    all_ads.extend(processed_ads)
+                    brands_with_ads.append(comp.company_name)
+                    print(f"      ✅ {comp.company_name}: Found {len(processed_ads)} ads in {elapsed:.1f}s")
+                else:
+                    print(f"      ⚠️  {comp.company_name}: No ads found in {elapsed:.1f}s")
+
+            except Exception as e:
+                elapsed = time.time() - start_time if 'start_time' in locals() else 0
+                self.logger.warning(f"Failed to fetch ads for {comp.company_name}: {str(e)}")
+                print(f"      ❌ {comp.company_name}: Error in {elapsed:.1f}s - {str(e)[:100]}")
+
+        return all_ads, brands_with_ads
+
     def _fetch_competitor_ads_parallel(self, fetcher, competitors: List[ValidatedCompetitor]):
         """Fetch ads for competitors using parallel processing"""
         
@@ -161,9 +250,9 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
                 # Fetch ads for this competitor
                 ads, fetch_result = fetcher.fetch_company_ads_with_metadata(
                     company_name=comp.company_name,
-                    max_ads=500,
-                    max_pages=10,
-                    delay_between_requests=0.5
+                    max_ads=self.max_ads,
+                    max_pages=self.max_pages,
+                    delay_between_requests=self.delay_between_requests
                 )
                 
                 elapsed = time.time() - start_time
@@ -217,9 +306,9 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
         try:
             target_ads, _ = fetcher.fetch_company_ads_with_metadata(
                 company_name=self.context.brand,
-                max_ads=500,
-                max_pages=10,
-                delay_between_requests=0.5
+                max_ads=self.max_ads,
+                max_pages=self.max_pages,
+                delay_between_requests=self.delay_between_requests
             )
             
             if target_ads:
@@ -297,9 +386,36 @@ class IngestionStage(PipelineStage[List[ValidatedCompetitor], IngestionResults])
             'landing_url': snapshot.get('link_url'),
             'cta_type': snapshot.get('cta_type'),
             'media_type': ad.get('media_type'),
-            'image_url': ad.get('image_url'),
-            'video_url': ad.get('video_url'),
             'card_index': ad.get('card_index'),
-            
+
+            # MEDIA CLASSIFICATION AND STORAGE: Classify and download at ingestion
+            **self._classify_and_store_media(ad, brand_name),
+
             'created_date': datetime.now().isoformat()
         }
+
+    def _classify_and_store_media(self, ad: dict, brand_name: str) -> dict:
+        """Classify media type and download/store media at ingestion time"""
+
+        if not self.media_storage_enabled:
+            # Fallback: use old media_type field if media storage is disabled
+            return {
+                'computed_media_type': ad.get('media_type', 'unknown'),
+                'media_storage_path': None
+            }
+
+        try:
+            media_type, storage_path = self.media_manager.classify_and_store_media(ad, brand_name)
+            return {
+                'computed_media_type': media_type,
+                'media_storage_path': storage_path
+            }
+        except Exception as e:
+            print(f"   ⚠️  Media classification failed for ad {ad.get('ad_id', 'unknown')}: {str(e)}")
+            return {
+                'computed_media_type': 'unknown',
+                'media_storage_path': None
+            }
+
+    # Note: ads_with_dates deduplication is now handled in Stage 5 (Strategic Labeling)
+    # This maintains proper separation of concerns and avoids schema mismatches

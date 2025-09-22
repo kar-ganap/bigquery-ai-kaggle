@@ -1,0 +1,16 @@
+{
+  "stage_info": {
+    "name": "Embeddings",
+    "number": 6,
+    "timestamp": "2025-09-19T16:48:03.755609",
+    "duration_seconds": 28.050111055374146
+  },
+  "input_summary": "Object: IngestionResults",
+  "output_summary": "Object: EmbeddingResults",
+  "full_output": {
+    "table_id": "bigquery-ai-kaggle-469620.ads_demo.ads_embeddings",
+    "embedding_count": "350",
+    "dimension": 768,
+    "generation_time": 0.0
+  }
+}

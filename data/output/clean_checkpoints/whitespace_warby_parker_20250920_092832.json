@@ -1,0 +1,173 @@
+{
+  "status": "success",
+  "opportunities_found": 3,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Past Purchasers with EMOTIONAL messaging in RETENTION stage",
+    "VIRGIN_TERRITORY opportunity targeting Value Conscious with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+    "VIRGIN_TERRITORY opportunity targeting First-Time Buyers with PROBLEM_SOLUTION messaging in CONSIDERATION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Past Purchasers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Your [Desired Look] is Waiting! Complete Your GlassesUSA Order Today.",
+        "value_propositions": "Remind customers of their unfinished purchase and evoke positive emotions associated with their chosen style, encouraging them to complete their order and experience the full benefit of their new glasses.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Abandoned Cart Recovery Rate >10%, Average Order Value (AOV) for Recovered Carts > Baseline AOV",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Past Purchasers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Value Conscious",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Tired of [Problem with Glasses]? Find Your Perfect Fit with Our Quiz!",
+        "value_propositions": "Effortlessly find glasses that match your face shape and style preferences, eliminating the frustration of online shopping with our interactive quiz.",
+        "recommended_ctas": "Try Free",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Quiz Completion Rate >50%, Click-Through Rate (CTR) on Quiz Results >2%, Conversion Rate from Quiz to Purchase >1%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Value Conscious with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "First-Time Buyers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Worried about buying glasses online? Try Eyebuydirect's 14-Day Free Returns!",
+        "value_propositions": "Eliminate risk with our easy return policy. Find your perfect frames with confidence.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >2%, Bounce Rate <40%, Time on Page >60 seconds",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting First-Time Buyers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 3 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Past Purchasers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Your [Desired Look] is Waiting! Complete Your GlassesUSA Order Today.",
+        "value_propositions": "Remind customers of their unfinished purchase and evoke positive emotions associated with their chosen style, encouraging them to complete their order and experience the full benefit of their new glasses.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Abandoned Cart Recovery Rate >10%, Average Order Value (AOV) for Recovered Carts > Baseline AOV",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Past Purchasers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Value Conscious",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Tired of [Problem with Glasses]? Find Your Perfect Fit with Our Quiz!",
+        "value_propositions": "Effortlessly find glasses that match your face shape and style preferences, eliminating the frustration of online shopping with our interactive quiz.",
+        "recommended_ctas": "Try Free",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Large (500K+)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "Quiz Completion Rate >50%, Click-Through Rate (CTR) on Quiz Results >2%, Conversion Rate from Quiz to Purchase >1%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Value Conscious with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "PROBLEM_SOLUTION",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "First-Time Buyers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Worried about buying glasses online? Try Eyebuydirect's 14-Day Free Returns!",
+        "value_propositions": "Eliminate risk with our easy return policy. Find your perfect frames with confidence.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >2%, Bounce Rate <40%, Time on Page >60 seconds",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting First-Time Buyers with PROBLEM_SOLUTION messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 12.233933,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_092832",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "status": "success",
+  "opportunities_found": 2,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting First Time Buyers with SOCIAL_PROOF messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Style Conscious with EMOTIONAL messaging in AWARENESS stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "DECISION",
+      "target_persona": "First Time Buyers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Join Thousands of Happy Customers! See What Everyone is Raving About.",
+        "value_propositions": "Build trust and credibility by showcasing positive customer reviews, testimonials, and user-generated content. Address concerns about online eyewear purchases by demonstrating satisfaction from other customers.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Conversion Rate +1%, Reduction in Cart Abandonment Rate -5%, Positive Sentiment +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting First Time Buyers with SOCIAL_PROOF messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Style Conscious",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Express Yourself: Find the Perfect Frames to Match Your Vibe.",
+        "value_propositions": "Emphasize the emotional connection people have with their glasses as a fashion statement and form of self-expression. Tap into the desire to find frames that reflect personality and style.",
+        "recommended_ctas": "Explore Styles",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Brand lift +5%, Website traffic +10%, Engagement Rate +1%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Style Conscious with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 2 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "DECISION",
+      "target_persona": "First Time Buyers",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Join Thousands of Happy Customers! See What Everyone is Raving About.",
+        "value_propositions": "Build trust and credibility by showcasing positive customer reviews, testimonials, and user-generated content. Address concerns about online eyewear purchases by demonstrating satisfaction from other customers.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Conversion Rate +1%, Reduction in Cart Abandonment Rate -5%, Positive Sentiment +10%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting First Time Buyers with SOCIAL_PROOF messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Style Conscious",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Express Yourself: Find the Perfect Frames to Match Your Vibe.",
+        "value_propositions": "Emphasize the emotional connection people have with their glasses as a fashion statement and form of self-expression. Tap into the desire to find frames that reflect personality and style.",
+        "recommended_ctas": "Explore Styles",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Brand lift +5%, Website traffic +10%, Engagement Rate +1%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Style Conscious with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 12.021747,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_232151",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

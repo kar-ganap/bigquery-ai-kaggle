@@ -41,11 +41,43 @@ class CurationStage(PipelineStage[List[CompetitorCandidate], List[ValidatedCompe
         super().__init__("AI Competitor Curation", 2, context.run_id)
         self.context = context
         self.dry_run = dry_run
-        
+
         if not dry_run and CompetitorNameValidator:
             self.name_validator = CompetitorNameValidator()
         else:
             self.name_validator = None
+
+    def ensure_gemini_model(self):
+        """Ensure Gemini model is available for AI.GENERATE_TABLE"""
+        model_id = f"{BQ_PROJECT}.{BQ_DATASET}.gemini_model"
+
+        if get_bigquery_client is None:
+            raise ImportError("BigQuery client required for model creation")
+
+        client = get_bigquery_client()
+
+        try:
+            # Check if model exists
+            client.get_model(model_id)
+            print(f"   ✅ Gemini model exists: {model_id}")
+            return model_id
+        except Exception as e:
+            # Create remote model connection to Gemini
+            print(f"   🔧 Creating Gemini model connection: {model_id}")
+            create_model_sql = f"""
+            CREATE OR REPLACE MODEL `{model_id}`
+            REMOTE WITH CONNECTION `{BQ_PROJECT}.us.vertex-ai`
+            OPTIONS (ENDPOINT = 'gemini-2.5-flash');
+            """
+
+            try:
+                client.query(create_model_sql).result()
+                print(f"   ✅ Created Gemini model: {model_id}")
+                return model_id
+            except Exception as e:
+                print(f"   ❌ Failed to create Gemini model: {e}")
+                print("   💡 Please ensure you have a Vertex AI connection set up")
+                raise
     
     def execute(self, candidates: List[CompetitorCandidate]) -> List[ValidatedCompetitor]:
         """Execute AI competitor curation"""
@@ -216,7 +248,10 @@ class CurationStage(PipelineStage[List[CompetitorCandidate], List[ValidatedCompe
         """Run AI consensus validation with 3 rounds per candidate"""
         prefilter_count = len(df_prefiltered)
         print(f"   🧠 Stage 2: AI consensus validation for {prefilter_count} candidates...")
-        
+
+        # Ensure Gemini model is available
+        model_id = self.ensure_gemini_model()
+
         # Prepare consensus validation query
         consensus_results = []
         batch_size = 5  # Process in batches to manage BigQuery limits

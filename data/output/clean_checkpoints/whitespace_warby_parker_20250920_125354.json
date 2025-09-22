@@ -1,0 +1,197 @@
+{
+  "status": "success",
+  "opportunities_found": 4,
+  "top_opportunities": [
+    "VIRGIN_TERRITORY opportunity targeting Existing Customers with FUNCTIONAL messaging in RETENTION stage",
+    "VIRGIN_TERRITORY opportunity targeting Abandoned Cart with EMOTIONAL messaging in DECISION stage",
+    "VIRGIN_TERRITORY opportunity targeting Designer Seekers with ASPIRATIONAL messaging in CONSIDERATION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Existing Customers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "\ud83d\udc53 Your Perfect Pair is Still Waiting! Complete Your Order & Save Up to 50%!",
+        "value_propositions": "Reminds customers of abandoned carts, incentivizing completion through discount and free shipping, increasing conversion and customer lifetime value.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email|Retargeting Ads",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart Recovery Rate >20%, Revenue/Ad Spend >5",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Existing Customers with FUNCTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Abandoned Cart",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Your Perfect Pair is Waiting! Up to 50% OFF!",
+        "value_propositions": "Don't miss out on the glasses you loved! Your cart is still here, plus enjoy free shipping, returns and up to 50% off to make the deal even sweeter.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email|Retargeting Ads",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Recovery Rate of Abandoned Carts > 10%, CPA <$25",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Abandoned Cart with EMOTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Designer Seekers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Elevate Your Style with COACH Glasses at Unbeatable Prices!",
+        "value_propositions": "Own a piece of luxury with authentic COACH glasses, now more accessible with a limited-time designer discount and added value of free lenses and money back guarantee.",
+        "recommended_ctas": "Shop Coach Glasses",
+        "channel_focus": "Instagram|Facebook",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >1.2%, CPA <$40, Revenue/Ad Spend >3",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Designer Seekers with ASPIRATIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Trust Seekers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Join Thousands of Happy EyeBuyDirect Customers: See What They're Saying!",
+        "value_propositions": "Discover why thousands trust EyeBuyDirect for affordable, stylish eyewear and exceptional customer service. Experience the difference for yourself.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Cross-platform",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >1%, Website Visit Duration +10%, Customer Satisfaction Score +8%",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Trust Seekers with SOCIAL_PROOF messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 4 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "FUNCTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Existing Customers",
+      "overall_score": 0.385,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "\ud83d\udc53 Your Perfect Pair is Still Waiting! Complete Your Order & Save Up to 50%!",
+        "value_propositions": "Reminds customers of abandoned carts, incentivizing completion through discount and free shipping, increasing conversion and customer lifetime value.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email|Retargeting Ads",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "Cart Recovery Rate >20%, Revenue/Ad Spend >5",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Existing Customers with FUNCTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "DECISION",
+      "target_persona": "Abandoned Cart",
+      "overall_score": 0.35,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Your Perfect Pair is Waiting! Up to 50% OFF!",
+        "value_propositions": "Don't miss out on the glasses you loved! Your cart is still here, plus enjoy free shipping, returns and up to 50% off to make the deal even sweeter.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Email|Retargeting Ads",
+        "audience_sizing": "Small (50K-100K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with LOW ($10K-30K)",
+      "success_metrics": "Recovery Rate of Abandoned Carts > 10%, CPA <$25",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Abandoned Cart with EMOTIONAL messaging in DECISION stage",
+      "confidence_level": "LOW"
+    },
+    {
+      "space_type": "VIRGIN_TERRITORY",
+      "messaging_angle": "ASPIRATIONAL",
+      "funnel_stage": "CONSIDERATION",
+      "target_persona": "Designer Seekers",
+      "overall_score": 0.315,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Elevate Your Style with COACH Glasses at Unbeatable Prices!",
+        "value_propositions": "Own a piece of luxury with authentic COACH glasses, now more accessible with a limited-time designer discount and added value of free lenses and money back guarantee.",
+        "recommended_ctas": "Shop Coach Glasses",
+        "channel_focus": "Instagram|Facebook",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "HIGH ($150K-300K) - Pioneer market with MEDIUM ($30K-100K)",
+      "success_metrics": "CTR >1.2%, CPA <$40, Revenue/Ad Spend >3",
+      "timeline": "Launch in 2-3 weeks (fast-mover advantage)",
+      "strategic_summary": "VIRGIN_TERRITORY opportunity targeting Designer Seekers with ASPIRATIONAL messaging in CONSIDERATION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 12.9592,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_125354",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

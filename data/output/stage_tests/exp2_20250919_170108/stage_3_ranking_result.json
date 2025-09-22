@@ -1,0 +1,16 @@
+{
+  "stage_info": {
+    "name": "Ranking",
+    "number": 3,
+    "timestamp": "2025-09-19T17:06:41.914682",
+    "duration_seconds": 21.715935230255127
+  },
+  "input_summary": "List with 7 items",
+  "output_summary": "List with 4 items",
+  "full_output": [
+    "ValidatedCompetitor(company_name='EyeBuyDirect', is_competitor=True, tier='Direct-Rival', market_overlap_pct=90, customer_substitution_ease='Easy', confidence=0.9333333333333332, reasoning='Consensus (3/3 votes): Both are prominent online direct-to-consumer eyewear retailers offering affordable, stylish glasses and sunglasses, directly competing for the same customer base.', evidence_sources=\"Search result 'Top 30 Warby Parker Alternatives & Competitors in 2025', general knowledge of eyewear market.\", quality_score=0.9693333333333334, meta_tier=3, estimated_ad_count='27+', meta_classification='Major Player (20+ ads)')",
+    "ValidatedCompetitor(company_name='LensCrafters', is_competitor=True, tier='Direct-Rival', market_overlap_pct=85, customer_substitution_ease='Easy', confidence=0.9500000000000001, reasoning='Consensus (3/3 votes): Both are major eyewear retailers offering prescription glasses, sunglasses, and eye exams, directly competing for the same customer base across online and retail channels.', evidence_sources=\"General knowledge of eyewear market, company websites, web search results for 'Warby Parker competitors'.\", quality_score=0.9680000000000001, meta_tier=3, estimated_ad_count='20+', meta_classification='Major Player (20+ ads)')",
+    "ValidatedCompetitor(company_name='GlassesUSA', is_competitor=True, tier='Direct-Rival', market_overlap_pct=85, customer_substitution_ease='Easy', confidence=0.9333333333333332, reasoning='Consensus (3/3 votes): Both sell prescription eyewear & sunglasses online with similar pricing models, targeting a similar customer base looking for convenience and value in the direct-to-consumer market.', evidence_sources=\"Web search for 'Warby Parker competitors', general knowledge of eyewear industry, company websites (Warby Parker, GlassesUSA)\", quality_score=0.9653333333333334, meta_tier=3, estimated_ad_count='25+', meta_classification='Major Player (20+ ads)')",
+    "ValidatedCompetitor(company_name='Zenni Optical', is_competitor=True, tier='Direct-Rival', market_overlap_pct=83, customer_substitution_ease='Easy', confidence=0.9, reasoning='Consensus (3/3 votes): Both are major online direct-to-consumer eyewear retailers offering prescription glasses and sunglasses, competing for customers seeking affordable and convenient eyewear solutions.', evidence_sources='Prompt context, general knowledge of online eyewear retailers and their business models.', quality_score=0.9584, meta_tier=3, estimated_ad_count='26+', meta_classification='Major Player (20+ ads)')"
+  ]
+}

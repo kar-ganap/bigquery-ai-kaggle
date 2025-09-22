@@ -1,0 +1,75 @@
+{
+  "status": "success",
+  "opportunities_found": 1,
+  "top_opportunities": [
+    "MONOPOLY opportunity targeting Returning Customers with EMOTIONAL messaging in RETENTION stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Returning Customers",
+      "overall_score": 0.245,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still Thinking About Those Glasses? Complete Your Look Today!",
+        "value_propositions": "Remind customers of abandoned carts, highlighting benefits like free shipping, returns, and money-back guarantee to close the sale.",
+        "recommended_ctas": "Complete Order",
+        "channel_focus": "Email",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Email",
+      "success_metrics": "Cart Recovery Rate >10%, Open Rate >30%, Conversion Rate >5%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Returning Customers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 1 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "RETENTION",
+      "target_persona": "Returning Customers",
+      "overall_score": 0.245,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Still Thinking About Those Glasses? Complete Your Look Today!",
+        "value_propositions": "Remind customers of abandoned carts, highlighting benefits like free shipping, returns, and money-back guarantee to close the sale.",
+        "recommended_ctas": "Complete Order",
+        "channel_focus": "Email",
+        "audience_sizing": "Medium (100K-500K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Email",
+      "success_metrics": "Cart Recovery Rate >10%, Open Rate >30%, Conversion Rate >5%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Returning Customers with EMOTIONAL messaging in RETENTION stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 11.817112,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_104044",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}

@@ -44,7 +44,7 @@ Thumbs.db
 # Development utilities (shouldn't be tracked)
 tools/
 scripts/data/
-data/output/*
+!data/output/*
 !data/output/clean_checkpoints/
 
 # Editors
@@ -52,3 +52,6 @@ data/output/*
 .idea/
 *.swp
 *.swo
+gcp-creds.json
+*.json # Block all JSON files to be safe
+gcp-creds.json

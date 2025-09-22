@@ -28,6 +28,7 @@ from .stages.ingestion import IngestionStage
 from .stages.strategic_labeling import StrategicLabelingStage
 from .stages.embeddings import EmbeddingsStage
 from .stages.analysis import AnalysisStage
+from .stages.visual_intelligence import VisualIntelligenceStage
 from .stages.enhanced_output import EnhancedOutputStage
 from .stages.multidimensional_intelligence import MultiDimensionalIntelligenceStage
 
@@ -64,8 +65,8 @@ class CompetitiveIntelligencePipeline:
         # Setup logging
         self._setup_logging()
         
-        # Initialize progress tracker  
-        self.progress = ProgressTracker(total_stages=9)
+        # Initialize progress tracker
+        self.progress = ProgressTracker(total_stages=10)  # 10 stages total (1-10)
         
         # Stage timings
         self.stage_timings = {}
@@ -141,28 +142,40 @@ class CompetitiveIntelligencePipeline:
             embeddings_stage = EmbeddingsStage(self.context, self.dry_run, self.verbose)
             embeddings_results = embeddings_stage.run(ingestion_results, self.progress)
             print(f"✅ Stage 6 complete - Generated {embeddings_results.embedding_count} embeddings")
-            
-            # Stage 7: Strategic Analysis
+
+            # Stage 7: Visual Intelligence
+            visual_intel_stage = VisualIntelligenceStage(self.context, self.dry_run)
+            visual_intel_results = visual_intel_stage.run(embeddings_results, self.progress)
+            print(f"✅ Stage 7 complete - Visual intelligence: {visual_intel_results.sampled_ads} ads analyzed, ${visual_intel_results.cost_estimate:.2f}")
+
+            # Stage 8: Strategic Analysis
             analysis_stage = AnalysisStage(self.context, self.dry_run, self.verbose)
             analysis_results = analysis_stage.run(embeddings_results, self.progress)
-            print(f"✅ Stage 7 complete - Strategic analysis complete")
+            print(f"✅ Stage 8 complete - Strategic analysis complete")
             
-            # Stage 8: Multi-Dimensional Intelligence
-            multidim_intel_stage = MultiDimensionalIntelligenceStage("Multi-Dimensional Intelligence", 8, self.run_id)
+            # Stage 9: Multi-Dimensional Intelligence
+            multidim_intel_stage = MultiDimensionalIntelligenceStage("Multi-Dimensional Intelligence", 9, self.run_id)
             # Pass competitor brands to the stage for proper analysis
             multidim_intel_stage.competitor_brands = self.context.competitor_brands + [self.context.brand]
+            # Pass Visual Intelligence results to the stage for L1-L4 integration
+            multidim_intel_stage.visual_intelligence_results = visual_intel_results.__dict__ if visual_intel_results else {}
             multidim_intel_results = multidim_intel_stage.run(analysis_results, self.progress)
-            print(f"✅ Stage 8 complete - Multi-dimensional intelligence analysis complete")
+            print(f"✅ Stage 9 complete - Multi-dimensional intelligence analysis complete")
             
-            # Stage 9: Intelligence Output
+            # Stage 10: Intelligence Output
             output_stage = EnhancedOutputStage(self.context, self.dry_run, self.verbose)
             intelligence_output = output_stage.run(multidim_intel_results, self.progress)
-            print(f"✅ Stage 9 complete - Intelligence output generated")
+            print(f"✅ Stage 10 complete - Intelligence output generated")
             
+            # CRITICAL: Validate data integrity before declaring success
+            print(f"\n🔍 FINAL DATA INTEGRITY VALIDATION")
+            print("=" * 50)
+            self._validate_data_integrity()
+
             # Success!
             duration = time.time() - start_time
             timings = self.progress.get_timings()
-            
+
             return PipelineResults(
                 success=True,
                 brand=self.brand,
@@ -204,6 +217,68 @@ class CompetitiveIntelligencePipeline:
                 error=f"Unexpected error: {str(e)}",
                 run_id=self.run_id
             )
+
+    def _validate_data_integrity(self):
+        """
+        Critical data integrity validation - ensures core inviolable fields are preserved.
+        Raises StageError if any violations are detected.
+        """
+        try:
+            from src.utils.bigquery_client import run_query
+
+            # Define the 12 core inviolable fields that MUST be preserved
+            core_fields = [
+                'ad_archive_id', 'brand', 'creative_text', 'title', 'cta_text',
+                'media_type', 'media_storage_path', 'start_date_string', 'end_date_string',
+                'publisher_platforms', 'page_name', 'snapshot_url'
+            ]
+
+            print(f"   🔍 Checking ads_with_dates for all {len(core_fields)} core inviolable fields...")
+
+            # Check if ads_with_dates exists and has all core fields
+            schema_query = f"""
+            SELECT column_name
+            FROM `{BQ_PROJECT}.{BQ_DATASET}.INFORMATION_SCHEMA.COLUMNS`
+            WHERE table_name = 'ads_with_dates'
+            ORDER BY ordinal_position
+            """
+
+            schema_result = run_query(schema_query)
+
+            if schema_result.empty:
+                raise StageError("❌ CRITICAL: ads_with_dates table does not exist!")
+
+            available_columns = set(schema_result['column_name'].tolist())
+            missing_fields = []
+
+            for field in core_fields:
+                if field in available_columns:
+                    print(f"   ✅ {field}")
+                else:
+                    missing_fields.append(field)
+                    print(f"   ❌ {field} - MISSING!")
+
+            if missing_fields:
+                error_msg = f"DATA INTEGRITY VIOLATION: {len(missing_fields)} core fields missing from ads_with_dates: {', '.join(missing_fields)}"
+                print(f"\n🚨 {error_msg}")
+                print("   💡 This indicates a stage violated the additive-only principle!")
+                print("   🔧 Fix: Ensure all stages preserve core inviolable fields")
+                raise StageError(error_msg)
+
+            # Check row count
+            count_query = f"SELECT COUNT(*) as count FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates`"
+            count_result = run_query(count_query)
+            row_count = count_result.iloc[0]['count'] if not count_result.empty else 0
+
+            print(f"\n   ✅ DATA INTEGRITY VALIDATED!")
+            print(f"   📊 ads_with_dates: {row_count} rows with all {len(core_fields)} core fields preserved")
+            print(f"   🎯 Additive-only principle: ENFORCED")
+
+        except Exception as e:
+            if isinstance(e, StageError):
+                raise  # Re-raise StageError as-is
+            else:
+                raise StageError(f"Data integrity validation failed: {str(e)}")
 
 
 def main():

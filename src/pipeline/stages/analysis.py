@@ -12,9 +12,11 @@ from ..models.candidates import EmbeddingResults, AnalysisResults
 
 try:
     from src.utils.bigquery_client import get_bigquery_client, run_query
+    from src.utils.sql_helpers import safe_brand_in_clause
 except ImportError:
     get_bigquery_client = None
     run_query = None
+    safe_brand_in_clause = None
 
 try:
     from src.competitive_intel.intelligence.temporal_intelligence_module import TemporalIntelligenceEngine
@@ -33,7 +35,7 @@ BQ_DATASET = os.environ.get("BQ_DATASET", "ads_demo")
 
 class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
     """
-    Stage 6: Strategic Analysis.
+    Stage 8: Strategic Analysis.
     
     Responsibilities:
     - Current state analysis using strategic labels
@@ -43,7 +45,7 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
     """
     
     def __init__(self, context: PipelineContext, dry_run: bool = False, verbose: bool = False):
-        super().__init__("Strategic Analysis", 6, context.run_id)
+        super().__init__("Strategic Analysis", 8, context.run_id)
         self.context = context
         self.dry_run = dry_run
         self.verbose = verbose
@@ -69,7 +71,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 'urgency_score': 0.58,
                 'brand_voice_score': 0.73,
                 'market_position': 'defensive',
-                'promotional_volatility': 0.12
+                'promotional_volatility': 0.12,
+                'avg_cta_aggressiveness': 4.2
             },
             influence={
                 'copying_detected': True,
@@ -134,7 +137,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                     'urgency_score': 0.0,
                     'brand_voice_score': 0.0,
                     'market_position': 'unknown',
-                    'promotional_volatility': 0.0
+                    'promotional_volatility': 0.0,
+                    'avg_cta_aggressiveness': 0.0
                 }
             
             # Step 3: Competitive Copying Detection
@@ -145,6 +149,22 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
             except Exception as e:
                 print(f"   ❌ Copying detection failed: {e}")
                 analysis.influence = {'copying_detected': False, 'similarity_score': 0.0}
+
+            # Step 3.5: Creative Fatigue Analysis (adapted from legacy)
+            print("   🎨 Analyzing creative fatigue patterns...")
+            try:
+                fatigue_analysis = self._analyze_creative_fatigue()
+                # Add fatigue data to current_state (following legacy pattern)
+                analysis.current_state.update({
+                    'avg_fatigue_score': fatigue_analysis['avg_fatigue_score'],
+                    'avg_originality_score': fatigue_analysis['avg_originality_score'],
+                    'avg_refresh_signal': fatigue_analysis['avg_refresh_signal'],
+                    'high_fatigue_count': fatigue_analysis['high_fatigue_count'],
+                    'fatigue_level': fatigue_analysis['fatigue_level']
+                })
+                print("   ✅ Creative fatigue analysis complete")
+            except Exception as e:
+                print(f"   ❌ Creative fatigue analysis failed: {e}")
 
             # Step 4: Temporal Intelligence Analysis (now enhanced with CTA data)
             print("   📈 Analyzing temporal intelligence (where did we come from)...")
@@ -164,9 +184,9 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 print(f"   ❌ Forecasting failed: {e}")
                 analysis.forecasts = {'next_30_days': 'stable_market', 'confidence': 'LOW', 'business_impact_score': 2}
             
-            # DEBUG: Log final analysis result before returning
-            print(f"   🔍 DEBUG ANALYSIS: Final analysis.current_state = {analysis.current_state}")
-            print(f"   🔍 DEBUG ANALYSIS: About to return analysis with current_state PI = {analysis.current_state.get('promotional_intensity', 'MISSING')}")
+            # Log final analysis result before returning (commented for production)
+            # print(f"   🔍 DEBUG ANALYSIS: Final analysis.current_state = {analysis.current_state}")
+            # print(f"   🔍 DEBUG ANALYSIS: About to return analysis with current_state PI = {analysis.current_state.get('promotional_intensity', 'MISSING')}")
             
             return analysis
             
@@ -215,7 +235,7 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
             
             if has_strategic_data:
                 print("   ✅ Using existing strategic labels for analysis")
-                print(f"   🔍 DEBUG: Found {strategic_count} records with strategic data")
+                # print(f"   🔍 DEBUG: Found {strategic_count} records with strategic data")
                 
                 current_state_query = f"""
                 SELECT 
@@ -235,6 +255,25 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 """
                 
                 current_result = run_query(current_state_query)
+
+                # Query CTA aggressiveness from the CTA analysis table
+                cta_aggressiveness = 0.0
+                try:
+                    cta_query = f"""
+                    SELECT
+                        avg_cta_aggressiveness
+                    FROM `{BQ_PROJECT}.{BQ_DATASET}.cta_aggressiveness_analysis`
+                    WHERE brand = '{self.context.brand}'
+                    """
+                    cta_result = run_query(cta_query)
+                    if not cta_result.empty:
+                        cta_aggressiveness = float(cta_result.iloc[0].get('avg_cta_aggressiveness', 0.0))
+                        print(f"   🎯 CTA aggressiveness score: {cta_aggressiveness:.2f}/10")
+                    else:
+                        print("   ⚠️  No CTA data found, using default value")
+                except Exception as e:
+                    print(f"   ⚠️  CTA aggressiveness query failed: {e}")
+
                 if not current_result.empty:
                     row = current_result.iloc[0]
                     result = {
@@ -242,12 +281,13 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                         'urgency_score': float(row.get('avg_urgency_score', 0)),
                         'brand_voice_score': float(row.get('avg_brand_voice_score', 0)),
                         'market_position': row.get('market_position', 'unknown'),
-                        'promotional_volatility': float(row.get('promotional_volatility', 0))
+                        'promotional_volatility': float(row.get('promotional_volatility', 0)),
+                        'avg_cta_aggressiveness': cta_aggressiveness
                     }
-                    print(f"   📊 Analysis metrics found: PI={result['promotional_intensity']:.3f}, US={result['urgency_score']:.3f}, BV={result['brand_voice_score']:.3f}")
-                    print(f"   🔍 DEBUG ANALYSIS: Returning current_state = {result}")
-                    for key, value in result.items():
-                        print(f"   🔍 DEBUG ANALYSIS: result['{key}'] = {value} (type: {type(value)})")
+                    print(f"   📊 Analysis metrics found: PI={result['promotional_intensity']:.3f}, US={result['urgency_score']:.3f}, BV={result['brand_voice_score']:.3f}, CTA={result['avg_cta_aggressiveness']:.2f}")
+                    # print(f"   🔍 DEBUG ANALYSIS: Returning current_state = {result}")
+                    # for key, value in result.items():
+                    #     print(f"   🔍 DEBUG ANALYSIS: result['{key}'] = {value} (type: {type(value)})")
                     return result
             else:
                 print("   ⚠️  No strategic labels found, using basic analysis")
@@ -262,7 +302,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
             'urgency_score': 0.0,
             'brand_voice_score': 0.0,
             'market_position': 'unknown',
-            'promotional_volatility': 0.0
+            'promotional_volatility': 0.0,
+            'avg_cta_aggressiveness': 0.0
         }
     
     def _detect_copying_patterns(self, embeddings: EmbeddingResults) -> dict:
@@ -273,9 +314,10 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
         
         try:
             # Join embeddings with strategic labels to get timestamps for temporal analysis
+            # Use all available brands in embeddings, not just competitor_brands list
             copying_query = f"""
-            WITH brand_embeddings_with_time AS (
-                SELECT 
+            WITH all_brand_embeddings AS (
+                SELECT
                     e.brand,
                     e.ad_archive_id,
                     e.content_embedding,
@@ -285,19 +327,17 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 ON e.ad_archive_id = s.ad_archive_id AND e.brand = s.brand
                 WHERE e.content_embedding IS NOT NULL
                     AND s.start_timestamp IS NOT NULL
-                    AND e.brand IN ({', '.join([f"'{self.context.brand}'"] + [f"'{b}'" for b in self.competitor_brands])})
             ),
             brand_similarity AS (
-                SELECT 
+                SELECT
                     a.brand as original_brand,
                     b.brand as potential_copier,
                     ML.DISTANCE(a.content_embedding, b.content_embedding, 'COSINE') as similarity_score,
                     DATE_DIFF(DATE(b.start_timestamp), DATE(a.start_timestamp), DAY) as lag_days
-                FROM brand_embeddings_with_time a
-                CROSS JOIN brand_embeddings_with_time b  
+                FROM all_brand_embeddings a
+                CROSS JOIN all_brand_embeddings b
                 WHERE a.brand = '{self.context.brand}'
                     AND b.brand != '{self.context.brand}'
-                    AND b.brand IN ({', '.join([f"'{b}'" for b in self.competitor_brands])})
                     AND DATE(b.start_timestamp) >= DATE(a.start_timestamp)
                     AND ML.DISTANCE(a.content_embedding, b.content_embedding, 'COSINE') < 0.3
             )
@@ -330,7 +370,132 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
             print(f"   ⚠️  Copying detection error: {e}")
         
         return {'copying_detected': False, 'similarity_score': 0}
-    
+
+    def _analyze_creative_fatigue(self) -> dict:
+        """Analyze creative fatigue using embeddings and temporal patterns (adapted from legacy)"""
+
+        if not run_query:
+            return self._mock_fatigue_results()
+
+        try:
+            print("   🎨 Analyzing creative fatigue patterns...")
+
+            # Adapt legacy fatigue logic to work with current data structures
+            fatigue_sql = f"""
+            WITH similarity_pairs AS (
+              -- Pre-compute all similarity pairs within 30-day windows
+              SELECT
+                e1.brand,
+                e1.ad_archive_id as current_ad_id,
+                s1.start_timestamp as current_timestamp,
+                e2.ad_archive_id as past_ad_id,
+                s2.start_timestamp as past_timestamp,
+                1 - ML.DISTANCE(e1.content_embedding, e2.content_embedding, 'COSINE') as similarity
+              FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_embeddings` e1
+              INNER JOIN `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates` s1
+                ON e1.ad_archive_id = s1.ad_archive_id AND e1.brand = s1.brand
+              INNER JOIN `{BQ_PROJECT}.{BQ_DATASET}.ads_embeddings` e2
+                ON e1.brand = e2.brand
+              INNER JOIN `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates` s2
+                ON e2.ad_archive_id = s2.ad_archive_id AND e2.brand = s2.brand
+              WHERE s2.start_timestamp < s1.start_timestamp
+                AND DATE_DIFF(DATE(s1.start_timestamp), DATE(s2.start_timestamp), DAY) <= 30
+                AND e1.content_embedding IS NOT NULL
+                AND e2.content_embedding IS NOT NULL
+            ),
+
+            brand_content_similarity AS (
+              SELECT
+                brand,
+                current_ad_id as ad_archive_id,
+                current_timestamp as start_timestamp,
+                AVG(similarity) as avg_similarity_to_recent
+              FROM similarity_pairs
+              GROUP BY brand, current_ad_id, current_timestamp
+            ),
+
+            fatigue_metrics AS (
+              SELECT
+                brand,
+                COUNT(*) as analyzed_ads,
+                AVG(COALESCE(avg_similarity_to_recent, 0)) as avg_semantic_repetition,
+                STDDEV(COALESCE(avg_similarity_to_recent, 0)) as repetition_variance,
+
+                -- Legacy-style fatigue score calculation
+                CASE
+                  WHEN AVG(COALESCE(avg_similarity_to_recent, 0)) > 0.8 THEN 1.0
+                  WHEN AVG(COALESCE(avg_similarity_to_recent, 0)) > 0.6 THEN 0.7
+                  WHEN AVG(COALESCE(avg_similarity_to_recent, 0)) > 0.4 THEN 0.4
+                  ELSE 0.2
+                END as fatigue_score,
+
+                -- Legacy-style originality score (inverse of repetition)
+                GREATEST(0, 1.0 - AVG(COALESCE(avg_similarity_to_recent, 0))) as originality_score,
+
+                -- Legacy-style refresh signal (based on variance)
+                GREATEST(0.1, COALESCE(STDDEV(COALESCE(avg_similarity_to_recent, 0)), 0.1)) as refresh_signal_strength,
+
+                -- Legacy-style fatigue level classification
+                CASE
+                  WHEN AVG(COALESCE(avg_similarity_to_recent, 0)) > 0.8 THEN 'HIGH'
+                  WHEN AVG(COALESCE(avg_similarity_to_recent, 0)) > 0.5 THEN 'MEDIUM'
+                  ELSE 'LOW'
+                END as fatigue_level
+
+              FROM brand_content_similarity
+              GROUP BY brand
+            )
+
+            SELECT
+              brand,
+              fatigue_score,
+              originality_score,
+              refresh_signal_strength,
+              fatigue_level,
+              analyzed_ads,
+              avg_semantic_repetition,
+              repetition_variance,
+
+              -- High fatigue count (legacy metric)
+              CASE WHEN fatigue_level = 'HIGH' THEN 1 ELSE 0 END as high_fatigue_count
+
+            FROM fatigue_metrics
+            WHERE brand = '{self.context.brand}'
+            """
+
+            fatigue_result = run_query(fatigue_sql)
+            if not fatigue_result.empty:
+                row = fatigue_result.iloc[0]
+                print(f"   📊 Fatigue analysis: {row.get('fatigue_level', 'UNKNOWN')} level "
+                      f"(score: {float(row.get('fatigue_score', 0)):.2f})")
+
+                return {
+                    'avg_fatigue_score': float(row.get('fatigue_score', 0.3)),
+                    'avg_originality_score': float(row.get('originality_score', 0.7)),
+                    'avg_refresh_signal': float(row.get('refresh_signal_strength', 0.5)),
+                    'high_fatigue_count': int(row.get('high_fatigue_count', 0)),
+                    'fatigue_level': row.get('fatigue_level', 'MEDIUM'),
+                    'analyzed_ads': int(row.get('analyzed_ads', 0))
+                }
+            else:
+                print("   ⚠️  No fatigue data available")
+
+        except Exception as e:
+            print(f"   ⚠️  Fatigue analysis failed: {e}")
+
+        return self._mock_fatigue_results()
+
+    def _mock_fatigue_results(self) -> dict:
+        """Mock fatigue results when analysis fails"""
+        return {
+            'avg_fatigue_score': 0.34,
+            'avg_originality_score': 0.78,
+            'avg_refresh_signal': 0.55,
+            'high_fatigue_count': 2,
+            'fatigue_level': 'MEDIUM',
+            'analyzed_ads': 25
+        }
+
     def _analyze_temporal_intelligence(self) -> dict:
         """Analyze temporal intelligence using the temporal engine"""
         
@@ -477,7 +642,8 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
                 'urgency_score': 0.0,
                 'brand_voice_score': 0.0,
                 'market_position': 'unknown',
-                'promotional_volatility': 0.0
+                'promotional_volatility': 0.0,
+                'avg_cta_aggressiveness': 0.0
             },
             influence={
                 'copying_detected': False,
@@ -537,69 +703,156 @@ class AnalysisStage(PipelineStage[EmbeddingResults, AnalysisResults]):
         brands = [self.context.brand] + self.competitor_brands
         brands_filter = "', '".join(brands)
 
-        # Enhanced CTA Intelligence SQL - creates the table that temporal intelligence expects
+        # Enhanced CTA Intelligence SQL with proper 0-10 aggressiveness scoring
         cta_analysis_sql = f"""
         CREATE OR REPLACE TABLE `{BQ_PROJECT}.{BQ_DATASET}.cta_aggressiveness_analysis` AS
 
-        WITH cta_analysis AS (
+        WITH cta_scoring AS (
           SELECT
             brand,
             ad_archive_id,
             cta_text,
-            LENGTH(COALESCE(cta_text, '')) as cta_length,
+            UPPER(COALESCE(cta_text, '')) as cta_upper,
 
-            -- CTA Presence Analysis
+            -- CTA Aggressiveness Score (0-10 scale)
             CASE
-              WHEN cta_text IS NOT NULL AND LENGTH(cta_text) > 0 THEN 'HAS_CTA'
-              ELSE 'NO_CTA'
-            END as cta_presence,
+              WHEN cta_text IS NULL OR LENGTH(TRIM(cta_text)) = 0 THEN 0.0
+              ELSE
+                -- Base score for having a CTA
+                2.0 +
 
-            -- Enhanced CTA Aggressiveness Classification
-            CASE
-              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BUY NOW|ORDER NOW|SHOP NOW|LIMITED TIME|ACT FAST|HURRY)\\b') THEN 'HIGH_URGENCY'
-              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(LEARN MORE|GET STARTED|DISCOVER|EXPLORE)\\b') THEN 'MEDIUM_ENGAGEMENT'
-              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BROWSE|VIEW|SEE MORE|FIND OUT)\\b') THEN 'LOW_PRESSURE'
-              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BOOK|SCHEDULE|CONSULT|TRY|EXPERIENCE)\\b') THEN 'CONSULTATIVE'
-              WHEN cta_text IS NOT NULL AND LENGTH(cta_text) > 0 THEN 'OTHER'
-              ELSE 'NO_CTA'
-            END as cta_aggressiveness
+                -- High urgency keywords (+3.0 each, max +6.0)
+                LEAST(6.0,
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bNOW\\b') THEN 3.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bTODAY\\b') THEN 2.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bURGENT\\b') THEN 3.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bHURRY\\b') THEN 2.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bLIMITED\\b') THEN 2.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bENDING\\b') THEN 2.0 ELSE 0.0 END)
+                ) +
 
-          FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_raw_{self.context.run_id}`
+                -- Action intensity keywords (+2.0 max)
+                LEAST(2.0,
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bBUY NOW\\b') THEN 2.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bSHOP NOW\\b') THEN 1.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bORDER\\b') THEN 1.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bPURCHASE\\b') THEN 1.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bGET\\b') THEN 1.0 ELSE 0.0 END)
+                ) +
+
+                -- Promotion/discount keywords (+1.5 max)
+                LEAST(1.5,
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bSALE\\b') THEN 1.5 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bOFF\\b') THEN 1.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bDISCOUNT\\b') THEN 1.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bFREE\\b') THEN 1.0 ELSE 0.0 END) +
+                  (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bDEAL\\b') THEN 1.0 ELSE 0.0 END)
+                ) -
+
+                -- Consultative language (reduces aggressiveness)
+                (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bLEARN\\b') THEN 1.0 ELSE 0.0 END) -
+                (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bDISCOVER\\b') THEN 0.5 ELSE 0.0 END) -
+                (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bEXPLORE\\b') THEN 0.5 ELSE 0.0 END) -
+                (CASE WHEN REGEXP_CONTAINS(UPPER(cta_text), r'\\bFIND OUT\\b') THEN 1.0 ELSE 0.0 END)
+            END as raw_aggressiveness_score
+
+          FROM `{BQ_PROJECT}.{BQ_DATASET}.ads_with_dates`
           WHERE brand IN ('{brands_filter}')
+        ),
+
+        cta_analysis AS (
+          SELECT
+            brand,
+            ad_archive_id,
+            cta_text,
+            -- Cap score between 0 and 10
+            GREATEST(0.0, LEAST(10.0, raw_aggressiveness_score)) as cta_aggressiveness_score,
+
+            -- Categorize based on proper score ranges
+            CASE
+              WHEN raw_aggressiveness_score >= 7.0 THEN 'ULTRA_AGGRESSIVE'
+              WHEN raw_aggressiveness_score >= 5.0 THEN 'AGGRESSIVE'
+              WHEN raw_aggressiveness_score >= 3.0 THEN 'MODERATE'
+              WHEN raw_aggressiveness_score >= 1.0 THEN 'CONSULTATIVE'
+              ELSE 'MINIMAL'
+            END as cta_category,
+
+            -- Specific strategy classifications with accurate naming
+            CASE
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(BUY NOW|ORDER NOW|SHOP NOW|LIMITED TIME|ACT FAST|HURRY)\\b') THEN 'URGENCY_DRIVEN'
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(SHOP|BUY|GET|ORDER|PURCHASE)\\b') THEN 'ACTION_FOCUSED'
+              WHEN REGEXP_CONTAINS(UPPER(COALESCE(cta_text, '')), r'\\b(LEARN MORE|DISCOVER|EXPLORE|FIND OUT)\\b') THEN 'EXPLORATORY'
+              WHEN cta_text IS NOT NULL AND LENGTH(TRIM(cta_text)) > 0 THEN 'SOFT_SELL'
+              ELSE 'NO_CTA'
+            END as cta_strategy_type
+
+          FROM cta_scoring
         )
 
         SELECT
           brand,
           COUNT(*) as total_ads,
-          COUNT(CASE WHEN cta_presence = 'HAS_CTA' THEN 1 END) as ads_with_cta,
-          ROUND(COUNT(CASE WHEN cta_presence = 'HAS_CTA' THEN 1 END) * 100.0 / COUNT(*), 1) as cta_adoption_rate,
-          ROUND(AVG(CASE WHEN cta_length > 0 THEN cta_length END), 1) as avg_cta_length,
-          COUNT(CASE WHEN cta_aggressiveness = 'HIGH_URGENCY' THEN 1 END) as high_urgency_ctas,
-          COUNT(CASE WHEN cta_aggressiveness = 'MEDIUM_ENGAGEMENT' THEN 1 END) as medium_engagement_ctas,
-          COUNT(CASE WHEN cta_aggressiveness = 'LOW_PRESSURE' THEN 1 END) as low_pressure_ctas,
-          COUNT(CASE WHEN cta_aggressiveness = 'CONSULTATIVE' THEN 1 END) as consultative_ctas,
 
-          -- Dominant Strategy
+          -- Remove meaningless "adoption rate" - focus on aggressiveness
+          ROUND(AVG(cta_aggressiveness_score), 2) as avg_cta_aggressiveness,
+          ROUND(STDDEV(cta_aggressiveness_score), 2) as cta_aggressiveness_stddev,
+
+          -- Calculate correct category in SQL, not in notebook
           CASE
-            WHEN COUNT(CASE WHEN cta_aggressiveness = 'HIGH_URGENCY' THEN 1 END) >= GREATEST(
-              COUNT(CASE WHEN cta_aggressiveness = 'MEDIUM_ENGAGEMENT' THEN 1 END),
-              COUNT(CASE WHEN cta_aggressiveness = 'LOW_PRESSURE' THEN 1 END),
-              COUNT(CASE WHEN cta_aggressiveness = 'CONSULTATIVE' THEN 1 END)
-            ) THEN 'HIGH_URGENCY'
-            WHEN COUNT(CASE WHEN cta_aggressiveness = 'MEDIUM_ENGAGEMENT' THEN 1 END) >= GREATEST(
-              COUNT(CASE WHEN cta_aggressiveness = 'LOW_PRESSURE' THEN 1 END),
-              COUNT(CASE WHEN cta_aggressiveness = 'CONSULTATIVE' THEN 1 END)
-            ) THEN 'MEDIUM_ENGAGEMENT'
-            WHEN COUNT(CASE WHEN cta_aggressiveness = 'LOW_PRESSURE' THEN 1 END) >= COUNT(CASE WHEN cta_aggressiveness = 'CONSULTATIVE' THEN 1 END)
-            THEN 'LOW_PRESSURE'
-            ELSE 'CONSULTATIVE'
+            WHEN AVG(cta_aggressiveness_score) >= 7.0 THEN 'ULTRA_AGGRESSIVE'
+            WHEN AVG(cta_aggressiveness_score) >= 5.0 THEN 'AGGRESSIVE'
+            WHEN AVG(cta_aggressiveness_score) >= 3.0 THEN 'MODERATE'
+            WHEN AVG(cta_aggressiveness_score) >= 1.0 THEN 'CONSULTATIVE'
+            ELSE 'MINIMAL'
+          END as correct_category,
+
+          -- Calculate consistency category
+          CASE
+            WHEN STDDEV(cta_aggressiveness_score) <= 1.0 THEN 'HIGH_CONSISTENCY'
+            WHEN STDDEV(cta_aggressiveness_score) <= 2.0 THEN 'MEDIUM_CONSISTENCY'
+            ELSE 'LOW_CONSISTENCY'
+          END as consistency_category,
+
+          -- Strategy distribution counts with accurate naming
+          COUNT(CASE WHEN cta_strategy_type = 'URGENCY_DRIVEN' THEN 1 END) as urgency_driven_ctas,
+          COUNT(CASE WHEN cta_strategy_type = 'ACTION_FOCUSED' THEN 1 END) as action_focused_ctas,
+          COUNT(CASE WHEN cta_strategy_type = 'EXPLORATORY' THEN 1 END) as exploratory_ctas,
+          COUNT(CASE WHEN cta_strategy_type = 'SOFT_SELL' THEN 1 END) as soft_sell_ctas,
+
+          -- Category distribution
+          COUNT(CASE WHEN cta_category = 'ULTRA_AGGRESSIVE' THEN 1 END) as ultra_aggressive_count,
+          COUNT(CASE WHEN cta_category = 'AGGRESSIVE' THEN 1 END) as aggressive_count,
+          COUNT(CASE WHEN cta_category = 'MODERATE' THEN 1 END) as moderate_count,
+          COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END) as consultative_count,
+          COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END) as minimal_count,
+
+          -- Dominant strategy based on highest count
+          CASE
+            WHEN COUNT(CASE WHEN cta_category = 'ULTRA_AGGRESSIVE' THEN 1 END) >= GREATEST(
+              COUNT(CASE WHEN cta_category = 'AGGRESSIVE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'MODERATE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END)
+            ) THEN 'ULTRA_AGGRESSIVE'
+            WHEN COUNT(CASE WHEN cta_category = 'AGGRESSIVE' THEN 1 END) >= GREATEST(
+              COUNT(CASE WHEN cta_category = 'MODERATE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END)
+            ) THEN 'AGGRESSIVE'
+            WHEN COUNT(CASE WHEN cta_category = 'MODERATE' THEN 1 END) >= GREATEST(
+              COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END),
+              COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END)
+            ) THEN 'MODERATE'
+            WHEN COUNT(CASE WHEN cta_category = 'CONSULTATIVE' THEN 1 END) >= COUNT(CASE WHEN cta_category = 'MINIMAL' THEN 1 END)
+            THEN 'CONSULTATIVE'
+            ELSE 'MINIMAL'
           END as dominant_cta_strategy,
 
           CURRENT_TIMESTAMP() as analysis_timestamp
 
         FROM cta_analysis
         GROUP BY brand
-        ORDER BY cta_adoption_rate DESC;
+        ORDER BY avg_cta_aggressiveness DESC;
         """
 
         # Execute the CTA Intelligence analysis

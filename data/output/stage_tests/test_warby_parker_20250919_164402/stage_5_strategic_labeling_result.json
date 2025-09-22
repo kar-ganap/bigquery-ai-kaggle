@@ -1,0 +1,15 @@
+{
+  "stage_info": {
+    "name": "Strategic Labeling",
+    "number": 5,
+    "timestamp": "2025-09-19T16:47:35.704956",
+    "duration_seconds": 29.310587167739868
+  },
+  "input_summary": "Object: IngestionResults",
+  "output_summary": "Object: StrategicLabelResults",
+  "full_output": {
+    "table_id": "bigquery-ai-kaggle-469620.ads_demo.ads_with_dates",
+    "labeled_ads": "350",
+    "generation_time": 0.0
+  }
+}

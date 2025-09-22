@@ -1,0 +1,58 @@
+{
+  "stage_info": {
+    "name": "Analysis",
+    "number": 8,
+    "timestamp": "2025-09-21T01:14:53.967468",
+    "duration_seconds": 22.531495094299316
+  },
+  "input_summary": "Object: EmbeddingResults",
+  "output_summary": "Object: AnalysisResults",
+  "full_output": {
+    "current_state": {
+      "promotional_intensity": 0.7286713286713287,
+      "urgency_score": 0.2076923076923078,
+      "brand_voice_score": 0.45314685314685327,
+      "market_position": "offensive",
+      "promotional_volatility": 0.12051671476755017,
+      "avg_cta_aggressiveness": 9.771428571428572
+    },
+    "influence": {
+      "copying_detected": true,
+      "top_copier": "EyeBuyDirect",
+      "similarity_score": 0.7288921448843566,
+      "lag_days": 0
+    },
+    "evolution": {
+      "momentum_status": "DECELERATING",
+      "velocity_change_7d": -0.29411764705882354,
+      "velocity_change_30d": 3.28,
+      "cta_intensity_shift": 1.0,
+      "creative_status": "MODERATE_FATIGUE",
+      "avg_campaign_age": 26.90209790209788
+    },
+    "forecasts": {
+      "executive_summary": "\ud83d\udd04 STABLE: Baseline competitive positioning - LensCrafters",
+      "business_impact_score": 2,
+      "confidence": "MEDIUM",
+      "top_predictions": [
+        {
+          "brand": "LensCrafters",
+          "forecast": "\ud83d\udd04 STABLE: Baseline competitive positioning - LensCrafters",
+          "impact_score": 2,
+          "video_change": 0.39,
+          "promotional_change": 0.015
+        }
+      ],
+      "next_7_days": "stable_short_term_outlook",
+      "next_14_days": "content_strategy_pivot_emerging",
+      "next_30_days": "stable_market_continuation"
+    },
+    "velocity": {},
+    "patterns": {},
+    "rhythms": {},
+    "momentum": {},
+    "white_spaces": {},
+    "cascades": {},
+    "status": "success"
+  }
+}

@@ -1,0 +1,5 @@
+2025-09-18 11:24:48,735 - pipeline_warby_parker_20250918_112448 - INFO - Starting Competitor Discovery
+2025-09-18 11:24:55,139 - pipeline_warby_parker_20250918_112448 - INFO - Completed Competitor Discovery in 6.4s
+2025-09-18 11:24:55,140 - pipeline_warby_parker_20250918_112448 - INFO - Starting AI Competitor Curation
+2025-09-18 11:26:49,363 - pipeline_warby_parker_20250918_112448 - INFO - Completed AI Competitor Curation in 114.2s
+2025-09-18 11:26:49,366 - pipeline_warby_parker_20250918_112448 - INFO - Starting Meta Ad Activity Ranking

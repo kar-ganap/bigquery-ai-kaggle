@@ -1,0 +1,124 @@
+{
+  "status": "success",
+  "opportunities_found": 2,
+  "top_opportunities": [
+    "MONOPOLY opportunity targeting Inspiration Seekers with SOCIAL_PROOF messaging in DECISION stage",
+    "MONOPOLY opportunity targeting Gen Z Trendsetters with EMOTIONAL messaging in AWARENESS stage"
+  ],
+  "strategic_opportunities": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "DECISION",
+      "target_persona": "Inspiration Seekers",
+      "overall_score": 0.55,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See What Others Are Loving: Trending Frames at EyeBuyDirect",
+        "value_propositions": "Discover the most popular styles and find the perfect pair of glasses based on what everyone else is wearing.",
+        "recommended_ctas": "Shop Best Sellers",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Small (80K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Facebook",
+      "success_metrics": "Click-through rate on 'Shop Best Sellers' >1.2%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Inspiration Seekers with SOCIAL_PROOF messaging in DECISION stage",
+      "confidence_level": "MEDIUM"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Gen Z Trendsetters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Express Yourself: Find Your Perfect [Glasses Style] at EyeBuyDirect",
+        "value_propositions": "EyeBuyDirect empowers you to express your unique personality and style through affordable, trendy eyewear.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (400K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, CPA <$25, Brand lift +5%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Gen Z Trendsetters with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "analysis_summary": "Parallel analysis found 2 strategic opportunities",
+  "strategic_recommendations": [
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "SOCIAL_PROOF",
+      "funnel_stage": "DECISION",
+      "target_persona": "Inspiration Seekers",
+      "overall_score": 0.55,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 1.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "See What Others Are Loving: Trending Frames at EyeBuyDirect",
+        "value_propositions": "Discover the most popular styles and find the perfect pair of glasses based on what everyone else is wearing.",
+        "recommended_ctas": "Shop Best Sellers",
+        "channel_focus": "Facebook",
+        "audience_sizing": "Small (80K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MEDIUM ($75K-150K) - Competitive displacement using Facebook",
+      "success_metrics": "Click-through rate on 'Shop Best Sellers' >1.2%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Inspiration Seekers with SOCIAL_PROOF messaging in DECISION stage",
+      "confidence_level": "MEDIUM"
+    },
+    {
+      "space_type": "MONOPOLY",
+      "messaging_angle": "EMOTIONAL",
+      "funnel_stage": "AWARENESS",
+      "target_persona": "Gen Z Trendsetters",
+      "overall_score": 0.28,
+      "competitor_count": 1,
+      "market_potential": 1.0,
+      "competitive_intensity": 2.0,
+      "recent_activity": 0,
+      "campaign_brief": {
+        "sample_headlines": "Express Yourself: Find Your Perfect [Glasses Style] at EyeBuyDirect",
+        "value_propositions": "EyeBuyDirect empowers you to express your unique personality and style through affordable, trendy eyewear.",
+        "recommended_ctas": "Shop Now",
+        "channel_focus": "Instagram",
+        "audience_sizing": "Medium (400K)",
+        "readiness_level": "CAMPAIGN_READY"
+      },
+      "investment_recommendation": "MINIMAL ($5K-20K) - Test and learn approach",
+      "success_metrics": "CTR >1.5%, CPA <$25, Brand lift +5%",
+      "timeline": "Launch in 3-4 weeks (campaign optimization)",
+      "strategic_summary": "MONOPOLY opportunity targeting Gen Z Trendsetters with EMOTIONAL messaging in AWARENESS stage",
+      "confidence_level": "LOW"
+    }
+  ],
+  "performance_metrics": {
+    "duration_seconds": 11.037102,
+    "coverage": "FULL_DATASET",
+    "approach": "hybrid_chunked_enhanced",
+    "white_space_opportunities": 0
+  },
+  "data_quality": "high",
+  "competitive_gaps_detected": true,
+  "run_metadata": {
+    "run_id": "warby_parker_20250920_183717",
+    "brands_analyzed": 5,
+    "detection_method": "parallel_chunked_processing",
+    "target_met": true,
+    "intelligence_level": "STRATEGIC_DISCOVERY"
+  }
+}
